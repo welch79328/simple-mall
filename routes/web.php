@@ -11,10 +11,39 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('frontend', function () {
+Route::get('/', function () {
     return view('frontend.index');
 });
+
+Route::get('about', function () {
+    return view('frontend.about');
+});
+
+Route::get('contact', function () {
+    return view('frontend.contact');
+});
+
+Route::get('icons', function () {
+    return view('frontend.icons');
+});
+
+Route::get('mens', function () {
+    return view('frontend.mens');
+});
+
+Route::get('single', function () {
+    return view('frontend.single');
+});
+
+Route::get('typography', function () {
+    return view('frontend.typography');
+});
+
+Route::get('womens', function () {
+    return view('frontend.womens');
+});
+
