@@ -30,7 +30,7 @@
         </div>
         <!-- header-bot -->
         <div class="col-md-4 logo_agile">
-            <h1><a href="index.html"><span>E</span>lite Shoppy <i class="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
+            <h1><a href="{{url('/')}}"><span>E</span>lite Shoppy <i class="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
         </div>
         <!-- header-bot -->
         <div class="col-md-4 agileits-social top_content">
@@ -75,35 +75,35 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav menu__list">
-                            <li class="active menu__item"><a class="menu__link" href="index.html">Home <span class="sr-only">(current)</span></a></li>
-                            <li class=" menu__item menu__item--current"><a class="menu__link" href="about.html">About</a></li>
+                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a></li>
+                            <li class=" menu__item menu__item--current"><a class="menu__link" href="{{url('about')}}">About</a></li>
                             <li class="dropdown menu__item">
                                 <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Men's wear <span class="caret"></span></a>
                                 <ul class="dropdown-menu multi-column columns-3">
                                     <div class="agile_inner_drop_nav_info">
                                         <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                            <a href="mens.html"><img src="images/top2.jpg" alt=" "/></a>
+                                            <a href="{{url('mens')}}"><img src="images/top2.jpg" alt=" "/></a>
                                         </div>
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="mens.html">Clothing</a></li>
-                                                <li><a href="mens.html">Wallets</a></li>
-                                                <li><a href="mens.html">Footwear</a></li>
-                                                <li><a href="mens.html">Watches</a></li>
-                                                <li><a href="mens.html">Accessories</a></li>
-                                                <li><a href="mens.html">Bags</a></li>
-                                                <li><a href="mens.html">Caps & Hats</a></li>
+                                                <li><a href="{{url('mens')}}">Clothing</a></li>
+                                                <li><a href="{{url('mens')}}">Wallets</a></li>
+                                                <li><a href="{{url('mens')}}">Footwear</a></li>
+                                                <li><a href="{{url('mens')}}">Watches</a></li>
+                                                <li><a href="{{url('mens')}}">Accessories</a></li>
+                                                <li><a href="{{url('mens')}}">Bags</a></li>
+                                                <li><a href="{{url('mens')}}">Caps & Hats</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="mens.html">Jewellery</a></li>
-                                                <li><a href="mens.html">Sunglasses</a></li>
-                                                <li><a href="mens.html">Perfumes</a></li>
-                                                <li><a href="mens.html">Beauty</a></li>
-                                                <li><a href="mens.html">Shirts</a></li>
-                                                <li><a href="mens.html">Sunglasses</a></li>
-                                                <li><a href="mens.html">Swimwear</a></li>
+                                                <li><a href="{{url('mens')}}">Jewellery</a></li>
+                                                <li><a href="{{url('mens')}}">Sunglasses</a></li>
+                                                <li><a href="{{url('mens')}}">Perfumes</a></li>
+                                                <li><a href="{{url('mens')}}">Beauty</a></li>
+                                                <li><a href="{{url('mens')}}">Shirts</a></li>
+                                                <li><a href="{{url('mens')}}">Sunglasses</a></li>
+                                                <li><a href="{{url('mens')}}">Swimwear</a></li>
                                             </ul>
                                         </div>
                                         <div class="clearfix"></div>
@@ -116,28 +116,28 @@
                                     <div class="agile_inner_drop_nav_info">
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="womens.html">Clothing</a></li>
-                                                <li><a href="womens.html">Wallets</a></li>
-                                                <li><a href="womens.html">Footwear</a></li>
-                                                <li><a href="womens.html">Watches</a></li>
-                                                <li><a href="womens.html">Accessories</a></li>
-                                                <li><a href="womens.html">Bags</a></li>
-                                                <li><a href="womens.html">Caps & Hats</a></li>
+                                                <li><a href="{{url('womens')}}">Clothing</a></li>
+                                                <li><a href="{{url('womens')}}">Wallets</a></li>
+                                                <li><a href="{{url('womens')}}">Footwear</a></li>
+                                                <li><a href="{{url('womens')}}">Watches</a></li>
+                                                <li><a href="{{url('womens')}}">Accessories</a></li>
+                                                <li><a href="{{url('womens')}}">Bags</a></li>
+                                                <li><a href="{{url('womens')}}">Caps & Hats</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="womens.html">Jewellery</a></li>
-                                                <li><a href="womens.html">Sunglasses</a></li>
-                                                <li><a href="womens.html">Perfumes</a></li>
-                                                <li><a href="womens.html">Beauty</a></li>
-                                                <li><a href="womens.html">Shirts</a></li>
-                                                <li><a href="womens.html">Sunglasses</a></li>
-                                                <li><a href="womens.html">Swimwear</a></li>
+                                                <li><a href="{{url('womens')}}">Jewellery</a></li>
+                                                <li><a href="{{url('womens')}}">Sunglasses</a></li>
+                                                <li><a href="{{url('womens')}}">Perfumes</a></li>
+                                                <li><a href="{{url('womens')}}">Beauty</a></li>
+                                                <li><a href="{{url('womens')}}">Shirts</a></li>
+                                                <li><a href="{{url('womens')}}">Sunglasses</a></li>
+                                                <li><a href="{{url('womens')}}">Swimwear</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-6 multi-gd-img multi-gd-text ">
-                                            <a href="womens.html"><img src="images/top1.jpg" alt=" "/></a>
+                                            <a href="{{url('womens')}}"><img src="images/top1.jpg" alt=" "/></a>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -146,11 +146,11 @@
                             <li class="menu__item dropdown">
                                 <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Short Codes <b class="caret"></b></a>
                                 <ul class="dropdown-menu agile_short_dropdown">
-                                    <li><a href="icons.html">Web Icons</a></li>
-                                    <li><a href="typography.html">Typography</a></li>
+                                    <li><a href="{{url('icons')}}">Web Icons</a></li>
+                                    <li><a href="{{url('typography')}}">Typography</a></li>
                                 </ul>
                             </li>
-                            <li class=" menu__item"><a class="menu__link" href="contact.html">Contact</a></li>
+                            <li class=" menu__item"><a class="menu__link" href="{{url('contact')}}">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -293,7 +293,7 @@
             <div class="agile_inner_breadcrumb">
 
                 <ul class="w3_short">
-                    <li><a href="index.html">Home</a><i>|</i></li>
+                    <li><a href="{{url('/')}}">Home</a><i>|</i></li>
                     <li>About</li>
                 </ul>
             </div>
@@ -486,7 +486,7 @@
         <h3 class="wthree_text_info">What's <span>Trending</span></h3>
 
         <div class="col-md-5 bb-grids bb-left-agileits-w3layouts">
-            <a href="women.html">
+            <a href="{{url('womens')}}">
                 <div class="bb-left-agileits-w3layouts-inner grid">
                     <figure class="effect-roxy">
                         <img src="images/bb1.jpg" alt=" " class="img-responsive" />
@@ -524,11 +524,11 @@
 <!--/grids-->
 <div class="agile_last_double_sectionw3ls">
     <div class="col-md-6 multi-gd-img multi-gd-text ">
-        <a href="womens.html"><img src="images/bot_1.jpg" alt=" "><h4>Flat <span>50%</span> offer</h4></a>
+        <a href="{{url('womens')}}"><img src="images/bot_1.jpg" alt=" "><h4>Flat <span>50%</span> offer</h4></a>
 
     </div>
     <div class="col-md-6 multi-gd-img multi-gd-text ">
-        <a href="womens.html"><img src="images/bot_2.jpg" alt=" "><h4>Flat <span>50%</span> offer</h4></a>
+        <a href="{{url('womens')}}"><img src="images/bot_2.jpg" alt=" "><h4>Flat <span>50%</span> offer</h4></a>
     </div>
     <div class="clearfix"></div>
 </div>							
@@ -538,7 +538,7 @@
     <div class="container">
         <h6>We Offer Flat <span>40%</span> Discount</h6>
 
-        <a class="hvr-outline-out button2" href="single.html">Shop Now </a>
+        <a class="hvr-outline-out button2" href="{{url('single')}}">Shop Now </a>
     </div>
 </div>
 <!-- //we-offer -->
@@ -588,114 +588,9 @@
     </div>
 </div>
 <!--grids-->
+
 <!-- footer -->
-<div class="footer">
-    <div class="footer_agile_inner_info_w3l">
-        <div class="col-md-3 footer-left">
-            <h2><a href="index.html"><span>E</span>lite Shoppy </a></h2>
-            <p>Lorem ipsum quia dolor
-                sit amet, consectetur, adipisci velit, sed quia non 
-                numquam eius modi tempora.</p>
-            <ul class="social-nav model-3d-0 footer-social w3_agile_social two">
-                <li><a href="#" class="facebook">
-                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="twitter"> 
-                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="instagram">
-                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="pinterest">
-                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
-            </ul>
-        </div>
-        <div class="col-md-9 footer-right">
-            <div class="sign-grds">
-                <div class="col-md-4 sign-gd">
-                    <h4>Our <span>Information</span> </h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="mens.html">Men's Wear</a></li>
-                        <li><a href="womens.html">Women's wear</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="typography.html">Short Codes</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-5 sign-gd-two">
-                    <h4>Store <span>Information</span></h4>
-                    <div class="w3-address">
-                        <div class="w3-address-grid">
-                            <div class="w3-address-left">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                            </div>
-                            <div class="w3-address-right">
-                                <h6>Phone Number</h6>
-                                <p>+1 234 567 8901</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="w3-address-grid">
-                            <div class="w3-address-left">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </div>
-                            <div class="w3-address-right">
-                                <h6>Email Address</h6>
-                                <p>Email :<a href="mailto:example@email.com"> mail@example.com</a></p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="w3-address-grid">
-                            <div class="w3-address-left">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            </div>
-                            <div class="w3-address-right">
-                                <h6>Location</h6>
-                                <p>Broome St, NY 10002,California, USA. 
-
-                                </p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 sign-gd flickr-post">
-                    <h4>Flickr <span>Posts</span></h4>
-                    <ul>
-                        <li><a href="single.html"><img src="images/t1.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/t3.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/t4.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/t1.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/t3.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/t4.jpg" alt=" " class="img-responsive" /></a></li>
-                    </ul>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="agile_newsletter_footer">
-            <div class="col-sm-6 newsleft">
-                <h3>SIGN UP FOR NEWSLETTER !</h3>
-            </div>
-            <div class="col-sm-6 newsright">
-                <form action="#" method="post">
-                    <input type="email" placeholder="Enter your email..." name="email" required="">
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-        <p class="copy-right">&copy 2017 Elite shoppy. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-    </div>
-</div>
+@include('frontend.footer')
 <!-- //footer -->
 
 <!-- login -->

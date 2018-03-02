@@ -2,7 +2,7 @@
 <div class="footer">
     <div class="footer_agile_inner_info_w3l">
         <div class="col-md-3 footer-left">
-            <h2><a href="{{url('frontend')}}"><span>E</span>lite Shoppy </a></h2>
+            <h2><a href="{{url('')}}"><span>E</span>lite Shoppy </a></h2>
             <p>Lorem ipsum quia dolor
                 sit amet, consectetur, adipisci velit, sed quia non 
                 numquam eius modi tempora.</p>
@@ -26,12 +26,12 @@
                 <div class="col-md-4 sign-gd">
                     <h4>Our <span>Information</span> </h4>
                     <ul>
-                        <li><a href="{{url('frontend')}}">Home</a></li>
-                        <li><a href="{{url('frontend/mens')}}">Men's Wear</a></li>
-                        <li><a href="{{url('frontend/womens')}}">Women's wear</a></li>
-                        <li><a href="{{url('frontend/about')}}">About</a></li>
-                        <li><a href="{{url('frontend/typography')}}">Short Codes</a></li>
-                        <li><a href="{{url('frontend/contact')}}">Contact</a></li>
+                        <li><a href="{{url('/')}}">Home</a></li>
+                        <li><a href="{{url('mens')}}">Men's Wear</a></li>
+                        <li><a href="{{url('womens')}}">Women's wear</a></li>
+                        <li><a href="{{url('about')}}">About</a></li>
+                        <li><a href="{{url('typography')}}">Short Codes</a></li>
+                        <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>
 
@@ -75,15 +75,15 @@
                 <div class="col-md-3 sign-gd flickr-post">
                     <h4>Flickr <span>Posts</span></h4>
                     <ul>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t1.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t3.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t4.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t1.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t3.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="{{url('frontend/single')}}"><img src="images/t4.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t1.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t3.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t4.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t1.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t3.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><a href="{{url('single')}}"><img src="images/t4.jpg" alt=" " class="img-responsive" /></a></li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
