@@ -1,0 +1,16 @@
+{
+    "name": "AdminMember",
+    "alias": "adminmember",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\AdminMember\\Providers\\AdminMemberServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
