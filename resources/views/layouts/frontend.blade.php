@@ -18,62 +18,6 @@
         <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'> 
     </head>
     <body>
-        <!-- js -->
-        <script type="text/javascript" src="{{asset('js/frontend/jquery-2.1.4.min.js')}}"></script>
-        <!-- //js -->
-
-        <!-- cart-js -->
-        <script src="{{asset('js/frontend/minicart.min.js')}}"></script>
-        <script>
-            // Mini Cart
-            paypal.minicart.render({
-                action: '#'
-            });
-
-            if (~window.location.search.indexOf('reset=true')) {
-                paypal.minicart.reset();
-            }
-        </script>
-        <!-- //cart-js --> 
-
-        <!-- start-smoth-scrolling -->
-        <script type="text/javascript" src="{{asset('js/frontend/move-top.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/frontend/jquery.easing.min.js')}}"></script>
-        <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                $(".scroll").click(function (event) {
-                    event.preventDefault();
-                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-                });
-            });
-        </script>
-        <!-- here stars scrolling icon -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                /*
-                 var defaults = {
-                 containerID: 'toTop', // fading element id
-                 containerHoverID: 'toTopHover', // fading element hover id
-                 scrollSpeed: 1200,
-                 easingType: 'linear' 
-                 };
-                 */
-
-                $().UItoTop({easingType: 'easeOutQuart'});
-
-            });
-        </script>
-        <!-- //here ends scrolling icon -->
-
-        <!-- stats -->
-        <script src="{{asset('js/frontend/jquery.waypoints.min.js')}}"></script>
-        <script src="{{asset('js/frontend/jquery.countup.js')}}"></script>
-        <script> $('.counter').countUp();</script>
-        <!-- //stats -->
-
-        <!-- for bootstrap working -->
-        <script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
-        
         @yield('content')
-</body>
+    </body>
 </html>

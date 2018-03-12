@@ -5,56 +5,8 @@
 @section('content')
 
 <!-- header -->
-<div class="header" id="home">
-    <div class="container">
-        <ul>
-            <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
-            <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
-            <li><i class="fa fa-phone" aria-hidden="true"></i> Call : 01234567898</li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
-        </ul>
-    </div>
-</div>
+@include('frontend.header')
 <!-- //header -->
-<!-- header-bot -->
-<div class="header-bot">
-    <div class="header-bot_inner_wthreeinfo_header_mid">
-        <div class="col-md-4 header-middle">
-            <form action="#" method="post">
-                <input type="search" name="search" placeholder="Search here..." required="">
-                <input type="submit" value=" ">
-                <div class="clearfix"></div>
-            </form>
-        </div>
-        <!-- header-bot -->
-        <div class="col-md-4 logo_agile">
-            <h1><a href="{{url('/')}}"><span>E</span>lite Shoppy <i class="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
-        </div>
-        <!-- header-bot -->
-        <div class="col-md-4 agileits-social top_content">
-            <ul class="social-nav model-3d-0 footer-social w3_agile_social">
-                <li class="share">Share On : </li>
-                <li><a href="#" class="facebook">
-                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="twitter"> 
-                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="instagram">
-                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="pinterest">
-                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
-            </ul>
-
-
-
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!-- //header-bot -->
 <!-- banner -->
 <div class="ban-top">
     <div class="container">
@@ -1883,9 +1835,24 @@
 <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
 
+<!-- js -->
+<script type="text/javascript" src="{{asset('js/frontend/jquery-2.1.4.min.js')}}"></script>
+<!-- //js -->
 <script src="{{asset('js/frontend/modernizr.custom.js')}}"></script>
 <!-- Custom-JavaScript-File-Links --> 
+<!-- cart-js -->
+<script src="{{asset('js/frontend/minicart.min.js')}}"></script>
+<script>
+                                        // Mini Cart
+                                        paypal.minicart.render({
+                                            action: '#'
+                                        });
 
+                                        if (~window.location.search.indexOf('reset=true')) {
+                                            paypal.minicart.reset();
+                                        }
+</script>
+<!-- //cart-js --> 
 <!-- script for responsive tabs -->						
 <script src="{{asset('js/frontend/easy-responsive-tabs.js')}}"></script>
 <script>
@@ -1911,5 +1878,39 @@
                                         });
 </script>
 <!-- //script for responsive tabs -->		
+<!-- stats -->
+<script src="{{asset('js/frontend/jquery.waypoints.min.js')}}"></script>
+<script src="{{asset('js/frontend/jquery.countup.js')}}"></script>
+<script> $('.counter').countUp();</script>
+<!-- //stats -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="{{asset('js/frontend/move-top.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/frontend/jquery.easing.min.js')}}"></script>
+<script type="text/javascript">
+                                        jQuery(document).ready(function ($) {
+                                            $(".scroll").click(function (event) {
+                                                event.preventDefault();
+                                                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                                            });
+                                        });
+</script>
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*
+         var defaults = {
+         containerID: 'toTop', // fading element id
+         containerHoverID: 'toTopHover', // fading element hover id
+         scrollSpeed: 1200,
+         easingType: 'linear' 
+         };
+         */
 
+        $().UItoTop({easingType: 'easeOutQuart'});
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<!-- for bootstrap working -->
+<script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
 @endsection
