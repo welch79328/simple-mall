@@ -34,7 +34,7 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/category/'.$field->cate_id)}}" method="post">
+        <form action="{{url('admin/category/'.$data->cate_id)}}" method="post">
             <input type="hidden" name="_method" value="put">
             {{csrf_field()}}
             <table class="add_tab">
@@ -56,14 +56,14 @@
                     <tr>
                         <th><i class="require">*</i>分類名稱：</th>
                         <td>
-                            <input type="text" name="cate_name" value="{{$field->cate_name}}">
+                            <input type="text" name="cate_name" value="{{$data->cate_name}}">
                             <span><i class="fa fa-exclamation-circle yellow"></i>分類名稱必須填寫</span>
                         </td>
                     </tr>
                     <tr>
                         <th><i class="require">*</i>排序：</th>
                         <td>
-                            <input type="text" class="sm" name="cate_order" value="{{$field->cate_order}}">
+                            <input type="number" class="sm" min="1" max="5"  name="cate_order" value="{{$data->cate_order}}">
                         </td>
                     </tr>
                     <tr>

@@ -25,11 +25,25 @@ class CommodityController extends Controller
     public function __construct()
     {
         $this->moduleHelper = new ModuleHelper();
+
     }
 
     public function index()
     {
-        $data = json_encode(Commodity::join('category','commodity.cate_id','=','category.cate_id')->orderBy('commodity_id','desc')->paginate(5));
+//        $data = Commodity::join('category','commodity.cate_id','=','category.cate_id')->orderBy('commodity_id','desc')->paginate(5);
+        $data = Commodity::paginate(10);
+        $cate = Category::get();
+        foreach ($data as $v){
+            if($v->cate_id == Null){
+                $v->cate_name = '';
+            }else{
+                foreach ($cate as $q){
+                    if($v->cate_id == $q->cate_id){
+                        $v->cate_name = $q->cate_name;
+                    }
+                }
+            }
+        }
         return view('backstage.commodity.index',compact('data'));
     }
 
@@ -40,7 +54,7 @@ class CommodityController extends Controller
     public function create()
     {
         $categorys = Category::orderBy('cate_order','asc')->get();
-        $data = json_encode($this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','5'));
+        $data = $this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','5');
         return view('backstage.commodity.create',compact('data'));
     }
 
@@ -70,7 +84,7 @@ class CommodityController extends Controller
                 'commodity_description.required'=>'商品內容不能為空!',
             ];
 
-            $validator = json_encode(Validator::make($input,$rules,$message));
+            $validator = Validator::make($input,$rules,$message);
 
             if($validator->passes()){
                 $re = Commodity::create($input);
@@ -115,8 +129,8 @@ class CommodityController extends Controller
     public function edit($commodity_id)
     {
         $categorys = Category::get();
-        $data = json_encode($this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','4'));
-        $commodity = json_encode(Commodity::find($commodity_id));
+        $data = $this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','4');
+        $commodity = Commodity::find($commodity_id);
         return view('backstage.commodity.edit',compact('data','commodity'));
     }
 

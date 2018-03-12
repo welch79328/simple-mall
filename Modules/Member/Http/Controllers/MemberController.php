@@ -2,12 +2,14 @@
 
 namespace Modules\Member\Http\Controllers;
 
+use App\Helpers\TownshipHelper;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-use Modules\Member\Entities\Members;
+use Modules\Member\Entities\Member;
 
 
 class MemberController extends Controller
@@ -18,17 +20,20 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $data = json_encode(Members::orderBy('member_id','desc')->paginate(5));
-        return view('frontend.member.index',compact('data'));
+        $data = Member::orderBy('member_id','desc')->paginate(20);
+        return view('backstage.member.index',compact('data'));
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
+    public function create(TownshipHelper $townshipHelper)
     {
-        return view('frontend.member.create');
+        $area = $townshipHelper->area();
+        $city = $townshipHelper->city();
+        $zipcode = $area[0]['area_zipcode'];
+        return view('backstage.member.create',compact('area','city','zipcode'));
     }
 
     /**
@@ -41,9 +46,9 @@ class MemberController extends Controller
         $input = Input::except('_token');
         $rules=[
             'member_account'=>'required',
-            'member_password'=>'required|regex:/^[a-zA-Z]/|between:6,8|same:user_password_check',
+            'member_password'=>'required|regex:/^[a-zA-Z]/|between:6,8|same:member_password_check',
 //            'member_identity'=>'required|regex:/^[A-Z]/|between:10,10',
-            'member_mail'=>'required|email|same:user_mail_check',
+            'member_mail'=>'required|email',
         ];
 
         $message=[
@@ -54,17 +59,18 @@ class MemberController extends Controller
             'member_password.same'=>'密碼必須相同!',
             'member_mail.required'=>'電子信箱不能為空!',
             'member_mail.email'=>'必須為信箱格式',
-            'member_mail.same'=>'電子信箱必須相同!',
+//            'member_mail.same'=>'電子信箱必須相同!',
 //            'member_identity.required'=>'身分證內容不能為空!',
 //            'member_identity.regex'=>'身分證開頭必須為英文字母!',
 //            'member_identity.between'=>'身分證長度必須為10位!',
         ];
         
         $validator = Validator::make($input,$rules,$message);
+        $member = Input::except('_token','member_password_check');
+        $member['member_password'] = Crypt::encrypt($member['member_password']);
 
         if($validator->passes()){
-            $re = Members::create($input);
-//            BackupMembers::create($input);
+            $re = Member::create($member);
             if($re){
                 return redirect('member');
             }else {
@@ -81,20 +87,21 @@ class MemberController extends Controller
      */
     public function show()
     {
-        return view('member::show');
+        return view('backstage.member.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit($member_id)
+    public function edit($member_id,TownshipHelper $townshipHelper)
     {
-        $field = Members::find($member_id);
-        $field['user_pass'] = Crypt::decrypt($field['user_pass']);
-        $field = json_encode($field);
+        $data= Member::find($member_id);
+        $data['member_password'] = Crypt::decrypt($data['member_password']);
+        $city = $townshipHelper->city();
+        $area = $townshipHelper->area();
 
-        return view('frontend.member.edit',compact('field'));
+        return view('backstage.member.edit',compact('data','city','area'));
     }
 
     /**
@@ -105,9 +112,10 @@ class MemberController extends Controller
     public function update(Request $request ,$member_id)
     {
         $input = Input::except('_token','_method');
-        $re = Members::where('member_id',$member_id)->update($input);
+        $input['member_password'] = Crypt::encrypt($input['member_password']);
+        $re = Member::where('member_id',$member_id)->update($input);
         if($re){
-            return redirect('home/member');
+            return redirect('member');
         }else{
             return back()->with('errors', '會員更新失敗, 請稍後重試');
         }
@@ -120,7 +128,7 @@ class MemberController extends Controller
     public function destroy($member_id)
     {
 //        $member = Members::find($member_id);
-        $re = Members::where('member_id',$member_id)->delete();
+        $re = Member::where('member_id',$member_id)->delete();
 
         if($re){
             $data = [
@@ -134,5 +142,32 @@ class MemberController extends Controller
             ];
         }
         return $data;
+    }
+
+    //連動下拉城市
+    public function city(TownshipHelper $townshipHelper){
+        $input = Input::all();
+        $re = [];
+        foreach ($townshipHelper->area() as $v){
+            if ($input['city_id'] == $v['city_id']){
+                $re[] = [
+                    'area' => $v['area'],
+                    'areaid' => $v['area_id'],
+                    'zipcode' => $v['area_zipcode'],
+                ];
+            }
+        }
+        return $re;
+    }
+
+    //連動下拉地區
+    public function area(TownshipHelper $townshipHelper){
+        $input = Input::all();
+        foreach ($townshipHelper->area() as $v){
+            if ($input['area_id'] == $v['area_id']){
+                $re = $v['area_zipcode'];
+            }
+        }
+        return $re;
     }
 }

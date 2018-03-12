@@ -47,3 +47,5 @@ Route::get('womens', function () {
     return view('frontend.womens');
 });
 
+require __DIR__ . '/web/backstage.php';
+

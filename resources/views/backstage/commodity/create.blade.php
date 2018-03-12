@@ -26,8 +26,8 @@
         </div>
         <div class="result_content">
             <div class="short_wrap">
-                <a href="{{url('admin/article/create')}}"><i class="fa fa-plus"></i>添加文章</a>
-                <a href="{{url('admin/article')}}"><i class="fa fa-recycle"></i>全部文章</a>
+                <a href="{{url('admin/commdity/create')}}"><i class="fa fa-plus"></i>添加商品</a>
+                <a href="{{url('admin/commodity')}}"><i class="fa fa-recycle"></i>全部商品</a>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
                     <tr>
                         <th>副標題：</th>
                         <td>
-                            <input type="text" class="sm" name="commodity_tag">
+                            <input type="text" class="sm" name="commodity_subtitle">
                         </td>
                     </tr>
 
@@ -67,82 +67,69 @@
                     <tr>
                         <th>大圖：</th>
                         <td>
-                            <input type="text" id="commodity_img" size="50" name="commodity_img">
-                            <input id="file_upload_1" name="file_upload_1" type="file" multiple="true">
-                            <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
-                            <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
+                            <img src="" alt="" id="comm_cover_img" style="max-height: 200px; max-width: 350px;">
+                            <input type="text" id="commodity_image" size="50" name="commodity_image">
+                            <input id="file_upload" name="file_upload" type="file">
+                            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+                            <script src="{{asset('org/uploadifive/jquery.uploadifive.js')}}" type="text/javascript"></script>
+                            <link rel="stylesheet" type="text/css" href="{{asset('org/uploadifive/uploadifive.css')}}">
                             <script type="text/javascript">
                                 <?php $timestamp = time();?>
                                 $(function() {
-                                    $('#file_upload_1').uploadify({
-                                        'buttonText'    : '圖片上傳',
+                                    $('#file_upload').uploadifive({
                                         'formData'     : {
                                             'timestamp' : '<?php echo $timestamp;?>',
-                                            '_token'     : "{{csrf_token()}}"
+                                            '_token'     : '{{csrf_token()}}'
                                         },
-                                        'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
-                                        'uploader'  : "{{url('admin/upload')}}",
-                                        'onUploadSuccess' : function(file, data, response) {
-                                            $('#commodity_img').val(data);
+                                        'uploadScript' : '{{url('admin/upload')}}',
+                                        'onUploadComplete' : function(file, data) {
+//                                            data = data.slice(0,29);
+                                            $('input[name = commodity_image]').val(data);
                                             $('#comm_cover_img').attr('src','/'+data);
                                         }
                                     });
                                 });
                             </script>
                             <style>
-                                .uploadify{display:inline-block;}
-                                .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
-                                table.add_tab tr td span.uploadify-button-text{color: #FFFFFF; margin: 0;}
+                                .uploadifive{display:inline-block;}
+                                .uploadifive-button{border:none; border-radius:5px; margin-top:8px;}
+                                table.add_tab tr td span.uploadifive-button-text{color: #FFFFFF; margin: 0;}
                             </style>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th></th>
-                        <td>
-                            <img src="" alt="" id="comm_cover_img" style="max-height: 100px; max-width: 350px;">
                         </td>
                     </tr>
 
                     <tr>
                         <th>縮略圖：</th>
                         <td>
-                            <input type="text" id="image_url" size="50" name="image_url">
-                            <input id="file_upload" name="file_upload" type="file" multiple="true">
-                            <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
-                            <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
+                            <img src="" alt="" id="art_thumb_img" style="max-height: 200px; max-width: 350px;">
+                            <input type="text" id="image" size="50" name="image">
+                            <input id="file_upload1" name="file_upload1" type="file">
+                            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+                            <script src="{{asset('org/uploadifive/jquery.uploadifive.js')}}" type="text/javascript"></script>
+                            <link rel="stylesheet" type="text/css" href="{{asset('org/uploadifive/uploadifive.css')}}">
                             <script type="text/javascript">
                                 var x = [];
                                 <?php $timestamp = time();?>
                                 $(function() {
-                                    $('#file_upload').uploadify({
-                                        'buttonText'    : '圖片上傳',
+                                    $('#file_upload1').uploadifive({
                                         'formData'     : {
                                             'timestamp' : '<?php echo $timestamp;?>',
-                                            '_token'     : "{{csrf_token()}}"
+                                            '_token'     : '{{csrf_token()}}'
                                         },
-                                        'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
-                                        'uploader'  : "{{url('admin/upload')}}",
-                                        'onUploadSuccess' : function(file, data, response) {
+                                        'uploadScript' : '{{url('admin/upload')}}',
+                                        'onUploadComplete' : function(file, data) {
                                             x.push(data);
-                                            $('#image_url').val(x);
+                                            $('#image').val(x);
                                             $('#art_thumb_img').attr('src','/'+data);
                                         }
                                     });
                                 });
                             </script>
                             <style>
-                                .uploadify{display:inline-block;}
-                                .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
-                                table.add_tab tr td span.uploadify-button-text{color: #FFFFFF; margin: 0;}
+                                .uploadifive{display:inline-block;}
+                                .uploadifive-button{border:none; border-radius:5px; margin-top:8px;}
+                                table.add_tab tr td span.uploadifive-button-text{color: #FFFFFF; margin: 0;}
                             </style>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th></th>
-                        <td>
-                            <img src="" alt="" id="art_thumb_img" style="max-height: 100px; max-width: 350px;">
                         </td>
                     </tr>
 

@@ -50,31 +50,23 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%">排序</th>
-                        <th class="tc" width="5%">ID</th>
                         <th>分類名稱</th>
-                        <th>标题</th>
                         <th>查看次數</th>
                         <th>操作</th>
                     </tr>
 
                     @foreach($data as $v)
-                    <tr @if($v->cate_pid==0)
+                    <tr @if($v->cate_parent==0)
                         style="background-color:#CCCCCC;"
                         @endif
                     >
-                        <td class="tc">
-                            <input type="text" onchange="changeOder(this,{{$v->cate_id}})" value="{{$v->cate_order}}">
-                        </td>
-                        <td class="tc">{{$v->cate_id}}</td>
                         <td>
                             <a href="#"
-                               @if($v->cate_pid!=0)
+                               @if($v->cate_parent!=0)
                                style="color:#CC3333;"
                                     @endif
                             >{{$v->_cate_name}}</a>
                         </td>
-                        <td>{{$v->cate_title}}</td>
                         <td>{{$v->cate_view}}</td>
                         <td>
                             <a href="{{url('admin/category/'.$v->cate_id.'/edit')}}">修改</a>

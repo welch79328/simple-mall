@@ -4,7 +4,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首页</a> &raquo; 分類管理
+        <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首頁</a> &raquo; 分類管理
     </div>
     <!--面包屑导航 结束-->
 
@@ -41,7 +41,7 @@
                     <tr>
                         <th width="120"><i class="require">*</i>父級分類：</th>
                         <td>
-                            <select name="cate_pid">
+                            <select name="cate_parent">
                                 <option value="0">==頂級分類==</option>
                                 @foreach($data as $v)
                                     <option value="{{$v->cate_id}}">{{$v->_cate_name}}</option>
@@ -59,7 +59,7 @@
                     <tr>
                         <th><i class="require">*</i>排序：</th>
                         <td>
-                            <input type="text" class="sm" name="cate_order">
+                            <input type="number" class="sm" min="1" max="5" name="cate_order">
                         </td>
                     </tr>
                     <tr>

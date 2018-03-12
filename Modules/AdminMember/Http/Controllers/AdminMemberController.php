@@ -18,7 +18,7 @@ class AdminMemberController extends Controller
      */
     public function index()
     {
-        $data = json_encode(AdminMember::orderBy('member_id','desc')->paginate(5));
+        $data = AdminMember::orderBy('member_id','desc')->paginate(10);
         return view('backstage.adminmember.index',compact('data'));
     }
 
@@ -41,9 +41,9 @@ class AdminMemberController extends Controller
         $input = Input::except('_token');
         $rules=[
             'member_account'=>'required',
-            'member_password'=>'required|regex:/^[a-zA-Z]/|between:6,8|same:user_password_check',
+            'member_password'=>'required|regex:/^[a-zA-Z]/|between:6,8|same:member_password_check',
 //            'member_identity'=>'required|regex:/^[A-Z]/|between:10,10',
-            'member_mail'=>'required|email|same:user_mail_check',
+            'member_mail'=>'required|email',
         ];
 
         $message=[
@@ -54,7 +54,7 @@ class AdminMemberController extends Controller
             'member_password.same'=>'密碼必須相同!',
             'member_mail.required'=>'電子信箱不能為空!',
             'member_mail.email'=>'必須為信箱格式',
-            'member_mail.same'=>'電子信箱必須相同!',
+//            'member_mail.same'=>'電子信箱必須相同!',
 //            'member_identity.required'=>'身分證內容不能為空!',
 //            'member_identity.regex'=>'身分證開頭必須為英文字母!',
 //            'member_identity.between'=>'身分證長度必須為10位!',
@@ -90,10 +90,9 @@ class AdminMemberController extends Controller
      */
     public function edit($member_id)
     {
-        $field = AdminMember::find($member_id);
-        $field['user_pass'] = Crypt::decrypt($field['user_pass']);
-        $field = json_encode($field);
-        return view('backstage.adminmember.edit',compact('field'));
+        $member = AdminMember::find($member_id);
+        $member['member_password'] = Crypt::decrypt($member['member_password']);
+        return view('backstage.adminmember.edit',compact('member'));
     }
 
     /**

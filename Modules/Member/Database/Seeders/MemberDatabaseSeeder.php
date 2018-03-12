@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
-use Modules\Member\Entities\Members;
+use Modules\Member\Entities\Member;
+
 
 class MemberDatabaseSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class MemberDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $factory->define(Members::class, function (Faker $faker) {
+        $factory->define(Member::class, function (Faker $faker) {
             $str = '1234';
             $password = Crypt::encrypt($str);
             return [
@@ -32,7 +33,7 @@ class MemberDatabaseSeeder extends Seeder
             ];
         });
 
-        factory(Members::class, 20)->create();
+        factory(Member::class, 20)->create();
 
         // $this->call("OthersTableSeeder");
     }

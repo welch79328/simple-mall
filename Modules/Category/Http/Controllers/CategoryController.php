@@ -29,7 +29,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categorys = Category::orderBy('cate_order','asc')->get();
-        $data = json_encode($this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','5'));
+        $data = $this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','5');
         return view('backstage.category.index',compact('data'));
     }
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categorys = Category::orderBy('cate_order','asc')->get();
-        $data = json_encode($this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','4'));
+        $data = $this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','4');
         return view('backstage.category.create',compact('data'));
     }
 
@@ -92,7 +92,7 @@ class CategoryController extends Controller
      */
     public function edit($cate_id)
     {
-        $data = json_encode(Category::find($cate_id));
+        $data = Category::find($cate_id);
         return view('backstage.category.edit',compact('data'));
     }
 
