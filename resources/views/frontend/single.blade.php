@@ -132,7 +132,7 @@
             <div class="agile_inner_breadcrumb">
 
                 <ul class="w3_short">
-                    <li><a href="index.html">Home</a><i>|</i></li>
+                    <li><a href="{{url('/')}}">Home</a><i>|</i></li>
                     <li>Single Page</li>
                 </ul>
             </div>
@@ -324,14 +324,14 @@
                         <img src="images/w2.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Sleeveless Solid Blue Top</a></h4>
+                        <h4><a href="{{url('single')}}">Sleeveless Solid Blue Top</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$140.99</span>
                             <del>$189.71</del>
@@ -363,14 +363,14 @@
                         <img src="images/w4.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Black Basic Shorts</a></h4>
+                        <h4><a href="{{url('single')}}">Black Basic Shorts</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$120.99</span>
                             <del>$189.71</del>
@@ -402,14 +402,14 @@
                         <img src="images/s6.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Aero Canvas Loafers  </a></h4>
+                        <h4><a href="{{url('single')}}">Aero Canvas Loafers  </a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$120.99</span>
                             <del>$199.71</del>
@@ -441,14 +441,14 @@
                         <img src="images/w7.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Ankle Length Socks</a></h4>
+                        <h4><a href="{{url('single')}}">Ankle Length Socks</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$100.99</span>
                             <del>$159.71</del>

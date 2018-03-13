@@ -126,7 +126,7 @@
             <div class="agile_inner_breadcrumb">
 
                 <ul class="w3_short">
-                    <li><a href="index.html">Home</a><i>|</i></li>
+                    <li><a href="{{url('/')}}">Home</a><i>|</i></li>
                     <li>Typography Page</li>
                 </ul>
             </div>

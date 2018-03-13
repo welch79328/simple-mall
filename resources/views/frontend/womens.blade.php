@@ -130,7 +130,7 @@
             <div class="agile_inner_breadcrumb">
 
                 <ul class="w3_short">
-                    <li><a href="index.html">Home</a><i>|</i></li>
+                    <li><a href="{{url('/')}}">Home</a><i>|</i></li>
                     <li>Women's Wear</li>
                 </ul>
             </div>
@@ -318,14 +318,14 @@
                         <img src="images/w4.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Black Basic Shorts</a></h4>
+                        <h4><a href="{{url('single')}}">Black Basic Shorts</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$120.99</span>
                             <del>$189.71</del>
@@ -357,14 +357,14 @@
                         <img src="images/b7.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Costa Swiss Bag </a></h4>
+                        <h4><a href="{{url('single')}}">Costa Swiss Bag </a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$290.99</span>
                             <del>$359.71</del>
@@ -396,14 +396,14 @@
                         <img src="images/s6.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Aero Canvas Loafers  </a></h4>
+                        <h4><a href="{{url('single')}}">Aero Canvas Loafers  </a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$120.99</span>
                             <del>$199.71</del>
@@ -441,14 +441,14 @@
                         <img src="images/w1.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">A-line Black Skirt</a></h4>
+                        <h4><a href="{{url('single')}}">A-line Black Skirt</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$130.99</span>
                             <del>$189.71</del>
@@ -480,14 +480,14 @@
                         <img src="images/w2.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Sleeveless Solid Blue Top</a></h4>
+                        <h4><a href="{{url('single')}}">Sleeveless Solid Blue Top</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$140.99</span>
                             <del>$189.71</del>
@@ -519,14 +519,14 @@
                         <img src="images/w3.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Skinny Jeans</a></h4>
+                        <h4><a href="{{url('single')}}">Skinny Jeans</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$150.99</span>
                             <del>$189.71</del>
@@ -558,14 +558,14 @@
                         <img src="images/w4.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Black Basic Shorts</a></h4>
+                        <h4><a href="{{url('single')}}">Black Basic Shorts</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$120.99</span>
                             <del>$189.71</del>
@@ -597,14 +597,14 @@
                         <img src="images/w5.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Pink Track Pants</a></h4>
+                        <h4><a href="{{url('single')}}">Pink Track Pants</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$220.99</span>
                             <del>$389.71</del>
@@ -636,14 +636,14 @@
                         <img src="images/w6.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Analog Watch</a></h4>
+                        <h4><a href="{{url('single')}}">Analog Watch</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$320.99</span>
                             <del>$489.71</del>
@@ -675,14 +675,14 @@
                         <img src="images/w7.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Ankle Length Socks</a></h4>
+                        <h4><a href="{{url('single')}}">Ankle Length Socks</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$100.99</span>
                             <del>$159.71</del>
@@ -714,14 +714,14 @@
                         <img src="images/w8.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
                             </div>
                         </div>
                         <span class="product-new-top">New</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">Reebok Women's Tights</a></h4>
+                        <h4><a href="{{url('single')}}">Reebok Women's Tights</a></h4>
                         <div class="info-product-price">
                             <span class="item_price">$130.99</span>
                             <del>$169.71</del>
