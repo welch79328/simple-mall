@@ -4,14 +4,14 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首页</a> &raquo; 文章管理
+        <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首頁</a> &raquo; 商品管理
     </div>
     <!--面包屑导航 结束-->
 
 	<!--结果集标题与导航组件 开始-->
 	<div class="result_wrap">
         <div class="result_title">
-            <h3>添加文章</h3>
+            <h3>添加商品</h3>
             @if(count($errors)>0)
                 <div class="mark">
                     @if(is_object($errors))
@@ -45,6 +45,7 @@
                                 @foreach($data as $v)
                                 <option value="{{$v->cate_id}}">{{$v->_cate_name}}</option>
                                 @endforeach
+                                <option value="">其他分類</option>
                             </select>
                         </td>
                     </tr>
@@ -52,23 +53,22 @@
                     <tr>
                         <th>標題：</th>
                         <td>
-                            <input type="text" class="lg" name="commodity_title">
+                            <input type="text" class="md" name="commodity_title">
                         </td>
                     </tr>
 
                     <tr>
                         <th>副標題：</th>
                         <td>
-                            <input type="text" class="sm" name="commodity_subtitle">
+                            <input type="text" class="md" name="commodity_subtitle">
                         </td>
                     </tr>
-
 
                     <tr>
                         <th>大圖：</th>
                         <td>
                             <img src="" alt="" id="comm_cover_img" style="max-height: 200px; max-width: 350px;">
-                            <input type="text" id="commodity_image" size="50" name="commodity_image">
+                            <input type="hidden" id="commodity_image" size="50" name="commodity_image">
                             <input id="file_upload" name="file_upload" type="file">
                             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
                             <script src="{{asset('org/uploadifive/jquery.uploadifive.js')}}" type="text/javascript"></script>
@@ -101,8 +101,10 @@
                     <tr>
                         <th>縮略圖：</th>
                         <td>
-                            <img src="" alt="" id="art_thumb_img" style="max-height: 200px; max-width: 350px;">
-                            <input type="text" id="image" size="50" name="image">
+                            <div id="thumb_image">
+                                <img src="" alt="" id="art_thumb_img" style="height: 100px; width: 150px;">
+                            </div>
+                            <input type="hidden" id="image" size="50" name="image">
                             <input id="file_upload1" name="file_upload1" type="file">
                             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
                             <script src="{{asset('org/uploadifive/jquery.uploadifive.js')}}" type="text/javascript"></script>
@@ -120,7 +122,13 @@
                                         'onUploadComplete' : function(file, data) {
                                             x.push(data);
                                             $('#image').val(x);
-                                            $('#art_thumb_img').attr('src','/'+data);
+                                            if(x.length > 1){
+                                                var data1 = "<img src='/"+data+"' alt='' id='art_thumb_img' style='height: 100px; width: 150px;'>";
+                                                $('#thumb_image').append(data1);
+                                            }else{
+                                                $('#art_thumb_img').attr('src','/'+data);
+                                            }
+
                                         }
                                     });
                                 });
@@ -136,20 +144,41 @@
                     <tr>
                         <th>定價：</th>
                         <td>
-                            <input type="text" class="lg" name="commodity_price">
+                            <input type="number" min="1" name="commodity_price">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>庫存：</th>
+                        <td>
+                            <input type="number" min="0" name="commodity_stock">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>安全庫存：</th>
+                        <td>
+                            <input type="number" min="0" name="commodity_safe_stock">
                         </td>
                     </tr>
 
                     <tr>
                         <th>狀態：</th>
                         <td>
-                            <input type="radio" name="commodity_status" value="上架" checked >上架
-                            <input type="radio" name="commodity_status" value="下架" >下架
+                            <input type="radio" name="commodity_status" value="on" checked >上架
+                            <input type="radio" name="commodity_status" value="off" >下架
                         </td>
                     </tr>
 
                     <tr>
-                        <th>描述：</th>
+                        <th>購物說明：</th>
+                        <td>
+                            <textarea name="commodity_guide"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>內容：</th>
                         <td>
                             <textarea name="commodity_description"></textarea>
                         </td>

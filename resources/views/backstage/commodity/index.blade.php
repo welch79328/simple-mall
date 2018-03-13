@@ -4,7 +4,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首页</a> &raquo; 商品管理
+        <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首頁</a> &raquo; 商品管理
     </div>
     <!--面包屑导航 结束-->
 
@@ -34,30 +34,26 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc">分類</th>
-                        <th>标题</th>
-                        <th>副标题</th>
+                        <th>分類</th>
+                        <th>標題</th>
                         <th>定價</th>
-                        <th>內容</th>
+                        <th>庫存</th>
+                        <th>安全庫存</th>
                         <th>狀態</th>
-                        <th>点击</th>
-                        <th>發布时间</th>
+                        <th>發布時間</th>
+                        <th>創建者</th>
                         <th>操作</th>
                     </tr>
                     @foreach($data as $v)
                     <tr>
                         <td class="tc">{{$v->cate_name}}</td>
-                        <td>
-                            <a href="#">{{$v->commodity_title}}</a>
-                        </td>
-                        <td>
-                            <a href="#">{{$v->commodity_tag}}</a>
-                        </td>
+                        <td>{{$v->commodity_title}}</td>
                         <td>{{$v->commodity_price}}</td>
-                        <td>{{$v->commodity_description}}</td>
-                        <td>{{$v->commodity_status}}</td>
-                        <td>{{$v->commodity_view}}</td>
-                        <td>{{date('Y-m-d',$v->commodity_time)}}</td>
+                        <td style="@if($v->commodity_stock == 0) color: #CC0033; @endif">{{$v->commodity_stock}}</td>
+                        <td style="@if($v->commodity_safe_stock == 0) color: #CC0033; @endif">{{$v->commodity_safe_stock}}</td>
+                        <td style="@if($v->commodity_status == 'on') color: #009966; @else color: #FF0033; @endif">{{$v->commodity_status}}</td>
+                        <td>{{$v->created_at}}</td>
+                        <td>{{$v->commodity_creator}}</td>
                         <td>
                             <a href="{{url('admin/commodity/'.$v->commodity_id.'/edit ')}}">修改</a>
                             <a href="javascript:" onclick="delcommodity({{$v->commodity_id}})">删除</a>
@@ -83,7 +79,7 @@
     <script>
         //刪除商品
         function delcommodity(commodity_id) {
-            layer.confirm('您確定要刪除這篇商品嗎？', {
+            layer.confirm('您確定要刪除這項商品嗎？', {
                 btn: ['確定','取消'] //按钮
             }, function(){
                 $.post("{{url('admin/commodity')}}/"+commodity_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {

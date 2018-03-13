@@ -47,5 +47,5 @@ Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['admin.
 //    Route::any('adv/classification_changes_up', 'AdvCategoryController@classification_changes_up');
 //
 //
-//    Route::any('upload', 'CommonController@upload');
+    Route::any('upload', 'CommonController@upload');
 });

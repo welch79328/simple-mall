@@ -28,6 +28,7 @@ class CreateCommodityTable extends Migration
             $table->integer('cate_id')->nullable();
             $table->integer('discount_id')->nullable();
             $table->enum('discount_status',['secondary','main'])->default('main')->nullable();
+            $table->string('commodity_creator')->nullable();
             $table->timestamps();
         });
     }

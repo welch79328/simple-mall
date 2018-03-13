@@ -34,7 +34,7 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/commodity'.$commodity->commodity_id)}}" method="post">
+        <form action="{{url('admin/commodity/'.$commodity->commodity_id)}}" method="post">
             <input type="hidden" name="_method" value="put">
             {{csrf_field()}}
             <table class="add_tab">
@@ -44,23 +44,25 @@
                         <td>
                             <select name="cate_id">
                                 @foreach($data as $v)
-                                <option value="{{$v->cate_id}}">{{$v->_cate_name}}</option>
+                                <option value="{{$v->cate_id}}"@if($v->cate_id == $commodity->cate_id) selected @endif>{{$v->_cate_name}}</option>
                                 @endforeach
+                                <option value="" @if($commodity->cate_id == Null) selected @endif>其他分類</option>
                             </select>
+
                         </td>
                     </tr>
 
                     <tr>
                         <th>標題：</th>
                         <td>
-                            <input type="text" class="lg" name="commodity_title" value="{{$commodity->commodity_title}}">
+                            <input type="text" class="md" name="commodity_title" value="{{$commodity->commodity_title}}">
                         </td>
                     </tr>
 
                     <tr>
                         <th>副標題：</th>
                         <td>
-                            <input type="text" class="sm" name="commodity_subtitle" value="{{$commodity->commodity_subtitle}}">
+                            <input type="text" class="md" name="commodity_subtitle" value="{{$commodity->commodity_subtitle}}">
                         </td>
                     </tr>
 
@@ -68,8 +70,8 @@
                     <tr>
                         <th>大圖：</th>
                         <td>
-                            <img src="" alt="" id="comm_cover_img" style="max-height: 200px; max-width: 350px;" value="{{$commodity->commodity_image}}">
-                            <input type="text" id="commodity_image" size="50" name="commodity_image">
+                            <img src="/{{$commodity->commodity_image}}" alt="" id="comm_cover_img" style="height: 200px; width: 350px;">
+                            <input type="hidden" id="commodity_image" size="50" name="commodity_image" value="{{$commodity->commodity_image}}">
                             <input id="file_upload" name="file_upload" type="file">
                             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
                             <script src="{{asset('org/uploadifive/jquery.uploadifive.js')}}" type="text/javascript"></script>
@@ -102,8 +104,12 @@
                     <tr>
                         <th>縮略圖：</th>
                         <td>
-                            <img src="" alt="" id="art_thumb_img" style="max-height: 200px; max-width: 350px;" value="">
-                            <input type="text" id="image" size="50" name="image">
+                            <div id="thumb_image">
+                            @foreach($commodityImg as $v)
+                                <img src="/{{$v->image}}" alt="" id="art_thumb_img" style="height: 100px; width: 150px;">
+                            @endforeach
+                            </div>
+                            <input type="hidden" id="image" size="50" name="image" value="{{$commodityImg_array}}">
                             <input id="file_upload1" name="file_upload1" type="file">
                             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
                             <script src="{{asset('org/uploadifive/jquery.uploadifive.js')}}" type="text/javascript"></script>
@@ -121,7 +127,14 @@
                                         'onUploadComplete' : function(file, data) {
                                             x.push(data);
                                             $('#image').val(x);
-                                            $('#art_thumb_img').attr('src','/'+data);
+                                            if(x.length > 1){
+                                                var data1 = "<img src='/"+data+"' alt='' id='art_thumb_img' style='height: 100px; width: 150px;'>";
+                                                $('#thumb_image').append(data1);
+                                            }else {
+                                                $('#thumb_image').html('');
+                                                var data1 = "<img src='/"+data+"' alt='' id='art_thumb_img' style='height: 100px; width: 150px;'>";
+                                                $('#thumb_image').append(data1);
+                                            }
                                         }
                                     });
                                 });
@@ -137,20 +150,41 @@
                     <tr>
                         <th>定價：</th>
                         <td>
-                            <input type="text" class="lg" name="commodity_price" value="{{$commodity->commodity_price}}">
+                            <input type="number" min="1" name="commodity_price" value="{{$commodity->commodity_price}}">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>庫存：</th>
+                        <td>
+                            <input type="number" min="0" name="commodity_stock" value="{{$commodity->commodity_stock}}">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>安全庫存：</th>
+                        <td>
+                            <input type="number" min="0" name="commodity_safe_stock" value="{{$commodity->commodity_safe_stock}}">
                         </td>
                     </tr>
 
                     <tr>
                         <th>狀態：</th>
                         <td>
-                            <input type="radio" name="commodity_status" value="上架" checked >上架
-                            <input type="radio" name="commodity_status" value="下架" >下架
+                            <input type="radio" name="commodity_status" value="on" checked >上架
+                            <input type="radio" name="commodity_status" value="off" >下架
                         </td>
                     </tr>
 
                     <tr>
-                        <th>描述：</th>
+                        <th>購物說明：</th>
+                        <td>
+                            <textarea name="commodity_guide">{{$commodity->commodity_guide}}</textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>商品內容：</th>
                         <td>
                             <textarea name="commodity_description">{{$commodity->commodity_description}}</textarea>
                         </td>

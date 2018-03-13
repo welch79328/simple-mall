@@ -31,7 +31,7 @@ class CommodityController extends Controller
     public function index()
     {
 //        $data = Commodity::join('category','commodity.cate_id','=','category.cate_id')->orderBy('commodity_id','desc')->paginate(5);
-        $data = Commodity::paginate(10);
+        $data = Commodity::orderBy('updated_at','desc')->paginate(10);
         $cate = Category::get();
         foreach ($data as $v){
             if($v->cate_id == Null){
@@ -53,7 +53,7 @@ class CommodityController extends Controller
      */
     public function create()
     {
-        $categorys = Category::orderBy('cate_order','asc')->get();
+        $categorys = Category::get();
         $data = $this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','5');
         return view('backstage.commodity.create',compact('data'));
     }
@@ -68,11 +68,11 @@ class CommodityController extends Controller
         try{
             DB::beginTransaction();
 
-            $input = Input::except('_token');
-            $image = explode(',', $input['image_url']);
+            $input = Input::except('_token','file_upload','file_upload1');
+            $input['commodity_creator'] = session('admin_member.member_name');
+            $image = explode(',', $input['image']);
 
-            $input['commodity_time'] = time();
-            unset($input['image_url']);
+            unset($input['image']);
 
             $rules=[
                 'commodity_title'=>'required',
@@ -89,12 +89,12 @@ class CommodityController extends Controller
             if($validator->passes()){
                 $re = Commodity::create($input);
                 foreach ($image as $k=>$v) {
-                    $k = 'image_url';
-                    $img_url = [$k=>$v,'commodity_id'=>$re->commodity_id];
-                    CommodityImg::create($img_url);
+                    $k = 'image';
+                    $commodityImg = [$k=>$v,'commodity_id'=>$re->commodity_id];
+                    CommodityImg::create($commodityImg);
                 }
                 DB::commit();
-                return redirect('commodity');
+                return redirect('admin/commodity');
 //                if($re){
 //                    return redirect('admin/commodity');
 //                }else {
@@ -103,8 +103,6 @@ class CommodityController extends Controller
             }else{
                 return back()->withErrors($validator);
             }
-
-
 
         }catch (\Exception $e){
             DB::rollBack();
@@ -131,7 +129,13 @@ class CommodityController extends Controller
         $categorys = Category::get();
         $data = $this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','4');
         $commodity = Commodity::find($commodity_id);
-        return view('backstage.commodity.edit',compact('data','commodity'));
+        $commodityImg = CommodityImg::where('commodity_id',$commodity_id)->get();
+        $commodityImg_array = '';
+        foreach ($commodityImg as $v){
+            $commodityImg_array = $commodityImg_array.','.$v->image;
+        }
+        $commodityImg_array = substr($commodityImg_array,1);
+        return view('backstage.commodity.edit',compact('data','commodity','commodityImg','commodityImg_array'));
     }
 
     /**
@@ -141,10 +145,19 @@ class CommodityController extends Controller
      */
     public function update(Request $request, $commodity_id)
     {
-        $input = Input::except('_token','_method');
+        $input = Input::except('_token','_method','file_upload','file_upload1');
+        $image = explode(',', $input['image']);
+        unset($input['image']);
         $re = Commodity::where('commodity_id',$commodity_id)->update($input);
-        if($re){
-            return redirect('commodity');
+
+        CommodityImg::where('commodity_id',$commodity_id)->delete();
+        foreach ($image as $k=>$v) {
+            $k = 'image';
+            $commodityImg = [$k=>$v,'commodity_id'=>$commodity_id];
+            $re1 = CommodityImg::create($commodityImg);
+        }
+        if($re || $re1){
+            return redirect('admin/commodity');
         }else{
             return back()->with('errors', '商品更新失敗, 請稍後重試');
         }
@@ -157,7 +170,8 @@ class CommodityController extends Controller
     public function destroy($commodity_id)
     {
         $re = Commodity::where('commodity_id',$commodity_id)->delete();
-        if($re){
+        $re1 = CommodityImg::where('commodity_id',$commodity_id)->delete();
+        if($re || $re1){
             $data = [
                 'status' => 0,
                 'msg' => '商品刪除成功!',
