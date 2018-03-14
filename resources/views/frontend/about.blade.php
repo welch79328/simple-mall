@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+@extends('layouts.frontstage.frontend')
 
 @section('title', 'Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | About :: w3layouts')
 
@@ -6,170 +6,6 @@
 <!--css -->
 <link href="{{asset('css/frontend/team.css')}}" rel="stylesheet" type="text/css" media="all" />
 
-<!-- header -->
-<div class="header" id="home">
-    <div class="container">
-        <ul>
-            <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
-            <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
-            <li><i class="fa fa-phone" aria-hidden="true"></i> Call : 01234567898</li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
-        </ul>
-    </div>
-</div>
-<!-- //header -->
-<!-- header-bot -->
-<div class="header-bot">
-    <div class="header-bot_inner_wthreeinfo_header_mid">
-        <div class="col-md-4 header-middle">
-            <form action="#" method="post">
-                <input type="search" name="search" placeholder="Search here..." required="">
-                <input type="submit" value=" ">
-                <div class="clearfix"></div>
-            </form>
-        </div>
-        <!-- header-bot -->
-        <div class="col-md-4 logo_agile">
-            <h1><a href="{{url('/')}}"><span>E</span>lite Shoppy <i class="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
-        </div>
-        <!-- header-bot -->
-        <div class="col-md-4 agileits-social top_content">
-            <ul class="social-nav model-3d-0 footer-social w3_agile_social">
-                <li class="share">Share On : </li>
-                <li><a href="#" class="facebook">
-                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="twitter"> 
-                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="instagram">
-                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-                <li><a href="#" class="pinterest">
-                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
-            </ul>
-
-
-
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!-- //header-bot -->
-<!-- banner -->
-<div class="ban-top">
-    <div class="container">
-        <div class="top_nav_left">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav menu__list">
-                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a></li>
-                            <li class=" menu__item menu__item--current"><a class="menu__link" href="{{url('about')}}">About</a></li>
-                            <li class="dropdown menu__item">
-                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Men's wear <span class="caret"></span></a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <div class="agile_inner_drop_nav_info">
-                                        <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                            <a href="{{url('mens')}}"><img src="images/top2.jpg" alt=" "/></a>
-                                        </div>
-                                        <div class="col-sm-3 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="{{url('mens')}}">Clothing</a></li>
-                                                <li><a href="{{url('mens')}}">Wallets</a></li>
-                                                <li><a href="{{url('mens')}}">Footwear</a></li>
-                                                <li><a href="{{url('mens')}}">Watches</a></li>
-                                                <li><a href="{{url('mens')}}">Accessories</a></li>
-                                                <li><a href="{{url('mens')}}">Bags</a></li>
-                                                <li><a href="{{url('mens')}}">Caps & Hats</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="{{url('mens')}}">Jewellery</a></li>
-                                                <li><a href="{{url('mens')}}">Sunglasses</a></li>
-                                                <li><a href="{{url('mens')}}">Perfumes</a></li>
-                                                <li><a href="{{url('mens')}}">Beauty</a></li>
-                                                <li><a href="{{url('mens')}}">Shirts</a></li>
-                                                <li><a href="{{url('mens')}}">Sunglasses</a></li>
-                                                <li><a href="{{url('mens')}}">Swimwear</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </ul>
-                            </li>
-                            <li class="dropdown menu__item">
-                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Women's wear <span class="caret"></span></a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <div class="agile_inner_drop_nav_info">
-                                        <div class="col-sm-3 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="{{url('womens')}}">Clothing</a></li>
-                                                <li><a href="{{url('womens')}}">Wallets</a></li>
-                                                <li><a href="{{url('womens')}}">Footwear</a></li>
-                                                <li><a href="{{url('womens')}}">Watches</a></li>
-                                                <li><a href="{{url('womens')}}">Accessories</a></li>
-                                                <li><a href="{{url('womens')}}">Bags</a></li>
-                                                <li><a href="{{url('womens')}}">Caps & Hats</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="{{url('womens')}}">Jewellery</a></li>
-                                                <li><a href="{{url('womens')}}">Sunglasses</a></li>
-                                                <li><a href="{{url('womens')}}">Perfumes</a></li>
-                                                <li><a href="{{url('womens')}}">Beauty</a></li>
-                                                <li><a href="{{url('womens')}}">Shirts</a></li>
-                                                <li><a href="{{url('womens')}}">Sunglasses</a></li>
-                                                <li><a href="{{url('womens')}}">Swimwear</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-6 multi-gd-img multi-gd-text ">
-                                            <a href="{{url('womens')}}"><img src="images/top1.jpg" alt=" "/></a>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </ul>
-                            </li>
-                            <li class="menu__item dropdown">
-                                <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Short Codes <b class="caret"></b></a>
-                                <ul class="dropdown-menu agile_short_dropdown">
-                                    <li><a href="{{url('icons')}}">Web Icons</a></li>
-                                    <li><a href="{{url('typography')}}">Typography</a></li>
-                                </ul>
-                            </li>
-                            <li class=" menu__item"><a class="menu__link" href="{{url('contact')}}">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>	
-        </div>
-        <div class="top_nav_right">
-            <div class="wthreecartaits wthreecartaits2 cart cart box_1"> 
-                <form action="#" method="post" class="last"> 
-                    <input type="hidden" name="cmd" value="_cart">
-                    <input type="hidden" name="display" value="1">
-                    <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-                </form>  
-
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!-- //banner-top -->
 <!-- Modal1 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
@@ -589,10 +425,6 @@
 </div>
 <!--grids-->
 
-<!-- footer -->
-@include('frontend.footer')
-<!-- //footer -->
-
 <!-- login -->
 <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -668,4 +500,55 @@
 <!-- //login -->
 <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
+<!-- js -->
+<script type="text/javascript" src="{{asset('js/frontend/jquery-2.1.4.min.js')}}"></script>
+<!-- //js -->	
+<!-- cart-js -->
+<script src="{{asset('js/frontend/minicart.min.js')}}"></script>
+<script>
+                                        // Mini Cart
+                                        paypal.minicart.render({
+                                            action: '#'
+                                        });
+
+                                        if (~window.location.search.indexOf('reset=true')) {
+                                            paypal.minicart.reset();
+                                        }
+</script>
+<!-- //cart-js --> 
+<!-- stats -->
+<script src="{{asset('js/frontend/jquery.waypoints.min.js')}}"></script>
+<script src="{{asset('js/frontend/jquery.countup.js')}}"></script>
+<script> $('.counter').countUp();</script>
+<!-- //stats -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="{{asset('js/frontend/move-top.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/frontend/jquery.easing.min.js')}}"></script>
+<script type="text/javascript">
+                                        jQuery(document).ready(function ($) {
+                                            $(".scroll").click(function (event) {
+                                                event.preventDefault();
+                                                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                                            });
+                                        });
+</script>
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*
+         var defaults = {
+         containerID: 'toTop', // fading element id
+         containerHoverID: 'toTopHover', // fading element hover id
+         scrollSpeed: 1200,
+         easingType: 'linear' 
+         };
+         */
+
+        $().UItoTop({easingType: 'easeOutQuart'});
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<!-- for bootstrap working -->
+<script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
 @endsection
