@@ -104,8 +104,8 @@ class LoginController extends Controller
 
     public function quit()
     {
-        session(['member'=>null]);
-        return redirect('member/login');
+        session(['admin_member'=>null]);
+        return redirect('admin/login');
     }
 
 //    public function generate_password()
