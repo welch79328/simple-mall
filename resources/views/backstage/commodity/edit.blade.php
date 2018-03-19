@@ -148,31 +148,68 @@
                     </tr>
 
                     <tr>
+                        <th>商品期間 : </th>
+                        <td>
+                            <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                            <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+                            <!-- Include Date Range Picker -->
+                            <script type="text/javascript" src="{{asset('org/daterangepicker/daterangepicker.js')}}"></script>
+                            <link rel="stylesheet" type="text/css" href="{{asset('org/daterangepicker/daterangepicker.css')}}" />
+                            {{--<input type="text" id="dom-id" size="20" name="advertisement_period">--}}
+                            <input type="text" name="commodity_period" value="{{$commodity->commodity_start_time}} to {{$commodity->commodity_end_time}}">
+
+                            <script type="text/javascript">
+                                $(function() {
+                                    $('input[name="commodity_period"]').daterangepicker({
+                                        timePicker: true,
+                                        timePicker24Hour: true,
+                                        timePickerIncrement: 30,
+                                        locale: {
+                                            format: 'YYYY-MM-DD HH:mm:ss'
+                                        }
+                                    });
+                                });
+                            </script>
+
+                        </td>
+                    </tr>
+
+                    <tr>
                         <th>定價：</th>
                         <td>
-                            <input type="number" min="1" name="commodity_price" value="{{$commodity->commodity_price}}">
+                            <input type="number" min="1" name="commodity_price" style="height: 28px;" value="{{$commodity->commodity_price}}">
                         </td>
                     </tr>
 
                     <tr>
                         <th>庫存：</th>
                         <td>
-                            <input type="number" min="0" name="commodity_stock" value="{{$commodity->commodity_stock}}">
+                            <input type="number" min="0" name="commodity_stock" style="height: 28px;" value="{{$commodity->commodity_stock}}">
                         </td>
                     </tr>
 
                     <tr>
                         <th>安全庫存：</th>
                         <td>
-                            <input type="number" min="0" name="commodity_safe_stock" value="{{$commodity->commodity_safe_stock}}">
+                            <input type="number" min="0" name="commodity_safe_stock" style="height: 28px;" value="{{$commodity->commodity_safe_stock}}">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>商品類型：</th>
+                        <td>
+                            <select name="commodity_type">
+                                <option value="general" @if($commodity->commodity_type == 'general') selected @endif>一般商品</option>
+                                <option value="limited"@if($commodity->commodity_type == 'limited') selected @endif>限時商品</option>
+                            </select>
                         </td>
                     </tr>
 
                     <tr>
                         <th>狀態：</th>
                         <td>
-                            <input type="radio" name="commodity_status" value="on" checked >上架
-                            <input type="radio" name="commodity_status" value="off" >下架
+                            <input type="radio" name="commodity_status" value="on" @if($commodity->commodity_status == 'on') checked @endif>上架
+                            <input type="radio" name="commodity_status" value="off" @if($commodity->commodity_status == 'off') checked @endif>下架
                         </td>
                     </tr>
 
@@ -193,8 +230,8 @@
                     <tr>
                         <th></th>
                         <td>
-                            <input type="submit" value="提交">
-                            <input type="button" class="back" onclick="history.go(-1)" value="返回">
+                            <input type="submit" style="line-height:5px;" value="提交">
+                            <input type="button" class="back" style="line-height:5px;" onclick="history.go(-1)" value="返回">
                         </td>
                     </tr>
                 </tbody>

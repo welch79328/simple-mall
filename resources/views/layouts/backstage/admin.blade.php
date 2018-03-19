@@ -7,6 +7,7 @@
     <script type="text/javascript" src="{{asset('js/backstage/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/backstage/ch-ui.admin.js')}}"></script>
     <script type="text/javascript" src="{{asset('org/layer/layer.js')}}"></script>
+    @yield('js')
 </head>
 <body>
 @yield('content')

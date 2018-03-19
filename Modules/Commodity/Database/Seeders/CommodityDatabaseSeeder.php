@@ -23,6 +23,8 @@ class CommodityDatabaseSeeder extends Seeder
             return [
                 'commodity_title' => $faker->name,
                 'commodity_price' => rand(200,2000),
+                'commodity_start_time'=>'2018-03-01 00:00:00',
+                'commodity_end_time'=>'2018-05-20 23:59:59',
                 'commodity_stock' => rand(1,10),
                 'commodity_safe_stock' => rand(1,10),
             ];

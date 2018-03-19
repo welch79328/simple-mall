@@ -36,9 +36,9 @@
                     <tr>
                         <th>分類</th>
                         <th>標題</th>
-                        <th>定價</th>
-                        <th>庫存</th>
-                        <th>安全庫存</th>
+                        <th>開始時間</th>
+                        <th>結束時間</th>
+                        <th>商品類型</th>
                         <th>狀態</th>
                         <th>發布時間</th>
                         <th>創建者</th>
@@ -48,11 +48,11 @@
                     <tr>
                         <td class="tc">{{$v->cate_name}}</td>
                         <td>{{$v->commodity_title}}</td>
-                        <td>{{$v->commodity_price}}</td>
-                        <td style="@if($v->commodity_stock == 0) color: #CC0033; @endif">{{$v->commodity_stock}}</td>
-                        <td style="@if($v->commodity_safe_stock == 0) color: #CC0033; @endif">{{$v->commodity_safe_stock}}</td>
+                        <td>{{$v->commodity_start_time}}</td>
+                        <td style="<?php $now = strtotime(date("Y/m/d h:i:s")); ?>@if(strtotime($v->commodity_end_time) < $now) color: #CC0033; @endif">{{$v->commodity_end_time}}</td>
+                        <td>{{$v->commodity_type}}</td>
                         <td style="@if($v->commodity_status == 'on') color: #009966; @else color: #FF0033; @endif">{{$v->commodity_status}}</td>
-                        <td>{{$v->created_at}}</td>
+                        <td>{{$v->updated_at}}</td>
                         <td>{{$v->commodity_creator}}</td>
                         <td>
                             <a href="{{url('admin/commodity/'.$v->commodity_id.'/edit ')}}">修改</a>

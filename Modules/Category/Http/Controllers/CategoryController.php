@@ -29,7 +29,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categorys = Category::orderBy('cate_order','asc')->get();
-        $data = $this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','5');
+        $data = $this->moduleHelper->getTree($categorys,'cate_name','cate_id','cate_parent','cate_level','5',0);
+        dd($data);
         return view('backstage.category.index',compact('data'));
     }
 

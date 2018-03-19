@@ -11,6 +11,8 @@ Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['admin.
     Route::get('/', 'IndexController@index');
     //後台主頁面
     Route::get('info', 'IndexController@info');
+
+    Route::get('layout', 'LayoutController@index');
 //    Route::get('quit', 'LoginController@quit');
 //    //使用者管理
 //    Route::resource('user', 'UserController');

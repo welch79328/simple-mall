@@ -142,23 +142,60 @@
                     </tr>
 
                     <tr>
+                        <th>商品期間 : </th>
+                        <td>
+                            <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                            <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+                            <!-- Include Date Range Picker -->
+                            <script type="text/javascript" src="{{asset('org/daterangepicker/daterangepicker.js')}}"></script>
+                            <link rel="stylesheet" type="text/css" href="{{asset('org/daterangepicker/daterangepicker.css')}}" />
+                            {{--<input type="text" id="dom-id" size="20" name="advertisement_period">--}}
+                            <input type="text" name="commodity_period" value="">
+
+                            <script type="text/javascript">
+                                $(function() {
+                                    $('input[name="commodity_period"]').daterangepicker({
+                                        timePicker: true,
+                                        timePicker24Hour: true,
+                                        timePickerIncrement: 30,
+                                        locale: {
+                                            format: 'YYYY-MM-DD HH:mm:ss'
+                                        }
+                                    });
+                                });
+                            </script>
+
+                        </td>
+                    </tr>
+
+                    <tr>
                         <th>定價：</th>
                         <td>
-                            <input type="number" min="1" name="commodity_price">
+                            <input type="number" min="1" style="height: 28px;" name="commodity_price">
                         </td>
                     </tr>
 
                     <tr>
                         <th>庫存：</th>
                         <td>
-                            <input type="number" min="0" name="commodity_stock">
+                            <input type="number" min="0" style="height: 28px;" name="commodity_stock">
                         </td>
                     </tr>
 
                     <tr>
                         <th>安全庫存：</th>
                         <td>
-                            <input type="number" min="0" name="commodity_safe_stock">
+                            <input type="number" min="0" style="height: 28px;" name="commodity_safe_stock">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>商品類型：</th>
+                        <td>
+                            <select name="commodity_type">
+                                <option value="general">一般商品</option>
+                                <option value="limited">限時商品</option>
+                            </select>
                         </td>
                     </tr>
 
@@ -187,8 +224,8 @@
                     <tr>
                         <th></th>
                         <td>
-                            <input type="submit" value="提交">
-                            <input type="button" class="back" onclick="history.go(-1)" value="返回">
+                            <input type="submit" style="line-height:5px;" value="提交">
+                            <input type="button" style="line-height:5px;" class="back" onclick="history.go(-1)" value="返回">
                         </td>
                     </tr>
                 </tbody>

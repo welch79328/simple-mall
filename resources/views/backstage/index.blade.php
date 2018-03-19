@@ -12,8 +12,8 @@
 		</div>
 		<div class="top_right">
 			<ul>
-				<li>{{session('admin_member.member_name')}} Welcome</li>
-				<li><a href="{{url('admin/quit')}}">Logout</a></li>
+				<li>{{session('admin_member.member_name')}}</li><li> Welcome</li>
+				<li><a href="{{url('admin/logout')}}">Logout</a></li>
 			</ul>
 		</div>
 	</div>
@@ -32,6 +32,7 @@
 					<li><a href="{{url('admin/commodity')}}" target="main"><i class="fa fa-fw fa-square"></i>商品管理</a></li>
 					{{--<li><a href="{{url('admin/discount')}}" target="main"><i class="fa fa-fw fa-square"></i>折價管理</a></li>--}}
 					<li><a href="{{url('admin/category')}}" target="main"><i class="fa fa-fw fa-square"></i>分類管理</a></li>
+					<li><a href="{{url('admin/advertisement')}}" target="main"><i class="fa fa-fw fa-square"></i>廣告管理</a></li>
 					<li><a href="" target="main"><i class="fa fa-fw fa-square"></i>訂單管理</a></li>
 				</ul>
 			</li>
@@ -45,7 +46,7 @@
             	<h3><i class="fa fa-fw fa-cog"></i>系统設置</h3>
                 <ul class="sub_menu" style="display: block;">
 					{{--<li><a href="{{url('admin/config')}}" target="main"><i class="fa fa-fw fa-cogs"></i>網站配置</a></li>--}}
-					<li><a href="" target="main"><i class="fa fa-fw fa-cogs"></i>網站配置</a></li>
+					<li><a href="{{url('admin/layout')}}" target="main"><i class="fa fa-fw fa-cogs"></i>網站配置</a></li>
 					{{--<li><a href="{{url('admin/navs')}}" target="main"><i class="fa fa-fw fa-navicon"></i>自定義登入紐</a></li>--}}
 
                 </ul>

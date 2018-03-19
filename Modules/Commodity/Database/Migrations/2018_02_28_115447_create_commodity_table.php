@@ -23,7 +23,11 @@ class CreateCommodityTable extends Migration
             $table->string('commodity_guide')->nullable();
             $table->integer('commodity_stock')->default(0);
             $table->integer('commodity_safe_stock')->default(0);
+            $table->string('commodity_start_time');
+            $table->string('commodity_end_time');
+            $table->integer('commodity_ordering')->default(1);
             $table->enum('commodity_status',['on','off'])->default('on');
+            $table->enum('commodity_type',['general','limited '])->default('general');
             $table->integer('commodity_view')->default(0);
             $table->integer('cate_id')->nullable();
             $table->integer('discount_id')->nullable();

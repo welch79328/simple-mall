@@ -102,7 +102,7 @@ class LoginController extends Controller
 
     }
 
-    public function quit()
+    public function logout()
     {
         session(['admin_member'=>null]);
         return redirect('admin/login');
