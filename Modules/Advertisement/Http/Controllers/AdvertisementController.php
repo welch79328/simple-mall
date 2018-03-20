@@ -111,9 +111,7 @@ class AdvertisementController extends Controller
         $input['advertisement_period'] = explode('to',$input['advertisement_period']);
         $input['advertisement_start_time'] = $input['advertisement_period'][0];
         $input['advertisement_end_time'] = $input['advertisement_period'][1];
-        if(empty($input['advertisement_creator'])){
-            $input['advertisement_creator'] = session('admin_member.member_name');
-        }
+        $input['advertisement_creator'] = session('admin_member.member_name');
 
         unset($input['advertisement_period']);
         $re = Advertisement::where('advertisement_id',$advertisement_id)->update($input);

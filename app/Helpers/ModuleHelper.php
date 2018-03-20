@@ -15,7 +15,7 @@ class ModuleHelper
     {
         $arr = array();
         foreach ($data as $k=>$v){
-            if($v->$field_parent==$pid && ((!is_bool($alone))?$v->cate_name == $alone:$alone)){
+            if($v->$field_parent==$pid && ((!is_bool($alone))?$v->cate_id == $alone:$alone)){
                 $data[$k]['_'.$field_name] = $data[$k][$field_name];
                 $arr[] = $data[$k];
                 foreach ($data as $m=>$n){

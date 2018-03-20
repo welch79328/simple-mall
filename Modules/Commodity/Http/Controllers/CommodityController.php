@@ -155,9 +155,8 @@ class CommodityController extends Controller
         $input['commodity_period'] = explode('to',$input['commodity_period']);
         $input['commodity_start_time'] = $input['commodity_period'][0];
         $input['commodity_end_time'] = $input['commodity_period'][1];
-        if(empty($input['commodity_creator'])){
-            $input['commodity_creator'] = session('admin_member.member_name');
-        }
+        $input['commodity_creator'] = session('admin_member.member_name');
+
         unset($input['commodity_period']);
         unset($input['image']);
         $re = Commodity::where('commodity_id',$commodity_id)->update($input);

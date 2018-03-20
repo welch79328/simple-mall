@@ -41,7 +41,7 @@
                         <th>商品類型</th>
                         <th>狀態</th>
                         <th>發布時間</th>
-                        <th>創建者</th>
+                        <th>編輯者</th>
                         <th>操作</th>
                     </tr>
                     @foreach($data as $v)
