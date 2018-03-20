@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', "Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template |Men's :: w3layouts")
+@section('title', "Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | $topCate->cate_name :: w3layouts")
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/frontend/jquery-ui.css')}}">
@@ -50,7 +50,7 @@
 
                 </div>
                 <div class="col-md-4 modal_body_right modal_body_right1">
-                    <img src="images/log_pic.jpg" alt=" "/>
+                    <img src="/images/log_pic.jpg" alt=" "/>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -112,7 +112,7 @@
 
                 </div>
                 <div class="col-md-4 modal_body_right modal_body_right1">
-                    <img src="images/log_pic.jpg" alt=" "/>
+                    <img src="/images/log_pic.jpg" alt=" "/>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -124,14 +124,14 @@
 <!-- /banner_bottom_agile_info -->
 <div class="page-head_agile_info_w3l">
     <div class="container">
-        <h3>Men's <span>Wear  </span></h3>
+        <h3>{{$topCate->cate_name}}</h3>
         <!--/w3_short-->
         <div class="services-breadcrumb">
             <div class="agile_inner_breadcrumb">
 
                 <ul class="w3_short">
                     <li><a href="{{url('/')}}">Home</a><i>|</i></li>
-                    <li>Men's Wear</li>
+                    <li>商品分類</li>
                 </ul>
             </div>
         </div>
@@ -284,13 +284,13 @@
                 <div  id="top" class="callbacks_container">
                     <ul class="rslides" id="slider3">
                         <li>
-                            <img class="img-responsive" src="images/banner2.jpg" alt=" "/>
+                            <img class="img-responsive" src="/images/banner2.jpg" alt=" "/>
                         </li>
                         <li>
-                            <img class="img-responsive" src="images/banner5.jpg" alt=" "/>
+                            <img class="img-responsive" src="/images/banner5.jpg" alt=" "/>
                         </li>
                         <li>
-                            <img class="img-responsive" src="images/banner2.jpg" alt=" "/>
+                            <img class="img-responsive" src="/images/banner2.jpg" alt=" "/>
                         </li>
 
                     </ul>
@@ -299,7 +299,7 @@
             </div>
             <div class="men-wear-bottom">
                 <div class="col-sm-4 men-wear-left">
-                    <img class="img-responsive" src="images/bb2.jpg" alt=" " />
+                    <img class="img-responsive" src="/images/bb2.jpg" alt=" " />
                 </div>
                 <div class="col-sm-8 men-wear-right">
                     <h4>Exclusive Men's <span>Collections</span></h4>
@@ -314,8 +314,8 @@
             <div class="col-md-4 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m8.jpg" alt="" class="pro-image-front">
-                        <img src="images/m8.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m8.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m8.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -353,8 +353,8 @@
             <div class="col-md-4 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m7.jpg" alt="" class="pro-image-front">
-                        <img src="images/m7.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m7.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m7.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -392,8 +392,8 @@
             <div class="col-md-4 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/s1.jpg" alt="" class="pro-image-front">
-                        <img src="images/s1.jpg" alt="" class="pro-image-back">
+                        <img src="/images/s1.jpg" alt="" class="pro-image-front">
+                        <img src="/images/s1.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -437,8 +437,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m1.jpg" alt="" class="pro-image-front">
-                        <img src="images/m1.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m1.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m1.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -476,8 +476,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m2.jpg" alt="" class="pro-image-front">
-                        <img src="images/m2.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m2.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m2.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -515,8 +515,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m3.jpg" alt="" class="pro-image-front">
-                        <img src="images/m3.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m3.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m3.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -554,8 +554,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m4.jpg" alt="" class="pro-image-front">
-                        <img src="images/m4.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m4.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m4.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -593,8 +593,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m5.jpg" alt="" class="pro-image-front">
-                        <img src="images/m5.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m5.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m5.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -632,8 +632,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m7.jpg" alt="" class="pro-image-front">
-                        <img src="images/m7.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m7.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m7.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -671,8 +671,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m6.jpg" alt="" class="pro-image-front">
-                        <img src="images/m6.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m6.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m6.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
@@ -710,8 +710,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m8.jpg" alt="" class="pro-image-front">
-                        <img src="images/m8.jpg" alt="" class="pro-image-back">
+                        <img src="/images/m8.jpg" alt="" class="pro-image-front">
+                        <img src="/images/m8.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
