@@ -1,12 +1,12 @@
 {
-    "name": "ShoppingCart",
+    "name": "Shoppingcart",
     "alias": "shoppingcart",
     "description": "",
     "keywords": [],
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\ShoppingCart\\Providers\\ShoppingCartServiceProvider"
+        "Modules\\Shoppingcart\\Providers\\ShoppingcartServiceProvider"
     ],
     "aliases": {},
     "files": [

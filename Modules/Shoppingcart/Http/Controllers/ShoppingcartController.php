@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\ShoppingCart\Http\Controllers;
+namespace Modules\Shoppingcart\Http\Controllers;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class ShoppingCartController extends Controller
+class ShoppingcartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,10 +40,10 @@ class ShoppingCartController extends Controller
      * Show the specified resource.
      * @return Response
      */
-    public function show()
-    {
-        return view('shoppingcart::show');
-    }
+//    public function show()
+//    {
+//        return view('shoppingcart::show');
+//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -66,7 +67,38 @@ class ShoppingCartController extends Controller
      * Remove the specified resource from storage.
      * @return Response
      */
-    public function destroy()
+//    public function destroy()
+//    {
+//    }
+
+    public function push($commodity_id)
     {
+        $commodity = Commodity::where('commodity_id',$commodity_id)->first();
+        $cart = Cart::add($commodity->commodity_id,$commodity->commodity_title,'1',$commodity->commodity_price);
+//        $aa = Cart::content();
+//        dd($aa);
+
+
+        return back();
+    }
+
+    public function show()
+    {
+        $cart = Cart::content();
+        $total = Cart::total();
+
+        return view('frontend.shoppingcart',compact('cart','total'));
+    }
+
+    public function time()
+    {
+        echo ini_get("session.gc_maxlifetime");
+    }
+
+    //delete.admin/'shoppingcart/{rowId}  刪除單個商品
+    public function destroy($rowId){
+        Cart::remove($rowId);
+
+        return view('frontend.shoppingcart');
     }
 }

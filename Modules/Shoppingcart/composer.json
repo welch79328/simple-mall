@@ -10,7 +10,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\ShoppingCart\\Providers\\ShoppingCartServiceProvider"
+                "Modules\\Shoppingcart\\Providers\\ShoppingcartServiceProvider"
             ],
             "aliases": {
                 
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\ShoppingCart\\": ""
+            "Modules\\Shoppingcart\\": ""
         }
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\ShoppingCart\Providers;
+namespace Modules\Shoppingcart\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class ShoppingCartServiceProvider extends ServiceProvider
+class ShoppingcartServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
