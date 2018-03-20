@@ -15,17 +15,6 @@ class IndexController extends Controller {
         $commodities = Commodity::all();//@todo 加上搶先看的條件
         return view('frontend.index', compact("commodities"));
     }
-
-    private function getCategoriesTree($elements, $parentId = 0) {
-        $categories = array();
-        foreach ($elements as $element) {
-            if ($element->cate_parent == $parentId) {
-                $children = $this->getCategoriesTree($elements, $element->cate_id);
-                $element->children = ($children) ? $children : [];
-                $categories[] = $element;
-            }
-        }
-        return $categories;
-    }
+    
 
 }

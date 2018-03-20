@@ -1,4 +1,4 @@
-@extends('layouts.frontstage.frontend')
+@extends('layouts.frontend.frontend')
 
 @section('title', 'Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Icons :: w3layouts')
 

@@ -26,17 +26,17 @@
     </head>
     <body>
         <!-- footer -->
-        @include('layouts.frontstage.header')
+        @include('layouts.frontend.header')
         <!-- //footer -->
         
         <!-- navbar -->
-        @include('layouts.frontstage.navbar')
+        @include('layouts.frontend.navbar')
         <!-- //navbar -->
         
         @yield('content')
         
         <!-- footer -->
-        @include('layouts.frontstage.footer')
+        @include('layouts.frontend.footer')
         <!-- //footer -->
     </body>
 </html>

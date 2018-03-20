@@ -47,26 +47,35 @@ label{
 }
 /*-- header --*/
 .header {
-    background: #000;
+    /*    background: #000;*/
+    background: white;
+}
+.header ul {
+    text-align: right;
 }
 .header ul li {
+    /*    width: 24.5%;
+        color: #fff;
+        border-right: 1px solid #464444;*/
+    margin-right: 3px;
     display: inline-block;
-    width: 24.5%;
     text-align: center;
-    color: #fff;
+    color: black;
     font-size: 13px;
     padding: 7px 0;
     letter-spacing: 1px;
-    border-right: 1px solid #464444;
 }
 .header ul li a {
-    color: #fff;
+    /*    color: #fff;*/
+    color: gray;
     text-decoration: none;
 }
 .header ul li i {
-    margin-right: 12px;
+    /*    margin-right: 12px;
+        color: #2fdab8;*/
+    margin-right: 5px;
     top: 2px;
-    color: #2fdab8;
+    color: gray;
 }
 .header-right {
     text-align: right;
@@ -226,6 +235,7 @@ li.share {
 }
 /*--social-icons--*/
 .logo_agile {
+    margin-top: 0px;
     text-align: center;
 }
 .logo_agile span {
@@ -347,7 +357,8 @@ i.fa.fa-shopping-bag.top_logo_agile_bag {
 /*-- //header-bot --*/
 /*-- banner-top --*/
 .ban-top{
-    background:#000;
+    /*    background:#000;*/
+    background: #003C9D;
     padding: 0px 0;
 }
 .dropdown-menu.columns-3 {
@@ -363,7 +374,7 @@ i.fa.fa-shopping-bag.top_logo_agile_bag {
     border: none;
     min-height: inherit;
     margin: 0;
-    float: left;
+    /*    float: left;*/
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     background: none;
@@ -381,6 +392,7 @@ i.fa.fa-shopping-bag.top_logo_agile_bag {
 .navbar-collapse {
     padding-right: 0;
     padding-left: 0;
+    text-align: center;
 }
 .navbar-nav > li > a {
     line-height: inherit;
@@ -388,6 +400,11 @@ i.fa.fa-shopping-bag.top_logo_agile_bag {
 
 /*-- //nav-bar --*/
 /* Common styles for all menus */
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
 
 .menu__list {
     position: relative;
@@ -1459,13 +1476,15 @@ h3.wthree_text_info span{
     margin-top: 2em;
 }
 button.w3view-cart {
+    background-color: white;
     outline: none;
     border: none;
-    background: #17c3a2;
-    width: 48px;
-    height: 43px;
-    font-size: 24px;
-    color: #000;
+    /*        background: #17c3a2;
+            width: 48px;
+            height: 43px;
+            font-size: 24px;
+            color: #000;*/
+    color: gray;
 }
 /*-- //cart --*/
 /*-- effect --*/
@@ -1533,7 +1552,7 @@ button.w3view-cart {
     padding: 0 10px 1px;
     position: absolute;
     top: 0;
-    z-index:99;
+    /*    z-index:99;*/
 }
 .inner-men-cart-pro {
     height: 100%;
@@ -4074,8 +4093,8 @@ p.w3ls_para {
     }
 
     .logo_agile {
-        text-align: left;
-        margin-top: 1em;
+        /*        text-align: left;
+                margin-top: 1em;*/
         padding: 0;
         float: left;
     }
@@ -4308,7 +4327,8 @@ p.w3ls_para {
         margin-top: 10px;
     }
     .navbar-default {
-        width: 77%;
+        width: 100%;
+        /*        width: 77%;*/
     }
     .navbar-default .navbar-collapse, .navbar-default .navbar-form {
         border: none;
@@ -4513,7 +4533,7 @@ p.w3ls_para {
     }
     .header ul li {
         display: inline-block;
-        width: 49%;
+        /*        width: 49%;*/
     }
     .men-wear-right p {
         line-height: 2em;
@@ -4690,7 +4710,8 @@ p.w3ls_para {
         width: 30%;
     }
     .navbar-default {
-        width: 69%;
+        width: 100%;
+        /*        width: 69%;*/
     }
     .page-head_agile_info_w3l h3 {
         font-size: 1.6em;
@@ -4998,7 +5019,8 @@ p.w3ls_para {
         width: 79%;
     }
     .navbar-default {
-        width: 65%;
+        width: 100%;
+        /*        width: 65%;*/    
     }
     .dropdown-menu.columns-3 {
         min-width: 300px;
