@@ -8,13 +8,13 @@ use Modules\Commodity\Entities\Commodity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends Controller {
+class IndexController extends CommonController {
 
     public function index() {
+        parent::__construct();
         $categories = Category::orderBy('cate_order', 'asc')->get();
-        $commodities = Commodity::all();//@todo 加上搶先看的條件
+        $commodities = Commodity::all(); //@todo 加上搶先看的條件
         return view('frontend.index', compact("commodities"));
     }
-    
 
 }
