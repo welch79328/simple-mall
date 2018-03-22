@@ -95,9 +95,13 @@ class ShoppingcartController extends Controller
     }
 
     //delete.admin/'shoppingcart/{rowId}  刪除單個商品
-    public function destroy($rowId){
+    public function remove(Request $request){
+        $rowId = $request->get("rowId");
         Cart::remove($rowId);
-
-        return view('frontend.shoppingcart');
+        $response = [
+            "result"=> true,
+            "msg" => "刪除購物車項目成功"
+        ];
+        return $response;
     }
 }

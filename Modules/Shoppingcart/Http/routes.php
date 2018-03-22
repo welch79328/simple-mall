@@ -11,4 +11,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Shoppingcart\Http\C
 //    Route::resource('shoppingcart', 'ShoppingcartController');
     //SESSION時間顯示
     Route::get('session/time', 'ShoppingcartController@time');
+    
+    //刪除項目
+    Route::post('shopping/remove', 'ShoppingcartController@remove');
 });

@@ -15,15 +15,15 @@
 
             <tbody>
                 @foreach($cart as $v)
-                <tr>
+                <tr id="{{$v->rowId}}">
                     <td>
                         <p> <strong> {{$v->name}} </strong> </p>
                     </td>
                     <td><input class="form-control input-sm" type ="text"  value = "{{$v->qty}}"  ></td>
                     <td> $ {{$v->price}}</td>
                     <td>
-
-                        <a href="javascript:" onclick="delcommodity('{{$v->rowId}}')">删除</a>
+                        <a href="javascript:" onclick="delcommodity(this)">删除</a>
+                        <input type="hidden" value="{{$v->rowId}}" />
                     </td>
                 </tr>
 
@@ -41,7 +41,9 @@
                 <td colspan="4">
                     <div class="col-4 text-center">
                         <button type="submit" class="btn btn-default">結帳</button>
-                        <button type="button" class="btn btn-default" onclick="{$('#myModal').modal('hide')}">繼續選購</button>
+                        <button type="button" class="btn btn-default" onclick="{
+                                    $('#ShoppingCartModal').modal('hide')
+                                }">繼續選購</button>
                     </div>
                 </td>
             </tr>
@@ -52,10 +54,18 @@
 <script>
 
     //刪除商品
-    function delcommodity(rowId) {
-    $.post("{{url('shoppingcart')}}/" + rowId, {'_method':'delete', '_token':"{{csrf_token()}}"}, function (data) {
-    alert('成功');
-    });
+    function delcommodity(obj) {
+        var hidden = $(obj).next();
+        var rowId = hidden.val();
+        $.post("{{url('shopping/remove')}}",
+                {
+                    "_token": "{{csrf_token()}}",
+                    "rowId": rowId
+                }, function (response) {
+            if (response.result) {
+                console.log($("#" + rowId));
+                $("#" + rowId).remove();
+            }
+        });
     }
-
 </script>

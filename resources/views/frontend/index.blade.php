@@ -21,47 +21,8 @@
 <div class="new_arrivals_agile_w3ls_info">
     <div class="container">
         <h3 class="wthree_text_info" style="color: red;">限時商品<i class="glyphicon glyphicon-time"></i></h3>
-        <div style="position: relative">
-            <div class="btn btn-default limit_previous_button hidden-xs">
-                <span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>
-            </div>
-            <div class="btn btn-default limit_next_button hidden-xs">
-                <span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>
-            </div>
-            @foreach($limitCommodities as $limit)
-            <div class="col-md-3 product-men">
-                <div class="men-pro-item simpleCart_shelfItem">
-                    <div style="background-color: gray; text-align: center; font-weight: bold;">剩餘時間 {{$limit->commodity_end_time}}</div>
-                    <div class="men-thumb-item">
-                        <img src="{{url(''.$limit->commodity_image)}}" alt="" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
-                        <img src="{{url(''.$limit->commodity_image)}}" alt="" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
-                        <div class="men-cart-pro">
-                            <div class="inner-men-cart-pro">
-                                <a href="{{url('single')}}" class="link-product-add-cart">查看商品</a>
-                            </div>
-                        </div>
-                        <span class="product-new-top">限量</span>
-
-                    </div>
-                    <div class="item-info-product ">
-                        <h4><a href="{{url('single')}}">{{$limit->commodity_title}}</a></h4>
-                        <div class="info-product-price">
-                            <div>
-                                <del>售價$69.71</del>
-                            </div>
-                            <div class="item_price">
-                                預購價 <span>{{$limit->commodity_price}}</span>
-                            </div>
-                        </div>
-                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                            <input type="button" value="立即預購" class="button" onclick="addToShoppingCart({{$limit->commodity_id}})"/>
-                        </div>
-                        </a>
-                    </div>
-                    <div style="text-align: center;">剩餘組數</div>
-                </div>
-            </div>
-            @endforeach
+        <div id="limitCommodityList" style="position: relative">
+            @include('frontend.limitCommodityList')
         </div>
     </div>
 </div>
@@ -302,37 +263,37 @@
 <script src="{{asset('js/frontend/minicart.min.js')}}"></script>
 <script>
 // Mini Cart
-                                paypal.minicart.render({
-                                action: '#'
-                                });
-                                if (~window.location.search.indexOf('reset=true')) {
-                                paypal.minicart.reset();
-                                }
+paypal.minicart.render({
+    action: '#'
+});
+if (~window.location.search.indexOf('reset=true')) {
+    paypal.minicart.reset();
+}
 </script>
 <!-- //cart-js --> 
 <!-- script for responsive tabs -->						
 <script src="{{asset('js/frontend/easy-responsive-tabs.js')}}"></script>
 <script>
-                                $(document).ready(function () {
-                                $('#horizontalTab').easyResponsiveTabs({
-                                type: 'default', //Types: default, vertical, accordion           
-                                        width: 'auto', //auto or any width like 600px
-                                        fit: true, // 100% fit in a container
-                                        closed: 'accordion', // Start closed if in accordion view
-                                        activate: function (event) { // Callback function if tab is switched
-                                        var $tab = $(this);
-                                        var $info = $('#tabInfo');
-                                        var $name = $('span', $info);
-                                        $name.text($tab.text());
-                                        $info.show();
-                                        }
-                                });
-                                $('#verticalTab').easyResponsiveTabs({
-                                type: 'vertical',
-                                        width: 'auto',
-                                        fit: true
-                                });
-                                });</script>
+$(document).ready(function () {
+    $('#horizontalTab').easyResponsiveTabs({
+        type: 'default', //Types: default, vertical, accordion           
+        width: 'auto', //auto or any width like 600px
+        fit: true, // 100% fit in a container
+        closed: 'accordion', // Start closed if in accordion view
+        activate: function (event) { // Callback function if tab is switched
+            var $tab = $(this);
+            var $info = $('#tabInfo');
+            var $name = $('span', $info);
+            $name.text($tab.text());
+            $info.show();
+        }
+    });
+    $('#verticalTab').easyResponsiveTabs({
+        type: 'vertical',
+        width: 'auto',
+        fit: true
+    });
+});</script>
 <!-- //script for responsive tabs -->		
 <!-- stats -->
 <script src="{{asset('js/frontend/jquery.waypoints.min.js')}}"></script>
@@ -343,49 +304,67 @@
 <script type="text/javascript" src="{{asset('js/frontend/move-top.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/frontend/jquery.easing.min.js')}}"></script>
 <script type="text/javascript">
-                                jQuery(document).ready(function ($) {
-                                $(".scroll").click(function (event) {
-                                event.preventDefault();
-                                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-                                });
-                                });</script>
+jQuery(document).ready(function ($) {
+    $(".scroll").click(function (event) {
+        event.preventDefault();
+        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+    });
+});</script>
 <!-- here stars scrolling icon -->
 <script type="text/javascript">
     $(document).ready(function () {
-    /*
-     var defaults = {
-     containerID: 'toTop', // fading element id
-     containerHoverID: 'toTopHover', // fading element hover id
-     scrollSpeed: 1200,
-     easingType: 'linear' 
-     };
-     */
+        /*
+         var defaults = {
+         containerID: 'toTop', // fading element id
+         containerHoverID: 'toTopHover', // fading element hover id
+         scrollSpeed: 1200,
+         easingType: 'linear' 
+         };
+         */
 
-    $().UItoTop({easingType: 'easeOutQuart'});
+        $().UItoTop({easingType: 'easeOutQuart'});
     });</script>
 <!-- //here ends scrolling icon -->
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('org/layer/layer.js')}}"></script>
 <script>
     //測試倒數計時
     var refreshIntervalId;
     var num = 50;
     $(document).ready(function () {
-    //refreshIntervalId = setInterval(time, 1000);
+        //refreshIntervalId = setInterval(time, 1000);
     });
     function time() {
-    console.log(num);
-    num = num - 1;
-    if (num == 40) {
-    clearInterval(refreshIntervalId);
-    console.log("時間到");
-    }
+        console.log(num);
+        num = num - 1;
+        if (num == 40) {
+            clearInterval(refreshIntervalId);
+            console.log("時間到");
+        }
 
     }
-    function addToShoppingCart($commodity_id) {
-    $.get("{{url('shopping')}}/" + $commodity_id, {}, function (data) {
-    console.log("加入成功");
-    });
+    function addToShoppingCart(obj) {
+        $hidden = $(obj).next();
+        $commodity_id = $hidden.val();
+        $.get("{{url('shopping')}}/" + $commodity_id, {}, function (data) {
+            console.log("加入成功");
+        });
+    }
+    function getLimitCommodities(obj) {
+        $page = $(obj).val();
+        if ($page == 0) {
+            alert("目前已是第一頁");
+            return;
+        }
+        $.post("{{url('getlimitcommodities')}}", {"page": $page, "_token": "{{ csrf_token() }}", }, function (data) {
+            if (data === "") {
+                alert("目前已是最後一頁");
+                return;
+            }
+            $("#limitCommodityList").html(data);
+        });
     }
 </script>
 
