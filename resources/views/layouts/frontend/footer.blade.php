@@ -1,14 +1,14 @@
 <!-- footer -->
-<div class="adwifi_footer">
+<div class="adwifi_footer hidden-xs">
     <div class="col-md-4 footer_div_1">
         <div class="col-md-4"></div>
         <div class="col-md-8">
             <h3 class="footer_title mobile_footer_title">關於我們</h3>
-            <div class="center-block text-left">
-                <div style="padding-top: 5px; padding-bottom: 5px">回首頁</div>
-                <div style="padding-top: 5px; padding-bottom: 5px">網站介紹</div>
-                <div style="padding-top: 5px; padding-bottom: 5px">隱私權聲明</div>
-                <div style="padding-top: 5px; padding-bottom: 5px">Free AD WiFi條款</div>
+            <div class="center-block text-left footer_detail">
+                <div>回首頁</div>
+                <div>網站介紹</div>
+                <div>隱私權聲明</div>
+                <div>Free AD WiFi條款</div>
             </div>
         </div>
     </div>
@@ -16,22 +16,22 @@
         <h3 class="text-center footer_title">聯絡我們</h3>
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <div class="center-block text-left">
-                <div style="padding-top: 5px; padding-bottom: 5px">marketing@adwifi.com.tw</div>
-                <div style="padding-top: 5px; padding-bottom: 5px">02-7709-1239</div>
-                <div style="padding-top: 5px; padding-bottom: 5px">周一至周五 09:00-18:00</div>
-                <div style="padding-top: 5px; padding-bottom: 5px">　</div>
+            <div class="center-block text-left footer_detail">
+                <div>marketing@adwifi.com.tw</div>
+                <div>02-7709-1239</div>
+                <div>周一至周五 09:00-18:00</div>
+                <div>　</div>
             </div>
         </div>
         <div class="col-md-2"></div>
     </div>
     <div class="col-md-4 footer_div_3">
         <h3 class="text-center footer_title">關注我們</h3>
-        <div class="center-block text-left">
-            <div style="padding-top: 5px; padding-bottom: 5px">　</div>
-            <div style="padding-top: 5px; padding-bottom: 5px">　</div>
-            <div style="padding-top: 5px; padding-bottom: 5px">　</div>
-            <div style="padding-top: 5px; padding-bottom: 5px">　</div>
+        <div class="center-block text-left footer_detail">
+            <div>　</div>
+            <div>　</div>
+            <div>　</div>
+            <div>　</div>
         </div>
     </div>
 </div>

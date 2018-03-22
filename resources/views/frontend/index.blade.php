@@ -14,174 +14,60 @@
         margin-top: -1px;
     }
 </style>
-<!-- Modal1 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body modal-body-sub_agile">
-                <div class="col-md-8 modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">Sign In <span>Now</span></h3>
-                    <form action="#" method="post">
-                        <div class="styled-input agile-styled-input-top">
-                            <input type="text" name="Name" required="">
-                            <label>Name</label>
-                            <span></span>
-                        </div>
-                        <div class="styled-input">
-                            <input type="email" name="Email" required=""> 
-                            <label>Email</label>
-                            <span></span>
-                        </div> 
-                        <input type="submit" value="Sign In">
-                    </form>
-                    <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
-                        <li><a href="#" class="facebook">
-                                <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-                                <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-                        <li><a href="#" class="twitter"> 
-                                <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-                                <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
-                        <li><a href="#" class="instagram">
-                                <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                                <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-                        <li><a href="#" class="pinterest">
-                                <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-                                <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
-                    </ul>
-                    <div class="clearfix"></div>
-                    <p><a href="#" data-toggle="modal" data-target="#myModal2" > Don't have an account?</a></p>
-
-                </div>
-                <div class="col-md-4 modal_body_right modal_body_right1">
-                    <img src="images/log_pic.jpg" alt=" "/>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <!-- //Modal content-->
-    </div>
-</div>
-<!-- //Modal1 -->
-<!-- Modal2 -->
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body modal-body-sub_agile">
-                <div class="col-md-8 modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">Sign Up <span>Now</span></h3>
-                    <form action="#" method="post">
-                        <div class="styled-input agile-styled-input-top">
-                            <input type="text" name="Name" required="">
-                            <label>Name</label>
-                            <span></span>
-                        </div>
-                        <div class="styled-input">
-                            <input type="email" name="Email" required=""> 
-                            <label>Email</label>
-                            <span></span>
-                        </div> 
-                        <div class="styled-input">
-                            <input type="password" name="password" required=""> 
-                            <label>Password</label>
-                            <span></span>
-                        </div> 
-                        <div class="styled-input">
-                            <input type="password" name="Confirm Password" required=""> 
-                            <label>Confirm Password</label>
-                            <span></span>
-                        </div> 
-                        <input type="submit" value="Sign Up">
-                    </form>
-                    <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
-                        <li><a href="#" class="facebook">
-                                <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-                                <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-                        <li><a href="#" class="twitter"> 
-                                <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-                                <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
-                        <li><a href="#" class="instagram">
-                                <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                                <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-                        <li><a href="#" class="pinterest">
-                                <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-                                <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
-                    </ul>
-                    <div class="clearfix"></div>
-                    <p><a href="#">By clicking register, I agree to your terms</a></p>
-
-                </div>
-                <div class="col-md-4 modal_body_right modal_body_right1">
-                    <img src="images/log_pic.jpg" alt=" "/>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <!-- //Modal content-->
-    </div>
-</div>
-<!-- //Modal2 -->
 <!-- banner --> 
 @include('layouts.frontend.banner')
 <!-- //banner --> 
 <!-- limit --> 
 <div class="new_arrivals_agile_w3ls_info">
     <div class="container">
-        <h3 class="wthree_text_info" style="color: red;">限時商品</h3>
-        <div>
-            @for($i=0;$i<4;$i++)
+        <h3 class="wthree_text_info" style="color: red;">限時商品<i class="glyphicon glyphicon-time"></i></h3>
+        <div style="position: relative">
+            <div class="btn btn-default limit_previous_button hidden-xs">
+                <span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>
+            </div>
+            <div class="btn btn-default limit_next_button hidden-xs">
+                <span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>
+            </div>
+            @foreach($limitCommodities as $limit)
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
+                    <div style="background-color: gray; text-align: center; font-weight: bold;">剩餘時間 {{$limit->commodity_end_time}}</div>
                     <div class="men-thumb-item">
-                        <img src="images/m2.jpg" alt="" class="pro-image-front">
-                        <img src="images/m2.jpg" alt="" class="pro-image-back">
+                        <img src="{{url(''.$limit->commodity_image)}}" alt="" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
+                        <img src="{{url(''.$limit->commodity_image)}}" alt="" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">查看商品</a>
                             </div>
                         </div>
                         <span class="product-new-top">限量</span>
 
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="{{url('single')}}">商品名稱</a></h4>
+                        <h4><a href="{{url('single')}}">{{$limit->commodity_title}}</a></h4>
                         <div class="info-product-price">
-                            <div><span class="item_price">1000</span></div>
-                            <div><del>$69.71</del></div>
+                            <div>
+                                <del>售價$69.71</del>
+                            </div>
+                            <div class="item_price">
+                                預購價 <span>{{$limit->commodity_price}}</span>
+                            </div>
                         </div>
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                            <form action="#" method="post">
-                                <fieldset>
-                                    <input type="hidden" name="cmd" value="_cart" />
-                                    <input type="hidden" name="add" value="1" />
-                                    <input type="hidden" name="business" value=" " />
-                                    <input type="hidden" name="item_name" value="商品名稱" />
-                                    <input type="hidden" name="amount" value="30.99" />
-                                    <input type="hidden" name="discount_amount" value="1.00" />
-                                    <input type="hidden" name="currency_code" value="USD" />
-                                    <input type="hidden" name="return" value=" " />
-                                    <input type="hidden" name="cancel_return" value=" " />
-                                    <input type="submit" name="submit" value="立即預購" class="button" />
-                                </fieldset>
-                            </form>
+                            <input type="button" value="立即預購" class="button" onclick="addToShoppingCart({{$limit->commodity_id}})"/>
                         </div>
+                        </a>
                     </div>
+                    <div style="text-align: center;">剩餘組數</div>
                 </div>
             </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 </div>
 <!-- //limit --> 
 <!-- /new_arrivals --> 
-<div class="new_arrivals_agile_w3ls_info hidden-xs"> 
+<div class="new_arrivals_agile_w3ls_info"> 
     <div class="container">
         <h3 class="wthree_text_info">全部商品</h3>		
         <div id="horizontalTab">
@@ -193,41 +79,52 @@
                         <img src="images/m1.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">查看商品</a>
                             </div>
                         </div>
-                        <span class="product-new-top">New</span>
+                        <span class="product-new-top">新</span>
 
                     </div>
                     <div class="item-info-product ">
                         <h4><a href="{{url('single')}}">{{$commodity->commodity_title}}</a></h4>
                         <div class="info-product-price">
-                            <span class="item_price">{{$commodity->commodity_price}}</span>
-                            <del>$69.71</del>
+                            <div>
+                                <del>售價$69.71</del>
+                            </div>
+                            <div class="item_price">
+                                預購價 <span>${{$commodity->commodity_price}}</span>
+                            </div>
                         </div>
-                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                            <form action="#" method="post">
-                                <fieldset>
-                                    <input type="hidden" name="cmd" value="_cart" />
-                                    <input type="hidden" name="add" value="1" />
-                                    <input type="hidden" name="business" value=" " />
-                                    <input type="hidden" name="item_name" value="{{$commodity->commodity_title}}" />
-                                    <input type="hidden" name="amount" value="30.99" />
-                                    <input type="hidden" name="discount_amount" value="1.00" />
-                                    <input type="hidden" name="currency_code" value="USD" />
-                                    <input type="hidden" name="return" value=" " />
-                                    <input type="hidden" name="cancel_return" value=" " />
-                                    <input type="submit" name="submit" value="Add to cart" class="button" />
-                                </fieldset>
-                            </form>
-                        </div>
+                        <a href="{{url('shopping/'.$commodity->commodity_id)}}">
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                <input type="button" value="立即預購" class="button" />
+                                <!--                            <form action="#" method="post">
+                                                                <fieldset>
+                                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                                    <input type="hidden" name="add" value="1" />
+                                                                    <input type="hidden" name="business" value=" " />
+                                                                    <input type="hidden" name="item_name" value="{{$commodity->commodity_title}}" />
+                                                                    <input type="hidden" name="amount" value="30.99" />
+                                                                    <input type="hidden" name="discount_amount" value="1.00" />
+                                                                    <input type="hidden" name="currency_code" value="USD" />
+                                                                    <input type="hidden" name="return" value=" " />
+                                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                                </fieldset>
+                                                            </form>-->
+
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
             @endforeach
             <div class="clearfix"></div>
-            <div>
-                <button>123</button>
+            <div class="" style="padding-top: 40px;">
+                <button type="button" class="btn btn-default btn-lg center-block" style="color: white; background-color: gray;">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    查看更多
+                </button>
             </div>
         </div>
     </div>
@@ -237,7 +134,13 @@
 <div class="new_arrivals_agile_w3ls_info hidden-xs">
     <div class="container">
         <h3 class="wthree_text_info">瀏覽過的商品</h3>
-        <div>
+        <div style="position: relative">
+            <div class="btn btn-default viewed_previous_button hidden-xs">
+                <span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>
+            </div>
+            <div class="btn btn-default viewed_next_button hidden-xs">
+                <span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>
+            </div>
             @for($i=0;$i<4;$i++)
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
@@ -246,7 +149,7 @@
                         <img src="images/m2.jpg" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="{{url('single')}}" class="link-product-add-cart">Quick View</a>
+                                <a href="{{url('single')}}" class="link-product-add-cart">查看商品</a>
                             </div>
                         </div>
                     </div>
@@ -387,7 +290,7 @@
     </div>
 </div>-->
 <!-- //login -->
-<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<a href="#home" class="scroll" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 
 
 <!-- js -->
@@ -399,39 +302,37 @@
 <script src="{{asset('js/frontend/minicart.min.js')}}"></script>
 <script>
 // Mini Cart
-paypal.minicart.render({
-    action: '#'
-});
-
-if (~window.location.search.indexOf('reset=true')) {
-    paypal.minicart.reset();
-}
+                                paypal.minicart.render({
+                                action: '#'
+                                });
+                                if (~window.location.search.indexOf('reset=true')) {
+                                paypal.minicart.reset();
+                                }
 </script>
 <!-- //cart-js --> 
 <!-- script for responsive tabs -->						
 <script src="{{asset('js/frontend/easy-responsive-tabs.js')}}"></script>
 <script>
-$(document).ready(function () {
-    $('#horizontalTab').easyResponsiveTabs({
-        type: 'default', //Types: default, vertical, accordion           
-        width: 'auto', //auto or any width like 600px
-        fit: true, // 100% fit in a container
-        closed: 'accordion', // Start closed if in accordion view
-        activate: function (event) { // Callback function if tab is switched
-            var $tab = $(this);
-            var $info = $('#tabInfo');
-            var $name = $('span', $info);
-            $name.text($tab.text());
-            $info.show();
-        }
-    });
-    $('#verticalTab').easyResponsiveTabs({
-        type: 'vertical',
-        width: 'auto',
-        fit: true
-    });
-});
-</script>
+                                $(document).ready(function () {
+                                $('#horizontalTab').easyResponsiveTabs({
+                                type: 'default', //Types: default, vertical, accordion           
+                                        width: 'auto', //auto or any width like 600px
+                                        fit: true, // 100% fit in a container
+                                        closed: 'accordion', // Start closed if in accordion view
+                                        activate: function (event) { // Callback function if tab is switched
+                                        var $tab = $(this);
+                                        var $info = $('#tabInfo');
+                                        var $name = $('span', $info);
+                                        $name.text($tab.text());
+                                        $info.show();
+                                        }
+                                });
+                                $('#verticalTab').easyResponsiveTabs({
+                                type: 'vertical',
+                                        width: 'auto',
+                                        fit: true
+                                });
+                                });</script>
 <!-- //script for responsive tabs -->		
 <!-- stats -->
 <script src="{{asset('js/frontend/jquery.waypoints.min.js')}}"></script>
@@ -442,30 +343,50 @@ $(document).ready(function () {
 <script type="text/javascript" src="{{asset('js/frontend/move-top.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/frontend/jquery.easing.min.js')}}"></script>
 <script type="text/javascript">
-jQuery(document).ready(function ($) {
-    $(".scroll").click(function (event) {
-        event.preventDefault();
-        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-    });
-});
-</script>
+                                jQuery(document).ready(function ($) {
+                                $(".scroll").click(function (event) {
+                                event.preventDefault();
+                                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                                });
+                                });</script>
 <!-- here stars scrolling icon -->
 <script type="text/javascript">
     $(document).ready(function () {
-        /*
-         var defaults = {
-         containerID: 'toTop', // fading element id
-         containerHoverID: 'toTopHover', // fading element hover id
-         scrollSpeed: 1200,
-         easingType: 'linear' 
-         };
-         */
+    /*
+     var defaults = {
+     containerID: 'toTop', // fading element id
+     containerHoverID: 'toTopHover', // fading element hover id
+     scrollSpeed: 1200,
+     easingType: 'linear' 
+     };
+     */
 
-        $().UItoTop({easingType: 'easeOutQuart'});
-
-    });
-</script>
+    $().UItoTop({easingType: 'easeOutQuart'});
+    });</script>
 <!-- //here ends scrolling icon -->
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
+<script>
+    //測試倒數計時
+    var refreshIntervalId;
+    var num = 50;
+    $(document).ready(function () {
+    //refreshIntervalId = setInterval(time, 1000);
+    });
+    function time() {
+    console.log(num);
+    num = num - 1;
+    if (num == 40) {
+    clearInterval(refreshIntervalId);
+    console.log("時間到");
+    }
+
+    }
+    function addToShoppingCart($commodity_id) {
+    $.get("{{url('shopping')}}/" + $commodity_id, {}, function (data) {
+    console.log("加入成功");
+    });
+    }
+</script>
+
 @endsection

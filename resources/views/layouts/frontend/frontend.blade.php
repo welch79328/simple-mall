@@ -20,7 +20,6 @@
         @yield('css')
         <!--//css -->
         <!--js -->
-        
         @yield('js')
         <!--//js -->
     </head>
@@ -28,15 +27,16 @@
         <!-- footer -->
         @include('layouts.frontend.header')
         <!-- //footer -->
-        
+
         <!-- navbar -->
         @include('layouts.frontend.navbar')
         <!-- //navbar -->
-        
+
         @yield('content')
-        
+
         <!-- footer -->
         @include('layouts.frontend.footer')
         <!-- //footer -->
+        
     </body>
 </html>

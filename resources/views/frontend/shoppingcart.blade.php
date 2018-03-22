@@ -1,66 +1,61 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <script type="text/javascript" src="{{asset('resources/views/admin/style/js/jquery.js')}}"></script>
-    <!--[if lt IE 9]>
-    <script src="{{asset('/resources/views/home/js/modernizr.js')}}"></script>
-    <![endif]-->
+<div class="table-responsive">
+    <form action="" method="post">
+        {{csrf_field()}}
 
-</head>
-<body>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> 產品</th> 
+                    <th> 數量</th> 
+                    <th> 價格</th>  
+                    <th> 操作</th> 
+                </tr>
+            </thead>
 
-<form action="" method="post">
-    {{csrf_field()}}
-    <table class="add_tab">
+            <tbody>
+                @foreach($cart as $v)
+                <tr>
+                    <td>
+                        <p> <strong> {{$v->name}} </strong> </p>
+                    </td>
+                    <td><input class="form-control input-sm" type ="text"  value = "{{$v->qty}}"  ></td>
+                    <td> $ {{$v->price}}</td>
+                    <td>
 
-    <table>
-     <tr> <th> 產品</th> <th> 數量</th> <th> 價格</th>  <th> 變更明細</th> </tr> </thead>
+                        <a href="javascript:" onclick="delcommodity('{{$v->rowId}}')">删除</a>
+                    </td>
+                </tr>
 
-    <tbody>
-    @foreach($cart as $v)
-    <tr>
-    <td>
-    <p> <strong> {{$v->name}} </strong> </p>
-    </td>
-    <td> <input  type ="text"  value = "{{$v->qty}}"  > </td>
-    <td> $ {{$v->price}}</td>
-    <td>
-        <a href="">下次再買</a>
-        <a href="javascript:" onclick="delcommodity('{{$v->rowId}}')">删除</a>
-    </td>
-    </tr>
+                @endforeach
 
-    @endforeach
+            </tbody>
 
-    </tbody>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> $ {{$total}}</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div class="col-4 text-center">
+                        <button type="submit" class="btn btn-default">結帳</button>
+                        <button type="button" class="btn btn-default" onclick="{$('#myModal').modal('hide')}">繼續選購</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<script>
 
-    <tr>
-        <td> </td>
-        <td> </td>
-        <td> $ {{$total}}</td>
-    </tr>
-        <th></th>
-        <td>
-            <input type="submit" value="結帳">
-            <input type="button" class="back" onclick="history.go(-1)" value="繼續選購">
-        </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+    //刪除商品
+    function delcommodity(rowId) {
+    $.post("{{url('shoppingcart')}}/" + rowId, {'_method':'delete', '_token':"{{csrf_token()}}"}, function (data) {
+    alert('成功');
+    });
+    }
 
-    <script>
-
-        //刪除商品
-        function delcommodity(rowId) {
-                $.post("{{url('shoppingcart')}}/"+rowId,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
-                        alert('成功');
-                });
-        }
-
-    </script>
-
-
-</body>
-</html>
+</script>

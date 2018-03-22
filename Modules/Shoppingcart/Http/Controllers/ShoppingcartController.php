@@ -73,7 +73,7 @@ class ShoppingcartController extends Controller
 
     public function push($commodity_id)
     {
-        $commodity = Commodity::where('commodity_id',$commodity_id)->first();
+        $commodity = \Modules\Commodity\Entities\Commodity::where('commodity_id',$commodity_id)->first();
         $cart = Cart::add($commodity->commodity_id,$commodity->commodity_title,'1',$commodity->commodity_price);
 //        $aa = Cart::content();
 //        dd($aa);
@@ -86,7 +86,6 @@ class ShoppingcartController extends Controller
     {
         $cart = Cart::content();
         $total = Cart::total();
-
         return view('frontend.shoppingcart',compact('cart','total'));
     }
 

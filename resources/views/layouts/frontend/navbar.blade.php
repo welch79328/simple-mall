@@ -16,21 +16,22 @@
                 <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav menu__list">
                         <!--menu__item--current 類別名稱 正在訪問的頁面-->
-<!--                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">首頁 <span class="sr-only">(current)</span></a></li>
+                        <!--                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">首頁 <span class="sr-only">(current)</span></a></li>
                         <li class=" menu__item"><a class="menu__link" href="{{url('about')}}">關於</a></li>-->
                         <li class="dropdown menu__item">
                             <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">限時商品<span class="caret"></span></a>
                             <ul class="dropdown-menu multi-column columns-3">
                                 <div class="agile_inner_drop_nav_info">
-                                    @foreach($topCategoriesGroup as $topCategories)
+                                    @foreach($topCategoriesGroup as $topCates)
                                     <div class="col-sm-4 multi-gd-img">
                                         <ul class="multi-column-dropdown">
-                                            @foreach($topCategories as $topCate)
+                                            @foreach($topCates as $topCate)
                                             <li><a href="{{url('category/'.$topCate->cate_id)}}">{{$topCate->cate_name}}</a></li>
                                             @endforeach
                                         </ul>
                                     </div>
                                     @endforeach
+                                    
                                     <div class="clearfix"></div>
                                 </div>
                             </ul>
@@ -39,10 +40,10 @@
                             <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">全部商品<span class="caret"></span></a>
                             <ul class="dropdown-menu multi-column columns-3">
                                 <div class="agile_inner_drop_nav_info">
-                                    @foreach($topCategoriesGroup as $topCategories)
+                                    @foreach($topCategoriesGroup as $topCates)
                                     <div class="col-sm-4 multi-gd-img">
                                         <ul class="multi-column-dropdown">
-                                            @foreach($topCategories as $topCate)
+                                            @foreach($topCates as $topCate)
                                             <li><a href="{{url('category/'.$topCate->cate_id)}}">{{$topCate->cate_name}}</a></li>
                                             @endforeach
                                         </ul>
@@ -131,7 +132,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>	
+        </nav>
     </div>
     <!--        <div class="top_nav_right">
                 <div class="wthreecartaits wthreecartaits2 cart cart box_1"> 
@@ -145,4 +146,5 @@
             </div>-->
     <div class="clearfix"></div>
 </div>
+
 <!-- //banner-top -->
