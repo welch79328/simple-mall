@@ -14,7 +14,9 @@
 Route::group(['namespace' => 'Frontend'], function() {
     Route::get('/', 'IndexController@index');
     Route::get('category/{cate_id}', 'CategoryController@index');
+    Route::get('checkout/order_info', 'CheckoutController@orderInfo');
     Route::post('getlimitcommodities', 'IndexController@getLimitCommodities');
+    Route::post('getgeneralcommodities', 'IndexController@getGeneralCommodities');
 });
 
 

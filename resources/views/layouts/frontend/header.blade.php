@@ -32,7 +32,7 @@
                                     <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>購物車</button>
                                 </form>-->
                 <!--                                <a href="{{url('shoppingcart/show')}}">-->
-                <button class="btn btn-default w3view-cart" type="button" onclick="showShoppingCartDialog();"><i class="fa fa-shopping-cart" aria-hidden="true"></i>購物車</button>
+                <a class="agile-icon btn btn-default" style="border: none;" href="{{url('shoppingcart/show')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>購物車</a>
                 <!--                                </a>-->
             </li>
             <li>
@@ -133,7 +133,7 @@
 
                 </div>
                 <div class="col-md-4 modal_body_right modal_body_right1">
-                    <img src="images/log_pic.jpg" alt=" "/>
+                    <img src="{{url('images/log_pic.jpg')}}" alt=" "/>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -196,7 +196,7 @@
 
                 </div>
                 <div class="col-md-4 modal_body_right modal_body_right1">
-                    <img src="images/log_pic.jpg" alt=" "/>
+                    <img src="{{url('images/log_pic.jpg')}}" alt=" "/>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -205,27 +205,3 @@
     </div>
 </div>
 <!-- //Modal2 -->
-
-<!--shopping cart modal -->
-<div class="modal fade" id="ShoppingCartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">購物車清單</h4>
-            </div>
-            <div class="modal-body" id="shoppingCartDiv">
-            </div>
-        </div>
-    </div>
-</div>
-<!--//shopping cart modal -->
-
-<script>
-    function showShoppingCartDialog() {
-        $.get("{{url('shoppingcart/show')}}", {}, function (data) {
-            $("#shoppingCartDiv").html(data);
-            $("#ShoppingCartModal").modal('show');
-        });
-    }
-</script>

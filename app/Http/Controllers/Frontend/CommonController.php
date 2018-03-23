@@ -8,12 +8,9 @@ use App\Http\Controllers\Controller;
 
 class CommonController extends Controller {
 
-    const COMMODITY_STATUS_ON = "on";
-    const COMMODITY_TYPE_LIMITED = "limited";
     const ERROR_IMG_URL = "/images/no_img.gif";
 
     function __construct() {
-        $this->shareTopCategories();
         $this->shareTopCategoriesGroup();
         $this->shareErrorImgUrl();
     }
@@ -41,11 +38,6 @@ class CommonController extends Controller {
             }
         }
         view()->share('topCategoriesGroup', $topCategoriesGroup);
-    }
-
-    private function shareTopCategories() {
-        $topCategories = Category::where("cate_parent", 0)->orderBy('cate_order', 'asc')->get();
-        view()->share('topCategories', $topCategories);
     }
 
     private function shareErrorImgUrl() {

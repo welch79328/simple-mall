@@ -6,15 +6,15 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use App\Http\Controllers\Frontend\CommonController;
 
-class ShoppingcartController extends Controller
-{
+class ShoppingcartController extends Controller {
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
-    {
+    public function index() {
         return view('shoppingcart::index');
     }
 
@@ -22,8 +22,7 @@ class ShoppingcartController extends Controller
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
-    {
+    public function create() {
         return view('shoppingcart::create');
     }
 
@@ -32,8 +31,8 @@ class ShoppingcartController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+        
     }
 
     /**
@@ -49,8 +48,7 @@ class ShoppingcartController extends Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit()
-    {
+    public function edit() {
         return view('shoppingcart::edit');
     }
 
@@ -59,8 +57,8 @@ class ShoppingcartController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
+        
     }
 
     /**
@@ -71,10 +69,9 @@ class ShoppingcartController extends Controller
 //    {
 //    }
 
-    public function push($commodity_id)
-    {
-        $commodity = \Modules\Commodity\Entities\Commodity::where('commodity_id',$commodity_id)->first();
-        $cart = Cart::add($commodity->commodity_id,$commodity->commodity_title,'1',$commodity->commodity_price);
+    public function push($commodity_id) {
+        $commodity = \Modules\Commodity\Entities\Commodity::where('commodity_id', $commodity_id)->first();
+        $cart = Cart::add($commodity->commodity_id, $commodity->commodity_title, '1', $commodity->commodity_price);
 //        $aa = Cart::content();
 //        dd($aa);
 
@@ -82,26 +79,21 @@ class ShoppingcartController extends Controller
         return back();
     }
 
-    public function show()
-    {
+    public function show() {
+        new CommonController();
         $cart = Cart::content();
         $total = Cart::total();
-        return view('frontend.shoppingcart',compact('cart','total'));
+        return view('frontend.shopping.shoppingcart', compact('cart', 'total'));
     }
 
-    public function time()
-    {
+    public function time() {
         echo ini_get("session.gc_maxlifetime");
     }
 
     //delete.admin/'shoppingcart/{rowId}  刪除單個商品
-    public function remove(Request $request){
-        $rowId = $request->get("rowId");
+    public function remove($rowId) {
         Cart::remove($rowId);
-        $response = [
-            "result"=> true,
-            "msg" => "刪除購物車項目成功"
-        ];
-        return $response;
+        return back();
     }
+
 }

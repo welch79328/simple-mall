@@ -1,13 +1,7 @@
-<button class="btn btn-default limit_previous_button hidden-xs" onclick="getLimitCommodities(this)" value="{{$page["backPage"]}}">
-    <span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>
-</button>
-<button class="btn btn-default limit_next_button hidden-xs" onclick="getLimitCommodities(this)" value="{{$page["nextPage"]}}">
-    <span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>
-</button>
 @foreach($limitCommodities as $limit)
 <div class="col-md-3 product-men">
     <div class="men-pro-item simpleCart_shelfItem">
-        <div style="background-color: gray; text-align: center; font-weight: bold;">剩餘時間 {{$limit->remainTime}}</div>
+        <div style="background-color: gray; text-align: center; font-weight: bold;">剩餘時間 <span id="remainTimeSpan[]" hidden>{{$limit->commodity_end_time}}</span></div>
         <div class="men-thumb-item">
             <img src="{{url(''.$limit->commodity_image)}}" alt="" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
             <img src="{{url(''.$limit->commodity_image)}}" alt="" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">

@@ -10,5 +10,9 @@ class CommodityController extends CommonController {
     public function index(Request $request) {
         
     }
+    
+    public function getCommoditiesArrray(Request $request){
+        
+    }
 
 }

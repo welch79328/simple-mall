@@ -21,6 +21,8 @@
         <!--//css -->
         <!--js -->
         @yield('js')
+        <script type="text/javascript" src="{{asset('js/frontend/jquery-2.1.4.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
         <!--//js -->
     </head>
     <body>

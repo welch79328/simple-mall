@@ -21,7 +21,7 @@ class CategoryController extends CommonController {
         //CommonController::getCategoriesTree($elements);
 
         $moduleHelper = new ModuleHelper();
-        $a = $moduleHelper->getTree($categories,'cate_name','cate_id','cate_parent','cate_level','5',0,$cate_id);
+        $a = $moduleHelper->getTree($categories, 'cate_name', 'cate_id', 'cate_parent', 'cate_level', '5', 0, $cate_id);
         return view("frontend.category", compact("topCate"));
     }
 

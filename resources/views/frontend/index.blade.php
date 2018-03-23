@@ -21,8 +21,17 @@
 <div class="new_arrivals_agile_w3ls_info">
     <div class="container">
         <h3 class="wthree_text_info" style="color: red;">限時商品<i class="glyphicon glyphicon-time"></i></h3>
-        <div id="limitCommodityList" style="position: relative">
-            @include('frontend.limitCommodityList')
+        <div style="position: relative">
+            <button class="btn btn-default limit_previous_button hidden-xs" onclick="getLimitCommodities(this)" value="{{$page["backPage"]}}" id="backPage">
+                <span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default limit_next_button hidden-xs" onclick="getLimitCommodities(this)" value="{{$page["nextPage"]}}" id="nextPage">
+                <span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>
+            </button>
+            <input value="{{$page["nowPage"]}}" type="hidden" id="nowPage">
+            <div id="limitCommodityList">
+                @include('frontend.limitCommodityList')
+            </div>
         </div>
     </div>
 </div>
@@ -32,57 +41,12 @@
     <div class="container">
         <h3 class="wthree_text_info">全部商品</h3>		
         <div id="horizontalTab">
-            @foreach($commodities as $commodity)
-            <div class="col-md-3 product-men">
-                <div class="men-pro-item simpleCart_shelfItem">
-                    <div class="men-thumb-item">
-                        <img src="images/m1.jpg" alt="" class="pro-image-front">
-                        <img src="images/m1.jpg" alt="" class="pro-image-back">
-                        <div class="men-cart-pro">
-                            <div class="inner-men-cart-pro">
-                                <a href="{{url('single')}}" class="link-product-add-cart">查看商品</a>
-                            </div>
-                        </div>
-                        <span class="product-new-top">新</span>
-
-                    </div>
-                    <div class="item-info-product ">
-                        <h4><a href="{{url('single')}}">{{$commodity->commodity_title}}</a></h4>
-                        <div class="info-product-price">
-                            <div>
-                                <del>售價$69.71</del>
-                            </div>
-                            <div class="item_price">
-                                預購價 <span>${{$commodity->commodity_price}}</span>
-                            </div>
-                        </div>
-                        <a href="{{url('shopping/'.$commodity->commodity_id)}}">
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                <input type="button" value="立即預購" class="button" />
-                                <!--                            <form action="#" method="post">
-                                                                <fieldset>
-                                                                    <input type="hidden" name="cmd" value="_cart" />
-                                                                    <input type="hidden" name="add" value="1" />
-                                                                    <input type="hidden" name="business" value=" " />
-                                                                    <input type="hidden" name="item_name" value="{{$commodity->commodity_title}}" />
-                                                                    <input type="hidden" name="amount" value="30.99" />
-                                                                    <input type="hidden" name="discount_amount" value="1.00" />
-                                                                    <input type="hidden" name="currency_code" value="USD" />
-                                                                    <input type="hidden" name="return" value=" " />
-                                                                    <input type="hidden" name="cancel_return" value=" " />
-                                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
-                                                                </fieldset>
-                                                            </form>-->
-
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            <div id="generalCommodityList">
+                @include('frontend.generalCommodityList')
             </div>
-            @endforeach
             <div class="clearfix"></div>
             <div class="" style="padding-top: 40px;">
-                <button type="button" class="btn btn-default btn-lg center-block" style="color: white; background-color: gray;">
+                <button type="button" class="btn btn-default btn-lg center-block" style="color: white; background-color: gray;" value="{{$page["nextPage"]}}" onclick="getGeneralCommodities(this)" id="generalPage">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     查看更多
                 </button>
@@ -263,37 +227,37 @@
 <script src="{{asset('js/frontend/minicart.min.js')}}"></script>
 <script>
 // Mini Cart
-paypal.minicart.render({
-    action: '#'
-});
-if (~window.location.search.indexOf('reset=true')) {
-    paypal.minicart.reset();
-}
+                    paypal.minicart.render({
+                        action: '#'
+                    });
+                    if (~window.location.search.indexOf('reset=true')) {
+                        paypal.minicart.reset();
+                    }
 </script>
 <!-- //cart-js --> 
 <!-- script for responsive tabs -->						
 <script src="{{asset('js/frontend/easy-responsive-tabs.js')}}"></script>
 <script>
-$(document).ready(function () {
-    $('#horizontalTab').easyResponsiveTabs({
-        type: 'default', //Types: default, vertical, accordion           
-        width: 'auto', //auto or any width like 600px
-        fit: true, // 100% fit in a container
-        closed: 'accordion', // Start closed if in accordion view
-        activate: function (event) { // Callback function if tab is switched
-            var $tab = $(this);
-            var $info = $('#tabInfo');
-            var $name = $('span', $info);
-            $name.text($tab.text());
-            $info.show();
-        }
-    });
-    $('#verticalTab').easyResponsiveTabs({
-        type: 'vertical',
-        width: 'auto',
-        fit: true
-    });
-});</script>
+                    $(document).ready(function () {
+                        $('#horizontalTab').easyResponsiveTabs({
+                            type: 'default', //Types: default, vertical, accordion           
+                            width: 'auto', //auto or any width like 600px
+                            fit: true, // 100% fit in a container
+                            closed: 'accordion', // Start closed if in accordion view
+                            activate: function (event) { // Callback function if tab is switched
+                                var $tab = $(this);
+                                var $info = $('#tabInfo');
+                                var $name = $('span', $info);
+                                $name.text($tab.text());
+                                $info.show();
+                            }
+                        });
+                        $('#verticalTab').easyResponsiveTabs({
+                            type: 'vertical',
+                            width: 'auto',
+                            fit: true
+                        });
+                    });</script>
 <!-- //script for responsive tabs -->		
 <!-- stats -->
 <script src="{{asset('js/frontend/jquery.waypoints.min.js')}}"></script>
@@ -304,12 +268,12 @@ $(document).ready(function () {
 <script type="text/javascript" src="{{asset('js/frontend/move-top.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/frontend/jquery.easing.min.js')}}"></script>
 <script type="text/javascript">
-jQuery(document).ready(function ($) {
-    $(".scroll").click(function (event) {
-        event.preventDefault();
-        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-    });
-});</script>
+                    jQuery(document).ready(function ($) {
+                        $(".scroll").click(function (event) {
+                            event.preventDefault();
+                            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                        });
+                    });</script>
 <!-- here stars scrolling icon -->
 <script type="text/javascript">
     $(document).ready(function () {
@@ -328,42 +292,89 @@ jQuery(document).ready(function ($) {
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
 
-<script type="text/javascript" src="{{asset('org/layer/layer.js')}}"></script>
 <script>
-    //測試倒數計時
-    var refreshIntervalId;
-    var num = 50;
+    var timer = [];
     $(document).ready(function () {
-        //refreshIntervalId = setInterval(time, 1000);
+        countdownTimer();
     });
-    function time() {
-        console.log(num);
-        num = num - 1;
-        if (num == 40) {
-            clearInterval(refreshIntervalId);
-            console.log("時間到");
-        }
+    function countdownTimer() {
+        var spans = $("span[id='remainTimeSpan[]']");
+        spans.each(function (index) {
+            var endTime = $(this).html();
+            var countDownDate = new Date(endTime).getTime();
+            countdown(countDownDate, $(this), index);
+        })
+    }
 
+    function countdown(countDownDate, obj, index) {
+        timer[index] = setInterval(function () {
+            // Get todays date and time
+            var now = new Date().getTime();
+            // Find the distance between now an the count down date
+            var distance = countDownDate - now;
+            //@todo 補零
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            if (hours < 10) {
+                hours = "0" + hours;
+            }
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            var remainTime = days + "天 " + hours + ":" + minutes + ":" + seconds;
+            $(obj).show();
+            $(obj).html(remainTime);
+            // If the count down is over, write some text 
+            if (distance <= 0) {
+                clearInterval(timer[index]);
+                getLimitCommodities($("#nowPage"));
+            }
+        }, 1000);
     }
     function addToShoppingCart(obj) {
-        $hidden = $(obj).next();
-        $commodity_id = $hidden.val();
-        $.get("{{url('shopping')}}/" + $commodity_id, {}, function (data) {
-            console.log("加入成功");
+        var hidden = $(obj).next();
+        var commodity_id = hidden.val();
+        $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
+
         });
     }
     function getLimitCommodities(obj) {
-        $page = $(obj).val();
-        if ($page == 0) {
+        var page = $(obj).val();
+        if (page == 0) {
             alert("目前已是第一頁");
             return;
         }
-        $.post("{{url('getlimitcommodities')}}", {"page": $page, "_token": "{{ csrf_token() }}", }, function (data) {
+        $.post("{{url('getlimitcommodities')}}", {"page": page, "_token": "{{ csrf_token() }}", }, function (data) {
             if (data === "") {
                 alert("目前已是最後一頁");
                 return;
             }
+            $("#backPage").val(parseInt(page) - 1);
+            $("#nowPage").val(parseInt(page));
+            $("#nextPage").val(parseInt(page) + 1);
             $("#limitCommodityList").html(data);
+            $.each(timer, function (index) {
+                clearInterval(timer[index]);
+            });
+            countdownTimer();
+        });
+    }
+
+    function getGeneralCommodities(obj) {
+        var page = $(obj).val();
+        $.post("{{url('getgeneralcommodities')}}", {"page": page, "_token": "{{ csrf_token() }}", }, function (data) {
+            if (data === "") {
+                alert("目前已是最後一頁");
+                return;
+            }
+            $("#generalPage").val(parseInt(page) + 1);
+            $("#generalCommodityList").append(data);
         });
     }
 </script>
