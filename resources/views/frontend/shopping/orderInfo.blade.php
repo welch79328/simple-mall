@@ -17,41 +17,46 @@
 @section('content')
 <div class="new_arrivals_agile_w3ls_info" style="font-family: Microsoft JhengHei;"> 
     <div class="container">
-        <form class="form-horizontal" action="{{url('')}}" method="post">
+        <form class="form-horizontal" action="{{url('order_setup')}}" method="post">
+            {{csrf_field()}}
             <div class="col-md-offset-2 col-md-8" style="padding: 30px;">
                 <h2 style="margin-bottom: 20px">收件人資料<i class="glyphicon glyphicon-user"></i></h2>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="請輸入中文姓名" required>
+                    <input type="text" class="form-control" id="name" name="member_name" placeholder="請輸入中文姓名" required value="{{$data->member_name}}">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="請輸入行動電話">
+                    <input type="text" class="form-control" id="phone" name="member_phone" placeholder="請輸入行動電話" value="{{$data->member_phone}}">
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="tel_code" name="tel_code" placeholder="區碼" style="width: 20%; float: left">
-                    <input type="text" class="form-control" id="tel" name="tel" placeholder="請輸入市話" style="width: 80%; float: left">
+                    <input type="text" class="form-control" id="tel" name="member_tel" placeholder="請輸入市話" style="width: 80%; float: left" value="{{$data->member_tel}}">
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="mail" name="mail" placeholder="請輸入電子信箱">
+                    <input type="email" class="form-control" id="mail" name="member_mail" placeholder="請輸入電子信箱" value="{{$data->member_mail}}">
                 </div>
                 <div class="form-group">
-                    <select class="form-control" name="city" onchange="changeCity(this)" style="width: 40%; float: left">
+                    <select class="form-control" name="member_city" onchange="changeCity(this)" style="width: 40%; float: left">
                         @foreach($city as $v)
-                        <option value="{{$v['city_id']}}">{{$v['city']}}</option>
+                            <option value="{{$v['city_id']}}" @if($data->member_city == $v['city_id']) selected @endif>{{$v['city']}}</option>
                         @endforeach
                     </select>
-                    <select class="form-control" name="area" id="area" onchange="changeArea(this)" style="width: 40%; float: left">
+                    <select class="form-control" name="member_city" id="area" onchange="changeArea(this)" style="width: 40%; float: left">
                         @foreach($area as $v)
-                        @if($v['city_id'] == 1)
-                        <option value="{{$v['area_id']}}">{{$v['area']}}</option>
-                        @endif
+                            @if(!empty($data->member_city))
+                                @if($v['city_id'] == $data->member_city)
+                                    <option value="{{$v['area_id']}}" @if($data->member_area == $v['area_id']) selected @endif>{{$v['area']}}</option>
+                                @endif
+                            @elseif($v['city_id'] == 1)
+                                <option value="{{$v['area_id']}}">{{$v['area']}}</option>
+                            @endif
                         @endforeach
                     </select>
-                    <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{$zipcode}}" style="width: 20%; float: left" readonly>
+                    <input type="text" class="form-control" id="zipcode" name="member_zipcode" value="@if($data->member_zipcode == Null) {{$zipcode}} @else {{$data->member_zipcode}} @endif" style="width: 20%; float: left" readonly>
                     <div class="clearfix"></div>
                     <div style="margin-top: 10px">
-                        <input type="text" class="form-control" id="address" name="address" placeholder="請輸入道路街名" required>
+                        <input type="text" class="form-control" id="address" name="member_location" placeholder="請輸入道路街名" required value="{{$data->member_location}}">
                     </div>
                 </div>
                 <div class="form-group">

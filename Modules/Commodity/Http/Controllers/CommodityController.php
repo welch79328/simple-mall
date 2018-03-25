@@ -72,7 +72,7 @@ class CommodityController extends Controller
             $input = Input::except('_token','file_upload','file_upload1');
             $input['commodity_creator'] = session('admin_member.member_name');
             $image = explode(',', $input['image']);
-            $input['commodity_period'] = explode('to',$input['commodity_period']);
+            $input['commodity_period'] = explode('to ',$input['commodity_period']);
             $input['commodity_start_time'] = $input['commodity_period'][0];
             $input['commodity_end_time'] = $input['commodity_period'][1];
 
@@ -152,7 +152,7 @@ class CommodityController extends Controller
     {
         $input = Input::except('_token','_method','file_upload','file_upload1');
         $image = explode(',', $input['image']);
-        $input['commodity_period'] = explode('to',$input['commodity_period']);
+        $input['commodity_period'] = explode('to ',$input['commodity_period']);
         $input['commodity_start_time'] = $input['commodity_period'][0];
         $input['commodity_end_time'] = $input['commodity_period'][1];
         $input['commodity_creator'] = session('admin_member.member_name');

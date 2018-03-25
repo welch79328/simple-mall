@@ -49,7 +49,7 @@ class AdvertisementController extends Controller
         try{
             $input = Input::except('_token','file_upload');
             $input['advertisement_creator'] = session('admin_member.member_name');
-            $input['advertisement_period'] = explode('to',$input['advertisement_period']);
+            $input['advertisement_period'] = explode('to ',$input['advertisement_period']);
             $input['advertisement_start_time'] = $input['advertisement_period'][0];
             $input['advertisement_end_time'] = $input['advertisement_period'][1];
 
@@ -108,7 +108,7 @@ class AdvertisementController extends Controller
     public function update(Request $request,$advertisement_id)
     {
         $input = Input::except('_token','_method','file_upload');
-        $input['advertisement_period'] = explode('to',$input['advertisement_period']);
+        $input['advertisement_period'] = explode('to ',$input['advertisement_period']);
         $input['advertisement_start_time'] = $input['advertisement_period'][0];
         $input['advertisement_end_time'] = $input['advertisement_period'][1];
         $input['advertisement_creator'] = session('admin_member.member_name');

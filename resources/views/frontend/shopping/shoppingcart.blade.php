@@ -7,7 +7,7 @@
     <div class="container">
         <h2>購物車({{count($cart)}})</h2>
         <div style="margin-top: 20px">
-            <form action="" method="post">
+            <form action="{{url('order_info')}}" method="post">
                 {{csrf_field()}}
                 <!-- Table -->
                 <table class="table">
@@ -45,8 +45,9 @@
                     </tr>
                 </table>
                 <div style="text-align: right">
-                    <button type="button" class="btn btn-default" onclick="" align="right">繼續選購</button>
-                    <a href="{{url('checkout/order_info')}}" class="btn btn-info" role="button">立即結帳</a>
+                    <button type="button" class="btn btn-default" onclick="history.go(-1)" align="right">繼續選購</button>
+                    {{--<a href="{{url('checkout/order_info')}}" class="btn btn-info" role="button">立即結帳</a>--}}
+                    <input type="submit" class="btn btn-info" value="立即結帳">
                 </div>
             </form>
         </div>

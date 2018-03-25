@@ -11,7 +11,7 @@ Route::group(['roles' => ['member'],'middleware' => 'web', 'prefix' => 'member',
 //    Route::resource('/', 'MemberController@')->middleware('login.judgment');
 });
 
-Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['web','admin.login.judgment'], 'namespace' => 'Modules\Member\Http\Controllers'], function()
+Route::group(['middleware' => 'web', 'namespace' => 'Modules\Member\Http\Controllers'], function()
 {
     Route::resource('member', 'MemberController');
     //連動表單城市

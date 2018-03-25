@@ -71,7 +71,7 @@ class ShoppingcartController extends Controller {
 
     public function push($commodity_id) {
         $commodity = \Modules\Commodity\Entities\Commodity::where('commodity_id', $commodity_id)->first();
-        $cart = Cart::add($commodity->commodity_id, $commodity->commodity_title, '1', $commodity->commodity_price);
+        Cart::add($commodity->commodity_id, $commodity->commodity_title, '1', $commodity->commodity_price);
 //        $aa = Cart::content();
 //        dd($aa);
 

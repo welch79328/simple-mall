@@ -1,6 +1,7 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'order', 'namespace' => 'Modules\Order\Http\Controllers'], function()
+Route::group(['middleware' => 'web', 'namespace' => 'Modules\Order\Http\Controllers'], function()
 {
-    Route::get('/', 'OrderController@index');
+    Route::post('order_info', 'OrderController@orderInfo');
+    Route::post('order_setup', 'OrderController@orderSetup');
 });

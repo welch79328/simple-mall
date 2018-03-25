@@ -10,29 +10,29 @@ use App\Http\Controllers\Controller;
 
 class IndexController extends CommonController {
 
-    public function index() {
+    public function index(CommodityHelper $commodityHelper) {
         parent::__construct();
         $page = [
             "backPage" => 0,
             "nowPage" => 1,
             "nextPage" => 2
         ];
-        $limitCommodities = CommodityHelper::getLimitCommodities(4);
-        $generalCommodities = CommodityHelper::getGeneralCommodities(8);
+        $limitCommodities = $commodityHelper->getLimitCommodities(4,8);
+        $generalCommodities = $commodityHelper->getGeneralCommodities(8);
         $commodities = Commodity::all(); //@todo 加上條件
         return view("frontend.index", compact("generalCommodities", "limitCommodities", "page"));
     }
 
-    public function getLimitCommodities() {
-        $limitCommodities = CommodityHelper::getLimitCommodities(4);
+    public function getLimitCommodities(CommodityHelper $commodityHelper) {
+        $limitCommodities = $commodityHelper->getLimitCommodities(4,8);
         if (count($limitCommodities) == 0) {
             return "";
         }
         return view("frontend.limitCommodityList", compact("limitCommodities"));
     }
     
-    public function getGeneralCommodities() {
-        $generalCommodities = CommodityHelper::getGeneralCommodities(8);
+    public function getGeneralCommodities(CommodityHelper $commodityHelper) {
+        $generalCommodities = $commodityHelper->getGeneralCommodities(8);
         if (count($generalCommodities) == 0) {
             return "";
         }
