@@ -80,7 +80,7 @@ class OrderController extends CommonController
 
     public function orderInfo(TownshipHelper $townshipHelper) {
 //        $session = session('member.member_name');
-        $session = 'Maeve Kozey';
+        $session = 'Mrs. Lily Smith';
         $data = Member::where('member_name',$session)->first();
         $total = Cart::total();
         $area = $townshipHelper->area();
@@ -95,7 +95,7 @@ class OrderController extends CommonController
 //        $session = session('member.member_name');
 //        DB::beginTransaction();
 //        try{
-            $session = 3;
+            $session = 4;
             Member::where('member_id',$session)->update($input);
             $cart = Cart::content();
             $re = Order::create([

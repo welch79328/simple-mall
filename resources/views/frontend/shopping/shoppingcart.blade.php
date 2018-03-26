@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts')
+@section('title', 'Free AD Wifi Mall 購物車')
 
 @section('content')
 <div class="new_arrivals_agile_w3ls_info">
@@ -46,8 +46,7 @@
                 </table>
                 <div style="text-align: right">
                     <button type="button" class="btn btn-default" onclick="history.go(-1)" align="right">繼續選購</button>
-                    {{--<a href="{{url('checkout/order_info')}}" class="btn btn-info" role="button">立即結帳</a>--}}
-                    <input type="submit" class="btn btn-info" value="立即結帳1">
+                    <input type="submit" class="btn btn-info" value="立即結帳">
                 </div>
             </form>
         </div>

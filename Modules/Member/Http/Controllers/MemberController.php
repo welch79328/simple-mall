@@ -44,15 +44,18 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $input = Input::except('_token');
+        
+        
+        //dd($input);
         $rules=[
-            'member_account'=>'required',
+            //'member_account'=>'required',
             'member_password'=>'required|regex:/^[a-zA-Z]/|between:6,8|same:member_password_check',
 //            'member_identity'=>'required|regex:/^[A-Z]/|between:10,10',
             'member_mail'=>'required|email',
         ];
 
         $message=[
-            'member_account.required'=>'會員帳號不能為空!',
+            //'member_account.required'=>'會員帳號不能為空!',
             'member_password.required'=>'密碼內容不能為空!',
             'member_password.regex'=>'密碼開頭必須為英文字母!',
             'member_password.between'=>'密碼長度必須為6至8位!',
@@ -67,12 +70,13 @@ class MemberController extends Controller
         
         $validator = Validator::make($input,$rules,$message);
         $member = Input::except('_token','member_password_check');
+        $member["member_account"] = $member["member_mail"];
         $member['member_password'] = Crypt::encrypt($member['member_password']);
 
         if($validator->passes()){
             $re = Member::create($member);
             if($re){
-                return redirect('member');
+                return redirect('signin');
             }else {
                 return back()->with('errors', '數據填充錯誤, 請稍後重試');
             }

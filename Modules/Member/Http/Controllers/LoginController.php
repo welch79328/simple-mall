@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 use Modules\Member\Entities\MemberLog;
-use Modules\Member\Entities\Members;
+use Modules\Member\Entities\Member;
 
 class LoginController extends Controller
 {
@@ -77,7 +77,7 @@ class LoginController extends Controller
     public function login(Request $request) {
         try{
             $input = $request->input();
-            $member = Members::where('member_account',$input['member_account'])->first();
+            $member = Member::where('member_account',$input['member_account'])->first();
             if(empty($member)){
                 return back()->with('msg','帳號或是密碼錯誤');
             }else if($member->member_account != $input['member_account'] || Crypt::decrypt($member->member_password) != $input['member_password']){
@@ -104,7 +104,7 @@ class LoginController extends Controller
     public function quit()
     {
         session(['member'=>null]);
-        return redirect('member/login');
+        return redirect('/');
     }
 
 //    public function generate_password()
