@@ -15,6 +15,7 @@ Route::group(['namespace' => 'Frontend'], function() {
     Route::get('/', 'IndexController@index');
     Route::get('category/{cate_id}', 'CategoryController@index');
     Route::get('checkout/order_info', 'CheckoutController@orderInfo');
+    Route::get('contact', 'ContactController@index');
     Route::post('getlimitcommodities', 'IndexController@getLimitCommodities');
     Route::post('getgeneralcommodities', 'IndexController@getGeneralCommodities');
 });
@@ -22,10 +23,6 @@ Route::group(['namespace' => 'Frontend'], function() {
 
 Route::get('about', function () {
     return view('frontend.about');
-});
-
-Route::get('contact', function () {
-    return view('frontend.contact');
 });
 
 Route::get('icons', function () {

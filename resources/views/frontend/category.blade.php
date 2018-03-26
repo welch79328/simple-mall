@@ -872,8 +872,7 @@
 </div>
 <!-- //login -->
 <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<!-- js -->
-<script type="text/javascript" src="{{asset('js/frontend/jquery-2.1.4.min.js')}}"></script>
+
 <!-- //js -->
 <script src="{{asset('js/frontend/responsiveslides.min.js')}}"></script>
 <script>
@@ -958,6 +957,4 @@
     });
 </script>
 <!-- //here ends scrolling icon -->
-<!-- for bootstrap working -->
-<script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
 @endsection

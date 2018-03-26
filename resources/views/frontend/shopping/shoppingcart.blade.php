@@ -3,9 +3,15 @@
 @section('title', 'Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts')
 
 @section('content')
+<div class="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url('/')}}">首頁</a></li>
+        <li class="breadcrumb-item active">購物車</li>
+    </ol>
+</div>
 <div class="new_arrivals_agile_w3ls_info">
     <div class="container">
-        <h2>購物車({{count($cart)}})</h2>
+        <h2>購物車({{$cartCount}})</h2>
         <div style="margin-top: 20px">
             <form action="" method="post">
                 {{csrf_field()}}
@@ -45,7 +51,7 @@
                     </tr>
                 </table>
                 <div style="text-align: right">
-                    <button type="button" class="btn btn-default" onclick="" align="right">繼續選購</button>
+                    <a href="{{url('/')}}" class="btn btn-default" role="button">繼續選購</a>
                     <a href="{{url('checkout/order_info')}}" class="btn btn-info" role="button">立即結帳</a>
                 </div>
             </form>

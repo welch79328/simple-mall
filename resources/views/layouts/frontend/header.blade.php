@@ -8,7 +8,9 @@
             <li><i class="fa fa-phone" aria-hidden="true"></i> 電話 : 01234567898</li>
             <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>-->
             <li>
-                <button class="btn btn-default" type="button" style="border: none;" onclick="{$('#loginModal').modal('show');}">
+                <button class="btn btn-default" type="button" style="border: none;" onclick="{
+                            $('#loginModal').modal('show');
+                        }">
                     <i class="glyphicon glyphicon-log-in"></i>登入
                 </button>
             </li>
@@ -18,7 +20,9 @@
                 </button>
             </li>
             <li>
-                <button class="btn btn-default" type="button" style="border: none;" onclick="{$('#signupModal').modal('show');}">
+                <button class="btn btn-default" type="button" style="border: none;" onclick="{
+                            $('#signupModal').modal('show');
+                        }">
                     <i class="glyphicon glyphicon-pencil"></i>註冊
                 </button>
             </li>
@@ -32,7 +36,9 @@
                                     <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>購物車</button>
                                 </form>-->
                 <!--                                <a href="{{url('shoppingcart/show')}}">-->
-                <a class="agile-icon btn btn-default" style="border: none;" href="{{url('shoppingcart/show')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>購物車</a>
+                <a class="agile-icon btn btn-default" style="border: none;" href="{{url('shoppingcart/show')}}">
+                    <i class="fa fa-shopping-cart" aria-hidden="true">({{$cartCount}})</i>購物車
+                </a>
                 <!--                                </a>-->
             </li>
             <li>
@@ -42,7 +48,7 @@
     </div>
     <div class="col-md-3" style="padding-top: 3.5px;">
         <div class="input-group">
-            <input type="text" class="form-control" aria-label="...">
+            <input type="text" class="form-control" aria-label="..." placeholder="商品關鍵字搜尋">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default" aria-label="Help">Go</button>
             </div>
