@@ -79,6 +79,7 @@ class OrderController extends CommonController
 //    }
 
     public function orderInfo(TownshipHelper $townshipHelper) {
+        new CommonController;
 //        $session = session('member.member_name');
         $session = 'Mrs. Lily Smith';
         $data = Member::where('member_name',$session)->first();

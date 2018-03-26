@@ -13,7 +13,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Shoppingcart\Http\C
     Route::get('shopping/remove/{rowId}', 'ShoppingcartController@remove');
 });
 
-Route::group(['roles' => ['member'],'middleware' => ['web','login.judgment'], 'namespace' => 'Modules\Shoppingcart\Http\Controllers'], function() {
+Route::group(['roles' => ['member'], 'middleware' => ['web', 'login.judgment'], 'namespace' => 'Modules\Shoppingcart\Http\Controllers'], function() {
 //購物車
     Route::get('shoppingcart/show', 'ShoppingcartController@show');
 });

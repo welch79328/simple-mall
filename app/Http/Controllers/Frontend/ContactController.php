@@ -7,11 +7,8 @@ use App\Http\Controllers\Controller;
 
 class ContactController extends CommonController {
     
-    function __construct() {
-        parent::__construct();
-    }
-
     public function index() {
+        parent::__construct();
         return view("frontend.contact");
     }
 

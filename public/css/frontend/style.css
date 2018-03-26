@@ -3525,15 +3525,16 @@ p.w3ls_para {
     display: none;
     text-decoration: none;
     position: fixed;
-    bottom: 55px;
+    bottom: 40%;
     right: 2%;
     overflow: hidden;
     z-index: 999; 
-    width: 32px;
-    height: 32px;
+    width: 70px;
+    height: 70px;
     border: none;
     text-indent: 100%;
-    background: url(/images/up_arrow.png) no-repeat 0px 0px;
+    background: url(/images/top-12.png) no-repeat 0px 0px;
+    background-size: 70px 70px;
 }
 #toTopHover {
     width: 32px;

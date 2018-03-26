@@ -4,15 +4,7 @@
 
 @section('content')
 <style>
-    .dropdown-submenu {
-        position: relative;
-    }
 
-    .dropdown-submenu .dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: -1px;
-    }
 </style>
 <!-- banner --> 
 @include('layouts.frontend.banner')
@@ -217,9 +209,6 @@
 <!-- //login -->
 <a href="#home" class="scroll" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 
-
-<!-- js -->
-<script type="text/javascript" src="{{asset('js/frontend/jquery-2.1.4.min.js')}}"></script>
 <!-- //js -->
 <script src="{{asset('js/frontend/modernizr.custom.js')}}"></script>
 <!-- Custom-JavaScript-File-Links --> 
@@ -287,10 +276,9 @@
          */
 
         $().UItoTop({easingType: 'easeOutQuart'});
-    });</script>
+    });
+</script>
 <!-- //here ends scrolling icon -->
-<!-- for bootstrap working -->
-<script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
 
 <script>
     var timer = [];
@@ -337,13 +325,17 @@
             }
         }, 1000);
     }
+
     function addToShoppingCart(obj) {
         var hidden = $(obj).next();
         var commodity_id = hidden.val();
+        $(obj).attr("disabled", true);
         $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
+            $(obj).attr("disabled", false);
 
         });
     }
+
     function getLimitCommodities(obj) {
         var page = $(obj).val();
         if (page == 0) {

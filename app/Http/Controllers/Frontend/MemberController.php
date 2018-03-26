@@ -6,21 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class MemberController extends CommonController {
-
-    function __construct() {
-        parent::__construct();
-    }
-
+    
     public function info() {
         
     }
 
     public function signIn() {
+        parent::__construct();
         return view("frontend.member.signin");
     }
 
     public function signUp() {
-        
+        parent::__construct();
         return view("frontend.member.signup");
     }
 
