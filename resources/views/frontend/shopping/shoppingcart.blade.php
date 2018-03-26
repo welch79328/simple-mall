@@ -47,7 +47,7 @@
                 <div style="text-align: right">
                     <button type="button" class="btn btn-default" onclick="history.go(-1)" align="right">繼續選購</button>
                     {{--<a href="{{url('checkout/order_info')}}" class="btn btn-info" role="button">立即結帳</a>--}}
-                    <input type="submit" class="btn btn-info" value="立即結帳">
+                    <input type="submit" class="btn btn-info" value="立即結帳1">
                 </div>
             </form>
         </div>
