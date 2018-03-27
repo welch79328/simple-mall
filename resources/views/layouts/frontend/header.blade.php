@@ -37,7 +37,10 @@
                                     <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>購物車</button>
                                 </form>-->
                 <!--                                <a href="{{url('shoppingcart/show')}}">-->
-                <a class="agile-icon btn btn-default" style="border: none;" href="{{url('shoppingcart/show')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>({{$cartCount}})購物車</a>
+                <a class="agile-icon btn btn-default" style="border: none;" href="{{url('shoppingcart/show')}}">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <span id="shoppingCartCount">({{$cartCount}})購物車</span>
+                </a>
                 <!--                                </a>-->
             </li>
             <li>

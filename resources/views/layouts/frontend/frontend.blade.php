@@ -39,6 +39,6 @@
         <!-- footer -->
         @include('layouts.frontend.footer')
         <!-- //footer -->
-        
+
     </body>
 </html>

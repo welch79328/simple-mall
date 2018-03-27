@@ -78,7 +78,24 @@
     </div>
 </div>
 <!-- //viewed products --> 
-
+<!-- joinCartSusessModal --> 
+<div class="modal fade" tabindex="-1" role="dialog" id="joinCartSusessModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>加入購物車成功！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- //joinCartSusessModal --> 
 <!-- /we-offer -->
 <!--<div class="sale-w3ls">
     <div class="container">
@@ -328,10 +345,14 @@
 
     function addToShoppingCart(obj) {
         var hidden = $(obj).next();
-        var commodity_id = hidden.val();
-        $(obj).attr("disabled", true);
+        var commodity_id = hidden.val()
         $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
-            $(obj).attr("disabled", false);
+            $("#shoppingCartCount").html("(" + data + ")購物車");
+            console.log(data);
+            $("#joinCartSusessModal").modal('show');
+            setTimeout(function () {
+                $("#joinCartSusessModal").modal("hide");
+            }, 1000);
 
         });
     }

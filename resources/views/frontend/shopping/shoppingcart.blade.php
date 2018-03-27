@@ -26,8 +26,8 @@
                             <td>
                                 <p> <strong> {{$v->name}} </strong> </p>
                             </td>
-                            <td><input class="form-control input-sm" type ="text"  value = "{{$v->qty}}"  ></td>
-                            <td> $ {{$v->price}}</td>
+                            <td>{{$v->qty}}</td>
+                            <td>${{$v->price}}</td>
                             <td>
                                 <a href="{{url('shopping/remove/'.$v->rowId)}}">删除</a>
                             </td>
@@ -40,7 +40,7 @@
                     <tr>
                         <td> </td>
                         <td> </td>
-                        <td> $ {{$total}}</td>
+                        <td>${{$total}}</td>
                         <td> </td>
                     </tr>
                 </table>
