@@ -18,6 +18,10 @@ class CreateOrderListTable extends Migration
             $table->string('name');
             $table->integer('amount');
             $table->integer('price');
+            $table->string('description')->nullable();
+            $table->string('creator')->nullable();
+            $table->enum('status',['complete','refund','pending'])->default('Pending');
+            $table->integer('commodity_id');
             $table->integer('order_id');
             $table->timestamps();
         });
