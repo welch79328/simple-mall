@@ -16,71 +16,140 @@ use Modules\Order\Entities\Orderlist;
 
 class OrderController extends CommonController
 {
-//    /**
-//     * Display a listing of the resource.
-//     * @return Response
-//     */
-//    public function index()
-//    {
-//        return view('order::index');
-//    }
-//
-//    /**
-//     * Show the form for creating a new resource.
-//     * @return Response
-//     */
-//    public function create()
-//    {
-//        return view('order::create');
-//    }
-//
-//    /**
-//     * Store a newly created resource in storage.
-//     * @param  Request $request
-//     * @return Response
-//     */
-//    public function store(Request $request)
-//    {
-//    }
-//
-//    /**
-//     * Show the specified resource.
-//     * @return Response
-//     */
-//    public function show()
-//    {
-//        return view('order::show');
-//    }
-//
-//    /**
-//     * Show the form for editing the specified resource.
-//     * @return Response
-//     */
-//    public function edit()
-//    {
-//        return view('order::edit');
-//    }
-//
-//    /**
-//     * Update the specified resource in storage.
-//     * @param  Request $request
-//     * @return Response
-//     */
-//    public function update(Request $request)
-//    {
-//    }
-//
-//    /**
-//     * Remove the specified resource from storage.
-//     * @return Response
-//     */
-//    public function destroy()
-//    {
-//    }
+    /**
+     * Display a listing of the resource.
+     * @return Response
+     */
+    public function index()
+    {
+        $data = Order::orderBy('order.updated_at','desc')->paginate(20);
+        foreach ($data as $v){
+            switch ($v->order_status)
+            {
+                case 'pending':
+                    $v->order_status = '待處理';
+                break;
+                case 'complete':
+                    $v->order_status = '完成';
+                break;
+                case 'refund':
+                    $v->order_status = '取消';
+                break;
+            }
+            $member = Member::where('member_id',$v->member_id)->first();
+            $v->member_name = $member['member_name'];
+        }
+
+        return view('backstage.order.index',compact('data'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function create()
+    {
+        return view('backstage.order.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @param  Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+    }
+
+    /**
+     * Show the specified resource.
+     * @return Response
+     */
+    public function show($order_id,TownshipHelper $townshipHelper)
+    {
+        $data = Order::join('member','order.member_id','=','member.member_id')->where('order_id',$order_id)->first();
+        $data->member_city = $townshipHelper->getCity($data->member_city);
+        $data->member_area = $townshipHelper->getArea($data->member_area);
+        $orderlist = Orderlist::where('order_id',$order_id)->get();
+        switch ($data->order_status)
+        {
+            case 'pending':
+                $data->order_status = '待處理';
+                break;
+            case 'complete':
+                $data->order_status = '完成';
+                break;
+            case 'refund':
+                $data->order_status = '取消';
+                break;
+        }
+        foreach ($orderlist as $v){
+            switch ($v->status)
+            {
+                case 'pending':
+                    $v->status = '待處理';
+                    break;
+                case 'complete':
+                    $v->status = '完成';
+                    break;
+                case 'refund':
+                    $v->status = '取消';
+                    break;
+            }
+        }
+        switch ($data->member_sex)
+        {
+            case 'male':
+                $data->member_sex = '男士';
+                break;
+            case 'female':
+                $data->member_sex = '女士';
+                break;
+        }
+        return view('backstage.order.show',compact('data','orderlist'));
+    }
+
+    public function order_alone($id)
+    {
+        $data = Orderlist::where('id',$id)->first();
+
+        return view('backstage.order.order_alone',compact('data'));
+    }
+
+    public function order_alone_edit($id)
+    {
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * @return Response
+     */
+    public function edit()
+    {
+        return view('order::edit');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @param  Request $request
+     * @return Response
+     */
+    public function update(Request $request)
+    {
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @return Response
+     */
+    public function destroy()
+    {
+    }
 
     public function orderInfo(TownshipHelper $townshipHelper) {
 //        $session = session('member.member_name');
-        $session = 'Maeve Kozey';
+        $session = 'Ms. Candace Lang';
         $data = Member::where('member_name',$session)->first();
         $total = Cart::total();
         $area = $townshipHelper->area();
@@ -95,7 +164,7 @@ class OrderController extends CommonController
 //        $session = session('member.member_name');
 //        DB::beginTransaction();
 //        try{
-            $session = 3;
+            $session = 1;
             Member::where('member_id',$session)->update($input);
             $cart = Cart::content();
             $re = Order::create([
@@ -114,6 +183,7 @@ class OrderController extends CommonController
                         'name'=>$v->name,
                         'amount'=>$v->qty,
                         'price'=>$v->price,
+                        'commodity_id'=>$v->id,
                         'order_id'=>$re['order_id'],
                     ]);
                 }
@@ -125,6 +195,12 @@ class OrderController extends CommonController
 ////            DB::rollBack();
 //            dd('error');
 //        }
+    }
 
+    public function commodity_show()
+    {
+        $data = Commodity::where('commodity_stock',0)->orderBy('created_at','asc')->paginate(20);
+
+        return view('backstage.order.commodity_show',compact('data'));
     }
 }
