@@ -37,7 +37,7 @@
                 @include('frontend.generalCommodityList')
             </div>
             <div class="clearfix"></div>
-            <div class="" style="padding-top: 40px;">
+            <div style="padding-top: 40px;">
                 <button type="button" class="btn btn-default btn-lg center-block" style="color: white; background-color: gray;" value="{{$page["nextPage"]}}" onclick="getGeneralCommodities(this)" id="generalPage">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     查看更多
@@ -62,8 +62,8 @@
             <div class="col-md-3 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="images/m2.jpg" alt="" class="pro-image-front">
-                        <img src="images/m2.jpg" alt="" class="pro-image-back">
+                        <img src="{{url('images/m2.jpg')}}" alt="" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
+                        <img src="{{url('images/m2.jpg')}}" alt="" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="{{url('single')}}" class="link-product-add-cart">查看商品</a>
@@ -77,25 +77,10 @@
 
     </div>
 </div>
-<!-- //viewed products --> 
-<!-- joinCartSusessModal --> 
-<div class="modal fade" tabindex="-1" role="dialog" id="joinCartSusessModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">提示</h4>
-            </div>
-            <div class="modal-body">
-                <p>加入購物車成功！</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- //joinCartSusessModal --> 
+<!-- //viewed products -->
+<!-- joinCartSusessModal -->
+@include("layouts.frontend.modal", ['id' => "joinCartSusessModal", 'title' => "提示", 'content' => "加入購物車成功！", 'onclick' => ""])
+<!-- //joinCartSusessModal -->
 <!-- /we-offer -->
 <!--<div class="sale-w3ls">
     <div class="container">
@@ -363,7 +348,7 @@
             alert("目前已是第一頁");
             return;
         }
-        $.post("{{url('getlimitcommodities')}}", {"page": page, "_token": "{{ csrf_token() }}", }, function (data) {
+        $.post("{{url('get_limit_commodities')}}", {"page": page, "_token": "{{ csrf_token() }}", }, function (data) {
             if (data === "") {
                 alert("目前已是最後一頁");
                 return;
@@ -381,7 +366,7 @@
 
     function getGeneralCommodities(obj) {
         var page = $(obj).val();
-        $.post("{{url('getgeneralcommodities')}}", {"page": page, "_token": "{{ csrf_token() }}", }, function (data) {
+        $.post("{{url('get_general_commodities')}}", {"page": page, "_token": "{{ csrf_token() }}", }, function (data) {
             if (data === "") {
                 alert("目前已是最後一頁");
                 return;

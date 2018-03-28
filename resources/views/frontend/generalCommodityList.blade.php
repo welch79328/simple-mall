@@ -1,4 +1,4 @@
-@foreach($generalCommodities as $general)
+@forelse($generalCommodities as $general)
 <div class="col-md-3 product-men">
     <div class="men-pro-item simpleCart_shelfItem">
         <div class="men-thumb-item">
@@ -27,6 +27,9 @@
                 <input type="hidden" value="{{$general->commodity_id}}"/>
             </div>
         </div>
+        <div style="text-align: center;">剩餘組數  {{$general->commodity_stock}}</div>
     </div>
 </div>
-@endforeach
+@empty
+<div>查無商品！</div>
+@endforelse

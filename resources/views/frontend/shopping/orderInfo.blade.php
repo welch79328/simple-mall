@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts')
+@section('title', 'Free AD Wifi Mall 訂購資料')
 
 @section('css')
 <style>
@@ -90,22 +90,9 @@
         </form>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" role="dialog" id="completeOrderModal" onclick="redirectIndex()">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="redirectIndex()"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">完成購買</h4>
-            </div>
-            <div class="modal-body">
-                <p>感謝您的購買，請等候頁面跳轉，或按下關閉即可。</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="redirectIndex()">關閉</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+
+@include("layouts.frontend.modal", ['id' => "completeOrderModal", 'title' => "完成購買", 'content' => "感謝您的購買，請等候頁面跳轉，或按下關閉即可。", 'onclick' => "redirectIndex()" ])
+
 <script>
     $(document).ready(function () {
         ajaxSubmitOrder();

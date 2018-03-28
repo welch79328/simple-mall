@@ -1,4 +1,4 @@
-@foreach($limitCommodities as $limit)
+@forelse($limitCommodities as $limit)
 <div class="col-md-3 product-men">
     <div class="men-pro-item simpleCart_shelfItem">
         <div style="background-color: gray; text-align: center; font-weight: bold;">剩餘時間 <span id="remainTimeSpan[]" hidden>{{$limit->commodity_end_time}}</span></div>
@@ -32,5 +32,6 @@
         <div style="text-align: center;">剩餘組數  {{$limit->commodity_stock}}</div>
     </div>
 </div>
-@endforeach
-<!-- js -->
+@empty
+<div>查無商品！</div>
+@endforelse

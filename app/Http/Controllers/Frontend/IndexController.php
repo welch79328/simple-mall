@@ -19,7 +19,6 @@ class IndexController extends CommonController {
         ];
         $limitCommodities = $commodityHelper->getLimitCommodities(4,8);
         $generalCommodities = $commodityHelper->getGeneralCommodities(8);
-        $commodities = Commodity::all(); //@todo 加上條件
         return view("frontend.index", compact("generalCommodities", "limitCommodities", "page"));
     }
 

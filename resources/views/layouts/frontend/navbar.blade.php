@@ -26,12 +26,12 @@
                                     <div class="col-sm-4 multi-gd-img">
                                         <ul class="multi-column-dropdown">
                                             @foreach($topCates as $topCate)
-                                            <li><a href="{{url('category/'.$topCate->cate_id)}}">{{$topCate->cate_name}}</a></li>
+                                            <li><a href="{{url('category/' . $topCate->cate_id . '?topCateId=' . $topCate->cate_id)}}">{{$topCate->cate_name}}</a></li>
                                             @endforeach
                                         </ul>
                                     </div>
                                     @endforeach
-                                    
+
                                     <div class="clearfix"></div>
                                 </div>
                             </ul>
@@ -44,7 +44,7 @@
                                     <div class="col-sm-4 multi-gd-img">
                                         <ul class="multi-column-dropdown">
                                             @foreach($topCates as $topCate)
-                                            <li><a href="{{url('category/'.$topCate->cate_id)}}">{{$topCate->cate_name}}</a></li>
+                                            <li><a href="{{url('category/' . $topCate->cate_id . '?topCateId=' . $topCate->cate_id)}}">{{$topCate->cate_name}}</a></li>
                                             @endforeach
                                         </ul>
                                     </div>

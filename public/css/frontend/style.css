@@ -3011,7 +3011,7 @@ ul.dropdown-menu6 li a {
 .css-treeview a,
 .css-treeview label::before
 {
-    display: inline-block;
+/*    display: inline-block;*/
     vertical-align: middle;
 }
 
@@ -3074,7 +3074,7 @@ ul.dropdown-menu6 li a {
     text-transform: uppercase;
 }
 .tree-list-pad{
-    padding:30px 30px;
+/*    padding:30px 30px;*/
 }
 .community-poll {
     border: 1px solid #d2d2d2;
@@ -3253,8 +3253,8 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.single_page_w3ls {
     margin: 35px 0;
 }
 .sorting {
-    float: left;
-    width: 46%;
+    float: right;
+    padding-right: 15px;
 }
 .sorting h6 {
     float: left;
@@ -5055,12 +5055,10 @@ p.w3ls_para {
         font-size: 16px;
     }
     .sorting {
-        float: left;
-        width: 100%;
-        margin-top: 0.5em;
+        float: right;
+        padding-right: 10px;
     }
     .sorting select {
-        padding: 4px 2px;
     }
     .men-wear-left {
         float: none;
