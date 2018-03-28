@@ -187,10 +187,10 @@
                 <div class="clearfix"></div>
             </div>
             <div class="sorting">
-                <button type="button" class="btn btn-default" onclick="getPopolarGeneralCommodities(this.value)" value="popular">最熱門</button>
+                <button type="button" class="btn btn-default" onclick="getPopolarGeneralCommodities(this.value)" value="-commodity_view">最熱門</button>
             </div>
             <div class="sorting">
-                <button type="button" class="btn btn-default" onclick="getLatestGeneralCommodities(this.value)" value="created_at">最新</button>
+                <button type="button" class="btn btn-default" onclick="getLatestGeneralCommodities(this.value)" value="-created_at">最新</button>
             </div>
             <div class="clearfix"></div>
             <!--            <div class="men-wear-top">
