@@ -3,9 +3,6 @@
 @section('title', 'Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts')
 
 @section('content')
-<style>
-
-</style>
 <!-- banner --> 
 @include('layouts.frontend.banner')
 <!-- //banner --> 
@@ -74,7 +71,6 @@
             </div>
             @endfor
         </div>
-
     </div>
 </div>
 <!-- //viewed products -->

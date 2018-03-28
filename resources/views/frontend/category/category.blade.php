@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', "Free AD Wifi Mall $activeCate->cate_name")
+@section('title', "Free AD Wifi Mall 商品分類")
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/frontend/jquery-ui.css')}}">
@@ -51,11 +51,11 @@
                 <h4>{{$activeCate->cate_name}}</h4>
                 <div class="list-group">
                     @foreach($cateTree as $cate)
-                        @if($cate->cate_id == $activeCate->cate_id)
-                            <a href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}" class="list-group-item active">{{$cate->_cate_name}}</a>
-                        @else
-                            <a href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}" class="list-group-item">{{$cate->_cate_name}}</a>
-                        @endif
+                    @if($cate->cate_id == $activeCate->cate_id)
+                    <a href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}" class="list-group-item active">{{$cate->_cate_name}}</a>
+                    @else
+                    <a href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}" class="list-group-item">{{$cate->_cate_name}}</a>
+                    @endif
                     @endforeach
                 </div>
                 <!--                <ul class="tree-list-pad">
@@ -434,8 +434,8 @@
 
         });
     }
-    
-    function getLatestGeneralCommodities(value){
+
+    function getLatestGeneralCommodities(value) {
         var cate_id = $("#activeCateId").val();
         var minPrice = $("#minPrice").val();
         var maxPrice = $("#maxPrice").val();
@@ -462,8 +462,8 @@
                 }
         );
     }
-    
-    function getPopolarGeneralCommodities(value){
+
+    function getPopolarGeneralCommodities(value) {
         var cate_id = $("#activeCateId").val();
         var minPrice = $("#minPrice").val();
         var maxPrice = $("#maxPrice").val();

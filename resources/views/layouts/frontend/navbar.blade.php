@@ -11,6 +11,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#search" style="float: right;">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
@@ -130,6 +133,15 @@
                         <li class=" menu__item"><a class="menu__link" href="#">購物流程FAQ</a></li>
                         <li class=" menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
                     </ul>
+                </div>
+                <div class="collapse navbar-collapse hidden-lg" id="search">
+                    <form class="mobile_search hidden-sm hidden-md hidden-lg" role="search" action="/" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="商品關鍵字..."/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Go</button>
+                            </span>
+                    </form>
                 </div>
             </div>
         </nav>

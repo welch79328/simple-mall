@@ -1580,6 +1580,10 @@ button.w3view-cart {
 }
 .men-thumb-item {
     position: relative;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 90%;
 }
 .item-info-product {
     text-align: center;
@@ -3278,7 +3282,7 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.single_page_w3ls {
 .single-right-left h3 {
     text-transform: capitalize;
     font-size: 23px;
-    color: #2fdab8;
+/*    color: #2fdab8;*/
     margin: 0;
     letter-spacing: 1px;
     font-weight: 600;

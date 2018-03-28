@@ -28,6 +28,10 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function() {
     Route::get('category/{cate_id}', 'CategoryController@index');
     Route::post('get_general_commodities_by_query', 'CategoryController@getGeneralCommoditiesByQuery');
     //商品分類--end
+    Route::get('commodity/{commodity_id}', 'CommodityController@index');
+    //商品--start
+    
+    //商品--end
 
     Route::get('contact', 'ContactController@index');
 });
