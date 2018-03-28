@@ -4,15 +4,7 @@
 
 @section('content')
 <style>
-    .dropdown-submenu {
-        position: relative;
-    }
 
-    .dropdown-submenu .dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: -1px;
-    }
 </style>
 <!-- banner --> 
 @include('layouts.frontend.banner')
@@ -86,7 +78,24 @@
     </div>
 </div>
 <!-- //viewed products --> 
-
+<!-- joinCartSusessModal --> 
+<div class="modal fade" tabindex="-1" role="dialog" id="joinCartSusessModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>加入購物車成功！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- //joinCartSusessModal --> 
 <!-- /we-offer -->
 <!--<div class="sale-w3ls">
     <div class="container">
@@ -217,9 +226,6 @@
 <!-- //login -->
 <a href="#home" class="scroll" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 
-
-<!-- js -->
-<script type="text/javascript" src="{{asset('js/frontend/jquery-2.1.4.min.js')}}"></script>
 <!-- //js -->
 <script src="{{asset('js/frontend/modernizr.custom.js')}}"></script>
 <!-- Custom-JavaScript-File-Links --> 
@@ -287,10 +293,9 @@
          */
 
         $().UItoTop({easingType: 'easeOutQuart'});
-    });</script>
+    });
+</script>
 <!-- //here ends scrolling icon -->
-<!-- for bootstrap working -->
-<script type="text/javascript" src="{{asset('js/frontend/bootstrap.js')}}"></script>
 
 <script>
     var timer = [];
@@ -337,13 +342,21 @@
             }
         }, 1000);
     }
+
     function addToShoppingCart(obj) {
         var hidden = $(obj).next();
-        var commodity_id = hidden.val();
+        var commodity_id = hidden.val()
         $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
+            $("#shoppingCartCount").html("(" + data + ")購物車");
+            console.log(data);
+            $("#joinCartSusessModal").modal('show');
+            setTimeout(function () {
+                $("#joinCartSusessModal").modal("hide");
+            }, 1000);
 
         });
     }
+
     function getLimitCommodities(obj) {
         var page = $(obj).val();
         if (page == 0) {

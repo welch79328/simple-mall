@@ -22,11 +22,10 @@
                     預購價 <span>${{$general->commodity_price}}</span>
                 </div>
             </div>
-            <a href="{{url('shopping/'.$general->commodity_id)}}">
-                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                    <input type="button" value="立即預購" class="button" />
-                </div>
-            </a>
+            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                <input type="button" value="立即預購" class="button" onclick="addToShoppingCart(this);"/>
+                <input type="hidden" value="{{$general->commodity_id}}"/>
+            </div>
         </div>
     </div>
 </div>

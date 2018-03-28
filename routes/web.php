@@ -11,21 +11,25 @@
   |
  */
 
-Route::group(['namespace' => 'Frontend'], function() {
+Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function() {
+
+    //首頁--start
     Route::get('/', 'IndexController@index');
     Route::get('category/{cate_id}', 'CategoryController@index');
 //    Route::get('checkout/order_info', 'CheckoutController@orderInfo');
     Route::post('getlimitcommodities', 'IndexController@getLimitCommodities');
     Route::post('getgeneralcommodities', 'IndexController@getGeneralCommodities');
-});
+    //首頁--end
+    //會員--start
+    Route::get('signin', 'MemberController@signIn');
+    Route::get('signup', 'MemberController@signUp');
+    //會員--end
 
+    Route::get('contact', 'ContactController@index');
+});
 
 Route::get('about', function () {
     return view('frontend.about');
-});
-
-Route::get('contact', function () {
-    return view('frontend.contact');
 });
 
 Route::get('icons', function () {

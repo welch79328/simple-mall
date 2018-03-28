@@ -148,8 +148,10 @@ class OrderController extends CommonController
     }
 
     public function orderInfo(TownshipHelper $townshipHelper) {
+        new CommonController;
 //        $session = session('member.member_name');
-        $session = 'Ms. Candace Lang';
+        $session = 'Mr. Rowan Weissnat I';
+
         $data = Member::where('member_name',$session)->first();
         $total = Cart::total();
         $area = $townshipHelper->area();
@@ -164,7 +166,9 @@ class OrderController extends CommonController
 //        $session = session('member.member_name');
 //        DB::beginTransaction();
 //        try{
-            $session = 1;
+
+            $session = 4;
+
             Member::where('member_id',$session)->update($input);
             $cart = Cart::content();
             $re = Order::create([
@@ -189,7 +193,11 @@ class OrderController extends CommonController
                 }
 //                DB::commit();
                 Cart::destroy();
-                return redirect('/');
+                $response = [
+                    "result" => true,
+                    "msg" => "新增訂單成功"
+                ];
+                return $response;
             }
 //        }catch (\Exception $e){
 ////            DB::rollBack();
