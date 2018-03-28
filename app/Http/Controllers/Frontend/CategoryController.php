@@ -53,7 +53,7 @@ class CategoryController extends CommonController {
             ["commodity_price", ">=", $minPrice],
             ["commodity_price", "<=", $maxPrice],
         ];
-
+        dd($field);
         $sort = [];
         if (!empty($field)) {
             foreach ($field as $value) {
@@ -64,6 +64,7 @@ class CategoryController extends CommonController {
                 }
             }
         }
+        dd($sort);
         $commodityHelper = new CommodityHelper();
         $generalCommodities = $commodityHelper->getGeneralCommoditiesByQuery(8, $conditions, $sort);
         if (count($generalCommodities) == 0) {

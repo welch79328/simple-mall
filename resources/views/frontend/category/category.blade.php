@@ -187,10 +187,10 @@
                 <div class="clearfix"></div>
             </div>
             <div class="sorting">
-                <button type="button" class="btn btn-default" onclick="searchGeneralCommodities(this.value)" value="popular">最熱門</button>
+                <button type="button" class="btn btn-default" onclick="getPopolarGeneralCommodities(this.value)" value="popular">最熱門</button>
             </div>
             <div class="sorting">
-                <button type="button" class="btn btn-default" onclick="searchGeneralCommodities(this.value)" value="latest">最新</button>
+                <button type="button" class="btn btn-default" onclick="getLatestGeneralCommodities(this.value)" value="created_at">最新</button>
             </div>
             <div class="clearfix"></div>
             <!--            <div class="men-wear-top">
@@ -230,7 +230,7 @@
             </div>
             <div class="clearfix"></div>
             <div style="padding-top: 40px;">
-                <button type="button" class="btn btn-default btn-lg center-block" style="color: white; background-color: gray;" value="2" onclick="getMoreGeneralCommodities(this)" id="generalPage">
+                <button type="button" class="btn btn-default btn-lg center-block" style="color: white; background-color: gray;" value="2" onclick="getMoreGeneralCommodities(this.value)" id="generalPage">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     查看更多
                 </button>
@@ -310,7 +310,6 @@
                         paypal.minicart.reset();
                     }
 </script>
-
 <!-- //cart-js --> 
 <!---->
 <script type='text/javascript'>//<![CDATA[ 
@@ -394,8 +393,7 @@
         searchGeneralCommodities();
     }
 
-    function getMoreGeneralCommodities(obj) {
-        var page = $(obj).val();
+    function getMoreGeneralCommodities(page) {
         var cate_id = $("#activeCateId").val();
         var minPrice = $("#minPrice").val();
         var maxPrice = $("#maxPrice").val();
@@ -435,6 +433,62 @@
             }, 1000);
 
         });
+    }
+    
+    function getLatestGeneralCommodities(value){
+        var cate_id = $("#activeCateId").val();
+        var minPrice = $("#minPrice").val();
+        var maxPrice = $("#maxPrice").val();
+        var sort = [];
+        sort.push(value);
+        if ($("#sortByPrice").val() != "default") {
+            sort.push($("#sortByPrice").val());
+        }
+        $.post("{{url('get_general_commodities_by_query')}}",
+                {
+                    _token: "{{ csrf_token() }}",
+                    cate_id: cate_id,
+                    minPrice: minPrice,
+                    maxPrice: maxPrice,
+                    sort: sort
+                },
+                function (data) {
+                    if (data === "") {
+                        $("#generalCommodityList").html("沒有符合此條件的商品！");
+                        return;
+                    }
+                    $("#generalPage").val("2");
+                    $("#generalCommodityList").html(data);
+                }
+        );
+    }
+    
+    function getPopolarGeneralCommodities(value){
+        var cate_id = $("#activeCateId").val();
+        var minPrice = $("#minPrice").val();
+        var maxPrice = $("#maxPrice").val();
+        var sort = [];
+        sort.push(value);
+        if ($("#sortByPrice").val() != "default") {
+            sort.push($("#sortByPrice").val());
+        }
+        $.post("{{url('get_general_commodities_by_query')}}",
+                {
+                    _token: "{{ csrf_token() }}",
+                    cate_id: cate_id,
+                    minPrice: minPrice,
+                    maxPrice: maxPrice,
+                    sort: sort
+                },
+                function (data) {
+                    if (data === "") {
+                        $("#generalCommodityList").html("沒有符合此條件的商品！");
+                        return;
+                    }
+                    $("#generalPage").val("2");
+                    $("#generalCommodityList").html(data);
+                }
+        );
     }
 
 </script>
