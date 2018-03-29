@@ -36,29 +36,5 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function() {
     Route::get('contact', 'ContactController@index');
 });
 
-Route::get('about', function () {
-    return view('frontend.about');
-});
-
-Route::get('icons', function () {
-    return view('frontend.icons');
-});
-
-Route::get('mens', function () {
-    return view('frontend.mens');
-});
-
-Route::get('single', function () {
-    return view('frontend.single');
-});
-
-Route::get('typography', function () {
-    return view('frontend.typography');
-});
-
-Route::get('womens', function () {
-    return view('frontend.womens');
-});
-
 require __DIR__ . '/web/backstage.php';
 

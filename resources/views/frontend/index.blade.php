@@ -55,21 +55,9 @@
             <div class="btn btn-default viewed_next_button hidden-xs">
                 <span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>
             </div>
-            @for($i=0;$i<4;$i++)
-            <div class="col-md-3 product-men">
-                <div class="men-pro-item simpleCart_shelfItem">
-                    <div class="men-thumb-item">
-                        <img src="{{url('images/m2.jpg')}}" alt="" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
-                        <img src="{{url('images/m2.jpg')}}" alt="" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
-                        <div class="men-cart-pro">
-                            <div class="inner-men-cart-pro">
-                                <a href="{{url('single')}}" class="link-product-add-cart">查看商品</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="recentlyViewedCommodityList" style="min-height: 200px">
+                @include('frontend.recentlyViewedCommodityList')
             </div>
-            @endfor
         </div>
     </div>
 </div>
