@@ -16,13 +16,13 @@ class CommodityController extends CommonController {
         $commodity->save();
         $imgs = CommodityImg::where("commodity_id", $commodity_id)->get();
 
-        $request->session()->push("recently_viewed.commodities", $commodity);
-        $tempCommodities = $request->session()->pull("recently_viewed.commodities");
-        $tempCommodities = $tempCommodities->unique();
-        foreach ($tempCommodities as $temp) {
-            $request->session()->push("recently_viewed.commodities", $temp);
-        }
-        $request->session()->forget('recently_viewed');
+//        $request->session()->push("recently_viewed.commodities", $commodity);
+//        $tempCommodities = $request->session()->pull("recently_viewed.commodities");
+//        $tempCommodities = $tempCommodities->unique();
+//        foreach ($tempCommodities as $temp) {
+//            $request->session()->push("recently_viewed.commodities", $temp);
+//        }
+//        $request->session()->forget('recently_viewed');
         return view("frontend.commodity.commodity", compact("commodity", "imgs"));
     }
 

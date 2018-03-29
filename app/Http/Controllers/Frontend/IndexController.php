@@ -20,10 +20,10 @@ class IndexController extends CommonController {
         $limitCommodities = $commodityHelper->getLimitCommodities(4, 8);
         $generalCommodities = $commodityHelper->getGeneralCommodities(8);
         $recentlyViewedCommodities = [];
-        if ($request->session()->has("recently_viewed.commodities")) {
-            $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
-        }
-        dd($request->session()->all());
+//        if ($request->session()->has("recently_viewed.commodities")) {
+//            $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
+//        }
+//        dd($request->session()->all());
         return view("frontend.index", compact("generalCommodities", "limitCommodities", "page", "recentlyViewedCommodities"));
     }
 
