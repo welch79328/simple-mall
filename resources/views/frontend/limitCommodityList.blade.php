@@ -3,8 +3,8 @@
     <div class="men-pro-item simpleCart_shelfItem">
         <div style="background-color: gray; text-align: center; font-weight: bold;">剩餘時間 <span id="remainTimeSpan[]" hidden>{{$limit->commodity_end_time}}</span></div>
         <div class="men-thumb-item">
-            <img src="{{url(''.$limit->commodity_image)}}" alt="" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
-            <img src="{{url(''.$limit->commodity_image)}}" alt="" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
+            <img src="{{url(''.$limit->commodity_image)}}" alt="{{$limit->commodity_title}}" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
+            <img src="{{url(''.$limit->commodity_image)}}" alt="{{$limit->commodity_title}}" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
             <div class="men-cart-pro">
                 <div class="inner-men-cart-pro">
                     <a href="{{url('commodity/'. $limit->commodity_id)}}" class="link-product-add-cart">查看商品</a>

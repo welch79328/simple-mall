@@ -2,8 +2,8 @@
 <div class="col-md-3 product-men">
     <div class="men-pro-item simpleCart_shelfItem">
         <div class="men-thumb-item">
-            <img src="{{url(''.$general->commodity_image)}}" alt="" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
-            <img src="{{url(''.$general->commodity_image)}}" alt="" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
+            <img src="{{url(''.$general->commodity_image)}}" alt="{{$general->commodity_title}}" class="pro-image-front" onError="this.src='{{$errorImgUrl}}'">
+            <img src="{{url(''.$general->commodity_image)}}" alt="{{$general->commodity_title}}" class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
             <div class="men-cart-pro">
                 <div class="inner-men-cart-pro">
                     <a href="{{url('commodity/'. $general->commodity_id)}}" class="link-product-add-cart">查看商品</a>

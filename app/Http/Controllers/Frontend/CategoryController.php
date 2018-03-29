@@ -10,15 +10,17 @@ use Modules\Commodity\Entities\Commodity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CategoryController extends CommonController {
+class CategoryController extends CommonController
+{
 
-    public function index(Request $request, CommodityHelper $commodityHelper, $cate_id) {
+    public function index(Request $request, CommodityHelper $commodityHelper, $cate_id)
+    {
         parent::__construct();
         $topCateId = $request->get("topCateId");
 
         $topCate = Category::find($topCateId);
         $activeCate = Category::find($cate_id);
-        
+
         $categories = Category::orderBy('cate_order', 'asc')->get();
         $moduleHelper = new ModuleHelper();
         $cateTree = $moduleHelper->getTree($categories, 'cate_name', 'cate_id', 'cate_parent', 'cate_level', '5', 0, $topCateId);
@@ -34,7 +36,8 @@ class CategoryController extends CommonController {
         return view("frontend.category.category", compact("topCate", "activeCate", "cateTree", "generalCommodities"));
     }
 
-    public function getGeneralCommoditiesByQuery(Request $request) {
+    public function getGeneralCommoditiesByQuery(Request $request)
+    {
         $cate_id = $request->post("cate_id");
         $minPrice = $request->post("minPrice", CommodityHelper::COMMODITY_PRICE_MIN);
         $maxPrice = $request->post("maxPrice", CommodityHelper::COMMODITY_PRICE_MAX);

@@ -11,6 +11,9 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Shoppingcart\Http\C
 
     //刪除項目
     Route::get('shopping/remove/{rowId}', 'ShoppingcartController@remove');
+    
+    //修改項目數量
+    Route::post('shopping/update_amount', 'ShoppingcartController@updateAmount');
 });
 
 Route::group(['roles' => ['member'], 'middleware' => ['web', 'login.judgment'], 'namespace' => 'Modules\Shoppingcart\Http\Controllers'], function() {
