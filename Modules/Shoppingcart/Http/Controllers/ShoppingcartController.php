@@ -2,6 +2,7 @@
 
 namespace Modules\Shoppingcart\Http\Controllers;
 
+use App\Helpers\Frontend\CommodityHelper;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -77,6 +78,14 @@ class ShoppingcartController extends Controller
 
     public function push(Request $request, $commodity_id)
     {
+        $commodityHelper = new CommodityHelper();
+        if (!$commodityHelper->isCommodityInDateRange($commodity_id)) {
+            $response = [
+                "result" => false,
+                "msg" => "加入購物車失敗：商品已超過期限或已下架！"
+            ];
+            return $response;
+        }
         $amount = $request->get("amount", 1);
         $commodity = \Modules\Commodity\Entities\Commodity::where('commodity_id', $commodity_id)->first();
         Cart::add($commodity->commodity_id, $commodity->commodity_title, $amount, $commodity->commodity_price);
@@ -84,8 +93,12 @@ class ShoppingcartController extends Controller
         $cartCount = count($cart);
 //        $aa = Cart::content();
 //        dd($aa);
-
-        return $cartCount;
+        $response = [
+            "result" => true,
+            "msg" => "加入購物車成功！",
+            "cartCount" => $cartCount
+        ];
+        return $response;
     }
 
     public function show()

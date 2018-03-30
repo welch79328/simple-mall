@@ -4,7 +4,8 @@ namespace App\Helpers\Frontend;
 
 use Modules\Commodity\Entities\Commodity;
 
-class CommodityHelper {
+class CommodityHelper
+{
 
     const COMMODITY_STATUS_ON = "on";
     const COMMODITY_TYPE_LIMITED = "limited";
@@ -15,18 +16,15 @@ class CommodityHelper {
     const COMMODITY_PRICE_MAX = "99999";
 
     private $limitmatch = [];
-    private $generalmatch = [];
-
-    public function getCommoditiesArray($condition) {
-        
-    }
+    private $match = [];
 
     /**
      * 取得限時商品清單(已上架、符合時間內)，HTTP request 需傳入 $page 參數
      * @param int $count 筆數
      * @return type
      */
-    public function getLimitCommodities($count, $total) {
+    public function getLimitCommodities($count, $total)
+    {
         $now = date("Y-m-d H:i:s");
         $this->limitmatch = [
             ["commodity_status", "=", CommodityHelper::COMMODITY_STATUS_ON],
@@ -35,7 +33,7 @@ class CommodityHelper {
             ["commodity_end_time", ">", $now],
             ["commodity_stock", ">", 0],
         ];
-        $this->generalmatch = [
+        $this->match = [
             ["commodity_status", "=", CommodityHelper::COMMODITY_STATUS_ON],
             ["commodity_type", "=", CommodityHelper::COMMODITY_TYPE_GENERAL],
             ["commodity_start_time", "<=", $now],
@@ -46,7 +44,7 @@ class CommodityHelper {
         $limit_pluck = $limit->pluck('commodity_id')->all();
         $array_merge = $limit_pluck;
         if (count($limit) < $total) {
-            $general = Commodity::where($this->generalmatch)->orderBy("commodity_ordering", "asc")->take($total - count($limit))->get();
+            $general = Commodity::where($this->match)->orderBy("commodity_ordering", "asc")->take($total - count($limit))->get();
             $general_pluck = $general->pluck('commodity_id')->all();
             $array_merge = array_merge($limit_pluck, $general_pluck);
         }
@@ -55,26 +53,26 @@ class CommodityHelper {
     }
 
     /**
-     * 取得一般商品清單(已上架)，HTTP request 需傳入 $page 參數
+     * 取得全部商品清單(已上架)，HTTP request 需傳入 $page 參數
      * @param int $count 筆數
      * @return type
      */
-    public function getGeneralCommodities($count) {
+    public function getCommodities($count)
+    {
         $now = date("Y-m-d H:i:s");
-        $this->generalmatch = [
+        $this->match = [
             ["commodity_status", "=", CommodityHelper::COMMODITY_STATUS_ON],
-            ["commodity_type", "=", CommodityHelper::COMMODITY_TYPE_GENERAL],
             ["commodity_start_time", "<=", $now],
             ["commodity_end_time", ">", $now],
             ["commodity_stock", ">", 0],
         ];
-        return Commodity::where($this->generalmatch)->orderBy("commodity_ordering", "asc")->paginate($count);
+        return Commodity::where($this->match)->orderBy("commodity_ordering", "asc")->paginate($count);
     }
 
     /**
-     * 透過查詢條件取得一般商品清單(已上架)，HTTP request 需傳入 $page 參數
+     * 透過查詢條件取得已上架商品清單，HTTP request 需傳入 $page 參數
      * @param int $count 筆數
-     * @param stdClass $conditions 條件
+     * @param array $conditions 條件
      * [
      *      ["欄位","條件"(=,>,<),"值"]
      *      ["欄位","條件"(=,>,<),"值"]...
@@ -84,21 +82,21 @@ class CommodityHelper {
      * field2 欲排序的欄位 =>  type2 排序方式...
      * @return type
      */
-    public function getGeneralCommoditiesByQuery($count = 8, $conditions = [], $sort = []) {
+    public function getCommoditiesByQuery($count = 8, $conditions = [], $sort = [])
+    {
         $now = date("Y-m-d H:i:s");
-        $this->generalmatch = [
+        $this->match = [
             ["commodity_status", "=", CommodityHelper::COMMODITY_STATUS_ON],
-            ["commodity_type", "=", CommodityHelper::COMMODITY_TYPE_GENERAL],
             ["commodity_start_time", "<=", $now],
             ["commodity_end_time", ">", $now],
             ["commodity_stock", ">", 0],
         ];
         if (!empty($conditions)) {
             foreach ($conditions as $condition) {
-                $this->generalmatch[] = $condition;
+                $this->match[] = $condition;
             }
         }
-        $query = Commodity::where($this->generalmatch);
+        $query = Commodity::where($this->match);
 
         if (!empty($sort)) {
             foreach ($sort as $field => $type) {
@@ -106,6 +104,27 @@ class CommodityHelper {
             }
         }
         return $query->orderBy("commodity_ordering", "asc")->paginate($count);
+    }
+
+    /**
+     * 判斷已上架商品是否在期限內
+     * @param $commodity_id
+     */
+    public function isCommodityInDateRange($commodity_id)
+    {
+        $now = date("Y-m-d H:i:s");
+        $this->match = [
+            ["commodity_id", "=", $commodity_id],
+            ["commodity_status", "=", CommodityHelper::COMMODITY_STATUS_ON],
+            ["commodity_start_time", "<=", $now],
+            ["commodity_end_time", ">", $now],
+            ["commodity_stock", ">", 0],
+        ];
+        $count = Commodity::where($this->match)->count();
+        if ($count === 0) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'login.judgment' => \Modules\Member\Http\Middleware\LoginJudgmentMiddleware::class,
         'admin.login.judgment' => \Modules\AdminMember\Http\Middleware\AdminLoginJudgmentMiddleware::class,
+        'check.commodity.deadline' => \App\Http\Middleware\Frontend\CheckCommodityDeadline::class
     ];
 }

@@ -32,17 +32,20 @@ class CategoryController extends CommonController
             ["commodity_price", "<=", CommodityHelper::COMMODITY_PRICE_MAX],
         ];
 
-        $generalCommodities = $commodityHelper->getGeneralCommoditiesByQuery(8, $conditions);
-        return view("frontend.category.category", compact("topCate", "activeCate", "cateTree", "generalCommodities"));
+        $commodities = $commodityHelper->getCommoditiesByQuery(8, $conditions);
+        return view("frontend.category.category", compact("topCate", "activeCate", "cateTree", "commodities"));
     }
 
-    public function getGeneralCommoditiesByQuery(Request $request)
+    public function limitCommodityList()
+    {
+
+    }
+
+    public function getCommoditiesByQuery(Request $request)
     {
         $cate_id = $request->post("cate_id");
         $minPrice = $request->post("minPrice", CommodityHelper::COMMODITY_PRICE_MIN);
         $maxPrice = $request->post("maxPrice", CommodityHelper::COMMODITY_PRICE_MAX);
-        $latest = $request->post("latest", false);
-        $popular = $request->post("popular", false);
         $field = $request->post("sort");
         if (is_null($minPrice))
             $minPrice = CommodityHelper::COMMODITY_PRICE_MIN;
@@ -50,7 +53,6 @@ class CategoryController extends CommonController
         if (is_null($maxPrice))
             $maxPrice = CommodityHelper::COMMODITY_PRICE_MAX;
 
-        $conditions = new \stdClass();
         $conditions = [
             ["cate_id", "=", $cate_id],
             ["commodity_price", ">=", $minPrice],
@@ -67,11 +69,11 @@ class CategoryController extends CommonController
             }
         }
         $commodityHelper = new CommodityHelper();
-        $generalCommodities = $commodityHelper->getGeneralCommoditiesByQuery(8, $conditions, $sort);
-        if (count($generalCommodities) == 0) {
+        $commodities = $commodityHelper->getCommoditiesByQuery(8, $conditions, $sort);
+        if (count($commodities) == 0) {
             return "";
         }
-        return view("frontend.generalCommodityList", compact("generalCommodities"));
+        return view("frontend.commodityList", compact("commodities"));
     }
 
 }

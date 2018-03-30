@@ -19,7 +19,7 @@ class IndexController extends CommonController {
             "nextPage" => 2
         ];
         $limitCommodities = $commodityHelper->getLimitCommodities(4, 8);
-        $generalCommodities = $commodityHelper->getGeneralCommodities(8);
+        $commodities = $commodityHelper->getCommodities(8);
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
             $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
@@ -32,7 +32,7 @@ class IndexController extends CommonController {
             ["advertisement_end_time", ">", $now]
         ];
         $ads = Advertisement::where($match)->orderBy("advertisement_ordering")->limit(5)->get();
-        return view("frontend.index", compact("generalCommodities", "limitCommodities", "page", "recentlyViewedCommodities", "ads"));
+        return view("frontend.index", compact("commodities", "limitCommodities", "page", "recentlyViewedCommodities", "ads"));
     }
 
     public function getLimitCommodities(CommodityHelper $commodityHelper) {
@@ -43,12 +43,12 @@ class IndexController extends CommonController {
         return view("frontend.limitCommodityList", compact("limitCommodities"));
     }
 
-    public function getGeneralCommodities(CommodityHelper $commodityHelper) {
-        $generalCommodities = $commodityHelper->getGeneralCommodities(8);
-        if (count($generalCommodities) == 0) {
+    public function getCommodities(CommodityHelper $commodityHelper) {
+        $commodities = $commodityHelper->getCommodities(8);
+        if (count($commodities) == 0) {
             return "";
         }
-        return view("frontend.generalCommodityList", compact("generalCommodities"));
+        return view("frontend.commodityList", compact("commodities"));
     }
 
 }
