@@ -1023,7 +1023,8 @@ p.copy-right a:hover{
 .contact input[type="text"], .contact input[type="email"], .contact textarea {
     font-size: 15px;
     letter-spacing: 1px;
-    color: #fff;
+    /*color: #fff;*/
+    color: black;
     padding: 0.5em 1em;
     border: 0;
     width: 100%;

@@ -118,7 +118,7 @@
                                                         </ul>
                                                     </li>-->
                     <!--                            <li class=" menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡我們</a></li>-->
-                        <li class="menu__item"><a class="menu__link" href="#">購物流程FAQ</a></li>
+                        <li class="menu__item"><a class="menu__link" href="{{url('question')}}">購物流程FAQ</a></li>
                         <li class="menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
                     </ul>
                 </div>

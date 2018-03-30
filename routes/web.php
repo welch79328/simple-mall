@@ -38,6 +38,8 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
     });
 
     Route::get('contact', 'ContactController@index');
+
+    Route::get('question', 'QuestionController@index');
 });
 
 require __DIR__ . '/web/backstage.php';

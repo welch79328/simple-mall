@@ -256,19 +256,18 @@
         </div>
     </div>
     <!-- viewed products -->
-    <!-- viewed products -->
     <div class="new_arrivals_agile_w3ls_info hidden-xs">
         <div class="container">
             <h3 class="wthree_text_info">瀏覽過的商品</h3>
             <div style="position: relative">
-                @if(!empty(session('recently_viewed.commodities')))
-                    <div class="btn btn-default viewed_previous_button hidden-xs">
-                        <span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>
-                    </div>
-                    <div class="btn btn-default viewed_next_button hidden-xs">
-                        <span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>
-                    </div>
-                @endif
+                {{--@if(!empty(session('recently_viewed.commodities')))--}}
+                    {{--<div class="btn btn-default viewed_previous_button hidden-xs">--}}
+                        {{--<span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>--}}
+                    {{--</div>--}}
+                    {{--<div class="btn btn-default viewed_next_button hidden-xs">--}}
+                        {{--<span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>--}}
+                    {{--</div>--}}
+                {{--@endif--}}
                 <div id="recentlyViewedCommodityList" style="min-height: 200px">
                     @include('layouts.frontend.recentlyViewedCommodityList')
                 </div>
