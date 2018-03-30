@@ -40,7 +40,7 @@ class IndexController extends CommonController {
         if (count($limitCommodities) == 0) {
             return "";
         }
-        return view("frontend.limitCommodityList", compact("limitCommodities"));
+        return view("layouts.frontend.limitCommodityList", compact("limitCommodities"));
     }
 
     public function getCommodities(CommodityHelper $commodityHelper) {
@@ -48,7 +48,7 @@ class IndexController extends CommonController {
         if (count($commodities) == 0) {
             return "";
         }
-        return view("frontend.commodityList", compact("commodities"));
+        return view("layouts.frontend.commodityList", compact("commodities"));
     }
 
 }

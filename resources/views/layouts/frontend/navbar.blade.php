@@ -23,7 +23,7 @@
                         <!--menu__item--current 類別名稱 正在訪問的頁面-->
                     <!--                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">首頁 <span class="sr-only">(current)</span></a></li>
                         <li class=" menu__item"><a class="menu__link" href="{{url('about')}}">關於</a></li>-->
-                        <li class="menu__item"><a class="menu__link" href="{{url('')}}">限時商品</a></li>
+                        <li class="menu__item"><a class="menu__link" href="{{url('limit_commodities_page')}}">限時商品</a></li>
                         <li class="dropdown menu__item">
                             <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">全部商品<span class="caret"></span></a>

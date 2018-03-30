@@ -593,7 +593,7 @@
                 alert("請選擇數量");
                 return;
             }
-            $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
+            $.get("{{url('shopping')}}/" + commodity_id, {amount: amount}, function (data) {
                 if (!data.result) {
                     alert(data.msg);
                     window.location.replace("{{url('/')}}");

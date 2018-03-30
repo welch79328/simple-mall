@@ -65,6 +65,7 @@
             var amount = $(obj).val();
             if (amount <= 0) {
                 alert("數量必須大於零");
+                location.reload();
                 return;
             }
             $.post("{{url('shopping/update_amount')}}", {
@@ -74,12 +75,13 @@
             }, function (data) {
                 if (!data.result) {
                     alert(data.msg);
+                    location.reload();
                     return;
                 }
                 $("#changeAmountSuccessModal").modal("show");
                 setTimeout(function () {
                     redirect();
-                }, 2000);
+                }, 1000);
             });
         }
 

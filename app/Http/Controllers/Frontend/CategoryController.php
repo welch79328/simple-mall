@@ -31,14 +31,14 @@ class CategoryController extends CommonController
             ["commodity_price", ">=", CommodityHelper::COMMODITY_PRICE_MIN],
             ["commodity_price", "<=", CommodityHelper::COMMODITY_PRICE_MAX],
         ];
-
         $commodities = $commodityHelper->getCommoditiesByQuery(8, $conditions);
-        return view("frontend.category.category", compact("topCate", "activeCate", "cateTree", "commodities"));
-    }
 
-    public function limitCommodityList()
-    {
+        $recentlyViewedCommodities = [];
+        if ($request->session()->has("recently_viewed.commodities")) {
+            $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
+        }
 
+        return view("frontend.category.category", compact("topCate", "activeCate", "cateTree", "commodities","recentlyViewedCommodities"));
     }
 
     public function getCommoditiesByQuery(Request $request)
@@ -75,5 +75,28 @@ class CategoryController extends CommonController
         }
         return view("frontend.commodityList", compact("commodities"));
     }
+
+    public function limitCommoditiesPage(Request $request, CommodityHelper $commodityHelper)
+    {
+        parent::__construct();
+        $limitCommodities = $commodityHelper->getLimitCommodities(12, 48);
+
+        $recentlyViewedCommodities = [];
+        if ($request->session()->has("recently_viewed.commodities")) {
+            $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
+        }
+
+        return view("frontend.category.limitCommoditiesPage", compact("limitCommodities", "recentlyViewedCommodities"));
+    }
+
+    public function getLimitCommodities(CommodityHelper $commodityHelper)
+    {
+        $limitCommodities = $commodityHelper->getLimitCommodities(12, 48);
+        if (count($limitCommodities) == 0) {
+            return "";
+        }
+        return view("layouts.frontend.limitCommodityList", compact("limitCommodities"));
+    }
+
 
 }

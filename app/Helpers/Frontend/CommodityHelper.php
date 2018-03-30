@@ -13,7 +13,7 @@ class CommodityHelper
     const SORT_TYPE_ASC = "asc";
     const SORT_TYPE_DESC = "desc";
     const COMMODITY_PRICE_MIN = "0";
-    const COMMODITY_PRICE_MAX = "99999";
+    const COMMODITY_PRICE_MAX = "99999999";
 
     private $limitmatch = [];
     private $match = [];

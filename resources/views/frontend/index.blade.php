@@ -21,7 +21,7 @@
                 </button>
                 <input value="{{$page["nowPage"]}}" type="hidden" id="nowPage">
                 <div id="limitCommodityList">
-                    @include('frontend.limitCommodityList')
+                    @include('layouts.frontend.limitCommodityList')
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
             <h3 class="wthree_text_info">全部商品</h3>
             <div id="horizontalTab">
                 <div id="commodityList">
-                    @include('frontend.commodityList')
+                    @include('layouts.frontend.commodityList')
                 </div>
                 <div class="clearfix"></div>
                 <div style="padding-top: 40px;">
@@ -62,7 +62,7 @@
                     </div>
                 @endif
                 <div id="recentlyViewedCommodityList" style="min-height: 200px">
-                    @include('frontend.recentlyViewedCommodityList')
+                    @include('layouts.frontend.recentlyViewedCommodityList')
                 </div>
             </div>
         </div>
