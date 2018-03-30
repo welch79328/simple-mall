@@ -3,48 +3,47 @@
     <div class="col-md-4"></div>
     <div class="col-md-5">
         <ul>
-<!--            <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> 登入 </a></li>
-            <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 註冊 </a></li>
-            <li><i class="fa fa-phone" aria-hidden="true"></i> 電話 : 01234567898</li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>-->
-            @if(is_null(session('member')))
-            <li>
-                <a class="agile-icon btn btn-default" style="border: none;" href="{{url('signin')}}"><i class="glyphicon glyphicon-log-in"></i>登錄</a>
-            </li>
-            <li>
-                <a class="agile-icon btn btn-default" style="border: none;" href="{{url('signup')}}"><i class="glyphicon glyphicon-pencil"></i>註冊</a>
-            </li>
-            @else
-            <li>
-                @if(empty(session('member')->member_name))
-                {{session('member')->member_account}} 您好
-                @else
-                {{session('member')->member_name}} 您好
-                @endif
-            </li>
-            <li>
-                <a class="agile-icon btn btn-default" style="border: none;" href="{{url('member/quit')}}"><i class="glyphicon glyphicon-log-out"></i>登出</a>
-            </li>
-            <li>
-                <a class="agile-icon btn btn-default" style="border: none;" href="#">會員專區</a>
-            </li>
+            <!--            <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> 登入 </a></li>
+                        <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 註冊 </a></li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i> 電話 : 01234567898</li>
+                        <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>-->
+            @if(!empty(session('member')))
+                <li>
+                    @if(empty(session('member')->member_name))
+                        {{session('member')->member_account}} 您好
+                    @else
+                        {{session('member')->member_name}} 您好
+                    @endif
+                </li>
             @endif
-
+            <li class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none;">
+                    <i class="glyphicon glyphicon-align-justify"></i>會員專區
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="text-align: left;">
+                    @if(!empty(session('member')))
+                        <li style="width: 100%;"><a href="{{url('member/quit')}}">登出</li>
+                    @else
+                        <li style="width: 100%;"><a href="{{url('signin')}}">登錄</li>
+                        <li style="width: 100%;"><a href="{{url('signup')}}">註冊</li>
+                    @endif
+                    <li style="width: 100%;"><a href="#">訂單查詢</a></li>
+                    <li style="width: 100%;"><a href="#">個人資料修改</a></li>
+                </ul>
+            </li>
             <li>
                 <!--                <form action="#" method="post" class="last"> 
                                     <input type="hidden" name="cmd" value="_cart">
                                     <input type="hidden" name="display" value="1">
                                     <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>購物車</button>
                                 </form>-->
-                <!--                                <a href="{{url('shoppingcart/show')}}">-->
+                <!--                                <a href="">-->
                 <a class="agile-icon btn btn-default" style="border: none;" href="{{url('shoppingcart/show')}}">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     <span id="shoppingCartCount">({{$cartCount}})購物車</span>
                 </a>
                 <!--                                </a>-->
-            </li>
-            <li>
-
             </li>
         </ul>
     </div>

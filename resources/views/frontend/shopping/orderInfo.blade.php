@@ -72,7 +72,7 @@
                                    placeholder="請輸入道路街名" value="{{$data->member_location}}" required>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <textarea class="form-control" rows="5" id="comment" name="comment"
                                   placeholder="備註事項"></textarea>
                     </div>

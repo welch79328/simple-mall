@@ -64,8 +64,7 @@
         function changeAmount(obj, rowId) {
             var amount = $(obj).val();
             if (amount <= 0) {
-                alert("數量必須大於零");
-                location.reload();
+                alert("修改數量失敗：數量必須大於零");
                 return;
             }
             $.post("{{url('shopping/update_amount')}}", {
