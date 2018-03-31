@@ -23,7 +23,7 @@ class IndexController extends CommonController {
         if ($request->session()->has("recently_viewed.commodities")) {
             $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
         }
-        dd($request->session()->all());
+//        dd($request->session()->all());
         return view("frontend.index", compact("generalCommodities", "limitCommodities", "page", "recentlyViewedCommodities"));
     }
 

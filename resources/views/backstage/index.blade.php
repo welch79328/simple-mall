@@ -4,7 +4,7 @@
 	<!--头部 开始-->
 	<div class="top_box">
 		<div class="top_left">
-			<div class="logo">FIELD SYSTEM</div>
+			<div class="logo">ADWIFI MALL</div>
 			<ul>
 				{{--<li><a href="{{url('/')}}" target="_blank" class="active">{{trans('Backstage.nav.Home')}}</a></li>--}}
 				<li><a href="{{url('admin/info')}}" target="main">管理頁</a></li>

@@ -7,8 +7,8 @@
 </head>
 <body style="background:#F3F3F4;">
 	<div class="login_box">
-		<h1>FIELD SYSTEM</h1>
-		<h2>歡迎使用大場域管理平台</h2>
+		<h1>ADWIFI MALL</h1>
+		<h2>歡迎使用</h2>
 		<div class="form">
 			@if(session('msg'))
 			<p style="color:red">{{session('msg')}}</p>
@@ -34,7 +34,7 @@
 					</li>
 				</ul>
 			</form>
-			<p><a href="#">返回首頁</a> &copy; 2016 Powered by <a href="http://www.houdunwang.com" target="_blank">http://www.houdunwang.com</a></p>
+			{{--<p><a href="#">返回首頁</a> &copy; 2016 Powered by <a href="http://www.houdunwang.com" target="_blank">http://www.houdunwang.com</a></p>--}}
 		</div>
 	</div>
 </body>

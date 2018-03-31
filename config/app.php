@@ -152,6 +152,8 @@ return [
          */
         Nwidart\Modules\LaravelModulesServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -212,6 +214,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Module' => Nwidart\Modules\Facades\Module::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

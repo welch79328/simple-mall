@@ -42,7 +42,7 @@
                         <option value="{{$v['city_id']}}" @if($data->member_city == $v['city_id']) selected @endif>{{$v['city']}}</option>
                         @endforeach
                     </select>
-                    <select class="form-control" name="member_city" id="area" onchange="changeArea(this)" style="width: 40%; float: left">
+                    <select class="form-control" name="member_area" id="area" onchange="changeArea(this)" style="width: 40%; float: left">
                         @foreach($area as $v)
                         @if(!empty($data->member_city))
                         @if($v['city_id'] == $data->member_city)

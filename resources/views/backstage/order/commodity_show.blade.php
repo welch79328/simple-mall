@@ -34,30 +34,30 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th>分類</th>
+                        {{--<th>分類</th>--}}
                         <th>標題</th>
                         <th>開始時間</th>
                         <th>結束時間</th>
-                        <th>商品類型</th>
+                        {{--<th>商品類型</th>--}}
                         <th>狀態</th>
                         <th>發布時間</th>
-                        <th>編輯者</th>
+                        {{--<th>編輯者</th>--}}
                         <th>操作</th>
                     </tr>
                     @foreach($data as $v)
                     <tr>
-                        <td class="tc">{{$v->cate_name}}</td>
+                        {{--<td class="tc">{{$v->cate_name}}</td>--}}
                         <td>{{$v->commodity_title}}</td>
                         <td>{{$v->commodity_start_time}}</td>
                         <td style="<?php $now = strtotime(date("Y/m/d h:i:s")); ?>@if(strtotime($v->commodity_end_time) < $now) color: #CC0033; @endif">{{$v->commodity_end_time}}</td>
-                        <td>{{$v->commodity_type}}</td>
+                        {{--<td>{{$v->commodity_type}}</td>--}}
                         <td style="@if($v->commodity_status == 'on') color: #009966; @else color: #FF0033; @endif">{{$v->commodity_status}}</td>
                         <td>{{$v->updated_at}}</td>
-                        <td>{{$v->commodity_creator}}</td>
+                        {{--<td>{{$v->commodity_creator}}</td>--}}
                         <td>
                             {{--<a href="{{url('admin/commodity/'.$v->commodity_id.'/edit ')}}">修改</a>--}}
                             {{--<a href="javascript:" onclick="delcommodity({{$v->commodity_id}})">删除</a>--}}
-                            <a href="{{url('admin/order/'.$v->order_id)}}">查看</a>
+                            <a href="{{url('admin/commodity_show_list/'.$v->commodity_id)}}">查看</a>
                         </td>
                     </tr>
                     @endforeach

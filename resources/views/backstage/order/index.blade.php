@@ -47,8 +47,8 @@
                         <td>{{$v->order_number}}</td>
                         <td>{{$v->member_name}}</td>
                         <td>{{$v->order_total}}</td>
-                        <td>{{$v->order_status}}</td>
-                        <td>{{$v->updated_at}}</td>
+                        <td style="color: @if($v->order_status == '完成') #009966 @elseif($v->order_status == '取消') #FF0033 @endif">{{$v->order_status}}</td>
+                        <td>{{$v->created_at}}</td>
                         <td>
                             <a href="{{url('admin/order/'.$v->order_id)}}">查看</a>
                             {{--<a href="{{url('admin/order/'.$v->order_id.'/edit ')}}">修改</a>--}}
