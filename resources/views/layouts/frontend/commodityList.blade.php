@@ -25,9 +25,9 @@
             <div class="item-info-product ">
                 <h4 class="commodity_title"><a href="{{url('commodity/'. $commodity->commodity_id)}}">{{$commodity->commodity_title}}</a></h4>
                 <div class="info-product-price">
-                    <div>
-                        <del>售價$69.71</del>
-                    </div>
+                    {{--<div>--}}
+                        {{--<del>售價$69.71</del>--}}
+                    {{--</div>--}}
                     <div class="item_price">
                         預購價 <span>${{$commodity->commodity_price}}</span>
                     </div>

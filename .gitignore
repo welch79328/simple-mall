@@ -13,3 +13,4 @@ yarn-error.log
 .env
 /nbproject
 /public/uploads
+/public/photos

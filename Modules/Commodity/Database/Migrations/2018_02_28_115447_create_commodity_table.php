@@ -20,7 +20,7 @@ class CreateCommodityTable extends Migration
             $table->string('commodity_image')->nullable();
             $table->integer('commodity_price');
             $table->string('commodity_description')->nullable();
-            $table->string('commodity_introduce')->nullable();
+            $table->text('commodity_introduce')->nullable();
             $table->integer('commodity_stock')->default(0);
             $table->integer('commodity_safe_stock')->default(0);
             $table->string('commodity_start_time');

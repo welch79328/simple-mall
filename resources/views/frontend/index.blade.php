@@ -54,12 +54,12 @@
             <h3 class="wthree_text_info">瀏覽過的商品</h3>
             <div style="position: relative">
                 {{--@if(!empty(session('recently_viewed.commodities')))--}}
-                    {{--<div class="btn btn-default viewed_previous_button hidden-xs">--}}
-                        {{--<span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>--}}
-                    {{--</div>--}}
-                    {{--<div class="btn btn-default viewed_next_button hidden-xs">--}}
-                        {{--<span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>--}}
-                    {{--</div>--}}
+                {{--<div class="btn btn-default viewed_previous_button hidden-xs">--}}
+                {{--<span class="glyphicon glyphicon-chevron-left limit_icon" aria-hidden="true"></span>--}}
+                {{--</div>--}}
+                {{--<div class="btn btn-default viewed_next_button hidden-xs">--}}
+                {{--<span class="glyphicon glyphicon-chevron-right limit_icon" aria-hidden="true"></span>--}}
+                {{--</div>--}}
                 {{--@endif--}}
                 <div id="recentlyViewedCommodityList" style="min-height: 200px">
                     @include('layouts.frontend.recentlyViewedCommodityList')
@@ -273,51 +273,6 @@
     <!-- //here ends scrolling icon -->
 
     <script>
-        var timer = [];
-        $(document).ready(function () {
-            countdownTimer();
-        });
-
-        function countdownTimer() {
-            var spans = $("span[id='remainTimeSpan[]']");
-            spans.each(function (index) {
-                var endTime = $(this).html();
-                var countDownDate = new Date(endTime).getTime();
-                countdown(countDownDate, $(this), index);
-            })
-        }
-
-        function countdown(countDownDate, obj, index) {
-            timer[index] = setInterval(function () {
-                // Get todays date and time
-                var now = new Date().getTime();
-                // Find the distance between now an the count down date
-                var distance = countDownDate - now;
-                //@todo 補零
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                if (hours < 10) {
-                    hours = "0" + hours;
-                }
-                if (minutes < 10) {
-                    minutes = "0" + minutes;
-                }
-                if (seconds < 10) {
-                    seconds = "0" + seconds;
-                }
-                var remainTime = days + "天 " + hours + ":" + minutes + ":" + seconds;
-                $(obj).show();
-                $(obj).html(remainTime);
-                // If the count down is over, write some text
-                if (distance <= 0) {
-                    clearInterval(timer[index]);
-                    getLimitCommodities($("#nowPage"));
-                }
-            }, 1000);
-        }
 
         function addToShoppingCart(commodity_id) {
             $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
