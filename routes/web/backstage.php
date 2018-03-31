@@ -13,6 +13,8 @@ Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['admin.
     Route::get('info', 'IndexController@info');
 
     Route::get('layout', 'LayoutController@index');
+
+
 //    Route::get('quit', 'LoginController@quit');
 //    //使用者管理
 //    Route::resource('user', 'UserController');
@@ -50,4 +52,10 @@ Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['admin.
 //
 //
     Route::any('upload', 'CommonController@upload');
+});
+
+
+Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['admin.login.judgment'],'namespace'=>'Backstage'], function (){
+    Route::get('/laravel-filemanager', '\Unisharp\Laravelfilemanager\controllers\LfmController@show');
+    Route::post('/laravel-filemanager/upload', '\Unisharp\Laravelfilemanager\controllers\UploadController@upload');
 });

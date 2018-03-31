@@ -106,7 +106,7 @@
                         <th>購買商品：</th>
                         <td>
                             @foreach($orderlist as $v)
-                                <p><a href="{{url('admin/order/alone/'.$v->id)}}">{{$v->name}}</a>  數量:{{$v->amount}}  單價:{{$v->price}}  ({{$v->status}})</p>
+                                <p><a href="{{url('admin/order/alone/'.$v->id)}}">{{$v->name}}</a> <span>數量:{{$v->amount}}</span>  <span>單價:{{$v->price}}</span>  <span style="color:@if($v->status == '完成') #009966 @elseif($v->status == '取消') #FF0033 @endif">狀態:({{$v->status}})</span> <span>編輯者:{{$v->creator}}</span></p>
                             @endforeach
                         </td>
                     </tr>

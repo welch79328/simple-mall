@@ -33,6 +33,7 @@ class IndexController extends CommonController {
         ];
         $ads = Advertisement::where($match)->orderBy("advertisement_ordering")->limit(5)->get();
         return view("frontend.index", compact("commodities", "limitCommodities", "page", "recentlyViewedCommodities", "ads"));
+
     }
 
     public function getLimitCommodities(CommodityHelper $commodityHelper) {

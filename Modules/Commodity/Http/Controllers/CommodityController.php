@@ -81,12 +81,12 @@ class CommodityController extends Controller
 
             $rules=[
                 'commodity_title'=>'required',
-                'commodity_description'=>'required',
+//                'commodity_description'=>'required',
             ];
 
             $message=[
                 'commodity_title.required'=>'商品名稱不能為空!',
-                'commodity_description.required'=>'商品內容不能為空!',
+//                'commodity_description.required'=>'商品內容不能為空!',
             ];
 
             $validator = Validator::make($input,$rules,$message);

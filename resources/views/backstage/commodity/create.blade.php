@@ -1,5 +1,9 @@
 @extends('layouts.backstage.admin')
 
+{{--@section('js')--}}
+    {{--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>--}}
+{{--@endsection--}}
+
 @section('content')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
@@ -26,7 +30,7 @@
         </div>
         <div class="result_content">
             <div class="short_wrap">
-                <a href="{{url('admin/commdity/create')}}"><i class="fa fa-plus"></i>添加商品</a>
+                <a href="{{url('admin/commodity/create')}}"><i class="fa fa-plus"></i>添加商品</a>
                 <a href="{{url('admin/commodity')}}"><i class="fa fa-recycle"></i>全部商品</a>
             </div>
         </div>
@@ -208,16 +212,31 @@
                     </tr>
 
                     <tr>
-                        <th>購物說明：</th>
+                        <th>商品描述：</th>
                         <td>
-                            <textarea name="commodity_guide"></textarea>
+                            <textarea name="commodity_description"></textarea>
                         </td>
                     </tr>
 
                     <tr>
-                        <th>內容：</th>
+                        <th>商品介绍：</th>
                         <td>
-                            <textarea name="commodity_description"></textarea>
+                            <script>
+                                var route_prefix = "{{ url(config('lfm.url_prefix', config('lfm.prefix'))) }}";
+                            </script>
+                            {{--<textarea name="commodity_description"></textarea>--}}
+                            <textarea name="commodity_introduce"></textarea>
+                            <script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.11/ckeditor.js"></script>
+                            <script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.11/adapters/jquery.js"></script>
+                            <script>
+                                $('textarea[name=commodity_introduce]').ckeditor({
+                                    height: 300,
+                                    filebrowserImageBrowseUrl: route_prefix + '?type=Images',
+                                    filebrowserImageUploadUrl: route_prefix + '/upload?type=Images&_token={{csrf_token()}}',
+                                    filebrowserBrowseUrl: route_prefix + '?type=Files',
+                                    filebrowserUploadUrl: route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
+                                });
+                            </script>
                         </td>
                     </tr>
 

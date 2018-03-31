@@ -2,6 +2,7 @@
 
 namespace Modules\Order\Http\Controllers;
 
+use App\Helpers\Report;
 use App\Helpers\TownshipHelper;
 use App\Http\Controllers\Frontend\CommonController;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Modules\Commodity\Entities\Commodity;
 use Modules\Member\Entities\Member;
 use Modules\Order\Entities\Order;
@@ -16,13 +18,31 @@ use Modules\Order\Entities\Orderlist;
 
 class OrderController extends CommonController
 {
+
+    public function __construct()
+    {
+        $data = Order::get();
+        foreach ($data as $v){
+            $orderlist = Orderlist::where('order_id',$v->order_id)->get();
+            $orderlist_status = $orderlist->pluck('status')->all();
+            if(in_array('refund', $orderlist_status) || in_array('pending', $orderlist_status)){
+                Order::where([['order_id','=',$v->order_id],['order_status','!=','refund'],])->update([
+                    'order_status'=>'pending',
+                ]);
+            }else{
+                Order::where([['order_id','=',$v->order_id],['order_status','!=','refund'],])->update([
+                    'order_status'=>'complete',
+                ]);
+            }
+        }
+    }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $data = Order::orderBy('order.updated_at','desc')->paginate(20);
+        $data = Order::orderBy('created_at','desc')->paginate(20);
         foreach ($data as $v){
             switch ($v->order_status)
             {
@@ -116,9 +136,17 @@ class OrderController extends CommonController
         return view('backstage.order.order_alone',compact('data'));
     }
 
-    public function order_alone_edit($id)
+    public function order_alone_update($id)
     {
-
+        $input = Input::all();
+        $input['creator'] = session('admin_member.member_name');
+        Orderlist::where('id',$id)->update([
+            'description'=>$input['description'],
+            'status'=>$input['status'],
+            'creator'=>$input['creator'],
+        ]);
+        $order_id = Order::find($id);
+        return redirect('admin/order/'.$order_id['order_id']);
     }
 
     /**
@@ -165,12 +193,11 @@ class OrderController extends CommonController
     public function orderSetup(Request $request)
     {
         $input = $request->only('member_name','member_phone','member_tel','member_mail','member_city','member_city','member_zipcode','member_location');
-//        $session = session('member.member_name');
+        $session = session('member.member_id');
 //        DB::beginTransaction();
-//        try{
+        try{
 
-            $session = 4;
-
+//            $session = 4;
             Member::where('member_id',$session)->update($input);
             $cart = Cart::content();
             $re = Order::create([
@@ -201,10 +228,10 @@ class OrderController extends CommonController
                 ];
                 return $response;
             }
-//        }catch (\Exception $e){
-////            DB::rollBack();
+        }catch (\Exception $e){
+//            DB::rollBack();
 //            dd('error');
-//        }
+        }
     }
 
     public function commodity_show()
@@ -212,5 +239,44 @@ class OrderController extends CommonController
         $data = Commodity::where('commodity_stock',0)->orderBy('created_at','asc')->paginate(20);
 
         return view('backstage.order.commodity_show',compact('data'));
+    }
+
+    public function commodity_show_list($commodity_id)
+    {
+//        $data = Orderlist::where('commodity_id',$commodity_id)->get();
+        $data = Orderlist::join('order','order_list.order_id','=','order.order_id')->join('member','order.member_id','=','member.member_id')->where([['commodity_id',$commodity_id],['order_status','!=','refund'],])->get();
+        foreach ($data as $v){
+            switch ($v->status)
+            {
+                case 'pending':
+                    $v->status = '待處理';
+                    break;
+                case 'complete':
+                    $v->status = '完成';
+                    break;
+                case 'refund':
+                    $v->status = '取消';
+                    break;
+            }
+        }
+        return view('backstage.order.commodity_show_list',compact('data','commodity_id'));
+    }
+
+    public function commodity_show_list_edit()
+    {
+        $input = Input::except('_token');
+        $input['creator'] = session('admin_member.member_name');
+        foreach ($input['list'] as $v){
+            Orderlist::where('id',$v)->update([
+                'status'=>'complete',
+                'creator'=>$input['creator'],
+            ]);
+        }
+        return redirect()->back();
+    }
+
+    public function commodity_show_list_excel(Report $report,$commodity_id)
+    {
+        $report->generateReport($commodity_id);
     }
 }
