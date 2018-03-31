@@ -176,11 +176,16 @@ class OrderController extends CommonController
     }
 
     public function orderInfo(TownshipHelper $townshipHelper) {
+        $cart = Cart::content();
+        if(count($cart) == 0){
+            return back()->with("errors.msg", "下單失敗：購物車內沒有商品！");
+        }
         new CommonController;
-        $session = session('member.member_name');
+
+        $session = session('member.member_id');
 //        $session = 'Mr. Rowan Weissnat I';
 
-        $data = Member::where('member_name',$session)->first();
+        $data = Member::where('member_id',$session)->first();
         $total = Cart::total();
         $area = $townshipHelper->area();
         $city = $townshipHelper->city();

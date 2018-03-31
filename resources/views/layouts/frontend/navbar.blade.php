@@ -5,13 +5,15 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#search" style="float: right;">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#search"
+                            style="float: right;">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -19,44 +21,30 @@
                 <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav menu__list">
                         <!--menu__item--current 類別名稱 正在訪問的頁面-->
-                        <!--                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">首頁 <span class="sr-only">(current)</span></a></li>
+                    <!--                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">首頁 <span class="sr-only">(current)</span></a></li>
                         <li class=" menu__item"><a class="menu__link" href="{{url('about')}}">關於</a></li>-->
+                        <li class="menu__item"><a class="menu__link" href="{{url('limit_commodities_page')}}">限時商品</a></li>
                         <li class="dropdown menu__item">
-                            <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">限時商品<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">全部商品<span class="caret"></span></a>
                             <ul class="dropdown-menu multi-column columns-3">
                                 <div class="agile_inner_drop_nav_info">
                                     @foreach($topCategoriesGroup as $topCates)
-                                    <div class="col-sm-4 multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            @foreach($topCates as $topCate)
-                                            <li><a href="{{url('category/' . $topCate->cate_id . '?topCateId=' . $topCate->cate_id)}}">{{$topCate->cate_name}}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    @endforeach
-
-                                    <div class="clearfix"></div>
-                                </div>
-                            </ul>
-                        </li>
-                        <li class="dropdown menu__item">
-                            <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">全部商品<span class="caret"></span></a>
-                            <ul class="dropdown-menu multi-column columns-3">
-                                <div class="agile_inner_drop_nav_info">
-                                    @foreach($topCategoriesGroup as $topCates)
-                                    <div class="col-sm-4 multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            @foreach($topCates as $topCate)
-                                            <li><a href="{{url('category/' . $topCate->cate_id . '?topCateId=' . $topCate->cate_id)}}">{{$topCate->cate_name}}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                                        <div class="col-sm-4 multi-gd-img">
+                                            <ul class="multi-column-dropdown">
+                                                @foreach($topCates as $topCate)
+                                                    <li>
+                                                        <a href="{{url('category/' . $topCate->cate_id . '?topCateId=' . $topCate->cate_id)}}">{{$topCate->cate_name}}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                     @endforeach
                                     <div class="clearfix"></div>
                                 </div>
                             </ul>
                         </li>
-                        <!--                            <li class="dropdown menu__item">
+                    <!--                            <li class="dropdown menu__item">
                                                         <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Men's wear <span class="caret"></span></a>
                                                         <ul class="dropdown-menu multi-column columns-3">
                                                             <div class="agile_inner_drop_nav_info">
@@ -122,16 +110,16 @@
                                                             </div>
                                                         </ul>
                                                     </li>-->
-                        <!--                            <li class="menu__item dropdown">
+                    <!--                            <li class="menu__item dropdown">
                                                         <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Short Codes <b class="caret"></b></a>
                                                         <ul class="dropdown-menu agile_short_dropdown">
                                                             <li><a href="{{url('icons')}}">Web Icons</a></li>
                                                             <li><a href="{{url('typography')}}">Typography</a></li>
                                                         </ul>
                                                     </li>-->
-                        <!--                            <li class=" menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡我們</a></li>-->
-                        <li class=" menu__item"><a class="menu__link" href="#">購物流程FAQ</a></li>
-                        <li class=" menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
+                    <!--                            <li class=" menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡我們</a></li>-->
+                        <li class="menu__item"><a class="menu__link" href="{{url('question')}}">購物流程FAQ</a></li>
+                        <li class="menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
                     </ul>
                 </div>
                 <div class="collapse navbar-collapse hidden-lg" id="search">

@@ -1,7 +1,10 @@
 <?php
 
-Route::group(['middleware' => 'web', 'namespace' => 'Modules\Shoppingcart\Http\Controllers'], function() {
+Route::group(['middleware' => 'web', 'namespace' => 'Modules\Shoppingcart\Http\Controllers'], function () {
 //    Route::get('/', 'ShoppingcartController@index');
+    //購物車
+    Route::get('shoppingcart/show', 'ShoppingcartController@show');
+
     //加入購物車
     Route::get('shopping/{commodity_id}', 'ShoppingcartController@push');
 //    //購物車路由
@@ -11,9 +14,9 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Shoppingcart\Http\C
 
     //刪除項目
     Route::get('shopping/remove/{rowId}', 'ShoppingcartController@remove');
+
+    //修改項目數量
+    Route::post('shopping/update_amount', 'ShoppingcartController@updateAmount');
 });
 
-Route::group(['roles' => ['member'], 'middleware' => ['web', 'login.judgment'], 'namespace' => 'Modules\Shoppingcart\Http\Controllers'], function() {
-//購物車
-    Route::get('shoppingcart/show', 'ShoppingcartController@show');
-});
+
