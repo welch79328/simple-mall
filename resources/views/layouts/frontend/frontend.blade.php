@@ -39,7 +39,7 @@
     <!--//js -->
 </head>
 <body>
-@if(count($errors) > 0)
+@if(count($errors) > 0 && !is_object($errors))
     @include("layouts.frontend.modal", ['id' => "errorsModal", 'title' => "提示", 'content' => $errors["msg"], 'onclick' => ""])
     <script>
         $(document).ready(function () {

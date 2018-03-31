@@ -5,9 +5,9 @@
 @section('content')
     <div class="new_arrivals_agile_w3ls_info">
         <div class="container">
-            <h2>購物車({{count($cart)}})</h2>
+            <h2>訂單查詢({{count($cart)}})</h2>
             <div style="margin-top: 20px">
-                <form action="{{url('order_info')}}" method="post">
+                <form action="{{url('')}}" method="post">
                 {{csrf_field()}}
                 <!-- Table -->
                     <table class="table">
@@ -48,10 +48,6 @@
                         </tr>
                     </table>
                     <div style="text-align: right">
-                        <button type="button" class="btn btn-default"
-                                onclick="(window.location.href = '{{url("/")}}')" align="right">
-                            繼續選購
-                        </button>
                         <input type="submit" class="btn btn-info" value="立即結帳">
                     </div>
                 </form>

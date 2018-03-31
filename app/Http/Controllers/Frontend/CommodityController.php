@@ -20,6 +20,9 @@ class CommodityController extends CommonController
 
         $temps = [];
         $sessionTemps = $request->session()->pull("recently_viewed.commodities");
+        if(is_null($sessionTemps)){
+            $sessionTemps = [];
+        }
         $temps[] = $commodity;
         foreach ($sessionTemps as $sessionTemp) {
             $temps[] = $sessionTemp;

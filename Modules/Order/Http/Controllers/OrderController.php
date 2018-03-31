@@ -153,9 +153,8 @@ class OrderController extends CommonController
             return back()->with("errors.msg", "下單失敗：購物車內沒有商品！");
         }
         new CommonController;
-//        $session = session('member.member_name');
-        $session = 'Mr. Rowan Weissnat I';
-        $data = Member::where('member_name',$session)->first();
+        $session = session('member.member_id');
+        $data = Member::where('member_id',$session)->first();
         $total = Cart::total();
         $area = $townshipHelper->area();
         $city = $townshipHelper->city();

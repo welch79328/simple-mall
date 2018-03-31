@@ -22,7 +22,7 @@
                 <p style="color: red; text-align: center;">{{session('msg')}}</p>
                 @endif
                 <div style="text-align: right">
-                    <a class="agile-icon btn btn-default" href="{{url('signup')}}"></i>尚未擁有帳號，立即註冊</a>
+                    <a class="agile-icon btn btn-default" href="{{url('member_signup')}}"></i>尚未擁有帳號，立即註冊</a>
                     <button type="submit" class="btn btn-primary">登錄</button>
                 </div>
             </div>

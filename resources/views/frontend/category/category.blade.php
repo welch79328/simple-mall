@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', "Free AD Wifi Mall 商品分類")
+@section('title', "Free AD Wifi Mall $topCate->cate_name 商品列表")
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('css/frontend/jquery-ui.css')}}">
@@ -56,10 +56,10 @@
                         @foreach($cateTree as $cate)
                             @if($cate->cate_id == $activeCate->cate_id)
                                 <a href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}"
-                                   class="list-group-item active">{{$cate->_cate_name}}</a>
+                                   class="list-group-item active">{{$cate->cate_name}}</a>
                             @else
                                 <a href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}"
-                                   class="list-group-item">{{$cate->_cate_name}}</a>
+                                   class="list-group-item">{{$cate->cate_name}}</a>
                             @endif
                         @endforeach
                     </div>

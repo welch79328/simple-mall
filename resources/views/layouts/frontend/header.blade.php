@@ -24,12 +24,14 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="text-align: left;">
                     @if(!empty(session('member')))
                         <li style="width: 100%;"><a href="{{url('member/quit')}}">登出</li>
+                        <li style="width: 100%;"><a href="{{url('member_order')}}">訂單查詢</a></li>
+                        <li style="width: 100%;"><a href="{{url('member_info')}}">資料修改</a></li>
+                        <li style="width: 100%;"><a href="{{url('')}}">修改密碼</a></li>
                     @else
-                        <li style="width: 100%;"><a href="{{url('signin')}}">登錄</li>
-                        <li style="width: 100%;"><a href="{{url('signup')}}">註冊</li>
+                        <li style="width: 100%;"><a href="{{url('member_signin')}}">登錄</li>
+                        <li style="width: 100%;"><a href="{{url('member_signup')}}">註冊</li>
                     @endif
-                    <li style="width: 100%;"><a href="#">訂單查詢</a></li>
-                    <li style="width: 100%;"><a href="#">個人資料修改</a></li>
+
                 </ul>
             </li>
             <li>

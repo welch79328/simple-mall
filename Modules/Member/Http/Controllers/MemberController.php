@@ -76,7 +76,7 @@ class MemberController extends Controller
         if($validator->passes()){
             $re = Member::create($member);
             if($re){
-                return redirect('signin');
+                return redirect('member_signin');
             }else {
                 return back()->with('errors', '數據填充錯誤, 請稍後重試');
             }
