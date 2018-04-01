@@ -73,7 +73,7 @@ class CategoryController extends CommonController
         if (count($commodities) == 0) {
             return "";
         }
-        return view("frontend.commodityList", compact("commodities"));
+        return view("layouts.frontend.commodityList", compact("commodities"));
     }
 
     public function limitCommoditiesPage(Request $request, CommodityHelper $commodityHelper)

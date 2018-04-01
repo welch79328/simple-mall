@@ -15,6 +15,18 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
+
+        .fixedDiv {
+            position: fixed;
+            bottom: 0;
+            width: 100vw;
+            height: 8vh;
+            z-index: 99999;
+        }
+
+        .blankSpaceDiv{
+            height: 8vh;
+        }
     </style>
 @endsection
 
@@ -40,6 +52,11 @@
 
     <!-- banner-bootom-w3-agileits -->
     <div class="banner-bootom-w3-agileits" style="font-family: Microsoft JhengHei;">
+        <div class="fixedDiv visible-xs">
+            <button type="button" class="btn btn-danger" style="width: 100%; height: 100%"
+                    onclick="addToShoppingCart({{$commodity->commodity_id}});">立即預購
+            </button>
+        </div>
         <div class="container">
             <div class="col-md-4 single-right-left ">
                 <div class="grid images_3_of_2">
@@ -92,7 +109,8 @@
                         預購價 <span
                                 style="font-size: 25px; font-weight: 600; letter-spacing: 1px;">${{$commodity->commodity_price}}</span>
                     </div>
-                    <div>
+                    {{--@todo--}}
+                    <div hidden>
                         目前0000人正在瀏覽
                     </div>
                 </div>
@@ -114,7 +132,7 @@
                             @endfor
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 hidden-xs">
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"
                              style="margin: 0;">
                             <input type="button" value="立即預購" class="button"
@@ -143,6 +161,8 @@
         </div>
     </div>
 
+    <div class="blankSpaceDiv visible-xs"></div>
+
     <div class="banner-bootom-w3-agileits hidden-xs" style="font-family: Microsoft JhengHei;">
         <div class="container">
             <div class="col-md-3" style="text-align: center;">
@@ -156,7 +176,8 @@
         </div>
     </div>
 
-    <div class="new_arrivals_agile_w3ls_info hidden-xs">
+    {{--@todo--}}
+    <div class="new_arrivals_agile_w3ls_info hidden-xs" hidden>
         <div class="container">
             <h3 class="wthree_text_info">推薦商品</h3>
             <div style="position: relative">
@@ -232,9 +253,6 @@
 
         </div>
     </div>-->
-    <!-- joinCartSusessModal -->
-    @include("layouts.frontend.modal", ['id' => "joinCartSusessModal", 'title' => "提示", 'content' => "加入購物車成功！", 'onclick' => ""])
-    <!-- //joinCartSusessModal -->
     <!--grids-->
     <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover"
                                                                              style="opacity: 1;"> </span></a>
@@ -351,14 +369,13 @@
             }
             $.get("{{url('shopping')}}/" + commodity_id, {amount: amount}, function (data) {
                 if (!data.result) {
-                    alert(data.msg);
-                    window.location.replace("{{url('/')}}");
+                    showModal("errorModal", "提示", data.msg);
                     return;
                 }
                 $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
-                $("#joinCartSusessModal").modal('show');
+                showModal("successModal", "提示", data.msg);
                 setTimeout(function () {
-                    $("#joinCartSusessModal").modal("hide");
+                    $("#successModal").modal("hide");
                 }, 1000);
             });
         }

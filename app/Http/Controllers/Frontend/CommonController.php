@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Modules\Member\Entities\Member;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Modules\Category\Entities\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CommonController extends Controller {
+class CommonController extends Controller
+{
 
     const ERROR_IMG_URL = "/images/no_img.gif";
 
-    function __construct() {
+    function __construct()
+    {
         $this->shareTopCategoriesGroup();
         $this->shareErrorImgUrl();
         $this->shareShoppingCartCount();
+        $this->shareMember();
     }
 
-    public static function getCategoriesTree($elements, $parentId = 0) {
+    public static function getCategoriesTree($elements, $parentId = 0)
+    {
         $categories = array();
         foreach ($elements as $element) {
             if ($element->cate_parent == $parentId) {
@@ -29,7 +34,8 @@ class CommonController extends Controller {
         return $categories;
     }
 
-    private function shareTopCategoriesGroup() {
+    private function shareTopCategoriesGroup()
+    {
         $topCategories = Category::where("cate_parent", 0)->orderBy('cate_order', 'asc')->get();
         $topCategoriesGroup = [];
         $i = 0;
@@ -42,14 +48,24 @@ class CommonController extends Controller {
         view()->share('topCategoriesGroup', $topCategoriesGroup);
     }
 
-    private function shareErrorImgUrl() {
+    private function shareErrorImgUrl()
+    {
         view()->share('errorImgUrl', self::ERROR_IMG_URL);
     }
-    
-    private function shareShoppingCartCount() {
+
+    private function shareShoppingCartCount()
+    {
         $cart = Cart::content();
         $cartCount = count($cart);
         view()->share('cartCount', $cartCount);
     }
+
+    private function shareMember()
+    {
+        $member_id = session("member.member_id");
+        $member = Member::find($member_id);
+        view()->share('member', $member);
+    }
+
 
 }

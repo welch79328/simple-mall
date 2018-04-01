@@ -23,10 +23,12 @@
 
             </div>
             <div class="item-info-product ">
-                <h4 class="commodity_title"><a href="{{url('commodity/'. $commodity->commodity_id)}}">{{$commodity->commodity_title}}</a></h4>
+                <h4 class="commodity_title"><a
+                            href="{{url('commodity/'. $commodity->commodity_id)}}">{{$commodity->commodity_title}}</a>
+                </h4>
                 <div class="info-product-price">
                     {{--<div>--}}
-                        {{--<del>售價$69.71</del>--}}
+                    {{--<del>售價$69.71</del>--}}
                     {{--</div>--}}
                     <div class="item_price">
                         預購價 <span>${{$commodity->commodity_price}}</span>
@@ -41,5 +43,5 @@
         </div>
     </div>
 @empty
-    <div>查無商品！</div>
+    <div style="margin-top: 20px; text-align: center;">查無商品！</div>
 @endforelse

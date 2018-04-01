@@ -12,8 +12,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    {{--@todo--}}
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#search"
-                            style="float: right;">
+                            style="float: right;" hidden>
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -23,7 +24,8 @@
                         <!--menu__item--current 類別名稱 正在訪問的頁面-->
                     <!--                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">首頁 <span class="sr-only">(current)</span></a></li>
                         <li class=" menu__item"><a class="menu__link" href="{{url('about')}}">關於</a></li>-->
-                        <li class="menu__item"><a class="menu__link" href="{{url('limit_commodities_page')}}">限時商品</a></li>
+                        <li class="menu__item"><a class="menu__link" href="{{url('limit_commodities_page')}}">限時商品</a>
+                        </li>
                         <li class="dropdown menu__item">
                             <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">全部商品<span class="caret"></span></a>
@@ -122,7 +124,8 @@
                         <li class="menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
                     </ul>
                 </div>
-                <div class="collapse navbar-collapse hidden-lg" id="search">
+                {{--@todo--}}
+                <div class="collapse navbar-collapse hidden-lg" id="search" hidden>
                     <form class="mobile_search hidden-sm hidden-md hidden-lg" role="search" action="/" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="商品關鍵字..."/>

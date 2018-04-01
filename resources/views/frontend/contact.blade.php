@@ -67,13 +67,14 @@
                         <div class="form-group">
                             <div style="padding-right: 15px">
                                 <textarea class="form-control" rows="10" id="comment" name="comment"
-                                          style="background-color: white;"></textarea>
+                                          style="background-color: white;" required></textarea>
                             </div>
                         </div>
                     </div>
+                    {{--@todo--}}
                     <div class="col-md-offset-2 col-md-8">
                         <div style="text-align: right">
-                            <button type="submit" class="btn btn-info">確定送出</button>
+                            <button type="submit" class="btn btn-info" disabled>確定送出</button>
                         </div>
                     </div>
                 </div>

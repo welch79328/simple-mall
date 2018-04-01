@@ -8,7 +8,13 @@
                 <h4 class="modal-title">{{$title}}</h4>
             </div>
             <div class="modal-body">
-                <p>{{$content}}</p>
+                @if(is_object($errors))
+                    @foreach($errors->all() as $error)
+                        <p>{{$error}}</p>
+                    @endforeach
+                @else
+                    <p>{{$errors["msg"]}}</p>
+                @endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>

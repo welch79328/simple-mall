@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="tel_code" name="tel_code" placeholder="區碼"
-                               style="width: 20%; float: left">
+                               style="width: 20%; float: left" value="{{$data->tel_code}}">
                         <input type="text" class="form-control" id="tel" name="member_tel" placeholder="請輸入市話"
                                style="width: 80%; float: left" value="{{$data->member_tel}}">
                     </div>
@@ -49,7 +49,7 @@
                                         @if($data->member_city == $v['city_id']) selected @endif>{{$v['city']}}</option>
                             @endforeach
                         </select>
-                        <select class="form-control" name="member_city" id="area" onchange="changeArea(this)"
+                        <select class="form-control" name="member_area" id="area" onchange="changeArea(this)"
                                 style="width: 40%; float: left">
                             @foreach($area as $v)
                                 @if(!empty($data->member_city))
@@ -103,9 +103,6 @@
             </form>
         </div>
     </div>
-
-    @include("layouts.frontend.modal", ['id' => "completeOrderModal", 'title' => "完成購買", 'content' => "感謝您的購買，請等候頁面跳轉，或按下關閉即可。", 'onclick' => "redirectIndex()" ])
-
     <script>
         $(document).ready(function () {
             ajaxSubmitOrder();
@@ -137,25 +134,20 @@
                     url: url,
                     type: "POST",
                     data: $(this).serialize(), // serializes the form's elements.
-                    success: function (result) {
-                        if (!result) {
-                            alert(result.msg);
-                            redirectIndex();
+                    success: function (data) {
+                        var callback = function () {
+                            window.location.href = "{{url('/')}}";
+                        }
+                        if (!data.result) {
+                            showModal("errorModal", "提示", data.msg, callback);
                             return;
                         }
-                        $('#completeOrderModal').modal('show');
-                        setTimeout(function () {
-                            redirectIndex();
-                        }, 2000);
+                        showModal("successModal", "提示", "感謝您的購買，請等候頁面跳轉，或按下關閉即可。", callback);
+                        setTimeout(callback, 2000);
                     }
                 });
                 e.preventDefault();
             });
         }
-
-        function redirectIndex() {
-            window.location.href = "{{url('/')}}";
-        }
-
     </script>
 @endsection

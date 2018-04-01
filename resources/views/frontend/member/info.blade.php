@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" id="member_phone" name="member_phone"
                                placeholder="請輸入手機"
-                               value="{{$member->member_name}}">
+                               value="{{$member->member_phone}}">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="tel_code" name="tel_code"
@@ -63,7 +63,7 @@
                     </div>
                     <div class=" clearfix"></div>
                     <div class="form-group">
-                        <select class="form-control" name="member_city" onchange="changeCity(this)"
+                        <select class="form-control" name="member_city" id="city" onchange="changeCity(this)"
                                 style="width: 40%; float: left">
                             @foreach($city as $v)
                                 <option value="{{$v['city_id']}}"

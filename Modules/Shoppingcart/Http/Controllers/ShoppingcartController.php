@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Http\Controllers\Frontend\CommonController;
+use Modules\Commodity\Entities\Commodity;
 
 class ShoppingcartController extends Controller
 {
@@ -86,13 +87,24 @@ class ShoppingcartController extends Controller
             ];
             return $response;
         }
+        $commodity = Commodity::find($commodity_id);
         $amount = $request->get("amount", 1);
-        $commodity = \Modules\Commodity\Entities\Commodity::where('commodity_id', $commodity_id)->first();
+        $carts = Cart::content();
+        foreach ($carts as $cart) {
+            if ($cart->id == $commodity_id) {
+                $totalAmount = (int)$cart->qty + (int)$amount;
+                if ($totalAmount > $commodity->commodity_stock) {
+                    $response = [
+                        "result" => false,
+                        "msg" => "加入購物車失敗：商品庫存量不足！"
+                    ];
+                    return $response;
+                }
+            }
+
+        }
         Cart::add($commodity->commodity_id, $commodity->commodity_title, $amount, $commodity->commodity_price);
-        $cart = Cart::content();
-        $cartCount = count($cart);
-//        $aa = Cart::content();
-//        dd($aa);
+        $cartCount = count($carts);
         $response = [
             "result" => true,
             "msg" => "加入購物車成功！",
@@ -125,15 +137,26 @@ class ShoppingcartController extends Controller
     {
         $amount = $request->get("amount");
         $rowId = $request->get("rowId");
-        $cart = Cart::content();
-        if (!isset($cart["$rowId"])) {
+        $carts = Cart::content();
+        $cartItem = $carts["$rowId"];
+        if (!isset($cartItem)) {
             $response = [
                 "result" => false,
                 "msg" => "修改數量失敗：此商品不在購物車內！"
             ];
             return $response;
         }
-        $cart["$rowId"]->qty = $amount;
+
+        $commodity = Commodity::find($cartItem->id);
+        if ((int)$amount > (int)$commodity->commodity_stock) {
+            $response = [
+                "result" => false,
+                "msg" => "修改數量失敗：商品庫存量不足，只剩 $commodity->commodity_stock 組！"
+            ];
+            return $response;
+        }
+
+        $cartItem->qty = $amount;
         $response = [
             "result" => true,
             "msg" => "修改數量成功！"

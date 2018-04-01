@@ -48,9 +48,6 @@
         </div>
     </div>
     <!-- //viewed products -->
-    <!-- joinCartSusessModal -->
-    @include("layouts.frontend.modal", ['id' => "joinCartSusessModal", 'title' => "提示", 'content' => "加入購物車成功！", 'onclick' => ""])
-    <!-- //joinCartSusessModal -->
     <a href="#home" class="scroll" id="toTop" style="display: block;">
         <span id="toTopHover" style="opacity: 1;"></span>
     </a>
@@ -133,7 +130,7 @@
                 },
                 function (data) {
                     if (data === "") {
-                        alert("目前已是最後一頁");
+                        showModal("errorModal", "提示", "目前已是最後一頁");
                         return;
                     }
                     $("#page").val(parseInt(page) + 1);
@@ -149,14 +146,13 @@
         function addToShoppingCart(commodity_id) {
             $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
                 if (!data.result) {
-                    alert(data.msg);
-                    location.reload();
+                    showModal("errorModal", "提示", data.msg);
                     return;
                 }
                 $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
-                $("#joinCartSusessModal").modal('show');
+                showModal("successModal", "提示", data.msg);
                 setTimeout(function () {
-                    $("#joinCartSusessModal").modal("hide");
+                    $("#successModal").modal("hide");
                 }, 1000);
             });
         }

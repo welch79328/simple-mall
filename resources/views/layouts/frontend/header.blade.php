@@ -9,10 +9,10 @@
                         <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>-->
             @if(!empty(session('member')))
                 <li>
-                    @if(empty(session('member')->member_name))
-                        {{session('member')->member_account}} 您好
+                    @if(empty($member->member_name))
+                        {{$member->member_account}} 您好
                     @else
-                        {{session('member')->member_name}} 您好
+                        {{$member->member_name}} 您好
                     @endif
                 </li>
             @endif
@@ -26,7 +26,7 @@
                         <li style="width: 100%;"><a href="{{url('member/quit')}}">登出</li>
                         <li style="width: 100%;"><a href="{{url('member_order')}}">訂單查詢</a></li>
                         <li style="width: 100%;"><a href="{{url('member_info')}}">資料修改</a></li>
-                        <li style="width: 100%;"><a href="{{url('')}}">修改密碼</a></li>
+                        <li style="width: 100%;"><a href="{{url('member_password')}}">密碼修改</a></li>
                     @else
                         <li style="width: 100%;"><a href="{{url('member_signin')}}">登錄</li>
                         <li style="width: 100%;"><a href="{{url('member_signup')}}">註冊</li>
@@ -49,7 +49,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-3" style="padding-top: 3.5px;">
+    <div class="col-md-3" style="padding-top: 3.5px;" hidden>
         <div class="input-group">
             <input type="text" class="form-control" aria-label="...">
             <div class="input-group-btn">

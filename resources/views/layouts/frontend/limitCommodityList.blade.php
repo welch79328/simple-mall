@@ -48,7 +48,7 @@
         </div>
     </div>
 @empty
-    <div>查無商品！</div>
+    <div style="margin-top: 20px; text-align: center;">查無商品！</div>
 @endforelse
 <script>
     var timer = [];

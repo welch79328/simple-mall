@@ -39,8 +39,8 @@
     <!--//js -->
 </head>
 <body>
-@if(count($errors) > 0 && !is_object($errors))
-    @include("layouts.frontend.modal", ['id' => "errorsModal", 'title' => "提示", 'content' => $errors["msg"], 'onclick' => ""])
+@if(count($errors) > 0)
+    @include("layouts.frontend.modal", ['id' => "errorsModal", 'title' => "提示", 'onclick' => ""])
     <script>
         $(document).ready(function () {
             $("#errorsModal").modal("show");
@@ -61,5 +61,35 @@
 @include('layouts.frontend.footer')
 <!-- //footer -->
 
+<!-- modal -->
+<div id="modalPlacement"></div>
+<!-- //modal -->
+
+<script>
+    function showModal(modalId, title, content, callback = null) {
+        var html = '<div class="modal fade" tabindex="-1" role="dialog" id="' + modalId
+            + '" aria-hidden="true" style="display: none;">';
+        html += '<div class="modal-dialog" role="document">';
+        html += '<div class="modal-content">';
+        html += '<div class="modal-header">';
+        html += '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        html += '<h4 class="modal-title">' + title + '</h4>';
+        html += '</div>';
+        html += '<div class="modal-body">';
+        html += '<p>' + content + '</p>';
+        html += '</div>';
+        html += '<div class="modal-footer">';
+        html += '<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>';
+        html += '</div>';
+        html += '</div>';//.modal-content
+        html += '</div>';//.modal-dialog
+        html += '</div>';//.modal
+        $("#modalPlacement").html(html);
+        if (callback != null) {
+            $("#" + modalId).on("hide.bs.modal", callback);
+        }
+        $("#" + modalId).modal("show");
+    }
+</script>
 </body>
 </html>

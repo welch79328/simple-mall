@@ -20,6 +20,9 @@ class LoginJudgmentMiddleware
         $roles = $this->getRequiredRoleForRoute($request->route());
         $member_id = session('member.member_id');
         $member = Member::find($member_id);
+        if(empty($member)){
+            return redirect('member_signin');
+        }
         $arr = in_array($member->member_level, $roles);
 
         if ($arr) {
