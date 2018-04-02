@@ -7,7 +7,7 @@
     }
 </style>
 @forelse($commodities as $key => $commodity)
-    <div class="col-xs-6 col-md-3 product-men">
+    <div class="col-xs-6 col-sm-3 col-md-3 product-men">
         <div class="men-pro-item simpleCart_shelfItem">
             <div class="men-thumb-item">
                 <img src="{{url(''.$commodity->commodity_image)}}" alt="{{$commodity->commodity_title}}"

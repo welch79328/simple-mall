@@ -49,7 +49,7 @@
     <div class="banner-bootom-w3-agileits">
         <div class="container">
             <!-- mens -->
-            <div class="col-md-3 products-left">
+            <div class="col-sm-3 col-md-3 products-left">
                 <div class="css-treeview col-xs-12">
                     <h4>{{$activeCate->cate_name}}</h4>
                     <div class="list-group">
@@ -186,7 +186,7 @@
                             </div>-->
                 <div class="clearfix"></div>
             </div>
-            <div class="col-md-9 products-right">
+            <div class="col-sm-9 col-md-9 products-right">
                 <h3 class="wthree_text_info" style="padding-left: 15px;">{{$activeCate->cate_name}}</h3>
                 <div class="sorting">
                     <select class="form-control" id="sortByPrice" onchange="searchCommodities()">

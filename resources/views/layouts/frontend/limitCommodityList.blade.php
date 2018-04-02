@@ -7,7 +7,7 @@
     }
 </style>
 @forelse($limitCommodities as $limit)
-    <div class="col-xs-6 col-md-3 product-men">
+    <div class="col-xs-6 col-sm-3 col-md-3 product-men">
         <div class="men-pro-item simpleCart_shelfItem">
             <div style="background-color: gray; text-align: center; font-weight: bold;">
                 剩餘時間

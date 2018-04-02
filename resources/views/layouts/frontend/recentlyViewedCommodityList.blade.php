@@ -1,5 +1,5 @@
 @forelse($recentlyViewedCommodities as $viewed)
-    <div class="col-md-3 product-men">
+    <div class="col-xs-6 col-sm-3 col-md-3 product-men">
         <div class="men-pro-item simpleCart_shelfItem">
             <div class="men-thumb-item">
                 <img src="{{url('' . $viewed->commodity_image)}}" alt="{{$viewed->commodity_title}}"

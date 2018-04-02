@@ -24,7 +24,7 @@
             z-index: 99999;
         }
 
-        .blankSpaceDiv{
+        .blankSpaceDiv {
             height: 8vh;
         }
     </style>
@@ -58,7 +58,7 @@
             </button>
         </div>
         <div class="container">
-            <div class="col-md-4 single-right-left ">
+            <div class="col-xs-12 col-sm-4 col-md-4 single-right-left ">
                 <div class="grid images_3_of_2">
                     <div class="flexslider">
                         <ul class="slides">
@@ -83,11 +83,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 single-right-left simpleCart_shelfItem">
-                <div class="col-md-7 margin-top-bottom-5px" style="color: #DDAA00; font-weight: bold;">預購數量售完即出貨</div>
-                <div class="col-md-5 margin-top-bottom-5px" style="color: #DDDDDD; font-weight: bold;">
+            <div class="col-xs-12 col-sm-8 col-md-8 single-right-left simpleCart_shelfItem">
+                <div class="col-sm-7 col-md-7 margin-top-bottom-5px" style="color: #DDAA00; font-weight: bold;">預購數量售完即出貨</div>
+                <div class="col-sm-5 col-md-5 margin-top-bottom-5px" style="color: #DDDDDD; font-weight: bold;">
                     剩餘組數 {{$commodity->commodity_stock}}</div>
-                <div class="col-md-12 margin-top-bottom-5px">
+                <div class="col-sm-12 col-md-12 margin-top-bottom-5px">
                     <h3>
                         @if(!empty($commodity->commodity_subtitle))
                             {{$commodity->commodity_subtitle}}
@@ -96,12 +96,12 @@
                         @endif
                     </h3>
                 </div>
-                <div class="col-md-12 margin-top-bottom-5px">
+                <div class="col-sm-12 col-md-12 margin-top-bottom-5px">
                     <div>
                         {{$commodity->commodity_description}}
                     </div>
                 </div>
-                <div class="col-md-offset-8 col-md-4 margin-top-bottom-5px">
+                <div class="col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-4 margin-top-bottom-5px">
                     {{--<div>--}}
                     {{--<del style="margin-left: 0px;">售價$69.71</del>--}}
                     {{--</div>--}}
@@ -115,12 +115,12 @@
                     </div>
                 </div>
                 <div class="margin-top-bottom-5px">
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <select class="form-control" name="">
                             <option value="default">規格選擇</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <select class="form-control" name="member_city" id="amount">
                             <option value="default">數量選擇</option>
                             @for($i=1; $i<=10; $i++)
@@ -132,7 +132,7 @@
                             @endfor
                         </select>
                     </div>
-                    <div class="col-md-4 hidden-xs">
+                    <div class="col-sm-4 col-md-4 hidden-xs">
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"
                              style="margin: 0;">
                             <input type="button" value="立即預購" class="button"
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-sm-12 col-md-12">
                     <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
                         <li>
                             <div id="fb-root"></div>
@@ -165,10 +165,10 @@
 
     <div class="banner-bootom-w3-agileits hidden-xs" style="font-family: Microsoft JhengHei;">
         <div class="container">
-            <div class="col-md-3" style="text-align: center;">
+            <div class="col-sm-3 col-md-3" style="text-align: center;">
                 <h2>商品介紹</h2>
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-9 col-md-9">
                 <div class="col-md-12 padding-top-bottom-20px">
                     {!!$commodity->commodity_introduce!!}
                 </div>
