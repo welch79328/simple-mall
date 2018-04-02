@@ -72,8 +72,13 @@
                 </div>-->
         <div class="col-md-4 col-sm-4"></div>
         <!-- header-bot -->
-        <div class="col-md-4 logo_agile col-sm-4">
-            <h1><a href="{{url('/')}}"><img src="{{url('images/logo-03.png')}}" width="40%"></a></h1>
+        <div class="col-md-4 logo_agile col-sm-4" style="margin-top: -50px; margin-bottom: -50px">
+            <h1 class="hidden-xs">
+                <a href="{{url('/')}}"><img src="{{url('images/J-UGO01-01.png')}}" width="300px"></a>
+            </h1>
+            <h1 class="visible-xs">
+                <a href="{{url('/')}}"><img src="{{url('images/J-UGO(2)-01.png')}}" width="300px"></a>
+            </h1>
         </div>
         <!-- header-bot -->
         <!--        <div class="col-md-4 agileits-social top_content">
