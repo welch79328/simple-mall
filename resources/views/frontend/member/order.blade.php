@@ -44,7 +44,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="page_list" style="text-align: center">
+            <div style="text-align: center">
                 {{$orders->links()}}
             </div>
         </div>

@@ -12,9 +12,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    {{--@todo--}}
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#search"
-                            style="float: right;" hidden>
+                            style="float: right; color:white">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -124,15 +123,18 @@
                         <li class="menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
                     </ul>
                 </div>
-                {{--@todo--}}
-                <div class="collapse navbar-collapse hidden-lg" id="search" hidden>
-                    <form class="mobile_search hidden-sm hidden-md hidden-lg" role="search" action="/" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="商品關鍵字..."/>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">Go</button>
-                            </span>
-                    </form>
+                <div class="visible-xs">
+                    <div class="collapse navbar-collapse hidden-lg" id="search">
+                        <div class="input-group" style="margin-top: 20px">
+                            <input id="mobilekeywordSearch" type="text" class="form-control" aria-label="..."
+                                   placeholder="商品關鍵字搜尋...">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" aria-label="Help"
+                                        onclick="mobileSearch()">搜尋
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -149,5 +151,14 @@
             </div>-->
     <div class="clearfix"></div>
 </div>
-
 <!-- //banner-top -->
+<script>
+    function mobileSearch() {
+        var keyword = $("#mobilekeywordSearch").val();
+        if (keyword == "") {
+            showModal("failModal", "提示", "請輸入關鍵字！");
+            return;
+        }
+        window.location.href = "{{url('search')}}" + "/" + keyword;
+    }
+</script>

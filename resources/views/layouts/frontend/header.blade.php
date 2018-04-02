@@ -49,11 +49,11 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-3" style="padding-top: 3.5px;" hidden>
-        <div class="input-group">
-            <input type="text" class="form-control" aria-label="...">
+    <div class="col-md-3 hidden-xs" style="margin-top: 8px;">
+        <div class="input-group ">
+            <input id="keywordSearch" type="text" class="form-control" aria-label="..." placeholder="商品關鍵字搜尋...">
             <div class="input-group-btn">
-                <button type="button" class="btn btn-default" aria-label="Help">Go</button>
+                <button type="button" class="btn btn-default" aria-label="Help" onclick="redirectSearch()">搜尋</button>
             </div>
         </div>
     </div>
@@ -98,3 +98,13 @@
     </div>
 </div>
 <!-- //header-bot -->
+<script>
+    function redirectSearch() {
+        var keyword = $("#keywordSearch").val();
+        if (keyword == "") {
+            showModal("failModal", "提示", "請輸入關鍵字！");
+            return;
+        }
+        window.location.href = "{{url('search')}}" + "/" + keyword;
+    }
+</script>

@@ -45,6 +45,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
         Route::get('commodity/{commodity_id}', 'CommodityController@index');
         //商品--end
     });
+    Route::get('search/{keyword}', 'CommodityController@search');
 
     Route::get('contact', 'ContactController@index');
 

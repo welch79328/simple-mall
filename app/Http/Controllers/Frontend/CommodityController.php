@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Helpers\Frontend\CommodityHelper;
 use Modules\Commodity\Entities\Commodity;
 use Modules\Commodity\Entities\CommodityImg;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class CommodityController extends CommonController
 
         $temps = [];
         $sessionTemps = $request->session()->pull("recently_viewed.commodities");
-        if(is_null($sessionTemps)){
+        if (is_null($sessionTemps)) {
             $sessionTemps = [];
         }
         $temps[] = $commodity;
@@ -32,6 +33,23 @@ class CommodityController extends CommonController
             $request->session()->push("recently_viewed.commodities", $temp);
         }
         return view("frontend.commodity.commodity", compact("commodity", "imgs"));
+    }
+
+    public function search(Request $request, $keyword)
+    {
+        parent::__construct();
+
+        $commodityHelper = new CommodityHelper();
+        $conditions = [
+            ["commodity_title", "like", "%$keyword%"]
+        ];
+        $commodities = $commodityHelper->getCommoditiesByQuery(12, $conditions);
+
+        $recentlyViewedCommodities = [];
+        if ($request->session()->has("recently_viewed.commodities")) {
+            $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
+        }
+        return view("frontend.commodity.search", compact("commodities", "recentlyViewedCommodities", "keyword"));
     }
 
     private function unique_multidim_array($array, $key)
