@@ -67,5 +67,23 @@ class CommonController extends Controller
         view()->share('member', $member);
     }
 
+    public static function failResponse($msg = "")
+    {
+        $response = [
+            "result" => false,
+            "msg" => $msg
+        ];
+        return $response;
+    }
+
+    public static function successResponse($msg = "")
+    {
+        $response = [
+            "result" => true,
+            "msg" => $msg
+        ];
+        return $response;
+    }
+
 
 }

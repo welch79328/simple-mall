@@ -115,7 +115,7 @@ class MemberController extends CommonController
         return view("frontend.member.order", compact("orders"));
     }
 
-    public function order_detail($order_id)
+    public function orderDetail($order_id)
     {
         parent::__construct();
         $order = Order::find($order_id);
@@ -147,6 +147,28 @@ class MemberController extends CommonController
         return view("frontend.member.order_detail", compact("order", "order_details"));
     }
 
+    public function cancelOrder(Request $request)
+    {
+        $order_id = $request->post("order_id");
+        if (empty($order_id)) {
+            return CommonController::failResponse("取消訂單失敗：未傳入訂單流水號！");
+        }
+        $order = Order::find($order_id);
+        if (empty($order)) {
+            return CommonController::failResponse("取消訂單失敗：找不到此筆訂單！");
+        }
+        if ($order->order_status == "refund") {
+            return CommonController::failResponse("訂單已經取消了！");
+        }
+        if ($order->order_status == "complete") {
+            return CommonController::failResponse("訂單已經完成，不能取消了！");
+        }
+        $result = $order->update(["order_status" => "refund"]);
+        if (!$result) {
+            return CommonController::failResponse("取消訂單失敗：請稍後在試！");
+        }
+        return CommonController::successResponse("成功取消訂單！");
+    }
 
     public function signIn()
     {

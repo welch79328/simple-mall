@@ -54,20 +54,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{--@foreach($order_details as $detail)--}}
-                            {{--<p>--}}
-                            {{--<span><a href="{{url('admin/order/alone/'.$detail->id)}}"></a></span>--}}
-                            {{--<span>數量:{{$detail->amount}}</span>--}}
-                            {{--<span>單價:{{$detail->price}}</span>--}}
-                            {{--@if($detail->status == '完成')--}}
-                            {{--<span style="color: #009966">狀態:({{$detail->status}})</span>--}}
-                            {{--@elseif($detail->status == '取消')--}}
-                            {{--<span style="color: #FF0033">狀態:({{$detail->status}})</span>--}}
-                            {{--@else--}}
-                            {{--<span>狀態:({{$detail->status}})</span>--}}
-                            {{--@endif--}}
-                            {{--</p>--}}
-                            {{--@endforeach--}}
                         </td>
                     </tr>
                     <tr>
@@ -76,7 +62,7 @@
                     </tr>
                     <tr>
                         <th>訂單狀態</th>
-                        <td>{{$order->order_status}}</td>
+                        <td style="color:@if($order->order_status == '完成')#009966 @elseif($order->order_status == '取消')#FF0033 @else #555 @endif">{{$order->order_status}}</td>
                     </tr>
                     </tbody>
                 </table>

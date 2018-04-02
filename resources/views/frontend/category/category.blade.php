@@ -189,7 +189,7 @@
             <div class="col-md-9 products-right">
                 <h3 class="wthree_text_info" style="padding-left: 15px;">{{$activeCate->cate_name}}</h3>
                 <div class="sorting">
-                    <select id="sortByPrice" onchange="searchCommodities()" class="frm-field required sect">
+                    <select class="form-control" id="sortByPrice" onchange="searchCommodities()">
                         <option value="default">預設排序</option>
                         <option value="commodity_price">價格低到高</option>
                         <option value="-commodity_price">價格高到低</option>
@@ -380,7 +380,7 @@
                 },
                 function (data) {
                     if (data === "") {
-                        $("#commodityList").html("沒有符合此條件的商品！");
+                        $("#commodityList").html("<div style='margin-top: 20px; text-align: center;'>沒有符合此條件的商品！</div>");
                         return;
                     }
                     $("#page").val("2");
@@ -456,7 +456,7 @@
                 },
                 function (data) {
                     if (data === "") {
-                        $("#commodityList").html("沒有符合此條件的商品！");
+                        $("#commodityList").html("<div style='margin-top: 20px; text-align: center;'>沒有符合此條件的商品！</div>");
                         return;
                     }
                     $("#page").val("2");
@@ -484,7 +484,7 @@
                 },
                 function (data) {
                     if (data === "") {
-                        $("#commodityList").html("沒有符合此條件的商品！");
+                        $("#commodityList").html("<div style='margin-top: 20px; text-align: center;'>沒有符合此條件的商品！</div>");
                         return;
                     }
                     $("#page").val("2");
