@@ -1,7 +1,6 @@
 <!-- header -->
 <div class="header" id="home">
-    <div class="col-md-4"></div>
-    <div class="col-md-5">
+    <div class="col-xs-12 col-sm-offset-4 col-sm-5 col-md-offset-4 col-md-5">
         <ul>
             <!--            <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> 登入 </a></li>
                         <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 註冊 </a></li>
@@ -50,7 +49,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-3 hidden-xs" style="margin-top: 8px;">
+    <div class="col-sm-3 col-md-3 hidden-xs" style="margin-top: 8px;">
         <div class="input-group ">
             <input id="keywordSearch" type="text" class="form-control" aria-label="..." placeholder="商品關鍵字搜尋...">
             <div class="input-group-btn">
@@ -59,10 +58,9 @@
         </div>
     </div>
 </div>
-
 <!-- //header -->
 <!-- header-bot -->
-<div class="header-bot" style="padding-top: 0px;">
+<div class="header-bot">
     <div class="header-bot_inner_wthreeinfo_header_mid">
         <!--        <div class="col-md-4 header-middle">
                     <form action="#" method="post">
@@ -71,11 +69,10 @@
                         <div class="clearfix"></div>
                     </form>
                 </div>-->
-        <div class="col-md-4 col-sm-4"></div>
         <!-- header-bot -->
-        <div class="col-md-4 logo_agile col-sm-4">
+        <div class="col-xs-12 col-md-12 logo_agile col-sm-12" style="text-align: center">
             <h1 class="hidden-xs">
-                <a href="{{url('/')}}"><img src="{{url('images/J-UGO01-01.png')}}" width="200px"></a>
+                <a href="{{url('/')}}"><img src="{{url('images/J-UGO01-01.png')}}" width="250px"></a>
             </h1>
             <h1 class="visible-xs">
                 <a href="{{url('/')}}"><img src="{{url('images/logo_180403_0002.jpg')}}" width="150px"></a>
@@ -99,7 +96,6 @@
                                 <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
                     </ul>
                 </div>-->
-        <div class="col-md-4 col-sm-4"></div>
         <div class="clearfix"></div>
     </div>
 </div>

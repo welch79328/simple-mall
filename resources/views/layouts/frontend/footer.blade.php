@@ -31,7 +31,8 @@
                          class="footerLinkLogo">
                     <p class="footerLinkText">
                         <a href="https://www.facebook.com/freeadwifistores/">Free AD WiFi 分享無線生活</a><br/>
-                        網路服務供應商
+                        網路服務供應商<br>
+                        00000人說讚
                     </p>
                 </div>
             </div>

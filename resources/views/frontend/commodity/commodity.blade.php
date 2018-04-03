@@ -57,7 +57,7 @@
     <!-- banner-bootom-w3-agileits -->
     <div class="banner-bootom-w3-agileits" style="font-family: Microsoft JhengHei;">
         <div class="fixedDiv visible-xs">
-            <button type="button" class="btn btn-danger" style="width: 100%; height: 100%"
+            <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; font-size: 3vh;"
                     onclick="addToShoppingCart({{$commodity->commodity_id}});">立即預購
             </button>
         </div>
@@ -66,19 +66,19 @@
                 <div class="grid images_3_of_2">
                     <div class="flexslider">
                         <ul class="slides">
-                            <li data-thumb="{{url(''.$commodity->commodity_image)}}" style="width: 350px">
+                            <li data-thumb="{{url(''.$commodity->commodity_image)}}">
                                 <div class="thumb-image">
                                     <img src="{{url(''.$commodity->commodity_image)}}" data-imagezoom="true"
                                          class="img-responsive" onError="this.src='{{$errorImgUrl}}'"
-                                         style="height: 350px">
+                                         style="height: 300px">
                                 </div>
                             </li>
                             @forelse($imgs as $img)
-                                <li data-thumb="{{url(''.$img->image)}}" style="width: 350px">
+                                <li data-thumb="{{url(''.$img->image)}}">
                                     <div class="thumb-image">
                                         <img src="{{url(''.$img->image)}}" data-imagezoom="true"
                                              class="img-responsive"
-                                             onError="this.src='{{$errorImgUrl}}'" style="height: 350px">
+                                             onError="this.src='{{$errorImgUrl}}'" style="height: 300px">
                                     </div>
                                 </li>
                             @empty
@@ -106,7 +106,7 @@
                     </h3>
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-8 margin-top-bottom-5px">
-                    <div style="height: 180px; overflow: hidden;">
+                    <div style="height: 135px; overflow: hidden;">
                         {{$commodity->commodity_description}}
                     </div>
                 </div>

@@ -38,7 +38,7 @@ class CategoryController extends CommonController
             $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
         }
 
-        return view("frontend.category.category", compact("topCate", "activeCate", "cateTree", "commodities","recentlyViewedCommodities"));
+        return view("frontend.category.category", compact("topCate", "activeCate", "cateTree", "commodities", "recentlyViewedCommodities"));
     }
 
     public function getCommoditiesByQuery(Request $request)
@@ -79,7 +79,8 @@ class CategoryController extends CommonController
     public function limitCommoditiesPage(Request $request, CommodityHelper $commodityHelper)
     {
         parent::__construct();
-        $limitCommodities = $commodityHelper->getLimitCommodities(12, 48);
+        $total = $commodityHelper->getCommoditiesCount();
+        $limitCommodities = $commodityHelper->getLimitCommodities(12, $total);
 
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
@@ -91,7 +92,8 @@ class CategoryController extends CommonController
 
     public function getLimitCommodities(CommodityHelper $commodityHelper)
     {
-        $limitCommodities = $commodityHelper->getLimitCommodities(12, 48);
+        $total = $commodityHelper->getCommoditiesCount();
+        $limitCommodities = $commodityHelper->getLimitCommodities(12, $total);
         if (count($limitCommodities) == 0) {
             return "";
         }

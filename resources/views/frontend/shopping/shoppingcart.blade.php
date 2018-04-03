@@ -25,7 +25,7 @@
                                 <td style="font-weight:bold;">{{$v->name}}</td>
                                 <td>
                                     <input type="number" min="1" value="{{$v->qty}}"
-                                           onchange="changeAmount(this, '{{$v->rowId}}')">
+                                           onchange="changeAmount(this, '{{$v->rowId}}')" required>
                                 </td>
                                 <td>${{$v->price}}</td>
                                 <td>

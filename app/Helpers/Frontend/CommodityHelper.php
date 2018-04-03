@@ -127,4 +127,16 @@ class CommodityHelper
         return true;
     }
 
+    public function getCommoditiesCount()
+    {
+        $now = date("Y-m-d H:i:s");
+        $this->match = [
+            ["commodity_status", "=", CommodityHelper::COMMODITY_STATUS_ON],
+            ["commodity_start_time", "<=", $now],
+            ["commodity_end_time", ">", $now],
+            ["commodity_stock", ">", 0],
+        ];
+        return Commodity::where($this->match)->count();
+    }
+
 }
