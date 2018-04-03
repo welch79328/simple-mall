@@ -15,41 +15,17 @@
                 <h3 class="wthree_text_info">訂購流程</h3>
                 <img src="{{url('images/shopping_process-12.png')}}" width="100%">
             </div>
-            <div class="col-md-5 faqDiv">
+            <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">付款方式</h3>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
             </div>
-            <div class="col-md-5 col-md-offset-2 faqDiv">
+            <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">配送方式</h3>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
             </div>
-            <div class="col-md-5 faqDiv">
+            <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">退換貨處理</h3>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
             </div>
-            <div class="col-md-5 col-md-offset-2 faqDiv">
+            <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">注意事項</h3>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
-                <div class="col-md-12" style="border-bottom-style: solid; border-bottom-color: #DCDCDC;">　</div>
             </div>
         </div>
     </div>
