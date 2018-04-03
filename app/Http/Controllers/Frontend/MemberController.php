@@ -53,7 +53,7 @@ class MemberController extends CommonController
             'account' => $member['member_account'],
             'ip' => $ip,
         ]);
-        return redirect('/');
+        return redirect('shoppingcart/show')->with("sussess.msg", "註冊成功，已自動登入！");;
     }
 
     public function info(TownshipHelper $townshipHelper)

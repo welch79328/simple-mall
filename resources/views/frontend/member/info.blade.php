@@ -95,7 +95,12 @@
                 </div>
                 <div class="col-md-offset-2 col-md-8">
                     @if(session('sussess.msg'))
-                        <p style="color: red; text-align: center;">{{session('sussess.msg')}}</p>
+                        <script>
+                            $(document).ready(function () {
+                                showModal("sussessModal", "提示", "修改資料成功！");
+                            });
+                        </script>
+                        <p style="color: #009966; text-align: center;">{{session('sussess.msg')}}</p>
                     @endif
                     <div style="text-align: right">
                         <button type="submit" class="btn btn-primary">提交</button>

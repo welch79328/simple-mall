@@ -120,8 +120,7 @@
                             ${{$commodity->commodity_price}}
                         </span>
                     </div>
-                    {{--@todo--}}
-                    <div hidden>
+                    <div>
                         目前0000人正在瀏覽
                     </div>
                 </div>

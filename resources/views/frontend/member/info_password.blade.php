@@ -13,7 +13,8 @@
                         <input type="password" class="form-control" name="password_o" placeholder="請輸入原密碼" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="請輸入新密碼" required>
+                        <input type="password" class="form-control" name="password" placeholder="請輸入新密碼(6至8位、開頭必須為英文字母)"
+                               required>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" name="password_confirmation" placeholder="新密碼確認"
@@ -33,7 +34,12 @@
                         </div>
                     @endif
                     @if(session('sussess.msg'))
-                        <p style="text-align: center;">{{session('sussess.msg')}}</p>
+                        <script>
+                            $(document).ready(function () {
+                                showModal("sussessModal", "提示", "修改密碼成功！");
+                            });
+                        </script>
+                        <p style="color: #009966; text-align: center;">{{session('sussess.msg')}}</p>
                     @endif
                     <div style="text-align: right">
                         <button type="submit" class="btn btn-primary">送出</button>
