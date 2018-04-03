@@ -3,42 +3,45 @@
 @section('title', 'Free AD Wifi Mall 註冊')
 
 @section('content')
-<div class="new_arrivals_agile_w3ls_info" style="font-family: Microsoft JhengHei;"> 
-    <div class="container">
-        <form class="form-horizontal" action="{{url('member')}}" method="post">
-            {{csrf_field()}}
-            <div class="col-md-offset-2 col-md-8">
-                <h2 style="margin-bottom: 20px">註冊</h2>
-                <div class="form-group">
-                    <input type="email" class="form-control" id="email" name="member_mail" placeholder="請輸入帳號 (電子信箱)" required>
+    <div class="new_arrivals_agile_w3ls_info" style="font-family: Microsoft JhengHei;">
+        <div class="container">
+            <form class="form-horizontal" action="{{url('member_store')}}" method="post">
+                {{csrf_field()}}
+                <div class="col-md-offset-2 col-md-8">
+                    <h2 style="margin-bottom: 20px">註冊</h2>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="member_mail"
+                               placeholder="請輸入帳號 (電子信箱)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" name="member_password"
+                               placeholder="請輸入密碼(6至8位、開頭必須為英文字母)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password_check" name="member_password_check"
+                               placeholder="密碼確認" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="password" name="member_password" placeholder="請輸入密碼" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="password_check" name="member_password_check" placeholder="密碼確認" required>
-                </div>
-            </div>
-            <div class="col-md-offset-2 col-md-8">
-                @if(count($errors)>0)
-                <div>
-                    @if(is_object($errors))
-                        @foreach($errors->all() as $erroe)
-                        <p style="color: red; text-align: center;">{{$erroe}}</p>
-                        @endforeach
-                    @else
-                        <p style="color: red; text-align: center;">{{$errors}}</p>
+                <div class="col-md-offset-2 col-md-8">
+                    @if(count($errors)>0)
+                        <div>
+                            @if(is_object($errors))
+                                @foreach($errors->all() as $error)
+                                    <p style="color: red; text-align: center;">{{$error}}</p>
+                                @endforeach
+                            @else
+                                <p style="color: red; text-align: center;">{{$errors["msg"]}}</p>
+                            @endif
+                        </div>
                     @endif
+                    <div style="text-align: right">
+                        <button type="submit" class="btn btn-primary">註冊</button>
+                    </div>
                 </div>
-                @endif
-                <div style="text-align: right">
-                    <button type="submit" class="btn btn-primary">註冊</button>
-                </div>
-            </div>
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 <!-- signup modal -->

@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts')
+@section('title', 'Free AD Wifi Mall 首頁')
 
 @section('content')
     <!-- banner -->

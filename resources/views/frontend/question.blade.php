@@ -5,7 +5,7 @@
 @section('css')
     <style>
         .faqDiv {
-            margin-bottom: 50px;
+            margin-bottom: 100px;
         }
     </style>
 @section('content')

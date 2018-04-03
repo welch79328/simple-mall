@@ -24,9 +24,15 @@
     <div class="col-sm-4 col-md-4 footer_div_3">
         <h3 class="text-center footer_title">關注我們</h3>
         <div class="center-block text-left footer_detail">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-sm-12 col-md-offset-2 col-md-8 ">
                 <div class="footerLinkDiv">
-                    123
+                    <img src="{{url('images/1915249_495138517355572_2897184772186084038_n.png')}}"
+                         onclick="(window.location.href = 'https://www.facebook.com/freeadwifistores/')"
+                         class="footerLinkLogo">
+                    <p class="footerLinkText">
+                        <a href="https://www.facebook.com/freeadwifistores/">Free AD WiFi 分享無線生活</a><br/>
+                        網路服務供應商
+                    </p>
                 </div>
             </div>
         </div>

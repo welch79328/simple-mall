@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Modules\Member\Entities\MemberLog;
+use Modules\Member\Http\Controllers\LoginController;
 use Modules\Order\Entities\Orderlist;
 use Modules\Order\Entities\Order;
 use Illuminate\Support\Facades\Crypt;
@@ -13,6 +15,46 @@ use App\Http\Controllers\Controller;
 
 class MemberController extends CommonController
 {
+
+    public function store(Request $request)
+    {
+        $input = $request->except("_token");
+        $rules = [
+            'member_password' => 'required|regex:/^[a-zA-Z]/|between:6,8|same:member_password_check',
+            'member_mail' => 'required|email',
+        ];
+        $message = [
+            'member_password.required' => '密碼內容不能為空!',
+            'member_password.regex' => '密碼開頭必須為英文字母!',
+            'member_password.between' => '密碼長度必須為6至8位!',
+            'member_password.same' => '密碼必須相同!',
+            'member_mail.required' => '電子信箱不能為空!',
+            'member_mail.email' => '必須為信箱格式'
+        ];
+        $validator = Validator::make($input, $rules, $message);
+        if (!$validator->passes()) {
+            return back()->withErrors($validator);
+        }
+        $member = $request->except('_token', 'member_password_check');
+        $member["member_account"] = $member["member_mail"];
+        $member['member_password'] = Crypt::encrypt($member['member_password']);
+        if (Member::where("member_account", $member["member_account"])->count() > 0) {
+            return back()->with('errors.msg', '此帳號已經被註冊！');
+        }
+        $result = Member::create($member);
+        if (!$result) {
+            return back()->with('errors.msg', '數據填充錯誤, 請稍後重試');
+        }
+        $result->member_level = "member";
+        session(['member' => $result]);
+        $loginController = new LoginController();
+        $ip = $loginController->transform_ip($_SERVER['REMOTE_ADDR']);;
+        MemberLog::create([
+            'account' => $member['member_account'],
+            'ip' => $ip,
+        ]);
+        return redirect('/');
+    }
 
     public function info(TownshipHelper $townshipHelper)
     {

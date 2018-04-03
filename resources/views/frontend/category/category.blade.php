@@ -141,7 +141,7 @@
                                         </li>
                                     </ul>-->
                 </div>
-                <div style="margin-top: 30px" class="col-xs-12">
+                <div style="margin-top: 30px; margin-bottom: 30px;" class="col-xs-12">
                     <h3 style="margin-bottom: 10px">價格範圍</h3>
                     <div class="form-group">
                         <input type="text" class="form-control" id="minPrice" name="minPrice" placeholder="最小值"

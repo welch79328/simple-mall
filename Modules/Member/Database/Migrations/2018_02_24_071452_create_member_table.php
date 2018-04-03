@@ -17,7 +17,7 @@ class CreateMemberTable extends Migration
             $table->increments('member_id');
             $table->string('member_account');
             $table->string('member_password');
-            $table->string('member_name');
+            $table->string('member_name')->nullable();
             $table->enum('member_sex', ['male','female'])->nullable();
             $table->string('member_year')->nullable();
             $table->string('member_month')->nullable();

@@ -74,28 +74,29 @@ class LoginController extends Controller
 //    {
 //    }
 
-    public function login(Request $request) {
-        try{
+    public function login(Request $request)
+    {
+        try {
             $input = $request->input();
-            $member = Member::where('member_account',$input['member_account'])->first();
-            if(empty($member)){
-                return back()->with('msg','帳號或是密碼錯誤');
-            }else if($member->member_account != $input['member_account'] || Crypt::decrypt($member->member_password) != $input['member_password']){
-                return back()->with('msg','帳號或是密碼錯誤');
+            $member = Member::where('member_account', $input['member_account'])->first();
+            if (empty($member)) {
+                return back()->with('msg', '帳號或是密碼錯誤');
+            } else if ($member->member_account != $input['member_account'] || Crypt::decrypt($member->member_password) != $input['member_password']) {
+                return back()->with('msg', '帳號或是密碼錯誤');
             }
 
-            session(['member'=>$member]);
+            session(['member' => $member]);
 
             $ip = $this->transform_ip($_SERVER['REMOTE_ADDR']);;
 
             MemberLog::create([
-                'account'=>$input['member_account'],
-                'ip'=>$ip,
+                'account' => $input['member_account'],
+                'ip' => $ip,
             ]);
 
-            return redirect('/');
+            return redirect('shoppingcart/show');
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return view('backstage.member.login');
         }
 
@@ -103,7 +104,7 @@ class LoginController extends Controller
 
     public function quit()
     {
-        session(['member'=>null]);
+        session(['member' => null]);
         return redirect('/');
     }
 
@@ -153,14 +154,14 @@ class LoginController extends Controller
             }
             $part7 = base_convert(($ip_parts[0] * 256) + $ip_parts[1], 10, 16);
             $part8 = base_convert(($ip_parts[2] * 256) + $ip_parts[3], 10, 16);
-            $ip = '::ffff:'.$part7.':'.$part8;
+            $ip = '::ffff:' . $part7 . ':' . $part8;
         }
         // expand IPv6 notation
         if (strpos($ip, '::') !== false) {
-            $ip = str_replace('::', str_repeat(':0000', (8 - substr_count($ip, ':'))).':', $ip);
+            $ip = str_replace('::', str_repeat(':0000', (8 - substr_count($ip, ':'))) . ':', $ip);
         }
         if (strpos($ip, ':') === 0) {
-            $ip = '0000'.$ip;
+            $ip = '0000' . $ip;
         }
         // normalize parts to 4 bytes
         $ip_parts = explode(':', $ip);
@@ -168,11 +169,11 @@ class LoginController extends Controller
             $ip_parts[$key] = sprintf('%04s', $num);
         }
         $ip = implode(':', $ip_parts);
-        $aa = base_convert(substr($ip_parts['6'],2),16,10);
-        $bb = base_convert(substr($ip_parts['6'],0,2),16,10);
-        $cc = base_convert(substr($ip_parts['7'],2),16,10);
-        $dd = base_convert(substr($ip_parts['7'],0,2),16,10);
-        $ip = $bb.'.'.$aa.'.'.$dd.'.'.$cc;
+        $aa = base_convert(substr($ip_parts['6'], 2), 16, 10);
+        $bb = base_convert(substr($ip_parts['6'], 0, 2), 16, 10);
+        $cc = base_convert(substr($ip_parts['7'], 2), 16, 10);
+        $dd = base_convert(substr($ip_parts['7'], 0, 2), 16, 10);
+        $ip = $bb . '.' . $aa . '.' . $dd . '.' . $cc;
 
         return $ip;
     }

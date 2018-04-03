@@ -18,7 +18,8 @@
             @endif
             <li class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none;">
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                        style="border: none; color:gray;">
                     <i class="glyphicon glyphicon-align-justify"></i>會員專區
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="text-align: left;">
@@ -72,12 +73,12 @@
                 </div>-->
         <div class="col-md-4 col-sm-4"></div>
         <!-- header-bot -->
-        <div class="col-md-4 logo_agile col-sm-4" style="margin-top: -50px; margin-bottom: -50px">
+        <div class="col-md-4 logo_agile col-sm-4">
             <h1 class="hidden-xs">
-                <a href="{{url('/')}}"><img src="{{url('images/J-UGO01-01.png')}}" width="300px"></a>
+                <a href="{{url('/')}}"><img src="{{url('images/J-UGO01-01.png')}}" width="200px"></a>
             </h1>
             <h1 class="visible-xs">
-                <a href="{{url('/')}}"><img src="{{url('images/J-UGO(2)-01.png')}}" width="300px"></a>
+                <a href="{{url('/')}}"><img src="{{url('images/logo_180403_0002.jpg')}}" width="150px"></a>
             </h1>
         </div>
         <!-- header-bot -->

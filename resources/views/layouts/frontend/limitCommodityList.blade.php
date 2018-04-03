@@ -5,11 +5,26 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .remainTime{
+        background-color: gray;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+        .remainTime{
+            font-size: 12px;
+            background-color: gray;
+            text-align: center;
+            font-weight: bold;
+        }
+    }
 </style>
 @forelse($limitCommodities as $limit)
     <div class="col-xs-6 col-sm-3 col-md-3 product-men">
         <div class="men-pro-item simpleCart_shelfItem">
-            <div style="background-color: gray; text-align: center; font-weight: bold;">
+            <div class="remainTime" style="">
                 剩餘時間
                 <input name="endTime[]" type="hidden" value="{{$limit->commodity_end_time}}">
                 <span></span>
