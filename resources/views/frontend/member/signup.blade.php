@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password" name="member_password"
-                               placeholder="請輸入密碼(6至8位、開頭必須為英文字母)" required>
+                               placeholder="請輸入密碼(6至8位、第一位必須為英文字母)" required>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password_check" name="member_password_check"

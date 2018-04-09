@@ -75,11 +75,4 @@
             });
         }
     </script>
-    @if(session('sussess.msg'))
-        <script>
-            $(document).ready(function () {
-                showModal("sussessModal", "提示", "註冊成功，已自動登入！");
-            });
-        </script>
-    @endif
 @endsection
