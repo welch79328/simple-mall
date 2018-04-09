@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
-        @media {
-
+        @media (max-width: 480px) {
+            .item_browsing {
+                text-align: center;
+            }
         }
 
         .margin-top-bottom-5px {
@@ -106,7 +108,7 @@
                     </h3>
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-8 margin-top-bottom-5px">
-                    <div style="height: 135px; overflow: hidden;">
+                    <div style="height: 110px; overflow: hidden;">
                         {{$commodity->commodity_description}}
                     </div>
                 </div>
@@ -120,7 +122,7 @@
                             ${{$commodity->commodity_price}}
                         </span>
                     </div>
-                    <div>
+                    <div class="item_browsing">
                         目前0000人正在瀏覽
                     </div>
                 </div>
@@ -155,9 +157,10 @@
                         <li>
                             <div id="fb-root"></div>
                             <div class="fb-share-button" data-href="{{url('commodity/'.$commodity->commodity_id)}}"
-                                 data-layout="button" data-size="small" data-mobile-iframe="false"><a target="_blank"
-                                                                                                      href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                                                                                                      class="fb-xfbml-parse-ignore"></a>
+                                 data-layout="button" data-size="small" data-mobile-iframe="false">
+                                <a target="_blank"
+                                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                                   class="fb-xfbml-parse-ignore"></a>
                             </div>
                         </li>
                         <li>
@@ -173,7 +176,7 @@
 
     <div class="blankSpaceDiv visible-xs"></div>
 
-    <div class="banner-bootom-w3-agileits hidden-xs" style="font-family: Microsoft JhengHei;">
+    <div class="banner-bootom-w3-agileits" style="font-family: Microsoft JhengHei;">
         <div class="container">
             <div class="col-sm-3 col-md-3" style="text-align: center;">
                 <h2>商品介紹</h2>
