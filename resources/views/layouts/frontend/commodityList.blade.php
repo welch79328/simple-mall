@@ -23,8 +23,8 @@
 
             </div>
             <div class="item-info-product ">
-                <h4 class="commodity_title"><a
-                            href="{{url('commodity/'. $commodity->commodity_id)}}">{{$commodity->commodity_title}}</a>
+                <h4 class="commodity_title">
+                    <a href="{{url('commodity/'. $commodity->commodity_id)}}">{{$commodity->commodity_title}}</a>
                 </h4>
                 <div class="info-product-price">
                     {{--<div>--}}

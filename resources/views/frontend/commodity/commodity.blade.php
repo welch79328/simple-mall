@@ -108,7 +108,7 @@
                     </h3>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 margin-top-bottom-5px">
-                    <div style="height: 150px; overflow: hidden;">
+                    <div style="height: 152px; overflow: hidden;">
                         {!! $commodity->commodity_description !!}
                     </div>
                 </div>
