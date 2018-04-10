@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Free AD Wifi Mall 訂單查詢')
+@section('title', "$websiteTitle 訂單查詢")
 
 @section('content')
     <div class="new_arrivals_agile_w3ls_info ">

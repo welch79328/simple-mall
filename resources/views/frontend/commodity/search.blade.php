@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', "Free AD Wifi Mall 搜尋")
+@section('title', "$websiteTitle 搜尋")
 
 @section('css')
 

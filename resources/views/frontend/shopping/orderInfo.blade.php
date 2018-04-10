@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Free AD Wifi Mall 訂購資料')
+@section('title', "$websiteTitle 訂購資料")
 
 @section('css')
     <style>

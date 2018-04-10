@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', "Free AD Wifi Mall $topCate->cate_name 商品列表")
+@section('title', "$websiteTitle $topCate->cate_name 商品列表")
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('css/frontend/jquery-ui.css')}}">

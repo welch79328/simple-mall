@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Free AD Wifi Mall 密碼修改')
+@section('title', "$websiteTitle 密碼修改")
 
 @section('content')
     <div class="new_arrivals_agile_w3ls_info" style="font-family: Microsoft JhengHei;">

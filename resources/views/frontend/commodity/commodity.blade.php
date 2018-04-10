@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', "Free AD Wifi Mall 商品")
+@section('title', "$websiteTitle 商品")
 
 @section('css')
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>

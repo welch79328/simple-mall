@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'J-UGo 首頁')
+@section('title', "$websiteTitle 首頁")
 
 @section('content')
     <!-- banner -->

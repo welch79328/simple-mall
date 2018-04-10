@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'J-UGo 隱私權政策')
+@section('title', "$websiteTitle 隱私權政策")
 
 @section('css')
     <style>

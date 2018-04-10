@@ -12,6 +12,7 @@ class CommonController extends Controller
 {
 
     const ERROR_IMG_URL = "/images/frontend/no_img.gif";
+    const WEBSITE_TITLE = "J-UGo";
 
     function __construct()
     {
@@ -19,6 +20,7 @@ class CommonController extends Controller
         $this->shareErrorImgUrl();
         $this->shareShoppingCartCount();
         $this->shareMember();
+        $this->shareWebsiteTitle();
     }
 
     public static function getCategoriesTree($elements, $parentId = 0)
@@ -32,6 +34,24 @@ class CommonController extends Controller
             }
         }
         return $categories;
+    }
+
+    public static function failResponse($msg = "")
+    {
+        $response = [
+            "result" => false,
+            "msg" => $msg
+        ];
+        return $response;
+    }
+
+    public static function successResponse($msg = "")
+    {
+        $response = [
+            "result" => true,
+            "msg" => $msg
+        ];
+        return $response;
     }
 
     private function shareTopCategoriesGroup()
@@ -67,22 +87,9 @@ class CommonController extends Controller
         view()->share('member', $member);
     }
 
-    public static function failResponse($msg = "")
+    private function shareWebsiteTitle()
     {
-        $response = [
-            "result" => false,
-            "msg" => $msg
-        ];
-        return $response;
-    }
-
-    public static function successResponse($msg = "")
-    {
-        $response = [
-            "result" => true,
-            "msg" => $msg
-        ];
-        return $response;
+        view()->share('websiteTitle', self::WEBSITE_TITLE);
     }
 
 

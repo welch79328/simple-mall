@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'J-UGo 關於J-UGo')
+@section('title', "$websiteTitle 關於J-UGo")
 
 @section('css')
     <style>
