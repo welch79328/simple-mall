@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class CommonController extends Controller
 {
 
-    const ERROR_IMG_URL = "/images/no_img.gif";
+    const ERROR_IMG_URL = "/images/frontend/no_img.gif";
 
     function __construct()
     {

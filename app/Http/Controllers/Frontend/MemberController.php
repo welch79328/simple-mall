@@ -110,13 +110,13 @@ class MemberController extends CommonController
     {
         $input = $request->except("_token");
         $rules = [
-            "password" => 'required|regex:/^[a-zA-Z]/|between:6,8|confirmed',
+            "password" => 'required|regex:/^[a-zA-Z][a-zA-Z0-9]{5,7}+$/|between:6,8|confirmed',
         ];
         $message = [
             'password.required' => '新密碼內容不能為空!',
-            'password.regex' => '新密碼開頭必須為英文字母!',
+            'password.regex' => '新密碼開頭必須為英文字母，只接受英文字母或數字!',
             'password.between' => '新密碼長度必須為6至8位!',
-            'password.confirmed' => '密碼不一致!',
+            'password.confirmed' => '新密碼不一致!',
         ];
         $validator = Validator::make($input, $rules, $message);
         if ($validator->fails()) {

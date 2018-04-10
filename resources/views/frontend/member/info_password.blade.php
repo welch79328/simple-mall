@@ -13,7 +13,10 @@
                         <input type="password" class="form-control" name="password_o" placeholder="請輸入原密碼" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="請輸入新密碼(6至8位、第一位必須為英文字母)"
+                        <input type="password" class="form-control" name="password"
+                               placeholder="請輸入新密碼(6至8位、第一位必須為英文字母、只接受英文字母或數字)"
+                               pattern="[a-zA-Z][a-zA-Z0-9]{5,7}"
+                               title="密碼限制(6至8位、第一位必須為英文字母、只接受英文字母或數字)"
                                required>
                     </div>
                     <div class="form-group">

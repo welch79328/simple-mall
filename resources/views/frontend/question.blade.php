@@ -19,7 +19,7 @@
         <div class="container">
             <div class="faqDiv">
                 <h3 class="wthree_text_info">訂購流程</h3>
-                <img src="{{url('images/shopping_process-12.png')}}" width="100%">
+                <img src="{{url('images/frontend/shopping_process-12.png')}}" width="100%">
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">付款方式</h3>
