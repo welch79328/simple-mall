@@ -78,8 +78,10 @@ class CommodityHelper
      *      ["欄位","條件"(=,>,<),"值"]...
      * ]
      * @param array $sort 排序
-     * field1 欲排序的欄位 =>  type1 排序方式
-     * field2 欲排序的欄位 =>  type2 排序方式...
+     * [
+     *      "field1" 欲排序的欄位 =>  "type1" 排序方式
+     *      "field2" 欲排序的欄位 =>  "type2" 排序方式...
+     * ]
      * @return type
      */
     public function getCommoditiesByQuery($count = 8, $conditions = [], $sort = [])

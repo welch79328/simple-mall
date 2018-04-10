@@ -46,7 +46,10 @@ class CommodityController extends CommonController
         $conditions = [
             ["commodity_title", "like", "%$keyword%"]
         ];
-        $commodities = $commodityHelper->getCommoditiesByQuery(12, $conditions);
+        $sorts = [
+            "commodity_type" => CommodityHelper::SORT_TYPE_DESC
+        ];
+        $commodities = $commodityHelper->getCommoditiesByQuery(12, $conditions, $sorts);
 
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
