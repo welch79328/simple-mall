@@ -931,6 +931,10 @@ figure.effect-roxy:hover p, .agileinfo_banner_bottom_grid_three_left:hover figca
     padding-bottom: 5px;
 }
 
+.footer_detail > div > a {
+    color: white;
+}
+
 .footerLinkDiv {
     background-color: white;
     width: 100%;
@@ -955,12 +959,6 @@ figure.effect-roxy:hover p, .agileinfo_banner_bottom_grid_three_left:hover figca
     font-weight: bold;
     display: table-cell;
     vertical-align: middle;
-}
-
-@media (max-width: 768px) {
-    .mobile_footer_title {
-        text-align: center;
-    }
 }
 
 /*-- //adwifi_footer --*/

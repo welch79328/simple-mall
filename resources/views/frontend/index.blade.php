@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Free AD Wifi Mall 首頁')
+@section('title', 'J-UGo 首頁')
 
 @section('content')
     <!-- banner -->

@@ -57,7 +57,7 @@
 </div>-->
 
     <!-- banner-bootom-w3-agileits -->
-    <div class="banner-bootom-w3-agileits" style="font-family: Microsoft JhengHei;">
+    <div class="banner-bootom-w3-agileits">
         <div class="fixedDiv visible-xs">
             <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; font-size: 3vh;"
                     onclick="addToShoppingCart({{$commodity->commodity_id}});">立即預購
@@ -72,7 +72,7 @@
                                 <div class="thumb-image">
                                     <img src="{{url(''.$commodity->commodity_image)}}" data-imagezoom="true"
                                          class="img-responsive" onError="this.src='{{$errorImgUrl}}'"
-                                         style="height: 300px">
+                                         style="height: 340px">
                                 </div>
                             </li>
                             @forelse($imgs as $img)
@@ -80,7 +80,7 @@
                                     <div class="thumb-image">
                                         <img src="{{url(''.$img->image)}}" data-imagezoom="true"
                                              class="img-responsive"
-                                             onError="this.src='{{$errorImgUrl}}'" style="height: 300px">
+                                             onError="this.src='{{$errorImgUrl}}'" style="height: 340px">
                                     </div>
                                 </li>
                             @empty
@@ -107,9 +107,9 @@
                         @endif
                     </h3>
                 </div>
-                <div class="col-xs-12 col-sm-8 col-md-8 margin-top-bottom-5px">
-                    <div style="height: 110px; overflow: hidden;">
-                        {{$commodity->commodity_description}}
+                <div class="col-xs-12 col-sm-12 col-md-12 margin-top-bottom-5px">
+                    <div style="height: 150px; overflow: hidden;">
+                        {!! $commodity->commodity_description !!}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-4 margin-top-bottom-5px">
@@ -174,20 +174,24 @@
         </div>
     </div>
 
-    <div class="blankSpaceDiv visible-xs"></div>
-
-    <div class="banner-bootom-w3-agileits" style="font-family: Microsoft JhengHei;">
+    <div class="banner-bootom-w3-agileits">
         <div class="container">
-            <div class="col-sm-3 col-md-3" style="text-align: center;">
+            <div class="col-xs-12 col-sm-3 col-md-3" style="text-align: center;">
                 <h2>商品介紹</h2>
             </div>
-            <div class="col-sm-9 col-md-9">
-                <div class="col-md-12 padding-top-bottom-20px">
-                    {!!$commodity->commodity_introduce!!}
+            <div class="col-xs-12 col-sm-9 col-md-9">
+                <div class="col-xs-12 col-md-12 padding-top-bottom-20px">
+                    @if($commodity->commodity_introduce)
+                        {!!$commodity->commodity_introduce!!}
+                    @else
+                        <p style="text-align: center; padding-top: 20px">此商品無介紹詞</p>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="blankSpaceDiv visible-xs"></div>
 
     {{--@todo--}}
     <div class="new_arrivals_agile_w3ls_info hidden-xs" hidden>

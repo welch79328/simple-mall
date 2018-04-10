@@ -15,11 +15,14 @@
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password" name="member_password"
-                               placeholder="請輸入密碼(6至8位、第一位必須為英文字母)" required>
+                               placeholder="請輸入密碼(6至8位、第一位必須為英文字母、只接受英文字母或數字)"
+                               pattern="[a-zA-Z][a-zA-Z0-9]{5,7}"
+                               title="密碼限制(6至8位、第一位必須為英文字母、只接受英文字母或數字)"
+                               required>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password_check" name="member_password_check"
-                               placeholder="密碼確認" required>
+                               placeholder="密碼確認" pattern="[a-zA-Z][a-zA-Z0-9]{5,7}" required>
                     </div>
                 </div>
                 <div class="col-md-offset-2 col-md-8">

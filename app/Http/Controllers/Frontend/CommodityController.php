@@ -32,6 +32,9 @@ class CommodityController extends CommonController
         foreach ($temps as $temp) {
             $request->session()->push("recently_viewed.commodities", $temp);
         }
+        if ($commodity->commodity_description) {
+            $commodity->commodity_description = nl2br($commodity->commodity_description);
+        }
         return view("frontend.commodity.commodity", compact("commodity", "imgs"));
     }
 

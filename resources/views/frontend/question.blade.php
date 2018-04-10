@@ -1,6 +1,6 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Free AD Wifi Mall  訂購流程FAQ')
+@section('title', 'J-UGo 訂購流程FAQ')
 
 @section('css')
     <style>
@@ -24,35 +24,29 @@
             <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">付款方式</h3>
                 <div class="faqTextDiv">
-                    <p>● 信用卡即時線上一次刷卡付款</p>
-                    <p>方便又好用的付款方式，當您選擇線上刷卡方式進行交易時，作業流程透過SSL加密機制，保障您的個人隱私資料。</p>
-                    <p>● ATM付款</p>
+                    <p>填寫完商品預購單後，系統將直接連結至相關網站進行結帳，提供ATM以及線上刷卡功能。</p>
                 </div>
             </div>
             <div class=" col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">配送方式</h3>
                 <div class="faqTextDiv">
-                    <p>1.超商取貨/宅急便 寄送。</p>
-                    <p>2.配送範圍限台灣本島各縣市(不含郵政信箱)。</p>
-                    <p>3.如本店無法接受您的訂單，將於收到您的訂單後二個工作日內通知您。但法令另有規定者除外。</p>
-                    <p>4.超商取貨在取貨後絕無分期問題！詐騙手法也不斷翻新，請買家留意不明來電！提高警覺、保持冷靜，並撥打165反詐騙專線。</p>
+                    <p>預購組數達滿後立即以郵寄或宅配方式出貨，將以郵件通知出貨。</p>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
-                <h3 class="wthree_text_info" style="margin-bottom: 10px;">退換貨處理</h3>
+                <h3 class="wthree_text_info" style="margin-bottom: 10px;">售後服務</h3>
                 <div class="faqTextDiv">
-                    <p>收到商品七天內，對商品感到不滿意，賣場無條件為您辦理整筆訂單退貨退款。</p>
-                    <p>若您收到商品不滿意，七天內都可申請退貨服務，申請完畢系統會自動派黑貓宅配跟您收件</p>
-                    <p>※提醒您；退貨需整筆訂單一併退貨，不可單獨退件。</p>
-                    <p>本賣場不提供外島配送，若您是外島買家退換貨須請您自行寄回，本賣場無法派宅配跟您收取退貨。</p>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
-                <h3 class="wthree_text_info" style="margin-bottom: 10px;">注意事項</h3>
-                <div class="faqTextDiv">
-                    <p>● 收到商品後請先仔細檢查，商品凡經使用過或剪標之商品，不接受任何理由更換/退貨。</p>
-                    <p>● 賣場不接受與想像不符、色差問題、個人因素以及贈品的退換貨。</p>
-                    <p>● 商品加入購物車未完成訂單填寫，宅配方式未完成付款視同訂單不成立</p>
+                    <p>￭收到錯誤/瑕疵商品</p>
+                    <p>對於捷U購出貨前未做好詳盡檢查，造成您的不便感到非常抱歉，請至會員專區訂單右側點選"我要退貨"，捷U購收到信件後會立即與您聯繫。</p>
+                    <p><br/></p>
+                    <p>￭退貨須知</p>
+                    <p>預售商品皆提供7天鑑賞期(非試用期)，商品未經拆封或破損（除原有商品瑕疵），請於收到商品後7天鑑賞期(含例假日)內申請退貨，將商品連同原包裝及發票封裝後自行寄回。</p>
+                    <p><br/></p>
+                    <p>
+                        如收到錯誤或瑕疵商品，因換貨所產生之來回運費，皆由捷U購負擔；其他因個人因素欲退貨，所產生之運費皆由消費者自行支付。商品退款於收到退貨後經檢查無誤，於7-14個工作天內退回至消費者原轉帳帳戶(扣除退貨運費)。
+                    </p>
+                    <p style="color: red">*捷U購預售商品僅供退貨不提供換貨服務(除錯誤/瑕疵商品)。</p>
+                    <p style="color: red">*即期商品因保存期限短暫，恕不提供退貨服務，購買前請三思。</p>
                 </div>
             </div>
         </div>

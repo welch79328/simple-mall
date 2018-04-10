@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Frontend\CommonController;
+
 /*
   |--------------------------------------------------------------------------
   | Web Routes
@@ -46,11 +48,25 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
         Route::get('commodity/{commodity_id}', 'CommodityController@index');
         //商品--end
     });
+
     Route::get('search/{keyword}', 'CommodityController@search');
 
     Route::get('contact', 'ContactController@index');
 
-    Route::get('question', 'QuestionController@index');
+    Route::get('question', function () {
+        new CommonController;
+        return view("frontend.question");
+    });
+
+    Route::get('about', function () {
+        new CommonController;
+        return view("frontend.about.about");
+    });
+
+    Route::get('privacy', function () {
+        new CommonController;
+        return view("frontend.about.privacy");
+    });
 });
 
 require __DIR__ . '/web/backstage.php';

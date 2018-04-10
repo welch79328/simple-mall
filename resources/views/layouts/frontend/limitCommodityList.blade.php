@@ -6,14 +6,14 @@
         text-overflow: ellipsis;
     }
 
-    .remainTime{
+    .remainTime {
         background-color: gray;
         text-align: center;
         font-weight: bold;
     }
 
     @media (max-width: 480px) {
-        .remainTime{
+        .remainTime {
             font-size: 12px;
             background-color: gray;
             text-align: center;

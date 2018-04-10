@@ -1,11 +1,11 @@
 @extends('layouts.frontend.frontend')
 
-@section('title', 'Free AD Wifi Mall  聯絡資訊')
+@section('title', 'J-UGo 聯絡資訊')
 
 @section('css')
     <style>
         .contact {
-            background-color: #F0F8FF;
+            background-color: #e7f4f8;
             padding: 20px;
             margin: 10px;
             border-radius: 10px;
@@ -13,7 +13,7 @@
         }
 
         .labelDiv {
-            background-color: #DDAA00;
+            background-color: #efc31b;
             color: white;
             text-align: center;
             padding-top: 10px;
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-xs-3 col-md-2 labelDiv" style="background-color: #009FCC;">
+                            <div class="col-xs-3 col-md-2 labelDiv" style="background-color: #388ecd;">
                                 <label class="control-label" for="phone">電話</label>
                             </div>
                             <div class="col-xs-9 col-md-10">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-xs-3 col-md-2 labelDiv" style="background-color: #55AA00;">
+                            <div class="col-xs-3 col-md-2 labelDiv" style="background-color: #35a555;">
                                 <label class="control-label" for="email">信箱</label>
                             </div>
                             <div class="col-xs-9 col-md-10">
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-xs-3 col-md-2 labelDiv" style="background-color: #00BFFF;">
+                            <div class="col-xs-3 col-md-2 labelDiv" style="background-color: #3eb9b0;">
                                 <label class="control-label" for="subject">主旨</label>
                             </div>
                             <div class="col-xs-9 col-md-10">
@@ -74,7 +74,9 @@
                     {{--@todo--}}
                     <div class="col-md-offset-2 col-md-8">
                         <div style="text-align: right">
-                            <button type="submit" class="btn btn-info" disabled>確定送出</button>
+                            <button type="submit" class="btn btn-info" style="background-color: #0c68ab" disabled>
+                                確定送出
+                            </button>
                         </div>
                     </div>
                 </div>

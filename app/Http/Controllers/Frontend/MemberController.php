@@ -20,12 +20,12 @@ class MemberController extends CommonController
     {
         $input = $request->except("_token");
         $rules = [
-            'member_password' => 'required|regex:/^[a-zA-Z]/|between:6,8|same:member_password_check',
+            'member_password' => 'required|regex:/^[a-zA-Z][a-zA-Z0-9]{5,7}+$/|between:6,8|same:member_password_check',
             'member_mail' => 'required|email',
         ];
         $message = [
             'member_password.required' => '密碼內容不能為空!',
-            'member_password.regex' => '密碼開頭必須為英文字母!',
+            'member_password.regex' => '密碼開頭必須為英文字母，只接受英文字母或數字!',
             'member_password.between' => '密碼長度必須為6至8位!',
             'member_password.same' => '密碼必須相同!',
             'member_mail.required' => '電子信箱不能為空!',
