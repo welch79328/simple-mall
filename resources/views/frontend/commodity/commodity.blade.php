@@ -6,8 +6,29 @@
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
+        .remindDiv {
+            color: #DDAA00;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .priceDiv {
+            font-size: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .browsingDiv {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 25px;
+            color: #d8a91e;
+            font-weight: bold;
+        }
+
         .stockDiv {
-            color: #DDDDDD;
+            font-size: 18px;
+            color: #707070;
             font-weight: bold;
             text-align: right
         }
@@ -40,7 +61,7 @@
         }
 
         @media (max-width: 480px) {
-            .item_browsing {
+            .browsingDiv {
                 text-align: center;
             }
 
@@ -107,13 +128,13 @@
             </div>
             <div class="col-xs-12 col-sm-offset-1 col-sm-7 col-md-offset-1 col-md-7 single-right-left simpleCart_shelfItem"
                  style="padding-left: 0; padding-right: 0">
-                <div class="col-xs-7 col-sm-7 col-md-6 margin-top-bottom-5px"
-                     style="color: #DDAA00; font-weight: bold;">
+                <div class="col-xs-7 col-sm-7 col-md-6 margin-top-bottom-5px remindDiv">
                     預購數量售完即出貨
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-4 margin-top-bottom-5px stockDiv">
                     剩餘組數 {{$commodity->commodity_stock}}
                 </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-10 margin-top-bottom-5px">
                     <h3>
                         @if(!empty($commodity->commodity_subtitle))
@@ -128,32 +149,26 @@
                         {!! $commodity->commodity_description !!}
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-offset-7 col-sm-5 col-md-offset-6 col-md-4 margin-top-bottom-5px"
+
+                <div class="col-xs-12 col-sm-10 col-md-10 margin-top-bottom-5px"
                      style="text-align: right;">
                     {{--<div>--}}
                     {{--<del style="margin-left: 0px;">售價$69.71</del>--}}
                     {{--</div>--}}
-                    <div class="item_price">
+                    <div class="item_price priceDiv">
                         預購價
-                        <span style="font-size: 35px; font-weight: 600; letter-spacing: 1px;">
+                        <span style="font-size: 35px;">
                             ${{$commodity->commodity_price}}
                         </span>
                     </div>
-                    <div class="item_browsing" style="font-size: 15px">
-                        目前0000人正在瀏覽
-                    </div>
-                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2 hidden-xs"
-                         style="margin: 0; width: 100%">
-                        <input type="button" value="立即預購" class="button"
-                               onclick="addToShoppingCart({{$commodity->commodity_id}});"/>
-                    </div>
                 </div>
-                <div class="col-xs-12 col-sm-5 col-md-4">
+
+                <div class="col-xs-12 col-sm-3 col-md-3">
                     <select class="form-control" name="">
                         <option value="default">規格選擇</option>
                     </select>
                 </div>
-                <div class="col-xs-12 col-sm-offset-2 col-sm-5 col-md-offset-2 col-md-4">
+                <div class="col-xs-12 col-sm-3 col-md-3">
                     <select class="form-control" name="member_city" id="amount">
                         <option value="default">數量選擇</option>
                         @for($i=1; $i<=10; $i++)
@@ -165,7 +180,15 @@
                         @endfor
                     </select>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-sm-4 col-md-4 hidden-xs">
+                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"
+                         style="margin: 0; width: 100%">
+                        <input type="button" value="立即預購" class="button"
+                               onclick="addToShoppingCart({{$commodity->commodity_id}});"/>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-4 col-md-4">
                     <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
                         <li>
                             <div id="fb-root"></div>
@@ -181,6 +204,9 @@
                                  data-url="{{url('commodity/'.$commodity->commodity_id)}}" style="display: none;"></div>
                         </li>
                     </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 browsingDiv">
+                    目前0000人正在瀏覽
                 </div>
             </div>
             <div class="clearfix"></div>

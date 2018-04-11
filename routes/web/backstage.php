@@ -6,7 +6,11 @@
 ////後台登入
 //Route::any('admin/login', 'Admin\LoginController@login');
 
-Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['admin.login.judgment'], 'prefix'=>'admin','namespace'=>'Backstage'], function (){
+Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'Backstage'], function () {
+    Route::any('mail', 'MailController@mail');
+});
+
+Route::group(['roles' => ['member', 'manager', 'admin'], 'middleware' => ['admin.login.judgment'], 'prefix' => 'admin', 'namespace' => 'Backstage'], function () {
 
     Route::get('/', 'IndexController@index');
     //後台主頁面
@@ -55,7 +59,7 @@ Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['admin.
 });
 
 
-Route::group(['roles' => ['member', 'manager', 'admin'],'middleware' => ['admin.login.judgment'],'namespace'=>'Backstage'], function (){
+Route::group(['roles' => ['member', 'manager', 'admin'], 'middleware' => ['admin.login.judgment'], 'namespace' => 'Backstage'], function () {
     Route::get('/laravel-filemanager', '\Unisharp\Laravelfilemanager\controllers\LfmController@show');
     Route::post('/laravel-filemanager/upload', '\Unisharp\Laravelfilemanager\controllers\UploadController@upload');
 });

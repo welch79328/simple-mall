@@ -13,7 +13,7 @@
         <h3 class="text-center footer_title">聯絡我們</h3>
         <div class="col-sm-offset-1 col-sm-11 col-md-10 col-md-offset-2 col-lg-9 col-lg-offset-3">
             <div class="center-block footer_detail">
-                <div>jugomall@gmail.com</div>
+                <div>jugomallservice@gmail.com</div>
                 <div>02-7709-1239</div>
                 <div>營業時間：09:00-18:00</div>
                 <br/>

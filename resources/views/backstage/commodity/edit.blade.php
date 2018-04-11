@@ -70,7 +70,10 @@
 
 
                 <tr>
-                    <th>大圖：</th>
+                    <th>
+                        <p>大圖：</p>
+                        <p>(尺寸：340*340)</p>
+                    </th>
                     <td>
                         <img src="/{{$commodity->commodity_image}}" alt="" id="comm_cover_img"
                              style="height: 200px; width: 350px;">
@@ -119,7 +122,10 @@
                 </tr>
 
                 <tr>
-                    <th>縮略圖：</th>
+                    <th>
+                        <p>大圖：</p>
+                        <p>(尺寸：340*340)</p>
+                    </th>
                     <td>
                         <div id="thumb_image">
                             @foreach($commodityImg as $v)
