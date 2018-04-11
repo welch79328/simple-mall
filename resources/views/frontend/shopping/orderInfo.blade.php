@@ -96,7 +96,7 @@
                 <div class="col-md-offset-2 col-md-8">
                     <div style="text-align: right">
                         <button type="button" class="btn btn-default" onclick="(history.go(-1))">上一步</button>
-                        <button type="submit" class="btn btn-danger">完成購買</button>
+                        <button type="submit" class="btn btn-danger">完成</button>
                     </div>
                 </div>
 

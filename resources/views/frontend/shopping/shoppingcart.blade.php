@@ -47,7 +47,7 @@
                             onclick="(window.location.href = '{{url("/")}}')" align="right">
                         繼續選購
                     </button>
-                    <input id="checkoutSubmit" type="submit" class="btn btn-info" value="立即結帳">
+                    <input id="checkoutSubmit" type="submit" class="btn btn-info" value="立即預購">
                 </div>
             </form>
         </div>
