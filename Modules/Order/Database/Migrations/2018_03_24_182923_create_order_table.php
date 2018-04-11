@@ -17,7 +17,7 @@ class CreateOrderTable extends Migration
             $table->increments('order_id');
             $table->integer('order_number');
             $table->integer('order_total');
-            $table->enum('order_status',['complete','refund','pending'])->default('Pending');
+            $table->enum('order_status',['complete','refund','pending','cancel','shipping'])->default('pending');
             $table->integer('member_id');
             $table->timestamps();
         });

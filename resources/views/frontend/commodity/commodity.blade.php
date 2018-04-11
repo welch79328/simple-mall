@@ -6,10 +6,15 @@
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
-        @media (max-width: 480px) {
-            .item_browsing {
-                text-align: center;
-            }
+        .stockDiv {
+            color: #DDDDDD;
+            font-weight: bold;
+            text-align: right
+        }
+
+        .descriptionDiv {
+            height: 120px;
+            overflow: hidden;
         }
 
         .margin-top-bottom-5px {
@@ -32,6 +37,16 @@
 
         .blankSpaceDiv {
             height: 8vh;
+        }
+
+        @media (max-width: 480px) {
+            .item_browsing {
+                text-align: center;
+            }
+
+            .descriptionDiv {
+                height: auto;
+            }
         }
     </style>
 @endsection
@@ -90,15 +105,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-8 col-md-8 single-right-left simpleCart_shelfItem">
-                <div class="col-xs-8 col-sm-8 col-md-8 margin-top-bottom-5px"
+            <div class="col-xs-12 col-sm-offset-1 col-sm-7 col-md-offset-1 col-md-7 single-right-left simpleCart_shelfItem"
+                 style="padding-left: 0; padding-right: 0">
+                <div class="col-xs-7 col-sm-7 col-md-6 margin-top-bottom-5px"
                      style="color: #DDAA00; font-weight: bold;">
                     預購數量售完即出貨
                 </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 margin-top-bottom-5px"
-                     style="color: #DDDDDD; font-weight: bold;">
-                    剩餘組數 {{$commodity->commodity_stock}}</div>
-                <div class="col-xs-12 col-sm-12 col-md-12 margin-top-bottom-5px">
+                <div class="col-xs-5 col-sm-5 col-md-4 margin-top-bottom-5px stockDiv">
+                    剩餘組數 {{$commodity->commodity_stock}}
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 margin-top-bottom-5px">
                     <h3>
                         @if(!empty($commodity->commodity_subtitle))
                             {{$commodity->commodity_subtitle}}
@@ -107,12 +123,13 @@
                         @endif
                     </h3>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 margin-top-bottom-5px">
-                    <div style="height: 152px; overflow: hidden;">
+                <div class="col-xs-12 col-sm-12 col-md-10 margin-top-bottom-5px">
+                    <div class="descriptionDiv">
                         {!! $commodity->commodity_description !!}
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-4 margin-top-bottom-5px">
+                <div class="col-xs-12 col-sm-offset-7 col-sm-5 col-md-offset-6 col-md-4 margin-top-bottom-5px"
+                     style="text-align: right;">
                     {{--<div>--}}
                     {{--<del style="margin-left: 0px;">售價$69.71</del>--}}
                     {{--</div>--}}
@@ -122,35 +139,31 @@
                             ${{$commodity->commodity_price}}
                         </span>
                     </div>
-                    <div class="item_browsing">
+                    <div class="item_browsing" style="font-size: 15px">
                         目前0000人正在瀏覽
                     </div>
+                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2 hidden-xs"
+                         style="margin: 0; width: 100%">
+                        <input type="button" value="立即預購" class="button"
+                               onclick="addToShoppingCart({{$commodity->commodity_id}});"/>
+                    </div>
                 </div>
-                <div class="margin-top-bottom-5px">
-                    <div class="col-xs-12 col-sm-4 col-md-4">
-                        <select class="form-control" name="">
-                            <option value="default">規格選擇</option>
-                        </select>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-4">
-                        <select class="form-control" name="member_city" id="amount">
-                            <option value="default">數量選擇</option>
-                            @for($i=1; $i<=10; $i++)
-                                @if($i == 1)
-                                    <option value="{{$i}}" selected>{{$i}}</option>
-                                @else
-                                    <option value="{{$i}}">{{$i}}</option>
-                                @endif
-                            @endfor
-                        </select>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-4 hidden-xs">
-                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"
-                             style="margin: 0;">
-                            <input type="button" value="立即預購" class="button"
-                                   onclick="addToShoppingCart({{$commodity->commodity_id}});"/>
-                        </div>
-                    </div>
+                <div class="col-xs-12 col-sm-5 col-md-4">
+                    <select class="form-control" name="">
+                        <option value="default">規格選擇</option>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-offset-2 col-sm-5 col-md-offset-2 col-md-4">
+                    <select class="form-control" name="member_city" id="amount">
+                        <option value="default">數量選擇</option>
+                        @for($i=1; $i<=10; $i++)
+                            @if($i == 1)
+                                <option value="{{$i}}" selected>{{$i}}</option>
+                            @else
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endif
+                        @endfor
+                    </select>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
