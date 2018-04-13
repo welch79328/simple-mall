@@ -205,6 +205,7 @@
 
                     </td>
                 </tr>
+
                 <tr>
                     <th>規格：</th>
                     <td>
@@ -224,14 +225,14 @@
                 <tr>
                     <th>庫存：</th>
                     <td>
-                        <input type="number" min="0" style="height: 28px;" name="commodity_stock">
+                        <input type="number" min="0" style="height: 28px;" name="commodity_stock" value="0">
                     </td>
                 </tr>
 
                 <tr>
                     <th>安全庫存：</th>
                     <td>
-                        <input type="number" min="0" style="height: 28px;" name="commodity_safe_stock">
+                        <input type="number" min="0" style="height: 28px;" name="commodity_safe_stock" value="0">
                     </td>
                 </tr>
 

@@ -215,6 +215,19 @@
                 </tr>
 
                 <tr>
+                    <th>規格：</th>
+                    <td>
+                        <div id="specBlock">
+                            @foreach($spec_array as $spec)
+                                <input type="text" name="spec[]" value="{{$spec->spec}}">
+                            @endforeach
+                        </div>
+                        <input type="button" class="back" value="新增" style="line-height:5px;"
+                               onclick="createTextInput()">
+                    </td>
+                </tr>
+
+                <tr>
                     <th>定價：</th>
                     <td>
                         <input type="number" min="1" name="commodity_price" style="height: 28px;"
@@ -302,5 +315,13 @@
             </table>
         </form>
     </div>
-
+    <script>
+        function createTextInput() {
+            var input = $('<input />', {
+                type: 'text',
+                name: "spec[]",
+            });
+            input.appendTo($("#specBlock"));
+        }
+    </script>
 @endsection

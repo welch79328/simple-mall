@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Modules\Category\Entities\Category;
 use Modules\Commodity\Entities\Commodity;
 use Modules\Commodity\Entities\CommodityImg;
-
+use Modules\Commodity\Entities\CommoditySpec;
 
 class CommodityController extends Controller
 {
@@ -68,29 +68,29 @@ class CommodityController extends Controller
     {
         try {
             DB::beginTransaction();
-
             $input = Input::except('_token', 'file_upload', 'file_upload1');
             $input['commodity_creator'] = session('admin_member.member_name');
             $image = explode(',', $input['image']);
             $input['commodity_period'] = explode(' to ', $input['commodity_period']);
             $input['commodity_start_time'] = $input['commodity_period'][0];
             $input['commodity_end_time'] = $input['commodity_period'][1];
-            $speces = $input['spec'];
-            dd($input);
+            $speces = (isset($input['spec'])) ? $input['spec'] : [];
             unset($input['commodity_period']);
             unset($input['image']);
-
+            unset($input['spec']);
 
             $rules = [
                 'commodity_title' => 'required',
-//                'commodity_description'=>'required',
+                'commodity_price' => 'required',
+                'commodity_stock' => 'required',
+                'commodity_safe_stock' => 'required',
             ];
-
             $message = [
                 'commodity_title.required' => '商品名稱不能為空!',
-//                'commodity_description.required'=>'商品內容不能為空!',
+                'commodity_price.required' => '商品價錢不能為空!',
+                'commodity_stock.required' => '商品庫存不能為空!',
+                'commodity_safe_stock.required' => '商品安全庫存不能為空!',
             ];
-
             $validator = Validator::make($input, $rules, $message);
 
             if ($validator->passes()) {
@@ -100,23 +100,20 @@ class CommodityController extends Controller
                     $commodityImg = [$k => $v, 'commodity_id' => $re->commodity_id];
                     CommodityImg::create($commodityImg);
                 }
-                foreach () {
-
+                foreach ($speces as $spec) {
+                    if (!empty($spec)) {
+                        $commoditySpec = ["spec" => $spec, 'commodity_id' => $re->commodity_id];
+                        CommoditySpec::create($commoditySpec);
+                    }
                 }
                 DB::commit();
                 return redirect('admin/commodity');
-//                if($re){
-//                    return redirect('admin/commodity');
-//                }else {
-//                    return back()->with('errors', '數據填充錯誤, 請稍後重試');
-//                }
             } else {
                 return back()->withErrors($validator);
             }
-
         } catch (\Exception $e) {
             DB::rollBack();
-
+            //return back()->with('errors', $e->getMessage());
             return back()->with('errors', '數據填充錯誤, 請稍後重試');
         }
     }
@@ -145,7 +142,8 @@ class CommodityController extends Controller
             $commodityImg_array = $commodityImg_array . ',' . $v->image;
         }
         $commodityImg_array = substr($commodityImg_array, 1);
-        return view('backstage.commodity.edit', compact('data', 'commodity', 'commodityImg', 'commodityImg_array'));
+        $spec_array = CommoditySpec::where('commodity_id', $commodity_id)->orderBy("id", "asc")->get();
+        return view('backstage.commodity.edit', compact('data', 'commodity', 'commodityImg', 'commodityImg_array', 'spec_array'));
     }
 
     /**
@@ -155,26 +153,57 @@ class CommodityController extends Controller
      */
     public function update(Request $request, $commodity_id)
     {
-        $input = Input::except('_token', '_method', 'file_upload', 'file_upload1');
-        $image = explode(',', $input['image']);
-        $input['commodity_period'] = explode('to ', $input['commodity_period']);
-        $input['commodity_start_time'] = $input['commodity_period'][0];
-        $input['commodity_end_time'] = $input['commodity_period'][1];
-        $input['commodity_creator'] = session('admin_member.member_name');
+        try {
+            DB::beginTransaction();
+            $input = Input::except('_token', '_method', 'file_upload', 'file_upload1');
+            $image = explode(',', $input['image']);
+            $input['commodity_period'] = explode(' to ', $input['commodity_period']);
+            $input['commodity_start_time'] = $input['commodity_period'][0];
+            $input['commodity_end_time'] = $input['commodity_period'][1];
+            $input['commodity_creator'] = session('admin_member.member_name');
+            $speces = (isset($input['spec'])) ? $input['spec'] : [];
 
-        unset($input['commodity_period']);
-        unset($input['image']);
-        $re = Commodity::where('commodity_id', $commodity_id)->update($input);
+            unset($input['commodity_period']);
+            unset($input['image']);
+            unset($input['spec']);
 
-        CommodityImg::where('commodity_id', $commodity_id)->delete();
-        foreach ($image as $k => $v) {
-            $k = 'image';
-            $commodityImg = [$k => $v, 'commodity_id' => $commodity_id];
-            $re1 = CommodityImg::create($commodityImg);
-        }
-        if ($re || $re1) {
+            $rules = [
+                'commodity_title' => 'required',
+                'commodity_price' => 'required',
+                'commodity_stock' => 'required',
+                'commodity_safe_stock' => 'required',
+            ];
+            $message = [
+                'commodity_title.required' => '商品名稱不能為空!',
+                'commodity_price.required' => '商品價錢不能為空!',
+                'commodity_stock.required' => '商品庫存不能為空!',
+                'commodity_safe_stock.required' => '商品安全庫存不能為空!',
+            ];
+            $validator = Validator::make($input, $rules, $message);
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            Commodity::where('commodity_id', $commodity_id)->update($input);
+
+            CommodityImg::where('commodity_id', $commodity_id)->delete();
+            foreach ($image as $k => $v) {
+                $k = 'image';
+                $commodityImg = [$k => $v, 'commodity_id' => $commodity_id];
+                CommodityImg::create($commodityImg);
+            }
+            CommoditySpec::where('commodity_id', $commodity_id)->delete();
+            foreach ($speces as $spec) {
+                if (!empty($spec)) {
+                    $commoditySpec = ["spec" => $spec, 'commodity_id' => $commodity_id];
+                    CommoditySpec::create($commoditySpec);
+                }
+            }
+            DB::commit();
             return redirect('admin/commodity');
-        } else {
+        } catch (\Exception $e) {
+            DB::rollBack();
+            //return back()->with('errors', $e->getMessage());
             return back()->with('errors', '商品更新失敗, 請稍後重試');
         }
     }
@@ -185,20 +214,25 @@ class CommodityController extends Controller
      */
     public function destroy($commodity_id)
     {
-        $re = Commodity::where('commodity_id', $commodity_id)->delete();
-        $re1 = CommodityImg::where('commodity_id', $commodity_id)->delete();
-        if ($re || $re1) {
+        try {
+            DB::beginTransaction();
+            Commodity::where('commodity_id', $commodity_id)->delete();
+            CommodityImg::where('commodity_id', $commodity_id)->delete();
+            CommoditySpec::where('commodity_id', $commodity_id)->delete();
+            DB::commit();
             $data = [
                 'status' => 0,
                 'msg' => '商品刪除成功!',
             ];
-        } else {
+            return $data;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            //return back()->with('errors', $e->getMessage());
             $data = [
                 'status' => 1,
                 'msg' => '商品刪除失敗, 請稍後重試!',
             ];
+            return $data;
         }
-
-        return $data;
     }
 }
