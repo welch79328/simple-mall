@@ -17,7 +17,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $data = Advertisement::orderBy('updated_at','desc')->paginate(10);
+        $data = Advertisement::orderBy('updated_at', 'desc')->paginate(10);
 
 //        $now = date("Y/m/d h:i:s");
 //        $date = strtotime($now);
@@ -27,7 +27,7 @@ class AdvertisementController extends Controller
 //            dd(3333,$date);
 //        }
 
-        return view('backstage.advertisement.index',compact('data'));
+        return view('backstage.advertisement.index', compact('data'));
     }
 
     /**
@@ -46,37 +46,35 @@ class AdvertisementController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            $input = Input::except('_token','file_upload');
+        try {
+            $input = Input::except('_token', 'file_upload');
             $input['advertisement_creator'] = session('admin_member.member_name');
-            $input['advertisement_period'] = explode('to ',$input['advertisement_period']);
+            $input['advertisement_period'] = explode(' to ', $input['advertisement_period']);
             $input['advertisement_start_time'] = $input['advertisement_period'][0];
             $input['advertisement_end_time'] = $input['advertisement_period'][1];
 
             unset($input['advertisement_period']);
 
-            $rules=[
-                'advertisement_name'=>'required',
+            $rules = [
+                'advertisement_name' => 'required',
             ];
 
-            $message=[
-                'advertisement_name.required'=>'廣告名稱不能為空!',
+            $message = [
+                'advertisement_name.required' => '廣告名稱不能為空!',
             ];
-            $validator = Validator::make($input,$rules,$message);
-
-            if($validator->passes()){
+            $validator = Validator::make($input, $rules, $message);
+            if ($validator->passes()) {
                 $re = Advertisement::create($input);
-
                 return redirect('admin/advertisement');
 //                if($re){
 //                    return redirect('admin/commodity');
 //                }else {
 //                    return back()->with('errors', '數據填充錯誤, 請稍後重試');
 //                }
-            }else{
+            } else {
                 return back()->withErrors($validator);
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return back()->with('errors', '數據填充錯誤, 請稍後重試');
         }
     }
@@ -96,8 +94,8 @@ class AdvertisementController extends Controller
      */
     public function edit($advertisement_id)
     {
-        $data = Advertisement::where('advertisement_id',$advertisement_id)->first();
-        return view('backstage.advertisement.edit',compact('data'));
+        $data = Advertisement::where('advertisement_id', $advertisement_id)->first();
+        return view('backstage.advertisement.edit', compact('data'));
     }
 
     /**
@@ -105,19 +103,19 @@ class AdvertisementController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request,$advertisement_id)
+    public function update(Request $request, $advertisement_id)
     {
-        $input = Input::except('_token','_method','file_upload');
-        $input['advertisement_period'] = explode('to ',$input['advertisement_period']);
+        $input = Input::except('_token', '_method', 'file_upload');
+        $input['advertisement_period'] = explode('to ', $input['advertisement_period']);
         $input['advertisement_start_time'] = $input['advertisement_period'][0];
         $input['advertisement_end_time'] = $input['advertisement_period'][1];
         $input['advertisement_creator'] = session('admin_member.member_name');
 
         unset($input['advertisement_period']);
-        $re = Advertisement::where('advertisement_id',$advertisement_id)->update($input);
-        if($re){
+        $re = Advertisement::where('advertisement_id', $advertisement_id)->update($input);
+        if ($re) {
             return redirect('admin/advertisement');
-        }else{
+        } else {
             return back()->with('errors', '商品更新失敗, 請稍後重試');
         }
     }
@@ -128,13 +126,13 @@ class AdvertisementController extends Controller
      */
     public function destroy($advertisement_id)
     {
-        $re = Advertisement::where('advertisement_id',$advertisement_id)->delete();
-        if($re){
+        $re = Advertisement::where('advertisement_id', $advertisement_id)->delete();
+        if ($re) {
             $data = [
                 'status' => 0,
                 'msg' => '廣告刪除成功!',
             ];
-        }else{
+        } else {
             $data = [
                 'status' => 1,
                 'msg' => '廣告刪除失敗, 請稍後重試!',

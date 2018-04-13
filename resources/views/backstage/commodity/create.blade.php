@@ -205,6 +205,14 @@
 
                     </td>
                 </tr>
+                <tr>
+                    <th>規格：</th>
+                    <td>
+                        <div id="specBlock"></div>
+                        <input type="button" class="back" value="新增" style="line-height:5px;"
+                               onclick="createTextInput()">
+                    </td>
+                </tr>
 
                 <tr>
                     <th>定價：</th>
@@ -286,5 +294,13 @@
             </table>
         </form>
     </div>
-
+    <script>
+        function createTextInput() {
+            var input = $('<input />', {
+                type: 'text',
+                name: "spec[]",
+            });
+            input.appendTo($("#specBlock"));
+        }
+    </script>
 @endsection

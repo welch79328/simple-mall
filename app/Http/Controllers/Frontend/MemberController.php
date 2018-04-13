@@ -212,13 +212,14 @@ class MemberController extends CommonController
         return CommonController::successResponse("成功取消訂單！");
     }
 
-    public function signIn()
+    public function signIn(Request $request)
     {
+        $redirectPath = $request->get("path", "shoppingcart/show");
         if (!empty(session("member"))) {
-            return redirect('/');
+            return redirect("$redirectPath");
         }
         parent::__construct();
-        return view("frontend.member.signin");
+        return view("frontend.member.signin", compact("redirectPath"));
     }
 
     public function signUp()

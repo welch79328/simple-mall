@@ -7,6 +7,7 @@
         <div class="container">
             <form class="form-horizontal" action="{{url('member/login')}}" method="post">
                 {{csrf_field()}}
+                <input type="hidden" name="path" value="{{$redirectPath}}">
                 <div class="col-md-offset-2 col-md-8">
                     <h2 style="margin-bottom: 20px">登錄</h2>
 
@@ -24,7 +25,7 @@
                         <p style="color: red; text-align: center;">{{session('msg')}}</p>
                     @endif
                     <div style="text-align: right">
-                        <a class="agile-icon btn btn-default" href="{{url('member_signup')}}"></i>尚未擁有帳號，立即註冊</a>
+                        <a class="agile-icon btn btn-default" href="{{url('member_signup')}}"></input>尚未擁有帳號，立即註冊</a>
                         <button type="submit" class="btn btn-primary">登錄</button>
                     </div>
                 </div>

@@ -96,7 +96,7 @@
                 <div class="col-md-offset-2 col-md-8">
                     <div style="text-align: right">
                         <button type="button" class="btn btn-default" onclick="(history.go(-1))">上一步</button>
-                        <button type="submit" class="btn btn-danger">完成</button>
+                        <button type="submit" class="btn btn-danger" id="orderSubmitButton">完成</button>
                     </div>
                 </div>
 
@@ -130,11 +130,14 @@
         function ajaxSubmitOrder() {
             $("#addOrderForm").submit(function (e) {
                 var url = "{{url('order_setup')}}"; // the script where you handle the form input.
+                showModal("waitModal", "提示", "請等候系統處理訂單！");
+                $("#orderSubmitButton").prop('disabled', true);
                 $.ajax({
                     url: url,
                     type: "POST",
                     data: $(this).serialize(), // serializes the form's elements.
                     success: function (data) {
+                        console.log(data);
                         var callback = function () {
                             window.location.href = "{{url('/')}}";
                         }
@@ -142,6 +145,8 @@
                             showModal("errorModal", "提示", data.msg, callback);
                             return;
                         }
+                        $("#waitModal").modal("hide");
+                        $("#orderSubmitButton").prop('disabled', false);
                         showModal("successModal", "提示", "感謝您的購買，請等候頁面跳轉，或按下關閉即可。", callback);
                         setTimeout(callback, 2000);
                     }

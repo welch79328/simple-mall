@@ -49,7 +49,7 @@
                 <tr>
                     <th>
                         <p>廣告圖：</p>
-                        <p>(建議尺寸：1680*700)</p>
+                        <p>(建議尺寸：1680*600)</p>
                     </th>
                     <td>
                         <img src="/{{$data->advertisement_image}}" alt="" id="advertisement_cover_img"

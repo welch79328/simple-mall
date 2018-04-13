@@ -34,8 +34,8 @@
         }
 
         .descriptionDiv {
-            height: 120px;
-            overflow: hidden;
+            height: 170px;
+            overflow: auto;
         }
 
         .margin-top-bottom-5px {

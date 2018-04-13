@@ -52,7 +52,7 @@
                 <tr>
                     <th>
                         <p>廣告圖：</p>
-                        <p>(建議尺寸：1680*700)</p>
+                        <p>(建議尺寸：1680*600)</p>
                     </th>
                     <td>
                         <img src="" alt="" id="advertisement_cover_img" style="max-height: 200px; max-width: 350px;">
@@ -138,14 +138,14 @@
                 <tr>
                     <th>廣告排序：</th>
                     <td>
-                        <input type="number" min="1" max="10" style="height: 28px;" name="advertisement_ordering">
+                        <input type="number" min="1" max="10" style="height: 28px;" name="advertisement_ordering" value="1">
                     </td>
                 </tr>
 
                 <tr>
                     <th>廣告點數：</th>
                     <td>
-                        <input type="number" min="1" style="height: 28px;" name="advertisement_point">
+                        <input type="number" min="1" style="height: 28px;" name="advertisement_point" value="1">
                     </td>
                 </tr>
 

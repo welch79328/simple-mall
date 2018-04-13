@@ -78,6 +78,7 @@ class LoginController extends Controller
     {
         try {
             $input = $request->input();
+            $redirectPath = $input["path"];
             $member = Member::where('member_account', $input['member_account'])->first();
             if (empty($member)) {
                 return back()->with('msg', '帳號或是密碼錯誤');
@@ -94,7 +95,7 @@ class LoginController extends Controller
                 'ip' => $ip,
             ]);
 
-            return redirect('shoppingcart/show');
+            return redirect("$redirectPath");
 
         } catch (\Exception $e) {
             return view('backstage.member.login');

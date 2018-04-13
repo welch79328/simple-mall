@@ -2,6 +2,7 @@
 
 namespace Modules\Order\Http\Controllers;
 
+use App\Http\Controllers\Backstage\MailController;
 use App\Helpers\Report;
 use App\Helpers\TownshipHelper;
 use App\Http\Controllers\Frontend\CommonController;
@@ -176,17 +177,17 @@ class OrderController extends CommonController
     {
         $carts = Cart::content();
         if (count($carts) == 0) {
-            return back()->with("errors.msg", "下單失敗：購物車內沒有商品！");
+            return redirect("shoppingcart/show")->with("errors.msg", "下單失敗：購物車內沒有商品！");
         }
         foreach ($carts as $item) {
             $commodity = Commodity::find($item->id);
             if ($item->qty > $commodity->commodity_stock) {
-                return back()->with("errors.msg", "下單失敗：$commodity->commodity_title 的庫存量不足，只剩 $commodity->commodity_stock 組！");
+                return redirect("shoppingcart/show")->with("errors.msg", "下單失敗：$commodity->commodity_title 的庫存量不足，只剩 $commodity->commodity_stock 組！");
             }
         }
         new CommonController;
-        $session = session('member.member_id');
-        $data = Member::where('member_id', $session)->first();
+        $member_id = session('member.member_id');
+        $data = Member::where('member_id', $member_id)->first();
         if (!empty($data->member_tel)) {
             $tel_explode = explode("-", $data->member_tel);
             $data->tel_code = $tel_explode[0];
@@ -204,9 +205,10 @@ class OrderController extends CommonController
         $input = $request->only('member_name', 'member_phone', 'tel_code', 'member_tel', 'member_mail', 'member_city', 'member_area', 'member_zipcode', 'member_location');
         $input["member_tel"] = $input["tel_code"] . "-" . $input["member_tel"];
         unset($input["tel_code"]);
-        $session = session('member.member_id');
-//        DB::beginTransaction();
+        $member_id = session('member.member_id');
         $carts = Cart::content();
+
+        //檢查商品庫存是否足夠
         foreach ($carts as $item) {
             $commodity = Commodity::find($item->id);
             if ($item->qty > $commodity->commodity_stock) {
@@ -219,18 +221,15 @@ class OrderController extends CommonController
         }
 
         try {
-
-//            $session = 4;
-            Member::where('member_id', $session)->update($input);
-            $cart = Cart::content();
+            DB::beginTransaction();
+            Member::where('member_id', $member_id)->update($input);
             $re = Order::create([
                 'order_number' => substr((string)time(), -8),
                 'order_total' => Cart::total(),
-                'member_id' => $session,
+                'member_id' => $member_id,
             ]);
             if ($re) {
-                foreach ($cart as $v) {
-//            dd($v,$v->qty,$v->name,$v->price);
+                foreach ($carts as $v) {
                     $commodity = Commodity::find($v->id);
                     $commodity->commodity_stock -= $v->qty;
                     $commodity->save();
@@ -245,6 +244,7 @@ class OrderController extends CommonController
                 }
 //                DB::commit();
                 Cart::destroy();
+                $result = MailController::preorder();
                 $response = [
                     "result" => true,
                     "msg" => "新增訂單成功"
@@ -252,8 +252,7 @@ class OrderController extends CommonController
                 return $response;
             }
         } catch (\Exception $e) {
-//            DB::rollBack();
-//            dd('error');
+            DB::rollBack();
         }
     }
 

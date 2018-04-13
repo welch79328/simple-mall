@@ -6,8 +6,7 @@
     <div class="new_arrivals_agile_w3ls_info">
         <div class="container">
             <h2>購物車({{count($cart)}})</h2>
-            <form id="shoppingCartForm" action="{{url('order_info')}}" method="post">
-                {{csrf_field()}}
+            <form id="shoppingCartForm" action="{{url('order_info')}}" method="get">
                 <div class="table-responsive" style="margin-top: 20px">
                     <!-- Table -->
                     <table class="table">

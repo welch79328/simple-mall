@@ -22,7 +22,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
     //首頁--end
 
     //會員--start
-    Route::get('member_signin', 'MemberController@signIn');
+    Route::get('member_signin', 'MemberController@signIn')->name("member_signin");
     Route::get('member_signup', 'MemberController@signUp');
     Route::post('member_store', 'MemberController@store');
     Route::group(['roles' => ['member'], 'middleware' => ['web', 'login.judgment']], function () {

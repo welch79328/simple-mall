@@ -23,13 +23,13 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="text-align: left;">
                     @if(!empty(session('member')))
-                        <li style="width: 100%;"><a href="{{url('member/quit')}}">登出</li>
+                        <li style="width: 100%;"><a href="{{url('member/quit')}}">登出</a></li>
                         <li style="width: 100%;"><a href="{{url('member_order')}}">訂單查詢</a></li>
                         <li style="width: 100%;"><a href="{{url('member_info')}}">資料修改</a></li>
                         <li style="width: 100%;"><a href="{{url('member_password')}}">密碼修改</a></li>
                     @else
-                        <li style="width: 100%;"><a href="{{url('member_signin')}}">登錄</li>
-                        <li style="width: 100%;"><a href="{{url('member_signup')}}">註冊</li>
+                        <li style="width: 100%;"><a href="{{url('member_signin')}}">登錄</a></li>
+                        <li style="width: 100%;"><a href="{{url('member_signup')}}">註冊</a></li>
                     @endif
 
                 </ul>
@@ -57,6 +57,7 @@
             </div>
         </div>
     </div>
+    <div class="clearfix"></div>
 </div>
 <!-- //header -->
 <!-- header-bot -->
@@ -70,7 +71,7 @@
                     </form>
                 </div>-->
         <!-- header-bot -->
-        <div class="col-xs-12 col-md-12 logo_agile col-sm-12" style="text-align: center">
+        <div class="col-xs-12 col-md-12 logo_agile col-sm-12">
             <h1 class="hidden-xs">
                 <a href="{{url('/')}}"><img src="{{url('images/frontend/J-UGO01-01.png')}}" width="250px"></a>
             </h1>
@@ -85,7 +86,7 @@
                         <li><a href="#" class="facebook">
                                 <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
                                 <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-                        <li><a href="#" class="twitter"> 
+                        <li><a href="#" class="twitter">
                                 <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
                                 <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
                         <li><a href="#" class="instagram">
