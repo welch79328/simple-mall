@@ -87,24 +87,29 @@ class ShoppingcartController extends Controller
             ];
             return $response;
         }
+
         $commodity = Commodity::find($commodity_id);
         $amount = $request->get("amount", 1);
         $carts = Cart::content();
+        $quantity_in_cart = 0;
+
         foreach ($carts as $cart) {
             if ($cart->id == $commodity_id) {
-                $totalAmount = (int)$cart->qty + (int)$amount;
-                if ($totalAmount > $commodity->commodity_stock) {
-                    $response = [
-                        "result" => false,
-                        "msg" => "加入購物車失敗：商品庫存量不足！"
-                    ];
-                    return $response;
-                }
+                $quantity_in_cart = $cart->qty;
             }
-
         }
+
+        $sum = (int)$quantity_in_cart + (int)$amount;
+        if ($sum > (int)$commodity->commodity_stock) {
+            $response = [
+                "result" => false,
+                "msg" => "加入購物車失敗：商品庫存量不足！"
+            ];
+            return $response;
+        }
+
         Cart::add($commodity->commodity_id, $commodity->commodity_title, $amount, $commodity->commodity_price);
-        $cartCount = count($carts);
+        $cartCount = Cart::count();
         $response = [
             "result" => true,
             "msg" => "加入購物車成功！",
