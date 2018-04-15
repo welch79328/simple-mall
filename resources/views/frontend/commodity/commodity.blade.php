@@ -9,7 +9,7 @@
         .addCartButton {
             width: 100%;
             height: 100%;
-            font-size: 3vh;
+            font-size: 25px;
             color: white;
             background-color: #e71d1c;
             border-radius: 0;
@@ -26,9 +26,9 @@
             vertical-align: bottom;
             padding-right: 0;
             padding-left: 0;
-            padding-bottom: 0.5vh;
-            padding-top: 0.5vh;
-            font-size: 1.8vh;
+            padding-bottom: 4px;
+            padding-top: 4px;
+            font-size: 14.5px;
             width: 100%;
             background-color: #f4e857;
         }
@@ -41,7 +41,7 @@
 
         .priceDiv {
             color: #e71d1c;
-            font-size: 25px;
+            font-size: 3vh;
             font-weight: 600;
             letter-spacing: 1px;
         }
@@ -108,7 +108,7 @@
             }
 
             .priceDiv {
-                font-size: 3vh;
+                font-size: 24px;
                 letter-spacing: 0;
             }
         }
@@ -116,7 +116,6 @@
 @endsection
 
 @section('content')
-
     <div class="fixedDiv visible-xs">
         <button type="button" class="btn btn-danger addCartButton"
                 onclick="addToShoppingCart({{$commodity->commodity_id}});">
@@ -124,6 +123,7 @@
         </button>
         <div class="clearfix"></div>
     </div>
+
     <!-- banner-bootom-w3-agileits -->
     <div id="scrollTopDiv" class="banner-bootom-w3-agileits">
         <div class="container">
@@ -242,6 +242,7 @@
     </div>
 
     <div class="col-xs-12 infoDiv visible-xs">
+
         <div class="col-xs-6" style="padding-right: 10px">
             <div style="color: #e71d1c">
                 剩餘時間:
@@ -501,10 +502,7 @@
             }
             $.get("{{url('shopping')}}/" + commodity_id, {amount: amount}, function (data) {
                 if (!data.result) {
-                    var callback = function () {
-                        location.reload();
-                    };
-                    showModal("errorModal", "提示", data.msg, callback);
+                    showModal("errorModal", "提示", data.msg);
                     return;
                 }
                 $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
