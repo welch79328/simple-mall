@@ -6,6 +6,32 @@
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
+        .addCartButton {
+            width: 100%;
+            height: 100%;
+            font-size: 2vh;
+            color: white;
+            background-color: #e71d1c;
+        }
+
+        .timeSpan {
+            padding-left: 2px;
+            padding-right: 2px;
+            background-color: #e71d1c;
+            color: white;
+        }
+
+        .infoDiv {
+            vertical-align: bottom;
+            padding-right: 0;
+            padding-left: 0;
+            padding-bottom: 0.5vh;
+            padding-top: 0.5vh;
+            font-size: 1.8vh;
+            width: 100%;
+            background-color: #f4e857;
+        }
+
         .remindDiv {
             color: #DDAA00;
             font-weight: bold;
@@ -13,6 +39,7 @@
         }
 
         .priceDiv {
+            color: #e71d1c;
             font-size: 25px;
             font-weight: 600;
             letter-spacing: 1px;
@@ -43,6 +70,16 @@
             margin-top: 5px;
         }
 
+        .margin-top-bottom-10px {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .margin-top-bottom-20px {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
         .padding-top-bottom-20px {
             padding-top: 20px;
             padding-bottom: 20px;
@@ -52,7 +89,7 @@
             position: fixed;
             bottom: 0;
             width: 100vw;
-            height: 8vh;
+            height: 5vh;
             z-index: 99999;
         }
 
@@ -61,46 +98,34 @@
         }
 
         @media (max-width: 480px) {
-            .browsingDiv {
-                text-align: center;
+            #scrollTopDiv {
+                padding-bottom: 0;
             }
 
             .descriptionDiv {
                 height: auto;
+            }
+
+            .priceDiv {
+                font-size: 2.5vh;
+                letter-spacing: 0;
             }
         }
     </style>
 @endsection
 
 @section('content')
-    <!--/single_page-->
-    <!-- /banner_bottom_agile_info -->
-    <!--<div class="page-head_agile_info_w3l">
-    <div class="container">
-        <h3>Single <span>Page </span></h3>
-        /w3_short
-        <div class="services-breadcrumb">
-            <div class="agile_inner_breadcrumb">
 
-                <ul class="w3_short">
-                    <li><a href="{{url('/')}}">Home</a><i>|</i></li>
-                    <li>Single Page</li>
-                </ul>
-            </div>
-        </div>
-        //w3_short
+    <div class="fixedDiv visible-xs">
+        <button type="button" class="btn addCartButton" onclick="addToShoppingCart({{$commodity->commodity_id}});">
+            剩餘組數{{$commodity->commodity_stock}}/立即預購
+        </button>
+        <div class="clearfix"></div>
     </div>
-</div>-->
-
     <!-- banner-bootom-w3-agileits -->
-    <div class="banner-bootom-w3-agileits">
-        <div class="fixedDiv visible-xs">
-            <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; font-size: 3vh;"
-                    onclick="addToShoppingCart({{$commodity->commodity_id}});">立即預購
-            </button>
-        </div>
+    <div id="scrollTopDiv" class="banner-bootom-w3-agileits">
         <div class="container">
-            <div class="col-xs-12 col-sm-4 col-md-4 single-right-left ">
+            <div class="col-xs-12 col-sm-4 col-md-4 single-right-left" style="margin-bottom: 0px;">
                 <div class="grid images_3_of_2">
                     <div class="flexslider">
                         <ul class="slides">
@@ -126,7 +151,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-offset-1 col-sm-7 col-md-offset-1 col-md-7 single-right-left simpleCart_shelfItem"
+            <div class="col-xs-12 col-sm-offset-1 col-sm-7 col-md-offset-1 col-md-7 single-right-left simpleCart_shelfItem hidden-xs"
                  style="padding-left: 0; padding-right: 0">
                 <div class="col-xs-7 col-sm-7 col-md-6 margin-top-bottom-5px remindDiv">
                     預購數量售完即出貨
@@ -201,7 +226,8 @@
                         </li>
                         <li>
                             <div class="line-it-button" data-lang="zh_Hant" data-type="share-a"
-                                 data-url="{{url('commodity/'.$commodity->commodity_id)}}" style="display: none;"></div>
+                                 data-url="{{url('commodity/'.$commodity->commodity_id)}}"
+                                 style="display: none;"></div>
                         </li>
                     </ul>
                 </div>
@@ -211,6 +237,90 @@
             </div>
             <div class="clearfix"></div>
         </div>
+    </div>
+
+    <div class="col-xs-12 infoDiv visible-xs">
+        <div class="col-xs-6" style="padding-right: 10px">
+            <div style="color: #e71d1c">
+                剩餘時間:
+                <input name="endTime" type="hidden" value="{{$commodity->commodity_end_time}}">
+                <span hidden>
+                    <span id="hourSpan" class="timeSpan"></span>
+                    <span>:</span>
+                    <span id="minSpan" class="timeSpan"></span>
+                    <span>:</span>
+                    <span id="secSpan" class="timeSpan"></span>
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <del>售價0000</del>
+        </div>
+        <div class="col-xs-6" style="padding-right: 10px; margin-top: 10px;">
+            <div style="color: #d0a31e">目前0000人正在瀏覽</div>
+        </div>
+        <div class="col-xs-6" style="padding-right: 0;">
+            <div class="priceDiv">
+                預購價 ${{$commodity->commodity_price}}
+            </div>
+        </div>
+    </div>
+
+    <div class="banner-bootom-w3-agileits visible-xs">
+        <div class="container">
+            <div class="col-xs-12 col-sm-offset-1 col-sm-7 col-md-offset-1 col-md-7 single-right-left simpleCart_shelfItem"
+                 style="padding-left: 0; padding-right: 0">
+                <div class="col-xs-12 margin-top-bottom-20px">
+                    <h3 style="font-size: 25px">
+                        @if(!empty($commodity->commodity_subtitle))
+                            {{$commodity->commodity_subtitle}}
+                        @else
+                            {{$commodity->commodity_title}}
+                        @endif
+                    </h3>
+                </div>
+                <div class="col-xs-12 margin-top-bottom-10px">
+                    <select class="form-control" name="">
+                        <option value="default">規格選擇</option>
+                    </select>
+                </div>
+                <div class="col-xs-12 margin-top-bottom-10px">
+                    <select class="form-control" name="member_city" id="amount">
+                        <option value="default">數量選擇</option>
+                        @for($i=1; $i<=10; $i++)
+                            @if($i == 1)
+                                <option value="{{$i}}" selected>{{$i}}</option>
+                            @else
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endif
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-xs-12 margin-top-bottom-10px">
+                    <div style="color: #d0a31e; text-align: center;">預購數量售完即出貨</div>
+                </div>
+                <div class="col-xs-12">
+                    <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls"
+                        style="margin-top: 0;">
+                        <li>
+                            <div id="fb-root"></div>
+                            <div class="fb-share-button" data-href="{{url('commodity/'.$commodity->commodity_id)}}"
+                                 data-layout="button" data-size="small" data-mobile-iframe="false">
+                                <a target="_blank"
+                                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                                   class="fb-xfbml-parse-ignore"></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="line-it-button" data-lang="zh_Hant" data-type="share-a"
+                                 data-url="{{url('commodity/'.$commodity->commodity_id)}}"
+                                 style="display: none;"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
     </div>
 
     <div class="banner-bootom-w3-agileits">
@@ -263,55 +373,11 @@
             </div>
         </div>
     </div>
-    <!--//single_page-->
-    <!--/grids-->
-    <!--<div class="coupons">
-        <div class="coupons-grids text-center">
-            <div class="w3layouts_mail_grid">
-                <div class="col-md-3 w3layouts_mail_grid_left">
-                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
-                        <i class="fa fa-truck" aria-hidden="true"></i>
-                    </div>
-                    <div class="w3layouts_mail_grid_left2">
-                        <h3>FREE SHIPPING</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                    </div>
-                </div>
-                <div class="col-md-3 w3layouts_mail_grid_left">
-                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
-                        <i class="fa fa-headphones" aria-hidden="true"></i>
-                    </div>
-                    <div class="w3layouts_mail_grid_left2">
-                        <h3>24/7 SUPPORT</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                    </div>
-                </div>
-                <div class="col-md-3 w3layouts_mail_grid_left">
-                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
-                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    </div>
-                    <div class="w3layouts_mail_grid_left2">
-                        <h3>MONEY BACK GUARANTEE</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                    </div>
-                </div>
-                <div class="col-md-3 w3layouts_mail_grid_left">
-                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
-                        <i class="fa fa-gift" aria-hidden="true"></i>
-                    </div>
-                    <div class="w3layouts_mail_grid_left2">
-                        <h3>FREE GIFT COUPONS</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                    </div>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-
-        </div>
-    </div>-->
-    <!--grids-->
-    <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover"
-                                                                             style="opacity: 1;"> </span></a>
+    <div class="hidden-xs">
+        <a href="#home" class="scroll" id="toTop" style="display: block;">
+            <span id="toTopHover" style="opacity: 1;"> </span>
+        </a>
+    </div>
 
     <!-- //js -->
     <script src="{{asset('js/frontend/modernizr.custom.js')}}"></script>
@@ -417,6 +483,14 @@
     <!-- //line -->
 
     <script>
+        $(window).on("load", function () {
+            countdownTimer();
+            if ($(window).width() <= 480) {
+                $('html, body').animate({scrollTop: $("#scrollTopDiv").offset().top}, 2000);
+                $("ol").hide();
+            }
+        });
+
         function addToShoppingCart(commodity_id) {
             var amount = $("#amount").val();
             if (amount === "default") {
@@ -425,7 +499,10 @@
             }
             $.get("{{url('shopping')}}/" + commodity_id, {amount: amount}, function (data) {
                 if (!data.result) {
-                    showModal("errorModal", "提示", data.msg);
+                    var callback = function () {
+                        location.reload();
+                    };
+                    showModal("errorModal", "提示", data.msg, callback);
                     return;
                 }
                 $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
@@ -434,6 +511,40 @@
                     $("#successModal").modal("hide");
                 }, 1000);
             });
+        }
+
+        function countdownTimer() {
+            var input = $("input[name='endTime']");
+            var endTime = input.val();
+            var countDownDate = new Date(endTime.replace(/-/g, '/')).getTime();
+            timer = setInterval(function () {
+                // Get todays date and time
+                var now = new Date().getTime();
+                // Find the distance between now an the count down date
+                var distance = countDownDate - now;
+                // Time calculations for days, hours, minutes and seconds
+                var hours = Math.floor(distance / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                if (hours < 10) {
+                    hours = "0" + hours;
+                }
+                if (minutes < 10) {
+                    minutes = "0" + minutes;
+                }
+                if (seconds < 10) {
+                    seconds = "0" + seconds;
+                }
+                input.next().show();
+                $("#hourSpan").html(hours);
+                $("#minSpan").html(minutes);
+                $("#secSpan").html(seconds);
+                // If the count down is over, write some text
+                if (distance <= 0) {
+                    clearInterval(timer);
+                    window.location.href = "{{url('/')}}";
+                }
+            }, 1000);
         }
 
     </script>

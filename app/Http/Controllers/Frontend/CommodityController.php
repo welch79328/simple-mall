@@ -17,6 +17,9 @@ class CommodityController extends CommonController
         $commodity = Commodity::find($commodity_id);
         $commodity->commodity_view++;
         $commodity->save();
+        if ((int)$commodity->commodity_price >= 1000) {
+            $commodity->commodity_price = number_format((int)$commodity->commodity_price);
+        }
         $imgs = CommodityImg::where("commodity_id", $commodity_id)->get();
 
         $temps = [];

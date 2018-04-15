@@ -28,10 +28,11 @@ class MailController extends Controller
         );
     }
 
-    public static function preorder($order_id)
+    public static function preorder()
     {
         Mail::send(
             'layouts.email.preorder',
+            [],
             function ($msg) {
                 $member_id = session("member.member_id");
                 $member = Member::find($member_id);

@@ -75,7 +75,7 @@
         var spans = $("input[name='endTime[]']");
         spans.each(function (index) {
             var endTime = $(this).val();
-            var countDownDate = new Date(endTime).getTime();
+            var countDownDate = new Date(endTime.replace(/-/g, '/')).getTime();
             countdown(countDownDate, $(this), index);
         })
     }
