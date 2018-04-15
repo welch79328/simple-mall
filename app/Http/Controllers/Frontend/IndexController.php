@@ -9,9 +9,11 @@ use Modules\Commodity\Entities\Commodity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends CommonController {
+class IndexController extends CommonController
+{
 
-    public function index(CommodityHelper $commodityHelper, Request $request) {
+    public function index(CommodityHelper $commodityHelper, Request $request)
+    {
         parent::__construct();
         $page = [
             "backPage" => 0,
@@ -20,6 +22,16 @@ class IndexController extends CommonController {
         ];
         $limitCommodities = $commodityHelper->getLimitCommodities(4, 8);
         $commodities = $commodityHelper->getCommodities(8);
+        foreach ($limitCommodities as $limit) {
+            if ((int)$limit->commodity_price >= 1000) {
+                $limit->commodity_price = number_format((int)$limit->commodity_price);
+            }
+        }
+        foreach ($commodities as $commodity) {
+            if ((int)$commodity->commodity_price >= 1000) {
+                $commodity->commodity_price = number_format((int)$commodity->commodity_price);
+            }
+        }
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
             $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
@@ -36,18 +48,30 @@ class IndexController extends CommonController {
 
     }
 
-    public function getLimitCommodities(CommodityHelper $commodityHelper) {
+    public function getLimitCommodities(CommodityHelper $commodityHelper)
+    {
         $limitCommodities = $commodityHelper->getLimitCommodities(4, 8);
         if (count($limitCommodities) == 0) {
             return "";
         }
+        foreach ($limitCommodities as $limit) {
+            if ((int)$limit->commodity_price >= 1000) {
+                $limit->commodity_price = number_format((int)$limit->commodity_price);
+            }
+        }
         return view("layouts.frontend.limitCommodityList", compact("limitCommodities"));
     }
 
-    public function getCommodities(CommodityHelper $commodityHelper) {
+    public function getCommodities(CommodityHelper $commodityHelper)
+    {
         $commodities = $commodityHelper->getCommodities(8);
         if (count($commodities) == 0) {
             return "";
+        }
+        foreach ($commodities as $commodity) {
+            if ((int)$commodity->commodity_price >= 1000) {
+                $commodity->commodity_price = number_format((int)$commodity->commodity_price);
+            }
         }
         return view("layouts.frontend.commodityList", compact("commodities"));
     }

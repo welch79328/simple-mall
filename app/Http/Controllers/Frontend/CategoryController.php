@@ -32,6 +32,11 @@ class CategoryController extends CommonController
             ["commodity_price", "<=", CommodityHelper::COMMODITY_PRICE_MAX],
         ];
         $commodities = $commodityHelper->getCommoditiesByQuery(8, $conditions);
+        foreach ($commodities as $commodity) {
+            if ((int)$commodity->commodity_price >= 1000) {
+                $commodity->commodity_price = number_format((int)$commodity->commodity_price);
+            }
+        }
 
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
@@ -73,6 +78,11 @@ class CategoryController extends CommonController
         if (count($commodities) == 0) {
             return "";
         }
+        foreach ($commodities as $commodity) {
+            if ((int)$commodity->commodity_price >= 1000) {
+                $commodity->commodity_price = number_format((int)$commodity->commodity_price);
+            }
+        }
         return view("layouts.frontend.commodityList", compact("commodities"));
     }
 
@@ -81,6 +91,11 @@ class CategoryController extends CommonController
         parent::__construct();
         $total = $commodityHelper->getCommoditiesCount();
         $limitCommodities = $commodityHelper->getLimitCommodities(12, $total);
+        foreach ($limitCommodities as $limit) {
+            if ((int)$limit->commodity_price >= 1000) {
+                $limit->commodity_price = number_format((int)$limit->commodity_price);
+            }
+        }
 
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
@@ -96,6 +111,11 @@ class CategoryController extends CommonController
         $limitCommodities = $commodityHelper->getLimitCommodities(12, $total);
         if (count($limitCommodities) == 0) {
             return "";
+        }
+        foreach ($limitCommodities as $limit) {
+            if ((int)$limit->commodity_price >= 1000) {
+                $limit->commodity_price = number_format((int)$limit->commodity_price);
+            }
         }
         return view("layouts.frontend.limitCommodityList", compact("limitCommodities"));
     }

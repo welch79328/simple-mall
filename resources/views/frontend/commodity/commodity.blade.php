@@ -9,9 +9,10 @@
         .addCartButton {
             width: 100%;
             height: 100%;
-            font-size: 2vh;
+            font-size: 3vh;
             color: white;
             background-color: #e71d1c;
+            border-radius: 0;
         }
 
         .timeSpan {
@@ -89,7 +90,7 @@
             position: fixed;
             bottom: 0;
             width: 100vw;
-            height: 5vh;
+            height: 8vh;
             z-index: 99999;
         }
 
@@ -107,7 +108,7 @@
             }
 
             .priceDiv {
-                font-size: 2.5vh;
+                font-size: 3vh;
                 letter-spacing: 0;
             }
         }
@@ -117,7 +118,8 @@
 @section('content')
 
     <div class="fixedDiv visible-xs">
-        <button type="button" class="btn addCartButton" onclick="addToShoppingCart({{$commodity->commodity_id}});">
+        <button type="button" class="btn btn-danger addCartButton"
+                onclick="addToShoppingCart({{$commodity->commodity_id}});">
             剩餘組數{{$commodity->commodity_stock}}/立即預購
         </button>
         <div class="clearfix"></div>
