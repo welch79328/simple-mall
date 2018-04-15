@@ -9,7 +9,7 @@
         .addCartButton {
             width: 100%;
             height: 100%;
-            font-size: 25px;
+            font-size: 18px;
             color: white;
             background-color: #e71d1c;
             border-radius: 0;
@@ -28,7 +28,7 @@
             padding-left: 0;
             padding-bottom: 4px;
             padding-top: 4px;
-            font-size: 14.5px;
+            font-size: 12px;
             width: 100%;
             background-color: #f4e857;
         }
@@ -108,7 +108,7 @@
             }
 
             .priceDiv {
-                font-size: 24px;
+                font-size: 20px;
                 letter-spacing: 0;
             }
         }
