@@ -76,7 +76,7 @@
                 <a href="{{url('/')}}"><img src="{{url('images/frontend/J-UGO01-01.png')}}" width="250px"></a>
             </h1>
             <h1 class="visible-xs">
-                <a href="{{url('/')}}"><img src="{{url('images/frontend/logo_180403_0002.jpg')}}" width="150px"></a>
+                <a href="{{url('/')}}"><img src="{{url('images/frontend/logo_180403_0002.jpg')}}" width="165px"></a>
             </h1>
         </div>
         <!-- header-bot -->
