@@ -53,7 +53,11 @@ class CommodityController extends CommonController
             "commodity_type" => CommodityHelper::SORT_TYPE_DESC
         ];
         $commodities = $commodityHelper->getCommoditiesByQuery(12, $conditions, $sorts);
-
+        foreach ($commodities as $commodity) {
+            if ((int)$commodity->commodity_price >= 1000) {
+                $commodity->commodity_price = number_format((int)$commodity->commodity_price);
+            }
+        }
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
             $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
