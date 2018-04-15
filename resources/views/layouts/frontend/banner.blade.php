@@ -12,16 +12,6 @@
 </style>
 <!-- banner -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        @foreach($ads as $key => $ad)
-            @if($key == 0)
-                <li data-target="#myCarousel" data-slide-to="{{$key}}" class="active"></li>
-            @else
-                <li data-target="#myCarousel" data-slide-to="{{$key}}" class=""></li>
-            @endif
-        @endforeach
-    </ol>
     <div class="carousel-inner">
         @forelse($ads as $key => $ad)
             @if($key == 0)
