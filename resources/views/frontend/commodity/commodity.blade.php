@@ -287,7 +287,7 @@
                     </select>
                 </div>
                 <div class="col-xs-12 margin-top-bottom-10px">
-                    <select class="form-control" name="member_city" id="amount">
+                    <select class="form-control" name="member_city" onchange="changeQuantity(this)">
                         <option value="default">數量選擇</option>
                         @for($i=1; $i<=10; $i++)
                             @if($i == 1)
@@ -547,6 +547,10 @@
                     window.location.href = "{{url('/')}}";
                 }
             }, 1000);
+        }
+
+        function changeQuantity(obj) {
+            $("#amount").val(obj.value);
         }
 
     </script>
