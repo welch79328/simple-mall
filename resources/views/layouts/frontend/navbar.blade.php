@@ -21,9 +21,8 @@
                 <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav menu__list">
                         <!--menu__item--current 類別名稱 正在訪問的頁面-->
-                    <!--                            <li class="active menu__item"><a class="menu__link" href="{{url('/')}}">首頁 <span class="sr-only">(current)</span></a></li>
-                        <li class=" menu__item"><a class="menu__link" href="{{url('about')}}">關於</a></li>-->
-                        <li class="menu__item"><a class="menu__link" href="{{url('limit_commodities_page')}}">限時商品</a>
+                        <li class="menu__item">
+                            <a class="menu__link" href="{{url('limit_commodities_page')}}">限時商品</a>
                         </li>
                         <li class="dropdown menu__item">
                             <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button"
@@ -45,82 +44,17 @@
                                 </div>
                             </ul>
                         </li>
-                    <!--                            <li class="dropdown menu__item">
-                                                        <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Men's wear <span class="caret"></span></a>
-                                                        <ul class="dropdown-menu multi-column columns-3">
-                                                            <div class="agile_inner_drop_nav_info">
-                                                                <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                                                    <a href="{{url('mens')}}"><img src="images/top2.jpg" alt=" "/></a>
-                                                                </div>
-                                                                <div class="col-sm-3 multi-gd-img">
-                                                                    <ul class="multi-column-dropdown">
-                                                                        <li><a href="{{url('mens')}}">Clothing</a></li>
-                                                                        <li><a href="{{url('mens')}}">Wallets</a></li>
-                                                                        <li><a href="{{url('mens')}}">Footwear</a></li>
-                                                                        <li><a href="{{url('mens')}}">Watches</a></li>
-                                                                        <li><a href="{{url('mens')}}">Accessories</a></li>
-                                                                        <li><a href="{{url('mens')}}">Bags</a></li>
-                                                                        <li><a href="{{url('mens')}}">Caps & Hats</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-sm-3 multi-gd-img">
-                                                                    <ul class="multi-column-dropdown">
-                                                                        <li><a href="{{url('mens')}}">Jewellery</a></li>
-                                                                        <li><a href="{{url('mens')}}">Sunglasses</a></li>
-                                                                        <li><a href="{{url('mens')}}">Perfumes</a></li>
-                                                                        <li><a href="{{url('mens')}}">Beauty</a></li>
-                                                                        <li><a href="{{url('mens')}}">Shirts</a></li>
-                                                                        <li><a href="{{url('mens')}}">Sunglasses</a></li>
-                                                                        <li><a href="{{url('mens')}}">Swimwear</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="clearfix"></div>
-                                                            </div>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="dropdown menu__item">
-                                                        <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Women's wear <span class="caret"></span></a>
-                                                        <ul class="dropdown-menu multi-column columns-3">
-                                                            <div class="agile_inner_drop_nav_info">
-                                                                <div class="col-sm-3 multi-gd-img">
-                                                                    <ul class="multi-column-dropdown">
-                                                                        <li><a href="{{url('womens')}}">Clothing</a></li>
-                                                                        <li><a href="{{url('womens')}}">Wallets</a></li>
-                                                                        <li><a href="{{url('womens')}}">Footwear</a></li>
-                                                                        <li><a href="{{url('womens')}}">Watches</a></li>
-                                                                        <li><a href="{{url('womens')}}">Accessories</a></li>
-                                                                        <li><a href="{{url('womens')}}">Bags</a></li>
-                                                                        <li><a href="{{url('womens')}}">Caps & Hats</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-sm-3 multi-gd-img">
-                                                                    <ul class="multi-column-dropdown">
-                                                                        <li><a href="{{url('womens')}}">Jewellery</a></li>
-                                                                        <li><a href="{{url('womens')}}">Sunglasses</a></li>
-                                                                        <li><a href="{{url('womens')}}">Perfumes</a></li>
-                                                                        <li><a href="{{url('womens')}}">Beauty</a></li>
-                                                                        <li><a href="{{url('womens')}}">Shirts</a></li>
-                                                                        <li><a href="{{url('womens')}}">Sunglasses</a></li>
-                                                                        <li><a href="{{url('womens')}}">Swimwear</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-sm-6 multi-gd-img multi-gd-text ">
-                                                                    <a href="{{url('womens')}}"><img src="images/top1.jpg" alt=" "/></a>
-                                                                </div>
-                                                                <div class="clearfix"></div>
-                                                            </div>
-                                                        </ul>
-                                                    </li>-->
-                    <!--                            <li class="menu__item dropdown">
-                                                        <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Short Codes <b class="caret"></b></a>
-                                                        <ul class="dropdown-menu agile_short_dropdown">
-                                                            <li><a href="{{url('icons')}}">Web Icons</a></li>
-                                                            <li><a href="{{url('typography')}}">Typography</a></li>
-                                                        </ul>
-                                                    </li>-->
-                    <!--                            <li class=" menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡我們</a></li>-->
                         <li class="menu__item"><a class="menu__link" href="{{url('question')}}">購物流程FAQ</a></li>
                         <li class="menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
+                        <li class="menu__item visible-xs"><a class="menu__link">追蹤我們</a></li>
+                        <li class="menu__item visible-xs">
+                            <a href="https://www.facebook.com/JUGOmall/">
+                                <img src="{{url('images/frontend/facebook.jpg')}}" width="30px">
+                            </a>
+                            <a href="https://line.me/R/ti/p/%40tbk0394m">
+                                <img src="{{url('images/frontend/line.png')}}" width="35px">
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="visible-xs">
@@ -139,16 +73,6 @@
             </div>
         </nav>
     </div>
-    <!--        <div class="top_nav_right">
-                <div class="wthreecartaits wthreecartaits2 cart cart box_1"> 
-                    <form action="#" method="post" class="last"> 
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="display" value="1">
-                        <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-                    </form>  
-    
-                </div>
-            </div>-->
     <div class="clearfix"></div>
 </div>
 <!-- //banner-top -->
