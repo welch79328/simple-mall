@@ -61,7 +61,7 @@
 </div>
 <!-- //header -->
 <!-- header-bot -->
-<div class="header-bot">
+<div class="header-bot" style="padding-bottom: 0; padding-top: 0;">
     <div class="header-bot_inner_wthreeinfo_header_mid">
         <!--        <div class="col-md-4 header-middle">
                     <form action="#" method="post">
@@ -71,11 +71,11 @@
                     </form>
                 </div>-->
         <!-- header-bot -->
-        <div class="col-xs-12 col-md-12 logo_agile col-sm-12">
-            <h1 class="hidden-xs">
+        <div class="col-xs-12 col-md-12 logo_agile col-sm-12" style="margin-top: 0">
+            <h1 class="hidden-xs" style="margin-top: 0">
                 <a href="{{url('/')}}"><img src="{{url('images/frontend/J-UGO01-01.png')}}" width="250px"></a>
             </h1>
-            <h1 class="visible-xs">
+            <h1 class="visible-xs" style="margin-top: 0">
                 <a href="{{url('/')}}"><img src="{{url('images/frontend/logo_180403_0002.jpg')}}" width="165px"></a>
             </h1>
         </div>
