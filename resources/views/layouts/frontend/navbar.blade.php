@@ -49,7 +49,7 @@
                         <li class="menu__item visible-xs"><a class="menu__link">追蹤我們</a></li>
                         <li class="menu__item visible-xs">
                             <a href="https://www.facebook.com/JUGOmall/">
-                                <img src="{{url('images/frontend/facebook.jpg')}}" width="30px">
+                                <img src="{{url('images/frontend/facebook.png')}}" width="30px">
                             </a>
                             <a href="https://line.me/R/ti/p/%40tbk0394m">
                                 <img src="{{url('images/frontend/line.png')}}" width="35px">

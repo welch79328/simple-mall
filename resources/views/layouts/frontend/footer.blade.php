@@ -81,7 +81,7 @@
             <h3 class="footer_title">關係企業</h3>
             <div class="center-block text-left footer_detail">
                 <a href="http://www.adwifi.com.tw/">
-                    <img src="{{url('images/frontend/facebook-logo-02.png')}}" width="60px">
+                    <img src="{{url('images/frontend/free ad wifi-01.png')}}" width="60px">
                 </a>
             </div>
         </div>
@@ -92,7 +92,7 @@
             <div class="center-block text-left footer_detail">
                 <div>
                     <a href="https://www.facebook.com/JUGOmall/" style="margin-right: 10px;">
-                        <img src="{{url('images/frontend/facebook.jpg')}}" width="30px">
+                        <img src="{{url('images/frontend/facebook.png')}}" width="30px">
                     </a>
                     <a href="https://line.me/R/ti/p/%40tbk0394m">
                         <img src="{{url('images/frontend/line.png')}}" width="35px">
@@ -103,7 +103,7 @@
     </div>
 </div>
 <div class="adwifi_footer visible-xs col-xs-12" style="background-color: #0c68ab;">
-    <div class="col-xs-9 col-xs-offset-3 footer_div_mobile">
+    <div class="col-xs-8 col-xs-offset-4 footer_div_mobile">
         <h3 class="footer_title_mobile">關於我們</h3>
         <div class="center-block text-left footer_detail">
             <div><a href="{{url('about')}}">關於J-UGo</a></div>
@@ -112,7 +112,7 @@
         <h3 class="footer_title_mobile" style="margin-top: 20px">關係企業</h3>
         <div class="center-block text-left footer_detail">
             <a href="http://www.adwifi.com.tw/">
-                <img src="{{url('images/frontend/facebook-logo-02.png')}}" width="60px">
+                <img src="{{url('images/frontend/free ad wifi-01.png')}}" width="60px">
             </a>
         </div>
     </div>
