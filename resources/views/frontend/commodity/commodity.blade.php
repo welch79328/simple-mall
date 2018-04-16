@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
+        .fixedLogo {
+            opacity: 0.8;
+            position: fixed;
+            top: 30%;
+            right: 0;
+            z-index: 10;
+        }
+
         .commodity_title {
             word-break: break-all;
             margin-top: 0;
@@ -13,7 +21,8 @@
         }
 
         .commodity_subtitle {
-            font-size: 15px;
+            font-weight: bold;
+            font-size: 18px;
             height: 15px;
             color: #e71d1c;
         }
@@ -126,6 +135,10 @@
                 onclick="addToShoppingCart({{$commodity->commodity_id}});">
             剩餘組數{{$commodity->commodity_stock}}/立即預購
         </button>
+        <div class="clearfix"></div>
+    </div>
+    <div class="fixedLogo visible-xs">
+        <img src="{{url('images/frontend/18-18.png')}}" width="60px">
         <div class="clearfix"></div>
     </div>
 
@@ -278,7 +291,7 @@
                  style="padding-left: 0; padding-right: 0">
                 <div class="col-xs-12 margin-top-bottom-20px">
                     <div class="commodity_subtitle">{{$commodity->commodity_subtitle}}</div>
-                    <h3 style="word-break: break-all; font-size: 20px;">
+                    <h3 style="word-break: break-all; font-size: 20px; margin-top: 10px">
                         {{$commodity->commodity_title}}
                     </h3>
                 </div>
