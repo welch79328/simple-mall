@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
+        .commodity_smalltitle {
+            font-size: 15px;
+            height: 15px;
+            color: #e71d1c;
+        }
+
         .addCartButton {
             width: 100%;
             height: 100%;
@@ -62,7 +68,7 @@
         }
 
         .descriptionDiv {
-            height: 170px;
+            height: 155px;
             overflow: auto;
         }
 
@@ -159,7 +165,8 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-10 margin-top-bottom-5px">
-                    <h3>
+                    <div class="commodity_smalltitle">{{$commodity->commodity_smalltitle}}</div>
+                    <h3 style="margin-top: 0">
                         @if(!empty($commodity->commodity_subtitle))
                             {{$commodity->commodity_subtitle}}
                         @else
@@ -255,7 +262,7 @@
             </div>
         </div>
         <div class="col-xs-6">
-            <del>售價0000</del>
+            <del>售價{{$commodity->commodity_originalprice}}</del>
         </div>
         <div class="col-xs-6" style="padding-right: 10px; margin-top: 10px;">
             <div style="color: #d0a31e">目前0000人正在瀏覽</div>
@@ -272,6 +279,7 @@
             <div class="col-xs-12 col-sm-offset-1 col-sm-7 col-md-offset-1 col-md-7 single-right-left simpleCart_shelfItem"
                  style="padding-left: 0; padding-right: 0">
                 <div class="col-xs-12 margin-top-bottom-20px">
+                    <div class="commodity_smalltitle">{{$commodity->commodity_smalltitle}}</div>
                     <h3 style="font-size: 25px">
                         @if(!empty($commodity->commodity_subtitle))
                             {{$commodity->commodity_subtitle}}

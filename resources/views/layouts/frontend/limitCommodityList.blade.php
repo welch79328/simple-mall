@@ -1,5 +1,16 @@
 <style>
+    .commodity_smalltitle {
+        font-size: 12px;
+        height: 15px;
+        color: #e71d1c;
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .commodity_title {
+        margin-top: 0;
         white-space: nowrap;
         width: 100%;
         overflow: hidden;
@@ -43,8 +54,9 @@
 
             </div>
             <div class="item-info-product ">
-                <h4 class="commodity_title"><a
-                            href="{{url('commodity/'. $limit->commodity_id)}}">{{$limit->commodity_title}}</a></h4>
+                <p class="commodity_smalltitle">{{$limit->commodity_smalltitle}}</p>
+                <h4 class="commodity_title">
+                    <a href="{{url('commodity/'. $limit->commodity_id)}}">{{$limit->commodity_title}}</a></h4>
                 <div class="info-product-price">
                     {{--<div>--}}
                     {{--<del>售價$69.71</del>--}}
