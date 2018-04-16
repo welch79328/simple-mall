@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
-        .commodity_smalltitle {
+        .commodity_title {
+            margin-top: 0;
+            height: 50px;
+        }
+
+        .commodity_subtitle {
             font-size: 15px;
             height: 15px;
             color: #e71d1c;
@@ -68,7 +73,7 @@
         }
 
         .descriptionDiv {
-            height: 155px;
+            height: 130px;
             overflow: auto;
         }
 
@@ -162,13 +167,9 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-10 margin-top-bottom-5px">
-                    <div class="commodity_smalltitle">{{$commodity->commodity_smalltitle}}</div>
-                    <h3 style="margin-top: 0">
-                        @if(!empty($commodity->commodity_subtitle))
-                            {{$commodity->commodity_subtitle}}
-                        @else
-                            {{$commodity->commodity_title}}
-                        @endif
+                    <div class="commodity_subtitle">{{$commodity->commodity_subtitle}}</div>
+                    <h3 class="commodity_title">
+                        {{$commodity->commodity_title}}
                     </h3>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-10 margin-top-bottom-5px">
@@ -242,7 +243,6 @@
     </div>
 
     <div class="col-xs-12 infoDiv visible-xs">
-
         <div class="col-xs-6" style="padding-right: 0">
             <div style="color: #e71d1c; font-size: 10px">
                 剩餘時間:
@@ -276,13 +276,9 @@
             <div class="col-xs-12 col-sm-offset-1 col-sm-7 col-md-offset-1 col-md-7 single-right-left simpleCart_shelfItem"
                  style="padding-left: 0; padding-right: 0">
                 <div class="col-xs-12 margin-top-bottom-20px">
-                    <div class="commodity_smalltitle">{{$commodity->commodity_smalltitle}}</div>
+                    <div class="commodity_subtitle">{{$commodity->commodity_subtitle}}</div>
                     <h3 style="font-size: 25px">
-                        @if(!empty($commodity->commodity_subtitle))
-                            {{$commodity->commodity_subtitle}}
-                        @else
-                            {{$commodity->commodity_title}}
-                        @endif
+                        {{$commodity->commodity_title}}
                     </h3>
                 </div>
                 <div class="col-xs-12 margin-top-bottom-10px">
