@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use Modules\Member\Entities\MemberLog;
 use Modules\Member\Http\Controllers\LoginController;
-use Modules\Order\Entities\Orderlist;
-use Modules\Order\Entities\Order;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Modules\Member\Entities\Member;
@@ -134,82 +132,6 @@ class MemberController extends CommonController
             return back()->with("errors.msg", "修改密碼失敗，請稍後重試！");
         }
         return redirect("member_password")->with("sussess.msg", "修改密碼成功！");
-    }
-
-    public function order(Request $request)
-    {
-        parent::__construct();
-        $member_id = $request->session()->get("member.member_id");
-        $orders = Order::where("member_id", $member_id)->orderBy('created_at', 'desc')->paginate(10);
-        foreach ($orders as $order) {
-            switch ($order->order_status) {
-                case 'pending':
-                    $order->order_status = '待處理';
-                    break;
-                case 'complete':
-                    $order->order_status = '完成';
-                    break;
-                case 'refund':
-                    $order->order_status = '取消';
-                    break;
-            }
-        }
-        return view("frontend.member.order", compact("orders"));
-    }
-
-    public function orderDetail($order_id)
-    {
-        parent::__construct();
-        $order = Order::find($order_id);
-        $order_details = Orderlist::where("order_id", $order_id)->get();
-        switch ($order->order_status) {
-            case 'pending':
-                $order->order_status = '待處理';
-                break;
-            case 'complete':
-                $order->order_status = '完成';
-                break;
-            case 'refund':
-                $order->order_status = '取消';
-                break;
-        }
-        foreach ($order_details as $detail) {
-            switch ($detail->status) {
-                case 'pending':
-                    $detail->status = '待處理';
-                    break;
-                case 'complete':
-                    $detail->status = '完成';
-                    break;
-                case 'refund':
-                    $detail->status = '取消';
-                    break;
-            }
-        }
-        return view("frontend.member.order_detail", compact("order", "order_details"));
-    }
-
-    public function cancelOrder(Request $request)
-    {
-        $order_id = $request->post("order_id");
-        if (empty($order_id)) {
-            return CommonController::failResponse("取消訂單失敗：未傳入訂單流水號！");
-        }
-        $order = Order::find($order_id);
-        if (empty($order)) {
-            return CommonController::failResponse("取消訂單失敗：找不到此筆訂單！");
-        }
-        if ($order->order_status == "refund") {
-            return CommonController::failResponse("訂單已經取消了！");
-        }
-        if ($order->order_status == "complete") {
-            return CommonController::failResponse("訂單已經完成，不能取消了！");
-        }
-        $result = $order->update(["order_status" => "refund"]);
-        if (!$result) {
-            return CommonController::failResponse("取消訂單失敗：請稍後在試！");
-        }
-        return CommonController::successResponse("成功取消訂單！");
     }
 
     public function signIn(Request $request)

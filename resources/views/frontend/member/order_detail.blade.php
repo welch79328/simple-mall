@@ -37,7 +37,6 @@
                                         <th>名稱</th>
                                         <th>數量</th>
                                         <th>單價</th>
-                                        <th>狀態</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -46,13 +45,6 @@
                                             <td>{{$detail->name}}</td>
                                             <td>{{$detail->amount}}</td>
                                             <td>{{$detail->price}}</td>
-                                            @if($detail->status == '完成')
-                                                <td style="color: #009966">{{$detail->status}}</td>
-                                            @elseif($detail->status == '取消')
-                                                <td style="color: #FF0033">{{$detail->status}}</td>
-                                            @else
-                                                <td>{{$detail->status}}</td>
-                                            @endif
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -66,7 +58,7 @@
                     </tr>
                     <tr>
                         <th>訂單狀態</th>
-                        <td style="color:@if($order->order_status == '完成')#009966 @elseif($order->order_status == '取消')#FF0033 @else #555 @endif">{{$order->order_status}}</td>
+                        <td style="color:@if($order->order_status == "complete")#009966 @elseif($order->order_status == "cancel")#FF0033 @else #555 @endif">{{$order->_order_status}}</td>
                     </tr>
                     </tbody>
                 </table>

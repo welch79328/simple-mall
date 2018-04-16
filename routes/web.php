@@ -28,11 +28,13 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
     Route::group(['roles' => ['member'], 'middleware' => ['web', 'login.judgment']], function () {
         Route::get('member_info', 'MemberController@info');
         Route::get('member_password', 'MemberController@infoPassword');
-        Route::get('member_order', 'MemberController@order');
-        Route::get('member_order_detail/{order_id}', 'MemberController@orderDetail');
-        Route::post('member_order_cancel', 'MemberController@cancelOrder');
         Route::post('member_update', 'MemberController@update');
         Route::post('member_update_password', 'MemberController@updatePassword');
+        //訂單--start
+        Route::get('member_order', 'OrderController@order');
+        Route::get('member_order_detail/{order_id}', 'OrderController@orderDetail');
+        Route::post('member_order_cancel', 'OrderController@cancel');
+        //訂單--end
     });
     //會員--end
 

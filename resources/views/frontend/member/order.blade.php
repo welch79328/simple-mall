@@ -24,15 +24,15 @@
                         <tr>
                             <td>{{$order->order_number}}</td>
                             <td class="hidden-xs">{{$order->order_total}}</td>
-                            <td style="color:@if($order->order_status == '完成')#009966 @elseif($order->order_status == '取消')#FF0033 @else #555 @endif">
-                                {{$order->order_status}}
+                            <td style="color:@if($order->order_status == "complete")#009966 @elseif($order->order_status == 'cancel')#FF0033 @else #555 @endif">
+                                {{$order->_order_status}}
                             </td>
                             <td class="hidden-xs">{{$order->created_at}}</td>
                             <td>
-                                <a href="{{url('member_order_detail/'.$order->order_id)}}">查看</a>
-                                @if($order->order_status == "待處理")
-                                    <a href="javascript: void(0)" onclick="showCancelOrderModal({{$order->order_id}})"
-                                       style="margin-left: 10px">取消</a>
+                                <a href="{{url('member_order_detail/'.$order->order_id)}}"
+                                   style="margin-right: 10px">明細</a>
+                                @if($order->order_status == "pending" || $order->order_status == "shipping")
+                                    <a href="javascript: void(0)" onclick="showCancelOrderModal({{$order->order_id}})">取消</a>
                                 @endif
                             </td>
                         </tr>
@@ -63,7 +63,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
                     <button id="cancelOrderButton" type="button" class="btn btn-primary"
-                            onclick="ajaxCancelOrder(this.value)">
+                            onclick="cancelOrder(this.value)">
                         確定
                     </button>
                 </div>
@@ -77,7 +77,12 @@
             $("#cancelOrderModal").modal("show");
         }
 
-        function ajaxCancelOrder(order_id) {
+        function showRefundModal(order_id) {
+            $("#refundButton").val(order_id);
+            $("#refundModal").modal("show");
+        }
+
+        function cancelOrder(order_id) {
             $.ajax({
                 type: "POST",
                 url: "{{url('member_order_cancel/')}}",
@@ -88,12 +93,15 @@
                 dataType: "json",
                 success: function (data) {
                     $("#cancelOrderButton").val("");
+                    $("#cancelOrderModal").modal("hide");
                     if (!data.result) {
                         showModal("failModal", "提示", data.msg);
+                        return;
                     }
                     window.location.href = "{{url('member_order')}}";
                 }
             });
         }
+
     </script>
 @endsection

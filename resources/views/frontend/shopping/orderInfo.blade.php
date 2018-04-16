@@ -130,14 +130,13 @@
         function ajaxSubmitOrder() {
             $("#addOrderForm").submit(function (e) {
                 var url = "{{url('order_setup')}}"; // the script where you handle the form input.
-                showModal("waitModal", "提示", "請等候系統處理訂單！");
+                showModal("waitModal", "提示", "請等候系統處理，離開此頁面，可能會造成預購失敗！");
                 $("#orderSubmitButton").prop('disabled', true);
                 $.ajax({
                     url: url,
                     type: "POST",
                     data: $(this).serialize(), // serializes the form's elements.
                     success: function (data) {
-                        console.log(data);
                         var callback = function () {
                             window.location.href = "{{url('/')}}";
                         }
@@ -147,7 +146,7 @@
                         }
                         $("#waitModal").modal("hide");
                         $("#orderSubmitButton").prop('disabled', false);
-                        showModal("successModal", "提示", "感謝您的購買，請等候頁面跳轉，或按下關閉即可。", callback);
+                        showModal("successModal", "提示", "預購商品成功，請等候頁面跳轉，或按下關閉即可。", callback);
                         setTimeout(callback, 2000);
                     }
                 });
