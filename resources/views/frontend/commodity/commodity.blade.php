@@ -278,7 +278,7 @@
                  style="padding-left: 0; padding-right: 0">
                 <div class="col-xs-12 margin-top-bottom-20px">
                     <div class="commodity_subtitle">{{$commodity->commodity_subtitle}}</div>
-                    <h3 style="font-size: 25px">
+                    <h3 style="word-break: break-all; font-size: 20px;">
                         {{$commodity->commodity_title}}
                     </h3>
                 </div>
