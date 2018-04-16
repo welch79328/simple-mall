@@ -7,6 +7,7 @@
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
         .commodity_title {
+            word-break: break-all;
             margin-top: 0;
             height: 50px;
         }
@@ -166,7 +167,7 @@
                     剩餘組數 {{$commodity->commodity_stock}}
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-10 margin-top-bottom-5px">
+                <div class="col-xs-12 col-sm-12 col-md-12 margin-top-bottom-5px">
                     <div class="commodity_subtitle">{{$commodity->commodity_subtitle}}</div>
                     <h3 class="commodity_title">
                         {{$commodity->commodity_title}}
