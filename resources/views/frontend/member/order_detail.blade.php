@@ -24,6 +24,10 @@
                         <td>{{$order->order_number}}</td>
                     </tr>
                     <tr>
+                        <th>下訂時間</th>
+                        <td>{{$order->created_at}}</td>
+                    </tr>
+                    <tr>
                         <th>商品明細</th>
                         <td>
                             <div class="table-responsive order_detail_div" style="margin-top: 20px">
@@ -57,7 +61,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>訂單金額</th>
+                        <th>訂單總金額</th>
                         <td>{{$order->order_total}}</td>
                     </tr>
                     <tr>

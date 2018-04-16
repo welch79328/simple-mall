@@ -12,9 +12,9 @@
                     <thead>
                     <tr>
                         <th>編號</th>
-                        <th>總金額</th>
+                        <th class="hidden-xs">總金額</th>
                         <th>狀態</th>
-                        <th>發布時間</th>
+                        <th class="hidden-xs">下訂時間</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -23,11 +23,11 @@
                     @forelse($orders as $order)
                         <tr>
                             <td>{{$order->order_number}}</td>
-                            <td>{{$order->order_total}}</td>
+                            <td class="hidden-xs">{{$order->order_total}}</td>
                             <td style="color:@if($order->order_status == '完成')#009966 @elseif($order->order_status == '取消')#FF0033 @else #555 @endif">
                                 {{$order->order_status}}
                             </td>
-                            <td>{{$order->created_at}}</td>
+                            <td class="hidden-xs">{{$order->created_at}}</td>
                             <td>
                                 <a href="{{url('member_order_detail/'.$order->order_id)}}">查看</a>
                                 @if($order->order_status == "待處理")
