@@ -2,6 +2,7 @@
 
 namespace Modules\Commodity\Http\Controllers;
 
+use Exception;
 use App\Helpers\ModuleHelper;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -67,13 +68,15 @@ class CommodityController extends Controller
     public function store(Request $request)
     {
         try {
-            DB::beginTransaction();
             $input = Input::except('_token', 'file_upload', 'file_upload1');
             $input['commodity_creator'] = session('admin_member.member_name');
             $image = explode(',', $input['image']);
             $input['commodity_period'] = explode(' to ', $input['commodity_period']);
             $input['commodity_start_time'] = $input['commodity_period'][0];
             $input['commodity_end_time'] = $input['commodity_period'][1];
+            if (empty($input['commodity_originalprice'])) {
+                $input['commodity_originalprice'] = $input['commodity_price'];
+            }
             $speces = (isset($input['spec'])) ? $input['spec'] : [];
             unset($input['commodity_period']);
             unset($input['image']);
@@ -87,7 +90,7 @@ class CommodityController extends Controller
             ];
             $message = [
                 'commodity_title.required' => '商品名稱不能為空!',
-                'commodity_price.required' => '商品價錢不能為空!',
+                'commodity_price.required' => '商品預購價不能為空!',
                 'commodity_stock.required' => '商品庫存不能為空!',
                 'commodity_safe_stock.required' => '商品安全庫存不能為空!',
             ];
@@ -95,15 +98,25 @@ class CommodityController extends Controller
 
             if ($validator->passes()) {
                 $re = Commodity::create($input);
+                if (!$re) {
+                    throw new Exception("新增商品失敗：請稍後再試！");
+                }
+                DB::beginTransaction();
                 foreach ($image as $k => $v) {
                     $k = 'image';
                     $commodityImg = [$k => $v, 'commodity_id' => $re->commodity_id];
-                    CommodityImg::create($commodityImg);
+                    $result = DB::table("commodity_img")->insert($commodityImg);
+                    if (!$result) {
+                        throw new Exception("新增商品失敗：無法新增圖片！");
+                    }
                 }
                 foreach ($speces as $spec) {
                     if (!empty($spec)) {
                         $commoditySpec = ["spec" => $spec, 'commodity_id' => $re->commodity_id];
-                        CommoditySpec::create($commoditySpec);
+                        $result = DB::table("commodity_spec")->insert($commoditySpec);
+                        if (!$result) {
+                            throw new Exception("新增商品失敗：無法新增規格！");
+                        }
                     }
                 }
                 DB::commit();
@@ -113,8 +126,7 @@ class CommodityController extends Controller
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            //return back()->with('errors', $e->getMessage());
-            return back()->with('errors', '數據填充錯誤, 請稍後重試');
+            return back()->with('errors', $e->getMessage());
         }
     }
 
@@ -154,7 +166,6 @@ class CommodityController extends Controller
     public function update(Request $request, $commodity_id)
     {
         try {
-            DB::beginTransaction();
             $input = Input::except('_token', '_method', 'file_upload', 'file_upload1');
             $image = explode(',', $input['image']);
             $input['commodity_period'] = explode(' to ', $input['commodity_period']);
@@ -162,7 +173,9 @@ class CommodityController extends Controller
             $input['commodity_end_time'] = $input['commodity_period'][1];
             $input['commodity_creator'] = session('admin_member.member_name');
             $speces = (isset($input['spec'])) ? $input['spec'] : [];
-
+            if (empty($input['commodity_originalprice'])) {
+                $input['commodity_originalprice'] = $input['commodity_price'];
+            }
             unset($input['commodity_period']);
             unset($input['image']);
             unset($input['spec']);
@@ -175,7 +188,7 @@ class CommodityController extends Controller
             ];
             $message = [
                 'commodity_title.required' => '商品名稱不能為空!',
-                'commodity_price.required' => '商品價錢不能為空!',
+                'commodity_price.required' => '商品預購價不能為空!',
                 'commodity_stock.required' => '商品庫存不能為空!',
                 'commodity_safe_stock.required' => '商品安全庫存不能為空!',
             ];
@@ -183,20 +196,20 @@ class CommodityController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator);
             }
+            DB::beginTransaction();
+            DB::table("commodity")->where('commodity_id', $commodity_id)->update($input);
 
-            Commodity::where('commodity_id', $commodity_id)->update($input);
-
-            CommodityImg::where('commodity_id', $commodity_id)->delete();
+            DB::table("commodity_img")->where('commodity_id', $commodity_id)->delete();
             foreach ($image as $k => $v) {
                 $k = 'image';
                 $commodityImg = [$k => $v, 'commodity_id' => $commodity_id];
-                CommodityImg::create($commodityImg);
+                DB::table("commodity_img")->insert($commodityImg);
             }
-            CommoditySpec::where('commodity_id', $commodity_id)->delete();
+            DB::table("commodity_spec")->where('commodity_id', $commodity_id)->delete();
             foreach ($speces as $spec) {
                 if (!empty($spec)) {
                     $commoditySpec = ["spec" => $spec, 'commodity_id' => $commodity_id];
-                    CommoditySpec::create($commoditySpec);
+                    DB::table("commodity_spec")->insert($commoditySpec);
                 }
             }
             DB::commit();

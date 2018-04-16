@@ -55,7 +55,7 @@
                 </tr>
 
                 <tr>
-                    <th>標題：</th>
+                    <th>主標題：</th>
                     <td>
                         <input type="text" class="md" name="commodity_title">
                     </td>
@@ -67,6 +67,14 @@
                         <input type="text" class="md" name="commodity_subtitle">
                     </td>
                 </tr>
+
+                <tr>
+                    <th>小標題：</th>
+                    <td>
+                        <input type="text" class="md" name="commodity_smalltitle">
+                    </td>
+                </tr>
+
 
                 <tr>
                     <th>
@@ -216,7 +224,14 @@
                 </tr>
 
                 <tr>
-                    <th>定價：</th>
+                    <th>原價：</th>
+                    <td>
+                        <input type="number" min="1" style="height: 28px;" name="commodity_originalprice">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>預購價：</th>
                     <td>
                         <input type="number" min="1" style="height: 28px;" name="commodity_price">
                     </td>

@@ -121,11 +121,11 @@
     </div>
 
     <!-- banner-bootom-w3-agileits -->
-    <div id="scrollTopDiv" class="banner-bootom-w3-agileits">
+    <div class="banner-bootom-w3-agileits">
         <div class="container">
             <div class="col-xs-12 col-sm-4 col-md-4 single-right-left" style="margin-bottom: 0px;">
                 <div class="grid images_3_of_2">
-                    <div class="flexslider">
+                    <div class="flexslider" id="scrollPosition">
                         <ul class="slides">
                             <li data-thumb="{{url(''.$commodity->commodity_image)}}">
                                 <div class="thumb-image">
@@ -244,6 +244,8 @@
                 剩餘時間:
                 <input name="endTime" type="hidden" value="{{$commodity->commodity_end_time}}">
                 <span hidden>
+                    <span id="daySpan" class="timeSpan"></span>
+                    <span>天</span>
                     <span id="hourSpan" class="timeSpan"></span>
                     <span>:</span>
                     <span id="minSpan" class="timeSpan"></span>
@@ -483,7 +485,7 @@
         $(window).on("load", function () {
             countdownTimer();
             if ($(window).width() <= 480) {
-                $('html, body').animate({scrollTop: $("#scrollTopDiv").offset().top}, 2000);
+                $('html, body').animate({scrollTop: $("#scrollPosition").offset().top}, 2000);
                 $("ol").hide();
             }
         });
@@ -517,7 +519,8 @@
                 // Find the distance between now an the count down date
                 var distance = countDownDate - now;
                 // Time calculations for days, hours, minutes and seconds
-                var hours = Math.floor(distance / (1000 * 60 * 60));
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 if (hours < 10) {
@@ -530,6 +533,7 @@
                     seconds = "0" + seconds;
                 }
                 input.next().show();
+                $("#daySpan").html(days);
                 $("#hourSpan").html(hours);
                 $("#minSpan").html(minutes);
                 $("#secSpan").html(seconds);
