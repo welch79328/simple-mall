@@ -17,7 +17,6 @@ class CreateCommodityTable extends Migration
             $table->increments('commodity_id');
             $table->string('commodity_title');
             $table->string('commodity_subtitle')->nullable();
-            $table->string('commodity_smalltitle')->nullable();
             $table->string('commodity_image')->nullable();
             $table->integer('commodity_originalprice')->default(0);
             $table->integer('commodity_price');
