@@ -5263,7 +5263,7 @@ p.w3ls_para {
 
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
         color: #000;
-        border-bottom: 1px solid #999;
+        /*border-bottom: 1px solid #999;*/
     }
 }
 

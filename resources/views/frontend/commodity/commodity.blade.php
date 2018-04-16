@@ -94,10 +94,6 @@
             z-index: 99999;
         }
 
-        .blankSpaceDiv {
-            height: 8vh;
-        }
-
         @media (max-width: 480px) {
             #scrollTopDiv {
                 padding-bottom: 0;
@@ -342,8 +338,6 @@
             </div>
         </div>
     </div>
-
-    <div class="blankSpaceDiv visible-xs"></div>
 
     {{--@todo--}}
     <div class="new_arrivals_agile_w3ls_info hidden-xs" hidden>

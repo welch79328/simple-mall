@@ -52,6 +52,10 @@
         font-size: 12px;
         font-weight: bold;
     }
+
+    .blankSpaceDiv {
+        height: 8vh;
+    }
 </style>
 <!-- footer -->
 <div class="adwifi_footer hidden-xs" style="height: 250px">
@@ -120,3 +124,4 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 footer_copyright">
     Copyright © 2018 Free AD WiFi Inc.
 </div>
+<div class="col-xs-12 blankSpaceDiv visible-xs"></div>

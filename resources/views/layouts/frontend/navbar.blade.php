@@ -45,7 +45,16 @@
                             </ul>
                         </li>
                         <li class="menu__item"><a class="menu__link" href="{{url('question')}}">購物流程FAQ</a></li>
-                        <li class="menu__item"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
+                        <li class="menu__item hidden-xs"><a class="menu__link" href="{{url('contact')}}">聯絡資訊</a></li>
+                        <li class="dropdown visible-xs">
+                            <a class="dropdown-toggle menu__link" data-toggle="dropdown" href="#">聯絡我們
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="menu__link">02-7709-1239</a></li>
+                                <li><a class="menu__link">jugomallservice@gmail.com</a></li>
+                                <li><a class="menu__link">客服時間：周一至周五09:00-18:00</a></li>
+                            </ul>
+                        </li>
                         <li class="menu__item visible-xs"><a class="menu__link">追蹤我們</a></li>
                         <li class="menu__item visible-xs">
                             <a href="https://www.facebook.com/JUGOmall/">
