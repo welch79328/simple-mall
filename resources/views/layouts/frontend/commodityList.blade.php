@@ -52,6 +52,7 @@
                 </div>
             </div>
             <div style="text-align: center;">剩餘組數 {{$commodity->commodity_stock}}</div>
+            <div style="text-align: center; font-size: 12px">目前0000人正在瀏覽</div>
         </div>
     </div>
 @empty

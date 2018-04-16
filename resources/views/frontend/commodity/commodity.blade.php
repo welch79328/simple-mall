@@ -101,9 +101,6 @@
         }
 
         @media (max-width: 480px) {
-            #scrollTopDiv {
-                padding-bottom: 0;
-            }
 
             .descriptionDiv {
                 height: auto;
@@ -246,8 +243,8 @@
 
     <div class="col-xs-12 infoDiv visible-xs">
 
-        <div class="col-xs-6" style="padding-right: 10px">
-            <div style="color: #e71d1c">
+        <div class="col-xs-6" style="padding-right: 0">
+            <div style="color: #e71d1c; font-size: 10px">
                 剩餘時間:
                 <input name="endTime" type="hidden" value="{{$commodity->commodity_end_time}}">
                 <span hidden>
