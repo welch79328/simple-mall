@@ -143,7 +143,7 @@
     </div>
 
     <!-- banner-bootom-w3-agileits -->
-    <div class="banner-bootom-w3-agileits">
+    <div class="banner-bootom-w3-agileits" style="padding-bottom: 0">
         <div class="container">
             <div class="col-xs-12 col-sm-4 col-md-4 single-right-left" style="margin-bottom: 0px;">
                 <div class="grid images_3_of_2">

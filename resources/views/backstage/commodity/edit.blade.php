@@ -234,9 +234,17 @@
                 </tr>
 
                 <tr>
-                    <th>定價：</th>
+                    <th>網路價：</th>
                     <td>
-                        <input type="number" min="1" name="commodity_price" style="height: 28px;"
+                        <input type="number" min="1" style="height: 28px;" name="commodity_originalprice"
+                               value="{{$commodity->commodity_originalprice}}">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>預購價：</th>
+                    <td>
+                        <input type="number" min="1" style="height: 28px;" name="commodity_price"
                                value="{{$commodity->commodity_price}}">
                     </td>
                 </tr>
