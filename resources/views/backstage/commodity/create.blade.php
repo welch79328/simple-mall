@@ -55,26 +55,24 @@
                 </tr>
 
                 <tr>
-                    <th>主標題：</th>
+                    <th>
+                        <p>主標題：</p>
+                        <p>(30個字元)</p>
+                    </th>
                     <td>
                         <input type="text" class="md" name="commodity_title">
                     </td>
                 </tr>
 
                 <tr>
-                    <th>副標題：</th>
+                    <th>
+                        <p>副標題：</p>
+                        <p>(18個字元)</p>
+                    </th>
                     <td>
                         <input type="text" class="md" name="commodity_subtitle">
                     </td>
                 </tr>
-
-                <tr>
-                    <th>小標題：</th>
-                    <td>
-                        <input type="text" class="md" name="commodity_smalltitle">
-                    </td>
-                </tr>
-
 
                 <tr>
                     <th>
@@ -224,7 +222,7 @@
                 </tr>
 
                 <tr>
-                    <th>原價：</th>
+                    <th>網路價：</th>
                     <td>
                         <input type="number" min="1" style="height: 28px;" name="commodity_originalprice">
                     </td>
