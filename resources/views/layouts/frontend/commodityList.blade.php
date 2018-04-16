@@ -1,5 +1,8 @@
 <style>
-    .commodity_smalltitle {
+    .commodity_subtitle {
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
         font-size: 12px;
         height: 15px;
         color: #e71d1c;
@@ -10,11 +13,21 @@
     }
 
     .commodity_title {
+        word-break: break-all;
+        height: 55px;
+        text-align: left;
+        padding-left: 5px;
+        padding-right: 5px;
         margin-top: 0;
-        white-space: nowrap;
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    @media (max-width: 480px) {
+        .commodity_title {
+            height: 75px;
+        }
     }
 </style>
 @forelse($commodities as $key => $commodity)
@@ -34,7 +47,7 @@
 
             </div>
             <div class="item-info-product ">
-                <p class="commodity_smalltitle">{{$commodity->commodity_smalltitle}}</p>
+                <p class="commodity_subtitle">{{$commodity->commodity_subtitle}}</p>
                 <h4 class="commodity_title">
                     <a href="{{url('commodity/'. $commodity->commodity_id)}}">{{$commodity->commodity_title}}</a>
                 </h4>

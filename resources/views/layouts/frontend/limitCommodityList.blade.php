@@ -1,5 +1,8 @@
 <style>
-    .commodity_smalltitle {
+    .commodity_subtitle {
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
         font-size: 12px;
         height: 15px;
         color: #e71d1c;
@@ -10,8 +13,12 @@
     }
 
     .commodity_title {
+        word-break: break-all;
+        height: 55px;
+        text-align: left;
+        padding-left: 5px;
+        padding-right: 5px;
         margin-top: 0;
-        white-space: nowrap;
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -30,7 +37,12 @@
             text-align: center;
             font-weight: bold;
         }
+
+        .commodity_title {
+            height: 75px;
+        }
     }
+
 </style>
 @forelse($limitCommodities as $limit)
     <div class="col-xs-6 col-sm-3 col-md-3 product-men">
@@ -53,10 +65,11 @@
                 <span class="product-new-top">限量</span>
 
             </div>
-            <div class="item-info-product ">
-                <p class="commodity_smalltitle">{{$limit->commodity_smalltitle}}</p>
+            <div class="item-info-product">
+                <p class="commodity_subtitle">{{$limit->commodity_subtitle}}</p>
                 <h4 class="commodity_title">
-                    <a href="{{url('commodity/'. $limit->commodity_id)}}">{{$limit->commodity_title}}</a></h4>
+                    <a href="{{url('commodity/'. $limit->commodity_id)}}">{{$limit->commodity_title}}</a>
+                </h4>
                 <div class="info-product-price">
                     {{--<div>--}}
                     {{--<del>售價$69.71</del>--}}
