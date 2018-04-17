@@ -224,12 +224,20 @@
                     <th>規格：</th>
                     <td>
                         <div id="specBlock">
-                            @foreach($spec_array as $spec)
-                                <input type="text" name="spec[]" value="{{$spec->spec}}">
+                            @foreach($spec_array as $key => $spec)
+                                <div id="initSpecDiv{{$key}}">
+                                    <input type="text" name="spec[]" value="{{$spec->spec}}" style="margin-right: 10px"
+                                           required>
+                                    庫存量：
+                                    <input type="number" min="0" name="stock[]" value="{{$spec->stock}}"
+                                           style="height: 28px;" onchange="getTotalStock()">
+                                    <a href="javascript:void(0)" onclick="removeSpecDiv('initSpecDiv{{$key}}')"
+                                       style="margin-left: 10px">刪除</a>
+                                </div>
                             @endforeach
                         </div>
                         <input type="button" class="back" value="新增" style="line-height:5px;"
-                               onclick="createTextInput()">
+                               onclick="createSpecDiv()">
                     </td>
                 </tr>
 
@@ -250,10 +258,11 @@
                 </tr>
 
                 <tr>
-                    <th>庫存：</th>
+                    <th>總庫存：</th>
                     <td>
-                        <input type="number" min="0" name="commodity_stock" style="height: 28px;"
-                               value="{{$commodity->commodity_stock}}">
+                        <input type="number" min="0" id="commodity_stock" name="commodity_stock" style="height: 28px;"
+                               value="{{$commodity->commodity_stock}}"
+                               @if(!$spec_array->isEmpty()) readonly="true" @endif>
                     </td>
                 </tr>
 
@@ -338,12 +347,62 @@
         </form>
     </div>
     <script>
-        function createTextInput() {
-            var input = $('<input />', {
-                type: 'text',
-                name: "spec[]",
+        var i = 0;
+
+        function createSpecDiv() {
+            var id = "specDiv" + i;
+            var div = $('<div>', {
+                id: id,
             });
-            input.appendTo($("#specBlock"));
+            var specInput = $('<input />', {
+                type: "text",
+                name: "spec[]",
+                required: true,
+                style: "margin-right: 10px",
+            });
+            var stockInput = $('<input />', {
+                type: "number",
+                min: 0,
+                height: "28px",
+                name: "stock[]",
+                value: 0,
+                change: function () {
+                    getTotalStock();
+                }
+            });
+            var deleteLink = $('<a>', {
+                text: "刪除",
+                href: "javascript:void(0)",
+                style: "margin-left: 10px",
+                click: function () {
+                    removeSpecDiv(id);
+                }
+            });
+
+            div.append(specInput);
+            div.append("庫存量：");
+            div.append(stockInput);
+            div.append(deleteLink);
+            div.appendTo($("#specBlock"));
+            $("#commodity_stock").attr("readonly", true);
+            getTotalStock();
+            i++;
+        }
+
+        function removeSpecDiv(id) {
+            $("#" + id).remove();
+            getTotalStock();
+            if ($('[name="stock[]"]').length == 0) {
+                $("#commodity_stock").attr("readonly", false);
+            }
+        }
+
+        function getTotalStock() {
+            var $totalStock = 0
+            $('[name="stock[]"]').each(function (index) {
+                $totalStock += parseInt($(this).val());
+            })
+            $("#commodity_stock").val($totalStock);
         }
     </script>
 @endsection

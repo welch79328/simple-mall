@@ -16,6 +16,7 @@ class CreateCommoditySpecTable extends Migration
         Schema::create('commodity_spec', function (Blueprint $table) {
             $table->increments('id');
             $table->string('spec');
+            $table->integer('stock');
             $table->integer('commodity_id');
             $table->timestamps();
         });

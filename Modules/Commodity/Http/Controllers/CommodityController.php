@@ -78,9 +78,11 @@ class CommodityController extends Controller
                 $input['commodity_originalprice'] = $input['commodity_price'];
             }
             $speces = (isset($input['spec'])) ? $input['spec'] : [];
+            $stocks = (isset($input['stock'])) ? $input['stock'] : [];
             unset($input['commodity_period']);
             unset($input['image']);
             unset($input['spec']);
+            unset($input['stock']);
 
             $rules = [
                 'commodity_title' => 'required',
@@ -103,16 +105,28 @@ class CommodityController extends Controller
                 }
                 DB::beginTransaction();
                 foreach ($image as $k => $v) {
-                    $k = 'image';
-                    $commodityImg = [$k => $v, 'commodity_id' => $re->commodity_id];
-                    $result = DB::table("commodity_img")->insert($commodityImg);
-                    if (!$result) {
-                        throw new Exception("新增商品失敗：無法新增圖片！");
+                    if (!empty($v)) {
+                        $commodityImg = [
+                            "image" => $v,
+                            "commodity_id" => $re->commodity_id,
+                            "created_at" => \Carbon\Carbon::now(),
+                            "updated_at" => \Carbon\Carbon::now()
+                        ];
+                        $result = DB::table("commodity_img")->insert($commodityImg);
+                        if (!$result) {
+                            throw new Exception("新增商品失敗：無法新增圖片！");
+                        }
                     }
                 }
-                foreach ($speces as $spec) {
+                foreach ($speces as $key => $spec) {
                     if (!empty($spec)) {
-                        $commoditySpec = ["spec" => $spec, 'commodity_id' => $re->commodity_id];
+                        $commoditySpec = [
+                            "spec" => $spec,
+                            "stock" => $stocks[$key],
+                            "commodity_id" => $re->commodity_id,
+                            "created_at" => \Carbon\Carbon::now(),
+                            "updated_at" => \Carbon\Carbon::now()
+                        ];
                         $result = DB::table("commodity_spec")->insert($commoditySpec);
                         if (!$result) {
                             throw new Exception("新增商品失敗：無法新增規格！");
@@ -173,12 +187,14 @@ class CommodityController extends Controller
             $input['commodity_end_time'] = $input['commodity_period'][1];
             $input['commodity_creator'] = session('admin_member.member_name');
             $speces = (isset($input['spec'])) ? $input['spec'] : [];
+            $stocks = (isset($input['stock'])) ? $input['stock'] : [];
             if (empty($input['commodity_originalprice'])) {
                 $input['commodity_originalprice'] = $input['commodity_price'];
             }
             unset($input['commodity_period']);
             unset($input['image']);
             unset($input['spec']);
+            unset($input['stock']);
 
             $rules = [
                 'commodity_title' => 'required',
@@ -197,18 +213,32 @@ class CommodityController extends Controller
                 return back()->withErrors($validator);
             }
             DB::beginTransaction();
+            $input["updated_at"] = \Carbon\Carbon::now();
             DB::table("commodity")->where('commodity_id', $commodity_id)->update($input);
 
             DB::table("commodity_img")->where('commodity_id', $commodity_id)->delete();
             foreach ($image as $k => $v) {
-                $k = 'image';
-                $commodityImg = [$k => $v, 'commodity_id' => $commodity_id];
-                DB::table("commodity_img")->insert($commodityImg);
+                if (!empty($v)) {
+                    $k = 'image';
+                    $commodityImg = [
+                        $k => $v,
+                        "commodity_id" => $commodity_id,
+                        "created_at" => \Carbon\Carbon::now(),
+                        "updated_at" => \Carbon\Carbon::now()
+                    ];
+                    DB::table("commodity_img")->insert($commodityImg);
+                }
             }
             DB::table("commodity_spec")->where('commodity_id', $commodity_id)->delete();
-            foreach ($speces as $spec) {
+            foreach ($speces as $key => $spec) {
                 if (!empty($spec)) {
-                    $commoditySpec = ["spec" => $spec, 'commodity_id' => $commodity_id];
+                    $commoditySpec = [
+                        "spec" => $spec,
+                        "stock" => $stocks[$key],
+                        "commodity_id" => $commodity_id,
+                        "created_at" => \Carbon\Carbon::now(),
+                        "updated_at" => \Carbon\Carbon::now()
+                    ];
                     DB::table("commodity_spec")->insert($commoditySpec);
                 }
             }
