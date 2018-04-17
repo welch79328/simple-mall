@@ -24,29 +24,30 @@
             <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">付款方式</h3>
                 <div class="faqTextDiv">
-                    <p>填寫完商品預購單後，系統將直接連結至相關網站進行結帳，提供ATM以及線上刷卡功能。</p>
+                    <p>填寫完商品預購單後，(待組數額滿)客服將主動聯繫，並Email相關匯款資料，請於三日內至ATM付款完成。</p>
                 </div>
             </div>
             <div class=" col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">配送方式</h3>
                 <div class="faqTextDiv">
-                    <p>預購組數達滿後立即以郵寄或宅配方式出貨，將以郵件通知出貨。</p>
+                    <p>預購組數達成後，立即以郵寄或宅配方式出貨，將以Email通知出貨。</p>
+                    <p style="color: red">★配送範圍：台灣本島</p>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 faqDiv">
                 <h3 class="wthree_text_info" style="margin-bottom: 10px;">售後服務</h3>
                 <div class="faqTextDiv">
                     <p>￭收到錯誤/瑕疵商品</p>
-                    <p>對於捷U購出貨前未做好詳盡檢查，造成您的不便感到非常抱歉，請至會員專區訂單右側點選"我要退貨"，捷U購收到信件後會立即與您聯繫。</p>
-                    <p><br/></p>
+                    <p>對於捷U購出貨前未做好詳盡檢查，造成您的不便感到非常抱歉，請至會員專區訂單查詢，右側點選”退貨”，捷U購收到信件後會立即與您聯繫</p>
+                    <br/>
                     <p>￭退貨須知</p>
                     <p>預售商品皆提供7天鑑賞期(非試用期)，商品未經拆封或破損（除原有商品瑕疵），請於收到商品後7天鑑賞期(含例假日)內申請退貨，將商品連同原包裝及發票封裝後自行寄回。</p>
-                    <p><br/></p>
+                    <br/>
                     <p>
                         如收到錯誤或瑕疵商品，因換貨所產生之來回運費，皆由捷U購負擔；其他因個人因素欲退貨，所產生之運費皆由消費者自行支付。商品退款於收到退貨後經檢查無誤，於7-14個工作天內退回至消費者原轉帳帳戶(扣除退貨運費)。
                     </p>
-                    <p style="color: red">*捷U購預售商品僅供退貨不提供換貨服務(除錯誤/瑕疵商品)。</p>
-                    <p style="color: red">*即期商品因保存期限短暫，恕不提供退貨服務，購買前請三思。</p>
+                    <p style="color: red">★捷U購預售商品僅供退貨不提供換貨服務(除錯誤/瑕疵商品)</p>
+                    <p style="color: red">★即期商品因保存期限短暫，恕不提供退貨服務，購買前請三思。</p>
                 </div>
             </div>
         </div>
