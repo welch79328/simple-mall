@@ -62,7 +62,7 @@
     <div class="col-sm-3 col-md-4 footer_div_2">
         <div class="col-sm-12 col-md-9 col-md-offset-3" style="border-right-style: solid; border-width: thin;">
             <div style="padding: 10px">
-                <img src="{{url('images/frontend/J-UGO01-01.png')}}" width="150px">
+                <img src="{{url('images/frontend/J-UGO-footer.png')}}" width="120px">
             </div>
             <div class="center-block text-left footer_detail">
                 <div>02-7709-1239</div>
