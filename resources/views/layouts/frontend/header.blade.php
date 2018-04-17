@@ -73,10 +73,10 @@
         <!-- header-bot -->
         <div class="col-xs-12 col-md-12 logo_agile col-sm-12" style="margin-top: 0">
             <h1 class="hidden-xs" style="margin-top: 0">
-                <a href="{{url('/')}}"><img src="{{url('images/frontend/J-UGO01-01.png')}}" width="250px"></a>
+                <a href="{{url('/')}}"><img src="{{url('images/frontend/J-UGO-logo-mobile.png')}}" width="500px"></a>
             </h1>
             <h1 class="visible-xs" style="margin-top: 0">
-                <a href="{{url('/')}}"><img src="{{url('images/frontend/logo_180403_0002.jpg')}}" width="165px"></a>
+                <a href="{{url('/')}}"><img src="{{url('images/frontend/J-UGO-logo-mobile.png')}}" width="300px"></a>
             </h1>
         </div>
         <!-- header-bot -->

@@ -16,7 +16,6 @@
 
         .commodity_title {
             word-break: break-all;
-            margin-top: 0;
             height: 50px;
         }
 
@@ -138,7 +137,7 @@
         <div class="clearfix"></div>
     </div>
     <div class="fixedLogo visible-xs">
-        <img src="{{url('images/frontend/18-18.png')}}" width="60px">
+        <img src="{{url('images/frontend/add-favorite.png')}}" width="60px">
         <div class="clearfix"></div>
     </div>
 
@@ -182,7 +181,7 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12 margin-top-bottom-5px">
                     <div class="commodity_subtitle">{{$commodity->commodity_subtitle}}</div>
-                    <h3 class="commodity_title">
+                    <h3 class="commodity_title" style="margin-top: 10px">
                         {{$commodity->commodity_title}}
                     </h3>
                 </div>
@@ -194,9 +193,9 @@
 
                 <div class="col-xs-12 col-sm-10 col-md-10 margin-top-bottom-5px"
                      style="text-align: right;">
-                    {{--<div>--}}
-                    {{--<del style="margin-left: 0px;">售價$69.71</del>--}}
-                    {{--</div>--}}
+                    <div>
+                        <del style="margin-left: 0px;">網路價${{$commodity->commodity_originalprice}}</del>
+                    </div>
                     <div class="item_price priceDiv">
                         預購價
                         <span style="font-size: 35px;">
@@ -273,7 +272,7 @@
             </div>
         </div>
         <div class="col-xs-6">
-            <del>售價{{$commodity->commodity_originalprice}}</del>
+            <del>網路價{{$commodity->commodity_originalprice}}</del>
         </div>
         <div class="col-xs-6" style="padding-right: 10px; margin-top: 10px;">
             <div style="color: #d0a31e">目前0000人正在瀏覽</div>

@@ -154,20 +154,21 @@
 
     <script>
         function addToShoppingCart(commodity_id) {
-            $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
-                if (!data.result) {
-                    var callback = function () {
-                        location.reload();
-                    };
-                    showModal("errorModal", "提示", data.msg, callback);
-                    return;
-                }
-                $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
-                showModal("successModal", "提示", data.msg);
-                setTimeout(function () {
-                    $("#successModal").modal("hide");
-                }, 1000);
-            });
+            $.get("{{url('shopping')}}/" + commodity_id, {},
+                function (data) {
+                    if (!data.result) {
+                        var callback = function () {
+                            location.reload();
+                        };
+                        showModal("errorModal", "提示", data.msg, callback);
+                        return;
+                    }
+                    $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
+                    showModal("successModal", "提示", data.msg);
+                    setTimeout(function () {
+                        $("#successModal").modal("hide");
+                    }, 1000);
+                });
         }
 
         function getLimitCommodities(obj) {
