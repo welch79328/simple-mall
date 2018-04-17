@@ -82,7 +82,7 @@
         }
 
         .descriptionDiv {
-            height: 130px;
+            height: 100px;
             overflow: auto;
         }
 
