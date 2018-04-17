@@ -40,16 +40,16 @@ class CommodityHelper
             ["commodity_end_time", ">", $now],
             ["commodity_stock", ">", 0],
         ];
-        $limit = Commodity::where($this->limitmatch)->orderBy("commodity_ordering", "asc")->take($total)->get();
+        $limit = Commodity::where($this->limitmatch)->orderBy("commodity_ordering", "asc")->orderByRaw("TIMESTAMPDIFF(SECOND,'$now',commodity_end_time) asc")->take($total)->get();
         $limit_pluck = $limit->pluck('commodity_id')->all();
         $array_merge = $limit_pluck;
         if (count($limit) < $total) {
-            $general = Commodity::where($this->match)->orderBy("commodity_ordering", "asc")->take($total - count($limit))->get();
+            $general = Commodity::where($this->match)->orderBy("commodity_ordering", "asc")->orderByRaw("TIMESTAMPDIFF(SECOND,'$now',commodity_end_time) asc")->take($total - count($limit))->get();
             $general_pluck = $general->pluck('commodity_id')->all();
             $array_merge = array_merge($limit_pluck, $general_pluck);
         }
-
-        return Commodity::whereIn('commodity_id', $array_merge)->orderBy("commodity_type", "desc")->paginate($count);
+        $string = implode(',', $array_merge);
+        return Commodity::whereIn('commodity_id', $array_merge)->orderByRaw("FIELD(commodity_id, $string)")->paginate($count);
     }
 
     /**

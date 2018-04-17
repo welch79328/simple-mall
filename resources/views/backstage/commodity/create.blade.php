@@ -268,6 +268,13 @@
                 </tr>
 
                 <tr>
+                    <th>排序：</th>
+                    <td>
+                        <input type="number" min="0" style="height: 28px;" name="commodity_ordering" value="1">
+                    </td>
+                </tr>
+
+                <tr>
                     <th>商品描述：</th>
                     <td>
                         <textarea name="commodity_description" style="height: 200px;"></textarea>
