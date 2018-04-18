@@ -2,7 +2,9 @@
 
 namespace App\Helpers\Frontend;
 
+
 use App\Http\Model\PageCount;
+use Modules\Commodity\Entities\CommoditySpec;
 use Modules\Commodity\Entities\Commodity;
 
 class CommodityHelper

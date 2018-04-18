@@ -80,7 +80,7 @@
                 </div>
                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
                     <input type="button" value="立即預購" class="button"
-                           onclick="addToShoppingCart({{$limit->commodity_id}});"/>
+                           onclick="showChooseSpecDialog({{$limit->commodity_id}});"/>
                 </div>
                 </a>
             </div>

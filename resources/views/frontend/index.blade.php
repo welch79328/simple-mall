@@ -3,9 +3,11 @@
 @section('title', "$websiteTitle 首頁")
 
 @section('content')
+
     <!-- banner -->
     @include('layouts.frontend.banner')
     <!-- //banner -->
+
     <!-- limit -->
     <div class="new_arrivals_agile_w3ls_info">
         <div class="container">
@@ -36,6 +38,7 @@
         </div>
     </div>
     <!-- //limit -->
+
     <!-- /new_arrivals -->
     <div class="new_arrivals_agile_w3ls_info">
         <div class="container">
@@ -57,6 +60,7 @@
         </div>
     </div>
     <!-- //new_arrivals -->
+
     <!-- viewed products -->
     <div class="new_arrivals_agile_w3ls_info hidden-xs">
         <div class="container">
@@ -78,7 +82,10 @@
     </div>
     <!-- //viewed products -->
 
-    <!-- //login -->
+    <!-- specModal-->
+    <div id="specModalPlace"></div>
+    <!-- //specModal-->
+
     <a href="#home" class="scroll" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 
     <!-- //js -->
@@ -153,14 +160,23 @@
     <!-- //here ends scrolling icon -->
 
     <script>
-        function addToShoppingCart(commodity_id) {
-            $.get("{{url('shopping')}}/" + commodity_id, {},
+        function showChooseSpecDialog(commodity_id) {
+            $.get("{{url('show_choose_spec_dialog')}}/" + commodity_id, {},
+                function (data) {
+                    if (data === "") {
+                        addToShoppingCart(commodity_id);
+                        return;
+                    }
+                    $("#specModalPlace").html(data);
+                    $("#specModal").modal("show");
+                });
+        }
+
+        function addToShoppingCart(commodity_id, spec_id = null) {
+            $.get("{{url('shopping')}}/" + commodity_id, {specId: spec_id},
                 function (data) {
                     if (!data.result) {
-                        var callback = function () {
-                            location.reload();
-                        };
-                        showModal("errorModal", "提示", data.msg, callback);
+                        showModal("errorModal", "提示", data.msg);
                         return;
                     }
                     $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
