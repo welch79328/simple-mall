@@ -1,5 +1,18 @@
 <html>
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117792451-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-117792451-1');
+    </script>
     <title>@yield('title')</title>
     <!--/tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +35,8 @@
     <link href="{{asset('css/frontend/font-awesome.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <!-- //for bootstrap working -->
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400300i,600,600i,700,700i,800" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400300i,600,600i,700,700i,800"
+          rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,,300italic,400italic,700,900,900italic,700italic'
           rel='stylesheet' type='text/css'>
     @yield('css')

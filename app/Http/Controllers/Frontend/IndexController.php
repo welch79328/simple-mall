@@ -26,11 +26,17 @@ class IndexController extends CommonController
             if ((int)$limit->commodity_price >= 1000) {
                 $limit->commodity_price = number_format((int)$limit->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($limit->commodity_id);
+            $limit->online = $data["count"];
+            $limit->rand = $data["rand"];
         }
         foreach ($commodities as $commodity) {
             if ((int)$commodity->commodity_price >= 1000) {
                 $commodity->commodity_price = number_format((int)$commodity->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($commodity->commodity_id);
+            $commodity->online = $data["count"];
+            $commodity->rand = $data["rand"];
         }
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
@@ -58,6 +64,9 @@ class IndexController extends CommonController
             if ((int)$limit->commodity_price >= 1000) {
                 $limit->commodity_price = number_format((int)$limit->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($limit->commodity_id);
+            $limit->online = $data["count"];
+            $limit->rand = $data["rand"];
         }
         return view("layouts.frontend.limitCommodityList", compact("limitCommodities"));
     }
@@ -72,6 +81,9 @@ class IndexController extends CommonController
             if ((int)$commodity->commodity_price >= 1000) {
                 $commodity->commodity_price = number_format((int)$commodity->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($commodity->commodity_id);
+            $commodity->online = $data["count"];
+            $commodity->rand = $data["rand"];
         }
         return view("layouts.frontend.commodityList", compact("commodities"));
     }

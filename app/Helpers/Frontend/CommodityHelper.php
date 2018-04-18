@@ -146,42 +146,42 @@ class CommodityHelper
 
     public function pageCount($page)
     {
-        if (empty(session('member'))){
-            if (empty(session('identity'))){
+        if (empty(session('member'))) {
+            if (empty(session('identity'))) {
                 $identity = strtotime("now");
                 session(['identity' => $identity]);
             }
             $member = session('identity');
-        }else{
+        } else {
             $member = session('member.member_id');
         }
 
-        if(!PageCount::where('member',$member)->first()){
+        if (!PageCount::where('member', $member)->first()) {
             PageCount::create([
-                'member'=>$member,
-                'page_name'=>$page,
+                'member' => $member,
+                'page_name' => $page,
             ]);
-        }else{
-            PageCount::where('member',$member)->update([
-                'page_name'=>$page,
+        } else {
+            PageCount::where('member', $member)->update([
+                'page_name' => $page,
             ]);
         }
     }
 
-    public function getPageCount($page,$rand=0)
+    public function getPageCount($page, $rand = 0)
     {
-        $count = count(PageCount::where([['page_name',$page],['updated_at','>',date("Y-m-d H:i:s",strtotime("-2 hours"))]])->get());
-        if($rand == 0){
-            if ($count < config('config.baseline_count')){
-                $rand = rand(config('config.min_count'),config('config.max_count'));
+        $count = count(PageCount::where([['page_name', $page], ['updated_at', '>', date("Y-m-d H:i:s", strtotime("-2 hours"))]])->get());
+        if ($rand == 0) {
+            if ($count < config('config.baseline_count')) {
+                $rand = rand(config('config.min_count'), config('config.max_count'));
                 $count = $count + $rand;
             }
-        }elseif ($rand != 0){
-            if ($count + $rand < config('config.baseline_count')){
+        } elseif ($rand != 0) {
+            if ($count + $rand < config('config.baseline_count')) {
                 $count = $count + $rand;
             }
         }
-        $data = ['count'=>$count,'rand'=>$rand];
+        $data = ['count' => $count, 'rand' => $rand];
         return $data;
     }
 

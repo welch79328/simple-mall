@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="{{asset('css/frontend/flexslider.css')}}" type="text/css" media="screen"/>
     <link href="{{asset('css/frontend/easy-responsive-tabs.css')}}" rel='stylesheet' type='text/css'/>
     <style>
+        .disabled {
+            cursor: not-allowed;
+            color: #e71d1c;
+        }
+
         .fixedLogo {
             opacity: 0.8;
             position: fixed;
@@ -205,20 +210,29 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <select class="form-control" name="">
-                        <option value="default">規格選擇</option>
-                    </select>
+                    @if(count($specArray) != 0)
+                        <select class="form-control" id="specId" onchange="getSpecStock(this.value)">
+                            <option value="default">選擇規格</option>
+                            @foreach($specArray as $spec)
+                                @if($spec->stock == 0)
+                                    <option class="disabled" value="{{$spec->id}}" disabled>
+                                        {{$spec->spec}}(庫存不足)
+                                    </option>
+                                @elseif($spec->stock > 0)
+                                    <option value="{{$spec->id}}">{{$spec->spec}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    @endif
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <select class="form-control" name="member_city" id="amount">
-                        <option value="default">數量選擇</option>
-                        @for($i=1; $i<=10; $i++)
-                            @if($i == 1)
-                                <option value="{{$i}}" selected>{{$i}}</option>
-                            @else
+                    <select class="form-control" id="amount">
+                        <option value="default">選擇數量</option>
+                        @if(count($specArray) == 0)
+                            @for($i=1;$i<=(int)$commodity->commodity_stock;$i++)
                                 <option value="{{$i}}">{{$i}}</option>
-                            @endif
-                        @endfor
+                            @endfor
+                        @endif
                     </select>
                 </div>
                 <div class="col-sm-4 col-md-4 hidden-xs">
@@ -247,8 +261,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 browsingDiv">
-                    目前0000人正在瀏覽
+                <div class="col-xs-12 col-sm-6 col-md-6 browsingDiv" id="onlineDiv">
+                    目前{{$commodity->online}}人正在瀏覽
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -274,8 +288,8 @@
         <div class="col-xs-6">
             <del>網路價{{$commodity->commodity_originalprice}}</del>
         </div>
-        <div class="col-xs-6" style="padding-right: 10px; margin-top: 10px;">
-            <div style="color: #d0a31e">目前0000人正在瀏覽</div>
+        <div class="col-xs-6" style="padding-right: 10px; margin-top: 10px;" id="mobileOnlineDiv">
+            <div style="color: #d0a31e">目前{{$commodity->online}}人正在瀏覽</div>
         </div>
         <div class="col-xs-6" style="padding-right: 0;">
             <div class="priceDiv">
@@ -294,21 +308,30 @@
                         {{$commodity->commodity_title}}
                     </h3>
                 </div>
+                @if(count($specArray) != 0)
+                    <div class="col-xs-12 margin-top-bottom-10px">
+                        <select class="form-control" onchange="changeSpec(this)">
+                            <option value="default">選擇規格</option>
+                            @foreach($specArray as $spec)
+                                @if($spec->stock == 0)
+                                    <option class="disabled" value="{{$spec->id}}" disabled>
+                                        {{$spec->spec}}(庫存不足)
+                                    </option>
+                                @elseif($spec->stock > 0)
+                                    <option value="{{$spec->id}}">{{$spec->spec}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
                 <div class="col-xs-12 margin-top-bottom-10px">
-                    <select class="form-control" name="">
-                        <option value="default">規格選擇</option>
-                    </select>
-                </div>
-                <div class="col-xs-12 margin-top-bottom-10px">
-                    <select class="form-control" name="member_city" onchange="changeQuantity(this)">
-                        <option value="default">數量選擇</option>
-                        @for($i=1; $i<=10; $i++)
-                            @if($i == 1)
-                                <option value="{{$i}}" selected>{{$i}}</option>
-                            @else
+                    <select class="form-control" id="mobileAmount" onchange="changeQuantity(this)">
+                        <option value="default">選擇數量</option>
+                        @if(count($specArray) == 0)
+                            @for($i=1;$i<=(int)$commodity->commodity_stock;$i++)
                                 <option value="{{$i}}">{{$i}}</option>
-                            @endif
-                        @endfor
+                            @endfor
+                        @endif
                     </select>
                 </div>
                 <div class="col-xs-12 margin-top-bottom-10px">
@@ -505,22 +528,31 @@
         });
 
         function addToShoppingCart(commodity_id) {
+            var specId = $("#specId").val();
             var amount = $("#amount").val();
-            if (amount === "default") {
-                alert("請選擇數量");
+            if (specId === "default") {
+                showModal("alertModal", "提示", "請先選擇規格")
                 return;
             }
-            $.get("{{url('shopping')}}/" + commodity_id, {amount: amount}, function (data) {
-                if (!data.result) {
-                    showModal("errorModal", "提示", data.msg);
-                    return;
-                }
-                $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
-                showModal("successModal", "提示", data.msg);
-                setTimeout(function () {
-                    $("#successModal").modal("hide");
-                }, 1000);
-            });
+            if (amount === "default") {
+                showModal("alertModal", "提示", "請先選擇數量")
+                return;
+            }
+            $.get("{{url('shopping')}}/" + commodity_id,
+                {
+                    amount: amount,
+                    specId: specId
+                }, function (data) {
+                    if (!data.result) {
+                        showModal("errorModal", "提示", data.msg);
+                        return;
+                    }
+                    $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
+                    showModal("successModal", "提示", data.msg);
+                    setTimeout(function () {
+                        $("#successModal").modal("hide");
+                    }, 1000);
+                });
         }
 
         function countdownTimer() {
@@ -561,6 +593,38 @@
 
         function changeQuantity(obj) {
             $("#amount").val(obj.value);
+        }
+
+        function changeSpec(obj) {
+            $("#specId").val(obj.value).trigger('change');
+        }
+
+        function getSpecStock(specId) {
+            if (specId === "default") {
+                $("#amount").html("<option value='default'>選擇數量</option>");
+                $("#mobileAmount").html("<option value='default'>選擇數量</option>");
+                return;
+            }
+            $.get("{{url('get_spec_stock')}}/" + specId, {}, function (json) {
+                if (!json.result) {
+                    showModal("failModal", "提示", json.msg);
+                    retrun;
+                }
+                $("#amount").html("");
+                $("#mobileAmount").html("");
+                for (var i = 1; i <= json.data; i++) {
+                    var option = $('<option>', {
+                        text: i,
+                        value: i,
+                    });
+                    option.appendTo($("#amount"));
+                    var option = $('<option>', {
+                        text: i,
+                        value: i,
+                    });
+                    option.appendTo($("#mobileAmount"));
+                }
+            });
         }
 
     </script>

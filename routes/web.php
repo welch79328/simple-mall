@@ -45,6 +45,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
     Route::post('get_more_limit_commodities', 'CategoryController@getLimitCommodities');
     //商品分類--end
 
+    Route::get('get_spec_stock/{spec_id}', 'CommodityController@getSpecStock');
     Route::middleware(['check.commodity.deadline'])->group(function () {
         //商品--start
         Route::get('commodity/{commodity_id}', 'CommodityController@index');

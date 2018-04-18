@@ -7,7 +7,7 @@
  */
 
 return [
-    'min_count'     => 25,
-    'max_count'     => 50,
+    'min_count' => 25,
+    'max_count' => 50,
     'baseline_count' => 100,
 ];

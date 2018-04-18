@@ -22,7 +22,9 @@ class CommodityController extends CommonController
             $commodity->commodity_price = number_format((int)$commodity->commodity_price);
         }
         $imgs = CommodityImg::where("commodity_id", $commodity_id)->get();
+        $specArray = CommoditySpec::where("commodity_id", $commodity_id)->orderBy("id", "asc")->get();
 
+        //瀏覽過的商品
         $temps = [];
         $sessionTemps = $request->session()->pull("recently_viewed.commodities");
         if (is_null($sessionTemps)) {
@@ -36,15 +38,18 @@ class CommodityController extends CommonController
         foreach ($temps as $temp) {
             $request->session()->push("recently_viewed.commodities", $temp);
         }
+
+        //textarea 換行
         if ($commodity->commodity_description) {
             $commodity->commodity_description = nl2br($commodity->commodity_description);
         }
-        $CommodityHelper = new CommodityHelper();
-        $CommodityHelper->pageCount($commodity_id);
-        $CommodityHelper->getPageCount($commodity_id);
-        dd($CommodityHelper->getPageCount($commodity_id));
 
-        return view("frontend.commodity.commodity", compact("commodity", "imgs"));
+        $commodityHelper = new CommodityHelper();
+        $commodityHelper->pageCount($commodity_id);
+        $data = $commodityHelper->getPageCount($commodity_id);
+        $commodity->online = $data["count"];
+        $commodity->rand = $data["rand"];
+        return view("frontend.commodity.commodity", compact("commodity", "imgs", "specArray"));
     }
 
     public function search(Request $request, $keyword)
@@ -63,6 +68,9 @@ class CommodityController extends CommonController
             if ((int)$commodity->commodity_price >= 1000) {
                 $commodity->commodity_price = number_format((int)$commodity->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($commodity->commodity_id);
+            $commodity->online = $data["count"];
+            $commodity->rand = $data["rand"];
         }
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
@@ -78,6 +86,15 @@ class CommodityController extends CommonController
             return "";
         }
         return view("layouts.frontend.specModal", compact("commodity_id", "specArray"));
+    }
+
+    public function getSpecStock($specId)
+    {
+        $spec = CommoditySpec::find($specId);
+        if (empty($spec)) {
+            return CommonController::failResponse("無法取得商品規格的庫存！");
+        }
+        return CommonController::successJsonResponse($spec->stock, "取得商品規格的庫存成功。");
     }
 
     private function unique_multidim_array($array, $key)

@@ -25,7 +25,6 @@ class CategoryController extends CommonController
         $moduleHelper = new ModuleHelper();
         $cateTree = $moduleHelper->getTree($categories, 'cate_name', 'cate_id', 'cate_parent', 'cate_level', '5', 0, $topCateId);
 
-        $conditions = new stdClass();
         $conditions = [
             ["cate_id", "=", $cate_id],
             ["commodity_price", ">=", CommodityHelper::COMMODITY_PRICE_MIN],
@@ -36,6 +35,9 @@ class CategoryController extends CommonController
             if ((int)$commodity->commodity_price >= 1000) {
                 $commodity->commodity_price = number_format((int)$commodity->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($commodity->commodity_id);
+            $commodity->online = $data["count"];
+            $commodity->rand = $data["rand"];
         }
 
         $recentlyViewedCommodities = [];
@@ -82,6 +84,9 @@ class CategoryController extends CommonController
             if ((int)$commodity->commodity_price >= 1000) {
                 $commodity->commodity_price = number_format((int)$commodity->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($commodity->commodity_id);
+            $commodity->online = $data["count"];
+            $commodity->rand = $data["rand"];
         }
         return view("layouts.frontend.commodityList", compact("commodities"));
     }
@@ -95,6 +100,9 @@ class CategoryController extends CommonController
             if ((int)$limit->commodity_price >= 1000) {
                 $limit->commodity_price = number_format((int)$limit->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($limit->commodity_id);
+            $limit->online = $data["count"];
+            $limit->rand = $data["rand"];
         }
 
         $recentlyViewedCommodities = [];
@@ -116,6 +124,9 @@ class CategoryController extends CommonController
             if ((int)$limit->commodity_price >= 1000) {
                 $limit->commodity_price = number_format((int)$limit->commodity_price);
             }
+            $data = $commodityHelper->getPageCount($limit->commodity_id);
+            $limit->online = $data["count"];
+            $limit->rand = $data["rand"];
         }
         return view("layouts.frontend.limitCommodityList", compact("limitCommodities"));
     }

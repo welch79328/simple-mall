@@ -54,6 +54,16 @@ class CommonController extends Controller
         return $response;
     }
 
+    public static function successJsonResponse($data, $msg = "")
+    {
+        $response = [
+            "result" => true,
+            "data" => $data,
+            "msg" => $msg
+        ];
+        return $response;
+    }
+
     private function shareTopCategoriesGroup()
     {
         $topCategories = Category::where("cate_parent", 0)->orderBy('cate_order', 'asc')->get();
