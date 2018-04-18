@@ -27,23 +27,6 @@
 @endsection
 
 @section('content')
-    <!-- /banner_bottom_agile_info -->
-    <!--<div class="page-head_agile_info_w3l">
-    <div class="container">
-        <h3>{{$topCate->cate_name}}</h3>
-        /w3_short
-        <div class="services-breadcrumb">
-            <div class="agile_inner_breadcrumb">
-
-                <ul class="w3_short">
-                    <li><a href="{{url('/')}}">Home</a><i>|</i></li>
-                    <li>商品分類</li>
-                </ul>
-            </div>
-        </div>
-        //w3_short
-    </div>
-</div>-->
     <input id="activeCateId" type="hidden" value="{{$activeCate->cate_id}}">
     <!-- banner-bootom-w3-agileits -->
     <div class="banner-bootom-w3-agileits">
@@ -63,83 +46,6 @@
                             @endif
                         @endforeach
                     </div>
-                    <!--                <ul class="tree-list-pad">
-                                        <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Men's Wear</label>
-                                            <ul>
-                                                <li><input type="checkbox" id="item-0-0" /><label for="item-0-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>Ethnic Wear</label>
-                                                    <ul>
-                                                        <li><a href="mens.html">Shirts</a></li>
-                                                        <li><a href="mens.html">Caps</a></li>
-                                                        <li><a href="mens.html">Shoes</a></li>
-                                                        <li><a href="mens.html">Pants</a></li>
-                                                        <li><a href="mens.html">SunGlasses</a></li>
-                                                        <li><a href="mens.html">Trousers</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><input type="checkbox"  id="item-0-1" /><label for="item-0-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Party Wear</label>
-                                                    <ul>
-                                                        <li><a href="mens.html">Shirts</a></li>
-                                                        <li><a href="mens.html">Caps</a></li>
-                                                        <li><a href="mens.html">Shoes</a></li>
-                                                        <li><a href="mens.html">Pants</a></li>
-                                                        <li><a href="mens.html">SunGlasses</a></li>
-                                                        <li><a href="mens.html">Trousers</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><input type="checkbox"  id="item-0-2" /><label for="item-0-2"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Casual Wear</label>
-                                                    <ul>
-                                                        <li><a href="mens.html">Shirts</a></li>
-                                                        <li><a href="mens.html">Caps</a></li>
-                                                        <li><a href="mens.html">Shoes</a></li>
-                                                        <li><a href="mens.html">Pants</a></li>
-                                                        <li><a href="mens.html">SunGlasses</a></li>
-                                                        <li><a href="mens.html">Trousers</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Best Collections</label>
-                                            <ul>
-                                                <li><input type="checkbox" checked="checked" id="item-1-0" /><label for="item-1-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> New Arrivals</label>
-                                                    <ul>
-                                                        <li><a href="mens.html">Shirts</a></li>
-                                                        <li><a href="mens.html">Shoes</a></li>
-                                                        <li><a href="mens.html">Pants</a></li>
-                                                        <li><a href="mens.html">SunGlasses</a></li>
-                                                    </ul>
-                                                </li>
-
-                                            </ul>
-                                        </li>
-                                        <li><input type="checkbox" checked="checked" id="item-2" /><label for="item-2"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Best Offers</label>
-                                            <ul>
-                                                <li><input type="checkbox"  id="item-2-0" /><label for="item-2-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Summer Discount Sales</label>
-                                                    <ul>
-                                                        <li><a href="mens.html">Shirts</a></li>
-                                                        <li><a href="mens.html">Shoes</a></li>
-                                                        <li><a href="mens.html">Pants</a></li>
-                                                        <li><a href="mens.html">SunGlasses</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><input type="checkbox" id="item-2-1" /><label for="item-2-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Exciting Offers</label>
-                                                    <ul>
-                                                        <li><a href="mens.html">Shirts</a></li>
-                                                        <li><a href="mens.html">Shoes</a></li>
-                                                        <li><a href="mens.html">Pants</a></li>
-                                                        <li><a href="mens.html">SunGlasses</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><input type="checkbox" id="item-2-2" /><label for="item-2-2"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Flat Discounts</label>
-                                                    <ul>
-                                                        <li><a href="mens.html">Shirts</a></li>
-                                                        <li><a href="mens.html">Shoes</a></li>
-                                                        <li><a href="mens.html">Pants</a></li>
-                                                        <li><a href="mens.html">SunGlasses</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>-->
                 </div>
                 <div style="margin-top: 30px; margin-bottom: 30px;" class="col-xs-12">
                     <h3 style="margin-bottom: 10px">價格範圍</h3>
@@ -207,38 +113,6 @@
                     </button>
                 </div>
                 <div class="clearfix"></div>
-                <!--            <div class="men-wear-top">
-
-                                <div  id="top" class="callbacks_container">
-                                    <ul class="rslides" id="slider3">
-                                        <li>
-                                            <img class="img-responsive" src="/images/banner2.jpg" alt=" "/>
-                                        </li>
-                                        <li>
-                                            <img class="img-responsive" src="/images/banner5.jpg" alt=" "/>
-                                        </li>
-                                        <li>
-                                            <img class="img-responsive" src="/images/banner2.jpg" alt=" "/>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="men-wear-bottom">
-                                <div class="col-sm-4 men-wear-left">
-                                    <img class="img-responsive" src="/images/bb2.jpg" alt=" " />
-                                </div>
-                                <div class="col-sm-8 men-wear-right">
-                                    <h4>Exclusive Men's <span>Collections</span></h4>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-                                        ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                                        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                                        odit aut fugit. </p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>-->
                 <div id="commodityList">
                     @include('layouts.frontend.commodityList')
                 </div>
@@ -255,6 +129,7 @@
             <div class="clearfix"></div>
         </div>
     </div>
+
     <!-- viewed products -->
     <div class="new_arrivals_agile_w3ls_info hidden-xs">
         <div class="container">
@@ -275,6 +150,11 @@
         </div>
     </div>
     <!-- //viewed products -->
+
+    <!-- specModal-->
+    <div id="specModalPlace"></div>
+    <!-- //specModal-->
+
     <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover"
                                                                              style="opacity: 1;"> </span></a>
     <!-- //js -->
@@ -423,21 +303,31 @@
             );
         }
 
-        function addToShoppingCart(commodity_id) {
-            $.get("{{url('shopping')}}/" + commodity_id, {}, function (data) {
-                if (!data.result) {
-                    var callback = function () {
-                        location.reload();
-                    };
-                    showModal("errorModal", "提示", data.msg, callback);
-                    return;
-                }
-                $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
-                showModal("successModal", "提示", data.msg);
-                setTimeout(function () {
-                    $("#successModal").modal("hide");
-                }, 1000);
-            });
+        function showChooseSpecDialog(commodity_id) {
+            $.get("{{url('show_choose_spec_dialog')}}/" + commodity_id, {},
+                function (data) {
+                    if (data === "") {
+                        addToShoppingCart(commodity_id);
+                        return;
+                    }
+                    $("#specModalPlace").html(data);
+                    $("#specModal").modal("show");
+                });
+        }
+
+        function addToShoppingCart(commodity_id, spec_id = null) {
+            $.get("{{url('shopping')}}/" + commodity_id, {specId: spec_id},
+                function (data) {
+                    if (!data.result) {
+                        showModal("errorModal", "提示", data.msg);
+                        return;
+                    }
+                    $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
+                    showModal("successModal", "提示", data.msg);
+                    setTimeout(function () {
+                        $("#successModal").modal("hide");
+                    }, 1000);
+                });
         }
 
         function getLatestCommodities(value) {

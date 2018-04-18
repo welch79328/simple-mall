@@ -61,7 +61,7 @@
                 </div>
                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
                     <input type="button" value="立即預購" class="button"
-                           onclick="addToShoppingCart({{$commodity->commodity_id}})"/>
+                           onclick="showChooseSpecDialog({{$commodity->commodity_id}})"/>
                 </div>
             </div>
             <div style="text-align: center;">剩餘組數 {{$commodity->commodity_stock}}</div>

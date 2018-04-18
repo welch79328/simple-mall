@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Helpers\Frontend\CommodityHelper;
 use Modules\Commodity\Entities\Commodity;
 use Modules\Commodity\Entities\CommodityImg;
+use Modules\Commodity\Entities\CommoditySpec;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -63,6 +64,15 @@ class CommodityController extends CommonController
             $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");
         }
         return view("frontend.commodity.search", compact("commodities", "recentlyViewedCommodities", "keyword"));
+    }
+
+    public function showChooseSpecDialog($commodity_id)
+    {
+        $specArray = CommoditySpec::where("commodity_id", $commodity_id)->orderBy("id", "asc")->get();
+        if (count($specArray) == 0) {
+            return "";
+        }
+        return view("layouts.frontend.specModal", compact("commodity_id", "specArray"));
     }
 
     private function unique_multidim_array($array, $key)

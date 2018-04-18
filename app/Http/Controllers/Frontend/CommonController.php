@@ -75,8 +75,7 @@ class CommonController extends Controller
 
     private function shareShoppingCartCount()
     {
-        $cart = Cart::content();
-        $cartCount = count($cart);
+        $cartCount = Cart::content()->count();
         view()->share('cartCount', $cartCount);
     }
 

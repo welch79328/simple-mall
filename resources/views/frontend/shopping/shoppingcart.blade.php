@@ -58,20 +58,22 @@
                 showModal("errorModal", "提示", "修改數量失敗：數量必須大於零");
                 return;
             }
-            $.post("{{url('shopping/update_amount')}}", {
-                _token: "{{csrf_token()}}",
-                amount: amount,
-                rowId: rowId
-            }, function (data) {
-                var callback = function () {
-                    window.location.href = "{{url('shoppingcart/show')}}";
-                }
-                if (!data.result) {
-                    showModal("errorModal", "提示", data.msg, callback);
-                    return;
-                }
-                showModal("successModal", "提示", data.msg, callback);
-            });
+            $.post(
+                "{{url('shopping/update_amount')}}",
+                {
+                    _token: "{{csrf_token()}}",
+                    amount: amount,
+                    rowId: rowId
+                }, function (data) {
+                    var callback = function () {
+                        window.location.href = "{{url('shoppingcart/show')}}";
+                    }
+                    if (!data.result) {
+                        showModal("errorModal", "提示", data.msg, callback);
+                        return;
+                    }
+                    showModal("successModal", "提示", data.msg, callback);
+                });
         }
     </script>
 @endsection

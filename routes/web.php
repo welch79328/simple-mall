@@ -48,6 +48,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
     Route::middleware(['check.commodity.deadline'])->group(function () {
         //商品--start
         Route::get('commodity/{commodity_id}', 'CommodityController@index');
+        Route::get('show_choose_spec_dialog/{commodity_id}', 'CommodityController@showChooseSpecDialog');
         //商品--end
     });
 
