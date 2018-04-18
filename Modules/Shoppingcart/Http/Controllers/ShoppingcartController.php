@@ -220,27 +220,33 @@ class ShoppingcartController extends Controller
         $rowId = $request->get("rowId");
         $carts = Cart::content();
         $cartItem = $carts["$rowId"];
-        if (!isset($cartItem)) {
+        if (empty($cartItem)) {
             $response = [
                 "result" => false,
                 "msg" => "修改數量失敗：此商品不在購物車內！"
             ];
             return $response;
         }
-
         $commodity = Commodity::find($cartItem->id);
-        if ((int)$amount > (int)$commodity->commodity_stock) {
+        $stock = $commodity->commodity_stock;
+        if (count($cartItem->options) > 0) {
+            $specInfo = CommoditySpec::find($cartItem->options->specId);
+            $stock = $specInfo->stock;
+        };
+        if ((int)$amount > (int)$stock) {
             $response = [
                 "result" => false,
-                "msg" => "修改數量失敗：商品庫存量不足，只剩 $commodity->commodity_stock 組！"
+                "msg" => "修改數量失敗：商品庫存量不足，只剩 $stock 組！"
             ];
             return $response;
         }
 
         $cartItem->qty = $amount;
+        $totalPrice = Cart::total();
         $response = [
             "result" => true,
-            "msg" => "修改數量成功！"
+            "msg" => "修改數量成功！",
+            "totalPrice" => $totalPrice
         ];
         return $response;
     }

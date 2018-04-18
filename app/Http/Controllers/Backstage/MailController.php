@@ -28,7 +28,7 @@ class MailController extends Controller
         );
     }
 
-    public static function preorder()
+    public static function preorderSuccess()
     {
         Mail::send(
             'layouts.email.preorder',

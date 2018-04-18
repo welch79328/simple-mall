@@ -13,6 +13,7 @@
                         <thead>
                         <tr>
                             <th> 產品</th>
+                            <th> 規格</th>
                             <th> 數量</th>
                             <th> 單價</th>
                             <th> 操作</th>
@@ -22,6 +23,9 @@
                         @foreach($cart as $v)
                             <tr>
                                 <td style="font-weight:bold;">{{$v->name}}</td>
+                                <td>
+                                    {{$v->options->specName}}
+                                </td>
                                 <td>
                                     <input type="number" min="1" value="{{$v->qty}}"
                                            onchange="changeAmount(this, '{{$v->rowId}}')" required>
@@ -36,7 +40,7 @@
                         <tr>
                             <td></td>
                             <td></td>
-                            <td>${{$total}}</td>
+                            <td id="totalPrice">${{$total}}</td>
                             <td></td>
                         </tr>
                     </table>
@@ -56,6 +60,7 @@
             var amount = $(obj).val();
             if (amount <= 0) {
                 showModal("errorModal", "提示", "修改數量失敗：數量必須大於零");
+                $(obj).val(1);
                 return;
             }
             $.post(
@@ -72,7 +77,8 @@
                         showModal("errorModal", "提示", data.msg, callback);
                         return;
                     }
-                    showModal("successModal", "提示", data.msg, callback);
+                    showModal("successModal", "提示", data.msg);
+                    $("#totalPrice").text(data.totalPrice);
                 });
         }
     </script>

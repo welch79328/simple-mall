@@ -1,3 +1,9 @@
+<style>
+    .disable {
+        cursor: not-allowed;
+        color: #e71d1c;
+    }
+</style>
 <!-- modal -->
 <div class="modal" tabindex="-1" role="dialog" id="specModal">
     <div class="modal-dialog" role="document">
@@ -9,13 +15,16 @@
             </div>
             <div class="modal-body">
                 @foreach($specArray as $spec)
-                    <label class="radio-inline">
-                        @if($spec->stock == 0)
-                            <input type="radio" name="spec" value="{{$spec->id}}" disabled>{{$spec->spec}}
-                        @else
+                    @if($spec->stock == 0)
+                        <label class="radio-inline disable">
+                            <input type="radio" name="spec" value="{{$spec->id}}"
+                                   disabled>{{$spec->spec}}(庫存不足)
+                        </label>
+                    @elseif($spec->stock > 0)
+                        <label class="radio-inline">
                             <input type="radio" name="spec" value="{{$spec->id}}">{{$spec->spec}}
-                        @endif
-                    </label>
+                        </label>
+                    @endif
                 @endforeach
             </div>
             <div class="modal-footer">

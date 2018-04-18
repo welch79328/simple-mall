@@ -2,6 +2,8 @@
 
 namespace Modules\Order\Http\Controllers;
 
+use Exception;
+use Carbon\Carbon;
 use App\Http\Controllers\Backstage\MailController;
 use App\Helpers\Report;
 use App\Helpers\TownshipHelper;
@@ -13,6 +15,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Modules\Commodity\Entities\Commodity;
+use Modules\Commodity\Entities\CommoditySpec;
 use Modules\Member\Entities\Member;
 use Modules\Order\Entities\Order;
 use Modules\Order\Entities\Orderlist;
@@ -205,54 +208,82 @@ class OrderController extends CommonController
         $input = $request->only('member_name', 'member_phone', 'tel_code', 'member_tel', 'member_mail', 'member_city', 'member_area', 'member_zipcode', 'member_location');
         $input["member_tel"] = $input["tel_code"] . "-" . $input["member_tel"];
         unset($input["tel_code"]);
-        $member_id = session('member.member_id');
         $carts = Cart::content();
-
+        $now = Carbon::now()->format("Y-m-d H:i:s");
+        $member_id = session("member.member_id");
         //檢查商品庫存是否足夠
         foreach ($carts as $item) {
             $commodity = Commodity::find($item->id);
-            if ($item->qty > $commodity->commodity_stock) {
+            $stock = $commodity->commodity_stock;
+            if (count($item->options) > 0) {
+                $spec = CommoditySpec::find($item->options->specId);
+                $stock = $spec->stock;
+            }
+            if ($item->qty > $stock) {
                 $response = [
                     "result" => false,
-                    "msg" => "下單失敗：$commodity->commodity_title 的庫存量不足，只剩 $commodity->commodity_stock 組！"
+                    "msg" => "下單失敗：$commodity->commodity_title 的庫存量不足，只剩 $stock 組！"
                 ];
                 return $response;
             }
         }
 
         try {
-            DB::beginTransaction();
-            Member::where('member_id', $member_id)->update($input);
-            $re = Order::create([
-                'order_number' => substr((string)time(), -8),
-                'order_total' => Cart::total(),
-                'member_id' => $member_id,
-            ]);
-            if ($re) {
-                foreach ($carts as $v) {
-                    $commodity = Commodity::find($v->id);
-                    $commodity->commodity_stock -= $v->qty;
-                    $commodity->save();
-
-                    Orderlist::create([
-                        'name' => $v->name,
-                        'amount' => $v->qty,
-                        'price' => $v->price,
-                        'commodity_id' => $v->id,
-                        'order_id' => $re['order_id'],
-                    ]);
+//            Member::where('member_id', $member_id)->update($input);
+            foreach ($carts as $v) {
+                $result = Order::create([
+                    'order_number' => substr((string)time(), -8),
+                    'order_total' => ($v->qty * $v->price),
+                    'member_id' => $member_id,
+                ]);
+                if (!$result) {
+                    throw new Exception("新增訂單失敗：請稍後再試！");
                 }
-//                DB::commit();
-                Cart::destroy();
-                $result = MailController::preorder();
-                $response = [
-                    "result" => true,
-                    "msg" => "新增訂單成功"
-                ];
-                return $response;
+                DB::beginTransaction();
+                $result = DB::table("order_list")->insert([
+                    'name' => $v->name,
+                    'amount' => $v->qty,
+                    'price' => $v->price,
+                    'commodity_id' => $v->id,
+                    'spec_id' => $v->options->specId,
+                    'order_id' => $result["order_id"],
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ]);
+                if (!$result) {
+                    throw new Exception("新增訂單失敗：新增訂單明細失敗！");
+                }
+
+                $commodity = DB::table("commodity")->where("commodity_id", $v->id)->first();
+                $stock = (int)$commodity->commodity_stock - (int)$v->qty;
+                $result = DB::table("commodity")->where("commodity_id", $v->id)->update(["commodity_stock" => $stock, "updated_at" => $now]);
+                if (!$result) {
+                    throw new Exception("新增訂單失敗：商品庫存修改失敗！");
+                }
+                if (count($v->options) > 0) {
+                    $spec = DB::table("commodity_spec")->where("id", $v->options->specId)->first();
+                    $stock = (int)$spec->stock - (int)$v->qty;
+                    $result = DB::table("commodity_spec")->where("id", $v->options->specId)->update(["stock" => $stock, "updated_at" => $now]);
+                    if (!$result) {
+                        throw new Exception("新增訂單失敗：商品規格庫存修改失敗！");
+                    }
+                }
+                DB::commit();
             }
-        } catch (\Exception $e) {
-            DB::rollBack();
+            Cart::destroy();
+            MailController::preorderSuccess();
+            $response = [
+                "result" => true,
+                "msg" => "新增訂單成功"
+            ];
+            return $response;
+        } catch (Exception $e) {
+            DB::rollback();
+            $response = [
+                "result" => false,
+                "msg" => $e->getMessage()
+            ];
+            return $response;
         }
     }
 
