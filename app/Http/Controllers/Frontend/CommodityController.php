@@ -38,6 +38,11 @@ class CommodityController extends CommonController
         if ($commodity->commodity_description) {
             $commodity->commodity_description = nl2br($commodity->commodity_description);
         }
+        $CommodityHelper = new CommodityHelper();
+        $CommodityHelper->pageCount($commodity_id);
+        $CommodityHelper->getPageCount($commodity_id);
+        dd($CommodityHelper->getPageCount($commodity_id));
+
         return view("frontend.commodity.commodity", compact("commodity", "imgs"));
     }
 
