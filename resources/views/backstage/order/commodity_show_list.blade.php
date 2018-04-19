@@ -8,43 +8,75 @@
     </div>
     <!--面包屑导航 结束-->
 
-	<!--结果页快捷搜索框 开始-->
-	{{--<div class="search_wrap">--}}
+    <!--结果页快捷搜索框 开始-->
+    {{--<div class="search_wrap">--}}
 
     {{--</div>--}}
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
     {{--<form action="#" method="post">--}}
-        <div class="result_wrap">
-            <!--快捷导航 开始-->
-            <div class="result_title">
-                <h3>訂單列表</h3>
-            </div>
-            <div class="result_content">
-                <div class="short_wrap">
-                    <a href="{{url('admin/order')}}"><i class="fa fa-recycle"></i>全部訂單</a>
-                    <a href="{{url('admin/commodity_show')}}"><i class="fa fa-recycle"></i>預購滿商品</a>
-                    <a href="{{url('admin/commodity_show_list/'.$commodity_id.'/excel')}}"><i class="fa fa-recycle"></i>產生清單</a>
-                </div>
-            </div>
-            <!--快捷导航 结束-->
+    <div class="result_wrap">
+        <!--快捷导航 开始-->
+        <div class="result_title">
+            <h3>訂單列表</h3>
         </div>
+        <div class="result_content">
+            <div class="short_wrap">
+                <a href="{{url('admin/order')}}"><i class="fa fa-recycle"></i>全部訂單</a>
+                <a href="{{url('admin/commodity_show')}}"><i class="fa fa-recycle"></i>預購滿商品</a>
+                <a href="{{url('admin/commodity_show_list/'.$commodity_id.'/excel')}}"><i class="fa fa-recycle"></i>產生清單</a>
+            </div>
+        </div>
+        <!--快捷导航 结束-->
+    </div>
 
-        <div class="result_wrap">
-            <div class="result_content">
-                <form action="{{url('admin/commodity_show_list/edit')}}" method="post">
-                    {{csrf_field()}}
-                    請勾選完成的項目<br>
+    <div class="result_wrap">
+        <div class="result_content">
+            <form action="{{url('admin/commodity_show_list/edit')}}" method="post">
+                {{csrf_field()}}
+                <p>
+                    <span>請勾選欲修改的項目</span>
+                    <span style="margin-left: 30px">
+                        狀態選擇：
+                        <select name="status">
+                            <option value="pending">待處理</option>
+                            <option value="shipping">出貨中</option>
+                            <option value="complete">已送達</option>
+                            <option value="refund">退貨處理中</option>
+                            <option value="cancel">取消</option>
+                        </select>
+                    </span>
+                </p>
+                <br>
+                @foreach($data as $v)
+                    <p>
+                        <input type="checkbox" value="{{$v->id}}" name="list[]">
+                        <a href="{{url('admin/order/'.$v->order_id)}}">{{$v->order_number}} - {{$v->member_name}}</a>
+                        <span style="padding: 0px 15px 0px 15px;">商品名:{{$v->name}}</span>
+                        @if(!empty($v->spec_name))
+                            <span style="padding: 0px 15px 0px 15px;">規格:{{$v->spec_name}}</span>
+                        @endif
+                        <span style="padding:0px 15px 0px 15px;">數量:{{$v->amount}}</span>
+                        <span style="padding: 0px 15px 0px 15px; color:@if($v->status == '完成') #009966 @elseif($v->status == '取消') #FF0033 @endif">
+                            狀態:({{$v->_status}})
+                        </span>
+                        <span style="padding: 0px 15px 0px 15px;">
+                            編輯者:
+                            @if(!empty($v->creator))
+                                {{$v->creator}}
+                            @else
+                                無
+                            @endif
+                        </span>
+                    </p>
                     <br>
-                    @foreach($data as $v)
-                        <p><input type="checkbox" value="{{$v->id}}" name="list[]"> <a href="{{url('admin/order/'.$v->order_id)}}">{{$v->order_number}} - {{$v->member_name}}</a><span style="padding: 0px 15px 0px 15px;">商品名:{{$v->name}}</span><span style="padding:0px 15px 0px 15px;">數量:{{$v->amount}}</span><span style="padding: 0px 15px 0px 15px; color:@if($v->status == '完成') #009966 @elseif($v->status == '取消') #FF0033 @endif">狀態:({{$v->status}})</span><span style="padding: 0px 15px 0px 15px;">編輯者:{{$v->creator}}</span></p><br>
-                    @endforeach
-                    <input type="submit" style="line-height:5px;" value="提交">
-                    <input type="button" style="line-height:5px;" class="back" onclick="history.go(-1)" value="返回">
-                </form>
-            </div>
+                @endforeach
+                <input type="submit" style="line-height:5px;" value="提交">
+                <input type="button" style="line-height:5px;" class="back" onclick="history.go(-1)" value="返回">
+            </form>
         </div>
+    </div>
     {{--</form>--}}
     <!--搜索结果页面 列表 结束-->
     <style>
@@ -58,17 +90,20 @@
         //刪除商品
         function delcommodity(commodity_id) {
             layer.confirm('您確定要刪除這項商品嗎？', {
-                btn: ['確定','取消'] //按钮
-            }, function(){
-                $.post("{{url('admin/commodity')}}/"+commodity_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
-                    if(data.status == 0){
+                btn: ['確定', '取消'] //按钮
+            }, function () {
+                $.post("{{url('admin/commodity')}}/" + commodity_id, {
+                    '_method': 'delete',
+                    '_token': "{{csrf_token()}}"
+                }, function (data) {
+                    if (data.status == 0) {
                         location.href = location.href;
                         layer.msg(data.msg, {icon: 6});
-                    }else{
+                    } else {
                         layer.msg(data.msg, {icon: 5});
                     }
                 });
-            }, function(){
+            }, function () {
 
             });
         }

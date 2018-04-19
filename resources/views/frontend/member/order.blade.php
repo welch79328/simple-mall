@@ -31,8 +31,10 @@
                             <td>
                                 <a href="{{url('member_order_detail/'.$order->order_id)}}"
                                    style="margin-right: 10px">明細</a>
-                                @if($order->order_status == "pending" || $order->order_status == "shipping")
+                                @if($order->order_status == "pending")
                                     <a href="javascript: void(0)" onclick="showCancelOrderModal({{$order->order_id}})">取消</a>
+                                @elseif($order->order_status == "complete")
+                                    <a href="javascript: void(0)" onclick="">退貨</a>
                                 @endif
                             </td>
                         </tr>

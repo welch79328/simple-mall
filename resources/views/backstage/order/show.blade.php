@@ -8,8 +8,8 @@
     </div>
     <!--面包屑导航 结束-->
 
-	<!--结果集标题与导航组件 开始-->
-	<div class="result_wrap">
+    <!--结果集标题与导航组件 开始-->
+    <div class="result_wrap">
         <div class="result_title">
             <h3>查看訂單</h3>
             @if(count($errors)>0)
@@ -33,107 +33,125 @@
         </div>
     </div>
     <!--结果集标题与导航组件 结束-->
-    
+
     <div class="result_wrap">
         {{--<form action="{{url('admin/order')}}" method="post">--}}
-            {{--{{csrf_field()}}--}}
-            <table class="add_tab">
-                <tbody>
-                    <tr>
-                        <th>訂單編號：</th>
-                        <td>
-                            <p>{{$data->order_number}}</p>
-                        </td>
-                    </tr>
+        {{--{{csrf_field()}}--}}
+        <table class="add_tab">
+            <tbody>
+            <tr>
+                <th>訂單編號：</th>
+                <td>
+                    <p>{{$data->order_number}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>用戶名稱：</th>
-                        <td>
-                            <p>{{$data->member_name}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>用戶名稱：</th>
+                <td>
+                    <p>{{$data->member_name}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>用戶性別：</th>
-                        <td>
-                            <p>{{$data->member_sex}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>用戶性別：</th>
+                <td>
+                    <p>{{$data->member_sex}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>用戶生日：</th>
-                        <td>
-                            <p>{{$data->member_year}} - {{$data->member_month}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>用戶生日：</th>
+                <td>
+                    <p>{{$data->member_year}} - {{$data->member_month}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>用戶信箱：</th>
-                        <td>
-                            <p>{{$data->member_mail}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>用戶信箱：</th>
+                <td>
+                    <p>{{$data->member_mail}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>用戶手機：</th>
-                        <td>
-                            <p>{{$data->member_phone}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>用戶手機：</th>
+                <td>
+                    <p>{{$data->member_phone}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>用戶電話：</th>
-                        <td>
-                            <p>{{$data->member_tel}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>用戶電話：</th>
+                <td>
+                    <p>{{$data->member_tel}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>郵遞區號：</th>
-                        <td>
-                            <p>{{$data->member_zipcode}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>郵遞區號：</th>
+                <td>
+                    <p>{{$data->member_zipcode}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>用戶地址：</th>
-                        <td>
-                            <p>{{$data->member_city}} {{$data->member_area}} {{$data->member_location}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>用戶地址：</th>
+                <td>
+                    <p>{{$data->member_city}} {{$data->member_area}} {{$data->member_location}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>購買商品：</th>
-                        <td>
-                            @foreach($orderlist as $v)
-                                <p><a href="{{url('admin/order/alone/'.$v->id)}}">{{$v->name}}</a> <span>數量:{{$v->amount}}</span>  <span>單價:{{$v->price}}</span>  <span style="color:@if($v->status == '完成') #009966 @elseif($v->status == '取消') #FF0033 @endif">狀態:({{$v->status}})</span> <span>編輯者:{{$v->creator}}</span></p>
-                            @endforeach
-                        </td>
-                    </tr>
+            <tr>
+                <th>購買商品：</th>
+                <td>
+                    @foreach($orderlist as $v)
+                        <p>
+                            <a href="{{url('admin/order/alone/'.$v->id)}}">{{$v->name}}</a>
+                            @if(!empty($v->spec_name))
+                                <span>規格:{{$v->spec_name}}</span>
+                            @endif
+                            <span>數量:{{$v->amount}}</span>
+                            <span>單價:{{$v->price}}</span>
+                            <span style="color:@if($v->status == '完成') #009966 @elseif($v->status == '取消') #FF0033 @endif">
+                                狀態:({{$v->_status}})
+                            </span>
+                            <span>
+                                編輯者:
+                                @if(!empty($v->creator))
+                                    {{$v->creator}}
+                                @else
+                                    無
+                                @endif
+                            </span>
+                        </p>
+                    @endforeach
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>訂單金額：</th>
-                        <td>
-                            <p>{{$data->order_total}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>訂單金額：</th>
+                <td>
+                    <p>{{$data->order_total}}</p>
+                </td>
+            </tr>
 
-                    <tr>
-                        <th>訂單狀態：</th>
-                        <td>
-                            <p>{{$data->order_status}}</p>
-                        </td>
-                    </tr>
+            <tr>
+                <th>訂單狀態：</th>
+                <td>
+                    <p>{{$data->_order_status}}</p>
+                </td>
+            </tr>
 
-                    {{--<tr>--}}
-                        {{--<th></th>--}}
-                        {{--<td>--}}
-                            {{--<input type="submit" value="提交">--}}
-                            {{--<input type="button" class="back" onclick="history.go(-1)" value="返回">--}}
-                        {{--</td>--}}
-                    {{--</tr>--}}
-                </tbody>
-            </table>
+            {{--<tr>--}}
+            {{--<th></th>--}}
+            {{--<td>--}}
+            {{--<input type="submit" value="提交">--}}
+            {{--<input type="button" class="back" onclick="history.go(-1)" value="返回">--}}
+            {{--</td>--}}
+            {{--</tr>--}}
+            </tbody>
+        </table>
         {{--</form>--}}
     </div>
 

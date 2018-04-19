@@ -186,7 +186,6 @@ class CommodityController extends Controller
             $input['commodity_start_time'] = $input['commodity_period'][0];
             $input['commodity_end_time'] = $input['commodity_period'][1];
             $input['commodity_creator'] = session('admin_member.member_name');
-            $specId = (isset($input['specId'])) ? $input['specId'] : [];
             $speces = (isset($input['spec'])) ? $input['spec'] : [];
             $stocks = (isset($input['stock'])) ? $input['stock'] : [];
             if (empty($input['commodity_originalprice'])) {
@@ -194,7 +193,6 @@ class CommodityController extends Controller
             }
             unset($input['commodity_period']);
             unset($input['image']);
-            unset($input['specId']);
             unset($input['spec']);
             unset($input['stock']);
 
@@ -231,15 +229,15 @@ class CommodityController extends Controller
                     DB::table("commodity_img")->insert($commodityImg);
                 }
             }
+            DB::table("commodity_spec")->where('commodity_id', $commodity_id)->delete();
             foreach ($speces as $key => $spec) {
                 if (!empty($spec)) {
                     $commoditySpec = [
                         "spec" => $spec,
                         "stock" => $stocks[$key],
                         "commodity_id" => $commodity_id,
-                        "updated_at" => \Carbon\Carbon::now()
                     ];
-                    DB::table("commodity_spec")->where("id", $specId[$key])->update($commoditySpec);
+                    DB::table("commodity_spec")->insert($commoditySpec);
                 }
             }
             DB::commit();

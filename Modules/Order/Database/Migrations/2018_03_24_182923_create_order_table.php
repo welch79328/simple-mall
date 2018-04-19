@@ -18,6 +18,13 @@ class CreateOrderTable extends Migration
             $table->integer('order_number');
             $table->integer('order_total');
             $table->enum('order_status', ['complete', 'refund', 'pending', 'cancel', 'shipping'])->default('pending');
+            $table->string('order_name');
+            $table->string('order_phone')->nullable();
+            $table->string('order_tel')->nullable();
+            $table->string('order_mail')->nullable();
+            $table->integer('order_zipcode')->nullable();
+            $table->string('order_address');
+            $table->text('order_comment')->nullable();
             $table->boolean('is_mail')->default(0);
             $table->integer('member_id');
             $table->timestamps();

@@ -23,33 +23,33 @@
                 <div class="col-md-offset-2 col-md-8" style="padding: 30px;">
                     <h2 style="margin-bottom: 20px">收件人資料<i class="glyphicon glyphicon-user"></i></h2>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="member_name" placeholder="請輸入中文姓名"
+                        <input type="text" class="form-control" id="name" name="order_name" placeholder="請輸入中文姓名"
                                required value="{{$data->member_name}}">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="phone" name="member_phone" placeholder="請輸入行動電話"
+                        <input type="text" class="form-control" id="phone" name="order_phone" placeholder="請輸入行動電話"
                                value="{{$data->member_phone}}">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="tel_code" name="tel_code" placeholder="區碼"
-                               style="width: 20%; float: left" value="{{$data->tel_code}}">
-                        <input type="text" class="form-control" id="tel" name="member_tel" placeholder="請輸入市話"
-                               style="width: 80%; float: left" value="{{$data->member_tel}}">
+                               style="width: 20%; float: left" value="{{$data->tel_code}}" onchange="requireTel()">
+                        <input type="text" class="form-control" id="tel" name="order_tel" placeholder="請輸入市話"
+                               style="width: 80%; float: left" value="{{$data->member_tel}}" onchange="requireTel()">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="mail" name="member_mail" placeholder="請輸入電子信箱"
+                        <input type="email" class="form-control" id="mail" name="order_mail" placeholder="請輸入電子信箱"
                                value="{{$data->member_mail}}">
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="member_city" onchange="changeCity(this)"
+                        <select class="form-control" name="order_city" onchange="changeCity(this)"
                                 style="width: 40%; float: left">
                             @foreach($city as $v)
                                 <option value="{{$v['city_id']}}"
                                         @if($data->member_city == $v['city_id']) selected @endif>{{$v['city']}}</option>
                             @endforeach
                         </select>
-                        <select class="form-control" name="member_area" id="area" onchange="changeArea(this)"
+                        <select class="form-control" name="order_area" id="area" onchange="changeArea(this)"
                                 style="width: 40%; float: left">
                             @foreach($area as $v)
                                 @if(!empty($data->member_city))
@@ -62,17 +62,17 @@
                                 @endif
                             @endforeach
                         </select>
-                        <input type="text" class="form-control" id="zipcode" name="member_zipcode"
+                        <input type="text" class="form-control" id="zipcode" name="order_zipcode"
                                value="@if($data->member_zipcode == Null) {{$zipcode}} @else {{$data->member_zipcode}} @endif"
                                style="width: 20%; float: left" readonly>
                         <div class="clearfix"></div>
                         <div style="margin-top: 10px">
-                            <input type="text" class="form-control" id="address" name="member_location"
+                            <input type="text" class="form-control" id="address" name="order_location"
                                    placeholder="請輸入道路街名" value="{{$data->member_location}}" required>
                         </div>
                     </div>
-                    <div class="form-group" hidden>
-                        <textarea class="form-control" rows="5" id="comment" name="comment"
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" id="comment" name="order_comment"
                                   placeholder="備註事項"></textarea>
                     </div>
                     <div class="form-group">
@@ -81,7 +81,7 @@
                             並由客服人員確認訂購資訊(確認付款及到貨資訊)
                         </div>
                         <div class="col-xs-3 col-md-3 agree_info" style="text-align: right;">
-                            <label><input type="radio" name="agree" required>我了解</label>
+                            <label><input type="radio" name="agree" value="1" required>我了解</label>
                         </div>
                     </div>
                     <div style="text-align: center; font-size: 3vh; font-weight:bold;">
@@ -103,6 +103,20 @@
             </form>
         </div>
     </div>
+    <!-- modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="waitModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p>請等候系統處理訂單，關閉頁面可能會造成預購失敗！</p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- //modal -->
     <script>
         $(document).ready(function () {
             ajaxSubmitOrder();
@@ -127,30 +141,48 @@
             });
         }
 
+        function requireTel() {
+            var tel = $("#tel").val();
+            var tel_code = $("#tel_code").val();
+            if (tel || tel_code) {
+                $("#tel").prop("required", true);
+                $("#tel_code").prop("required", true);
+            } else {
+                $("#tel").removeAttr("required");
+                $("#tel_code").removeAttr("required");
+            }
+        }
+
         function ajaxSubmitOrder() {
             $("#addOrderForm").submit(function (e) {
+                e.preventDefault();
+                var phone = $('#phone').val()
+                var tel = $("#tel").val();
+                if (phone == "" && tel == "") {
+                    showModal("alertModal", "提示", "手機與市話請擇一填寫！");
+                    return;
+                }
                 var url = "{{url('order_setup')}}"; // the script where you handle the form input.
-                showModal("waitModal", "提示", "請等候系統處理，離開此頁面，可能會造成預購失敗！");
+                $("#waitModal").modal("show");
                 $("#orderSubmitButton").prop('disabled', true);
                 $.ajax({
                     url: url,
                     type: "POST",
                     data: $(this).serialize(), // serializes the form's elements.
                     success: function (data) {
+                        $("#waitModal").modal("hide");
+                        $("#orderSubmitButton").prop('disabled', false);
                         var callback = function () {
                             window.location.href = "{{url('/')}}";
                         }
                         if (!data.result) {
-                            showModal("errorModal", "提示", data.msg, callback);
+                            showModal("errorModal", "提示", data.msg);
                             return;
                         }
-                        $("#waitModal").modal("hide");
-                        $("#orderSubmitButton").prop('disabled', false);
                         showModal("successModal", "提示", "預購商品成功，請等候頁面跳轉，或按下關閉即可。", callback);
                         setTimeout(callback, 2000);
                     }
                 });
-                e.preventDefault();
             });
         }
     </script>

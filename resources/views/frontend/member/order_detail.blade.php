@@ -35,6 +35,7 @@
                                     <thead>
                                     <tr>
                                         <th>名稱</th>
+                                        <th>規格</th>
                                         <th>數量</th>
                                         <th>單價</th>
                                     </tr>
@@ -43,6 +44,7 @@
                                     @foreach($order_details as $detail)
                                         <tr>
                                             <td>{{$detail->name}}</td>
+                                            <td>{{$detail->spec_name}}</td>
                                             <td>{{$detail->amount}}</td>
                                             <td>{{$detail->price}}</td>
                                         </tr>

@@ -226,7 +226,6 @@
                         <div id="specBlock">
                             @foreach($spec_array as $key => $spec)
                                 <div id="initSpecDiv{{$key}}">
-                                    <input type="hidden" name="specId[]" value="{{$spec->id}}">
                                     <input type="text" name="spec[]" value="{{$spec->spec}}" style="margin-right: 10px"
                                            required>
                                     庫存量：

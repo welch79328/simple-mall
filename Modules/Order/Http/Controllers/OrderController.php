@@ -25,20 +25,21 @@ class OrderController extends CommonController
 
     public function __construct()
     {
-        $data = Order::get();
-        foreach ($data as $v) {
-            $orderlist = Orderlist::where('order_id', $v->order_id)->get();
-            $orderlist_status = $orderlist->pluck('status')->all();
-            if (in_array('refund', $orderlist_status) || in_array('pending', $orderlist_status)) {
-                Order::where([['order_id', '=', $v->order_id], ['order_status', '!=', 'refund'],])->update([
-                    'order_status' => 'pending',
-                ]);
-            } else {
-                Order::where([['order_id', '=', $v->order_id], ['order_status', '!=', 'refund'],])->update([
-                    'order_status' => 'complete',
-                ]);
-            }
-        }
+//        $data = Order::get();
+//        foreach ($data as $v) {
+//            $orderlist = Orderlist::where('order_id', $v->order_id)->get();
+//            $orderlist_status = $orderlist->pluck('status')->all();
+////            dd($orderlist_status);
+//            if (in_array('refund', $orderlist_status) || in_array('pending', $orderlist_status)) {
+//                Order::where([['order_id', '=', $v->order_id], ['order_status', '!=', 'refund'],])->update([
+//                    'order_status' => 'pending',
+//                ]);
+//            } else {
+//                Order::where([['order_id', '=', $v->order_id], ['order_status', '!=', 'refund'],])->update([
+//                    'order_status' => 'complete',
+//                ]);
+//            }
+//        }
     }
 
     /**
@@ -51,19 +52,24 @@ class OrderController extends CommonController
         foreach ($data as $v) {
             switch ($v->order_status) {
                 case 'pending':
-                    $v->order_status = '待處理';
+                    $v->_order_status = '待處理';
                     break;
                 case 'complete':
-                    $v->order_status = '完成';
+                    $v->_order_status = '已送達';
                     break;
                 case 'refund':
-                    $v->order_status = '取消';
+                    $v->_order_status = '退貨處理中';
+                    break;
+                case 'shipping':
+                    $v->_order_status = '出貨中';
+                    break;
+                case 'cancel':
+                    $v->_order_status = '已取消';
                     break;
             }
             $member = Member::where('member_id', $v->member_id)->first();
             $v->member_name = $member['member_name'];
         }
-
         return view('backstage.order.index', compact('data'));
     }
 
@@ -97,25 +103,37 @@ class OrderController extends CommonController
         $orderlist = Orderlist::where('order_id', $order_id)->get();
         switch ($data->order_status) {
             case 'pending':
-                $data->order_status = '待處理';
+                $data->_order_status = '待處理';
                 break;
             case 'complete':
-                $data->order_status = '完成';
+                $data->_order_status = '已送達';
                 break;
             case 'refund':
-                $data->order_status = '取消';
+                $data->_order_status = '退貨處理中';
+                break;
+            case 'cancel':
+                $data->_order_status = '取消';
+                break;
+            case 'shipping':
+                $data->_order_status = '出貨中';
                 break;
         }
         foreach ($orderlist as $v) {
             switch ($v->status) {
                 case 'pending':
-                    $v->status = '待處理';
+                    $v->_status = '待處理';
                     break;
                 case 'complete':
-                    $v->status = '完成';
+                    $v->_status = '已送達';
                     break;
                 case 'refund':
-                    $v->status = '取消';
+                    $v->_status = '退貨處理中';
+                    break;
+                case 'cancel':
+                    $v->_status = '取消';
+                    break;
+                case 'shipping':
+                    $v->_status = '出貨中';
                     break;
             }
         }
@@ -146,8 +164,11 @@ class OrderController extends CommonController
             'status' => $input['status'],
             'creator' => $input['creator'],
         ]);
-        $order_id = Order::find($id);
-        return redirect('admin/order/' . $order_id['order_id']);
+        $orderList = Orderlist::find($id);
+        Order::where('order_id', $orderList->order_id)->update([
+            'order_status' => $input['status'],
+        ]);
+        return redirect('admin/order/' . $orderList->order_id);
     }
 
     /**
@@ -180,12 +201,12 @@ class OrderController extends CommonController
     {
         $carts = Cart::content();
         if (count($carts) == 0) {
-            return redirect("shoppingcart/show")->with("errors.msg", "下單失敗：購物車內沒有商品！");
+            return redirect("shoppingcart/show")->with("errors.msg", "預購失敗：購物車內沒有商品！");
         }
         foreach ($carts as $item) {
             $commodity = Commodity::find($item->id);
             if ($item->qty > $commodity->commodity_stock) {
-                return redirect("shoppingcart/show")->with("errors.msg", "下單失敗：$commodity->commodity_title 的庫存量不足，只剩 $commodity->commodity_stock 組！");
+                return redirect("shoppingcart/show")->with("errors.msg", "預購失敗：$commodity->commodity_title 的庫存量不足，只剩 $commodity->commodity_stock 組！");
             }
         }
         new CommonController;
@@ -205,13 +226,24 @@ class OrderController extends CommonController
 
     public function orderSetup(Request $request)
     {
-        $input = $request->only('member_name', 'member_phone', 'tel_code', 'member_tel', 'member_mail', 'member_city', 'member_area', 'member_zipcode', 'member_location');
-        $input["member_tel"] = $input["tel_code"] . "-" . $input["member_tel"];
+        $input = $request->except("_token", "agree");
+        if (!empty($input["tel_code"]) && !empty($input["order_tel"])) {
+            $input["order_tel"] = $input["tel_code"] . "-" . $input["order_tel"];
+        }
+        $townshipHelper = new TownshipHelper();
+        $city = $townshipHelper->getCity($input["order_city"]);
+        $area = $townshipHelper->getArea($input["order_area"]);
+        $input["order_address"] = $city . $area . $input["order_location"];
+        $input["member_id"] = session("member.member_id");
+
         unset($input["tel_code"]);
-        $carts = Cart::content();
+        unset($input["order_city"]);
+        unset($input["order_area"]);
+        unset($input["order_location"]);
         $now = Carbon::now()->format("Y-m-d H:i:s");
-        $member_id = session("member.member_id");
+
         //檢查商品庫存是否足夠
+        $carts = Cart::content();
         foreach ($carts as $item) {
             $commodity = Commodity::find($item->id);
             $stock = $commodity->commodity_stock;
@@ -222,26 +254,26 @@ class OrderController extends CommonController
             if ($item->qty > $stock) {
                 $response = [
                     "result" => false,
-                    "msg" => "下單失敗：$commodity->commodity_title 的庫存量不足，只剩 $stock 組！"
+                    "msg" => "預購失敗：$commodity->commodity_title 的庫存量不足，只剩 $stock 組！"
                 ];
                 return $response;
             }
         }
 
         try {
-//            Member::where('member_id', $member_id)->update($input);
+            $i = 0;
             foreach ($carts as $v) {
-                $result = Order::create([
-                    'order_number' => substr((string)time(), -8),
-                    'order_total' => ($v->qty * $v->price),
-                    'member_id' => $member_id,
-                ]);
+                $input["order_number"] = substr((string)time() . $i, -8);
+                $input["order_total"] = $v->qty * $v->price;
+                $result = Order::create($input);
                 if (!$result) {
                     throw new Exception("新增訂單失敗：請稍後再試！");
                 }
+
                 DB::beginTransaction();
                 $result = DB::table("order_list")->insert([
                     'name' => $v->name,
+                    'spec_name' => $v->options->specName,
                     'amount' => $v->qty,
                     'price' => $v->price,
                     'commodity_id' => $v->id,
@@ -269,6 +301,7 @@ class OrderController extends CommonController
                     }
                 }
                 DB::commit();
+                $i++;
             }
             Cart::destroy();
             MailController::preorderSuccess();
@@ -301,13 +334,19 @@ class OrderController extends CommonController
         foreach ($data as $v) {
             switch ($v->status) {
                 case 'pending':
-                    $v->status = '待處理';
+                    $v->_status = '待處理';
                     break;
                 case 'complete':
-                    $v->status = '完成';
+                    $v->_status = '已送達';
                     break;
                 case 'refund':
-                    $v->status = '取消';
+                    $v->_status = '退貨處理中';
+                    break;
+                case 'cancel':
+                    $v->_status = '取消';
+                    break;
+                case 'shipping':
+                    $v->_status = '出貨中';
                     break;
             }
         }
@@ -320,8 +359,12 @@ class OrderController extends CommonController
         $input['creator'] = session('admin_member.member_name');
         foreach ($input['list'] as $v) {
             Orderlist::where('id', $v)->update([
-                'status' => 'complete',
+                'status' => $input['status'],
                 'creator' => $input['creator'],
+            ]);
+            $orderList = Orderlist::where('id', $v)->first();
+            Order::where('order_id', $orderList->order_id)->update([
+                'order_status' => $input['status'],
             ]);
         }
         return redirect()->back();
