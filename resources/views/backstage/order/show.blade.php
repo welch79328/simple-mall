@@ -45,60 +45,52 @@
                     <p>{{$data->order_number}}</p>
                 </td>
             </tr>
-
             <tr>
-                <th>用戶名稱：</th>
+                <th>訂購人：</th>
                 <td>
-                    <p>{{$data->member_name}}</p>
+                    <p><a href="{{url('member/'.$member->member_id.'/edit')}}">{{$member->member_name}}</a></p>
                 </td>
             </tr>
 
             <tr>
-                <th>用戶性別：</th>
+                <th>聯絡姓名：</th>
                 <td>
-                    <p>{{$data->member_sex}}</p>
+                    <p>{{$data->order_name}}</p>
                 </td>
             </tr>
 
             <tr>
-                <th>用戶生日：</th>
+                <th>聯絡信箱：</th>
                 <td>
-                    <p>{{$data->member_year}} - {{$data->member_month}}</p>
+                    <p>{{$data->order_mail}}</p>
                 </td>
             </tr>
 
             <tr>
-                <th>用戶信箱：</th>
+                <th>聯絡手機：</th>
                 <td>
-                    <p>{{$data->member_mail}}</p>
+                    <p>{{$data->order_phone}}</p>
                 </td>
             </tr>
 
             <tr>
-                <th>用戶手機：</th>
+                <th>聯絡電話：</th>
                 <td>
-                    <p>{{$data->member_phone}}</p>
-                </td>
-            </tr>
-
-            <tr>
-                <th>用戶電話：</th>
-                <td>
-                    <p>{{$data->member_tel}}</p>
+                    <p>{{$data->order_tel}}</p>
                 </td>
             </tr>
 
             <tr>
                 <th>郵遞區號：</th>
                 <td>
-                    <p>{{$data->member_zipcode}}</p>
+                    <p>{{$data->order_zipcode}}</p>
                 </td>
             </tr>
 
             <tr>
-                <th>用戶地址：</th>
+                <th>聯絡地址：</th>
                 <td>
-                    <p>{{$data->member_city}} {{$data->member_area}} {{$data->member_location}}</p>
+                    <p>{{$data->order_address}}</p>
                 </td>
             </tr>
 
@@ -110,20 +102,16 @@
                             <a href="{{url('admin/order/alone/'.$v->id)}}">{{$v->name}}</a>
                             @if(!empty($v->spec_name))
                                 <span>規格:{{$v->spec_name}}</span>
+                            @else
+
                             @endif
+
                             <span>數量:{{$v->amount}}</span>
                             <span>單價:{{$v->price}}</span>
                             <span style="color:@if($v->status == '完成') #009966 @elseif($v->status == '取消') #FF0033 @endif">
                                 狀態:({{$v->_status}})
                             </span>
-                            <span>
-                                編輯者:
-                                @if(!empty($v->creator))
-                                    {{$v->creator}}
-                                @else
-                                    無
-                                @endif
-                            </span>
+                            <span>編輯者:{{$v->creator}}</span>
                         </p>
                     @endforeach
                 </td>

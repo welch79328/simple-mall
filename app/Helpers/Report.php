@@ -3,7 +3,7 @@
 
 namespace App\Helpers;
 
-require base_path().'/vendor/autoload.php';
+require base_path() . '/vendor/autoload.php';
 
 
 use Modules\Order\Entities\Orderlist;
@@ -22,8 +22,8 @@ class Report
     {
         ini_set('max_execution_time', 600000);
 
-        $data = Orderlist::join('order','order_list.order_id','=','order.order_id')->join('member','order.member_id','=','member.member_id')->where([['commodity_id',$commodity_id],['order_status','!=','refund'],])
-            ->select('id','order_number', 'member_name','amount','member_sex','price','member_year','member_month','member_mail','member_phone','member_tel','member_city','member_area','member_location')->get();
+        $data = Orderlist::join('order', 'order_list.order_id', '=', 'order.order_id')->join('member', 'order.member_id', '=', 'member.member_id')->where([['commodity_id', $commodity_id], ['order_status', '!=', 'refund'],])
+            ->select('id', 'order_number', 'member_name', 'amount', 'member_sex', 'price', 'member_year', 'member_month', 'member_mail', 'member_phone', 'member_tel', 'member_city', 'member_area', 'member_location')->get();
 //        dd($data);
 
         $bookmark = 0;
@@ -72,17 +72,17 @@ class Report
             $v['created_at'] = $created_at['created_at'];
 //            dd($v);
 
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('A'.$title_row, $v->order_number);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('B'.$title_row, $v->member_name);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('C'.$title_row, $v->amount);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('D'.$title_row, ($v->amount*$v->price));
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('E'.$title_row, $v->created_at);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('F'.$title_row, $v->member_sex);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('G'.$title_row, $v->member_year.'-'.$v->member_month);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('H'.$title_row, $v->member_mail);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('I'.$title_row, $v->member_phone);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('J'.$title_row, $v->member_tel);
-            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('K'.$title_row, $v->member_city.'-'.$v->member_area.'-'.$v->member_location);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('A' . $title_row, $v->order_number);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('B' . $title_row, $v->member_name);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('C' . $title_row, $v->amount);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('D' . $title_row, ($v->amount * $v->price));
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('E' . $title_row, $v->created_at);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('F' . $title_row, $v->member_sex);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('G' . $title_row, $v->member_year . '-' . $v->member_month);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('H' . $title_row, $v->member_mail);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('I' . $title_row, $v->member_phone);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('J' . $title_row, $v->member_tel);
+            $spreadsheet->setActiveSheetIndex($bookmark)->setCellValue('K' . $title_row, $v->member_city . '-' . $v->member_area . '-' . $v->member_location);
 
             $title_row++;
 
@@ -107,7 +107,6 @@ class Report
         $writer->save('php://output');
 //        $writer->save('/var/www/html/mrt_report/public/');
     }
-
 
 
 }

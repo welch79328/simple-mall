@@ -48,6 +48,19 @@
                         </select>
                     </span>
                 </p>
+                @if(session("success"))
+                    <p style="color: #0AA908">{{session("success")}}</p>
+                @elseif(count($errors)>0)
+                    <div class="mark">
+                        @if(is_object($errors))
+                            @foreach($errors->all() as $erroe)
+                                <p style="color: #e71d1c">{{$erroe}}</p>
+                            @endforeach
+                        @else
+                            <p style="color: #e71d1c">{{$errors}}</p>
+                        @endif
+                    </div>
+                @endif
                 <br>
                 @foreach($data as $v)
                     <p>

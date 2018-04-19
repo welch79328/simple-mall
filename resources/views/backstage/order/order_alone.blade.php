@@ -45,7 +45,14 @@
                         <p>{{$data->name}}</p>
                     </td>
                 </tr>
-
+                @if(!empty($data->spec_name))
+                    <tr>
+                        <th>規格：</th>
+                        <td>
+                            <p>{{$data->spec_name}}</p>
+                        </td>
+                    </tr>
+                @endif
                 <tr>
                     <th>數量：</th>
                     <td>

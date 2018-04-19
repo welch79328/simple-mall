@@ -97,9 +97,7 @@ class OrderController extends CommonController
      */
     public function show($order_id, TownshipHelper $townshipHelper)
     {
-        $data = Order::join('member', 'order.member_id', '=', 'member.member_id')->where('order_id', $order_id)->first();
-        $data->member_city = $townshipHelper->getCity($data->member_city);
-        $data->member_area = $townshipHelper->getArea($data->member_area);
+        $data = Order::where('order_id', $order_id)->first();
         $orderlist = Orderlist::where('order_id', $order_id)->get();
         switch ($data->order_status) {
             case 'pending':
@@ -137,15 +135,8 @@ class OrderController extends CommonController
                     break;
             }
         }
-        switch ($data->member_sex) {
-            case 'male':
-                $data->member_sex = '男士';
-                break;
-            case 'female':
-                $data->member_sex = '女士';
-                break;
-        }
-        return view('backstage.order.show', compact('data', 'orderlist'));
+        $member = Member::select("member_id", "member_name")->where("member_id", $data->member_id)->first();
+        return view('backstage.order.show', compact('data', 'orderlist', 'member'));
     }
 
     public function order_alone($id)
@@ -357,6 +348,9 @@ class OrderController extends CommonController
     {
         $input = Input::except('_token');
         $input['creator'] = session('admin_member.member_name');
+        if (empty($input['list'])) {
+            return back()->with("errors", "修改失敗：無資料被勾選！");
+        }
         foreach ($input['list'] as $v) {
             Orderlist::where('id', $v)->update([
                 'status' => $input['status'],
@@ -367,7 +361,7 @@ class OrderController extends CommonController
                 'order_status' => $input['status'],
             ]);
         }
-        return redirect()->back();
+        return redirect()->back()->with('success', "修改成功！");
     }
 
     public function commodity_show_list_excel(Report $report, $commodity_id)
