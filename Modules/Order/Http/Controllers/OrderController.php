@@ -295,7 +295,9 @@ class OrderController extends CommonController
                 $i++;
             }
             Cart::destroy();
-            MailController::preorderSuccess();
+            if (!empty($input["order_mail"])) {
+                MailController::preorderSuccess($input["order_mail"]);
+            }
             $response = [
                 "result" => true,
                 "msg" => "新增訂單成功"

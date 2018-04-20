@@ -28,16 +28,14 @@ class MailController extends Controller
         );
     }
 
-    public static function preorderSuccess()
+    public static function preorderSuccess($recipient)
     {
         Mail::send(
             'layouts.email.preorder',
             [],
-            function ($msg) {
-                $member_id = session("member.member_id");
-                $member = Member::find($member_id);
+            function ($msg) use ($recipient) {
                 $msg->subject('捷 U 購『預購成功』通知');
-                $msg->to($member->member_mail);
+                $msg->to($recipient);
             }
         );
         return true;
