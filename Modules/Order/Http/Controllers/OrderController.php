@@ -321,7 +321,7 @@ class OrderController extends CommonController
     public function commodity_show_list($commodity_id)
     {
 //        $data = Orderlist::where('commodity_id',$commodity_id)->get();
-        $data = Orderlist::join('order', 'order_list.order_id', '=', 'order.order_id')->join('member', 'order.member_id', '=', 'member.member_id')->where([['commodity_id', $commodity_id], ['order_status', '!=', 'refund'],])->get();
+        $data = Orderlist::join('order', 'order_list.order_id', '=', 'order.order_id')->join('member', 'order.member_id', '=', 'member.member_id')->where([['commodity_id', $commodity_id], ['order_status', '!=', 'cancel'],])->get();
         foreach ($data as $v) {
             switch ($v->status) {
                 case 'pending':

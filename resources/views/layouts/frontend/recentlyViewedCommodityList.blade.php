@@ -8,7 +8,8 @@
                      class="pro-image-back" onError="this.src='{{$errorImgUrl}}'">
                 <div class="men-cart-pro">
                     <div class="inner-men-cart-pro">
-                        <a href="{{url('commodity/' . $viewed->commodity_id)}}" class="link-product-add-cart">查看商品</a>
+                        <a href="{{url('commodity/' . $viewed->commodity_id.'?rand='.$viewed->rand)}}"
+                           class="link-product-add-cart">查看商品</a>
                     </div>
                 </div>
             </div>

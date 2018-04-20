@@ -14,6 +14,7 @@ class CommodityController extends CommonController
 
     public function index(Request $request, $commodity_id)
     {
+        $rand = $request->get("rand");
         parent::__construct();
         $commodity = Commodity::find($commodity_id);
         $commodity->commodity_view++;
@@ -23,6 +24,18 @@ class CommodityController extends CommonController
         }
         $imgs = CommodityImg::where("commodity_id", $commodity_id)->get();
         $specArray = CommoditySpec::where("commodity_id", $commodity_id)->orderBy("id", "asc")->get();
+
+        //瀏覽人數的計算
+        $commodityHelper = new CommodityHelper();
+        $commodityHelper->pageCount($commodity_id);
+        $data = $commodityHelper->getPageCount($commodity_id, $rand);
+        $commodity->online = $data["count"];
+        $commodity->rand = $data["rand"];
+
+        //textarea 換行
+        if ($commodity->commodity_description) {
+            $commodity->commodity_description = nl2br($commodity->commodity_description);
+        }
 
         //瀏覽過的商品
         $temps = [];
@@ -39,16 +52,6 @@ class CommodityController extends CommonController
             $request->session()->push("recently_viewed.commodities", $temp);
         }
 
-        //textarea 換行
-        if ($commodity->commodity_description) {
-            $commodity->commodity_description = nl2br($commodity->commodity_description);
-        }
-
-        $commodityHelper = new CommodityHelper();
-        $commodityHelper->pageCount($commodity_id);
-        $data = $commodityHelper->getPageCount($commodity_id);
-        $commodity->online = $data["count"];
-        $commodity->rand = $data["rand"];
         return view("frontend.commodity.commodity", compact("commodity", "imgs", "specArray"));
     }
 
