@@ -14,5 +14,6 @@ Route::group(['roles' => ['member', 'manager', 'admin'], 'middleware' => ['web',
     Route::post('commodity_show_list/edit', 'OrderController@commodity_show_list_edit');
     Route::get('commodity_show_list/{commodity_id}/excel', 'OrderController@commodity_show_list_excel');
     Route::get('order/alone/{id}', 'OrderController@order_alone');
+    Route::post('order/update/{order_id}', 'OrderController@update');
     Route::post('order/alone/{id}/update', 'OrderController@order_alone_update');
 });

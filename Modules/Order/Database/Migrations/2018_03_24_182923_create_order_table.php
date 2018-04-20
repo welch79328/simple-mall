@@ -26,7 +26,9 @@ class CreateOrderTable extends Migration
             $table->string('order_address');
             $table->text('order_comment')->nullable();
             $table->boolean('is_mail')->default(0);
+            $table->boolean('is_pay')->default(0);
             $table->integer('member_id');
+            $table->timestamp('delivery_time')->nullable();
             $table->timestamps();
         });
     }

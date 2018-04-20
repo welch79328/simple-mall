@@ -54,9 +54,17 @@ class MailController extends Controller
         return true;
     }
 
-    public static function paymentSuccess()
+    public static function paymentSuccess($recipient, $order_number)
     {
-
+        Mail::send(
+            'layouts.email.payment',
+            compact("order_number"),
+            function ($msg) use ($recipient) {
+                $msg->subject('捷 U 購『付款完成!出貨中』通知');
+                $msg->to($recipient);
+            }
+        );
+        return true;
     }
 
     public static function refund()
