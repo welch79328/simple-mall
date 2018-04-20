@@ -56,6 +56,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
     Route::get('search/{keyword}', 'CommodityController@search');
 
     Route::get('contact', 'ContactController@index');
+    Route::post('mail_to_us', 'ContactController@mailToUs');
 
     Route::get('question', function () {
         new CommonController;

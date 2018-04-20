@@ -54,7 +54,7 @@ class MailController extends Controller
         return true;
     }
 
-    public static function payment()
+    public static function paymentSuccess()
     {
 
     }
