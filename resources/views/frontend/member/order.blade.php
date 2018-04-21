@@ -34,7 +34,8 @@
                                 @if($order->order_status == "pending")
                                     <a href="javascript: void(0)" onclick="showCancelOrderModal({{$order->order_id}})">取消</a>
                                 @elseif($order->order_status == "complete")
-                                    <a href="javascript: void(0)" onclick="">退貨</a>
+                                    <a href="javascript: void(0)"
+                                       onclick="showReturnModal({{$order->order_id}}, {{$order->order_number}})">退貨</a>
                                 @endif
                             </td>
                         </tr>
@@ -72,6 +73,42 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="returnModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 id="returnTitle" class="modal-title">退貨</h4>
+                </div>
+                <form id="returnForm" action="{{url('')}}" method="post">
+                    <div class="modal-body">
+                        <div class="form-inline">
+                            <label>訂單編號：</label>
+                            <label id="orderNumber"></label>
+                        </div>
+                        <br>
+                        <div class="form-inline">
+                            <label>退貨方式：</label>
+                            <label class="radio-inline"><input type="radio" name="return_status">換貨</label>
+                            <label class="radio-inline"><input type="radio" name="return_status">退款</label>
+                        </div>
+                        <br>
+                        <input type="email" class="form-control" id="email" placeholder="退款帳號" name="">
+                        <br>
+                        <textarea class="form-control" rows="3" placeholder="退換貨原因"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                        <button id="returnButton" type="submit" class="btn btn-primary"
+                                onclick="returnOrder(this.value)">
+                            確定退貨
+                        </button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <script>
 
         function showCancelOrderModal(order_id) {
@@ -79,9 +116,10 @@
             $("#cancelOrderModal").modal("show");
         }
 
-        function showRefundModal(order_id) {
-            $("#refundButton").val(order_id);
-            $("#refundModal").modal("show");
+        function showReturnModal(order_id, order_number) {
+            $("#returnButton").val(order_id);
+            $("#orderNumber").html(order_number);
+            $("#returnModal").modal("show");
         }
 
         function cancelOrder(order_id) {
