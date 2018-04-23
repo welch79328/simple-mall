@@ -1,4 +1,11 @@
 <style>
+    .onlineDiv {
+        text-align: center;
+        font-size: 20px;
+        color: #d8a91e;
+        font-weight: bold;
+    }
+
     .commodity_subtitle {
         padding-left: 5px;
         padding-right: 5px;
@@ -31,6 +38,11 @@
     }
 
     @media (max-width: 480px) {
+
+        .onlineDiv {
+            font-size: 16px;
+        }
+
         .remainTime {
             font-size: 12px;
             background-color: gray;
@@ -86,7 +98,7 @@
                 </a>
             </div>
             <div style="text-align: center;">剩餘組數 {{$limit->commodity_stock}}</div>
-            <div style="text-align: center; font-size: 12px">目前{{$limit->online}}人正在瀏覽</div>
+            <div class="onlineDiv">目前{{$limit->online}}人正在瀏覽</div>
         </div>
     </div>
 @empty
