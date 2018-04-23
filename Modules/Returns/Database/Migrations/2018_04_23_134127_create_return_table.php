@@ -15,10 +15,12 @@ class CreateReturnTable extends Migration
     {
         Schema::create('return', function (Blueprint $table) {
             $table->increments('return_id');
-            $table->enum('return_status', ['refund', 'exchange'])->default('refund');;
+            $table->integer('order_number');
+            $table->enum('return_status', ['refund', 'exchange', 'complete'])->default('refund');;
             $table->string('return_account')->nullable();
             $table->string('return_reason');
             $table->integer('order_id');
+            $table->string('creator')->nullable();
             $table->timestamps();
         });
     }

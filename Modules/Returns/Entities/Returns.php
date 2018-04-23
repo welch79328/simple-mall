@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Model;
+namespace Modules\Returns\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReturnModel extends Model
+class Returns extends Model
 {
     protected $table = 'return';
     protected $primaryKey = 'return_id';

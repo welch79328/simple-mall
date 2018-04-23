@@ -6,7 +6,7 @@ use App\Http\Controllers\Backstage\MailController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Exception;
-use App\Http\Model\ReturnModel;
+use Modules\Returns\Entities\Returns;
 use Modules\Order\Entities\Orderlist;
 use Modules\Order\Entities\Order;
 use Illuminate\Http\Request;
@@ -150,6 +150,7 @@ class OrderController extends CommonController
         if (empty($order)) {
             return CommonController::failResponse("退貨失敗：已超過七天鑑賞期！");
         }
+        $input["order_number"] = $order->order_number;
         $result = Order::where("order_id", $input["order_id"])->update(["order_status" => self::ORDER_STATUS_REFUND]);
         if (!$result) {
             return CommonController::failResponse("退貨失敗：請稍後再試！");
@@ -158,7 +159,7 @@ class OrderController extends CommonController
         if (!$result) {
             return CommonController::failResponse("退貨失敗：請稍後再試！");
         }
-        $result = ReturnModel::create($input);
+        $result = Returns::create($input);
         if (!$result) {
             return CommonController::failResponse("退貨失敗：請稍後再試！");
         }

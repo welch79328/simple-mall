@@ -34,6 +34,7 @@
 					<li><a href="{{url('admin/category')}}" target="main"><i class="fa fa-fw fa-square"></i>分類管理</a></li>
 					<li><a href="{{url('admin/advertisement')}}" target="main"><i class="fa fa-fw fa-square"></i>廣告管理</a></li>
 					<li><a href="{{url('admin/order')}}" target="main"><i class="fa fa-fw fa-square"></i>訂單管理</a></li>
+                    <li><a href="{{url('admin/return')}}" target="main"><i class="fa fa-fw fa-square"></i>退貨管理</a></li>
 				</ul>
 			</li>
 			<li>

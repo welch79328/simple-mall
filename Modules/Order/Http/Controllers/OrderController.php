@@ -19,6 +19,7 @@ use Modules\Commodity\Entities\CommoditySpec;
 use Modules\Member\Entities\Member;
 use Modules\Order\Entities\Order;
 use Modules\Order\Entities\Orderlist;
+use Modules\Returns\Entities\Returns;
 
 class OrderController extends CommonController
 {
@@ -203,7 +204,7 @@ class OrderController extends CommonController
         if (!$result) {
             return back()->with("errors", "修改訂單失敗：請稍後再試！");
         }
-        return redirect('admin/order/' . $order_id)->with("success.msg", "修改訂單成功！");
+        return redirect('admin/order');
     }
 
     /**

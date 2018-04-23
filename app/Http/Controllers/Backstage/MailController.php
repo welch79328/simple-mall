@@ -42,7 +42,7 @@ class MailController extends Controller
     }
 
     //@todo
-    public static function reached($order_id)
+    public static function reached()
     {
         Mail::send(
             'layouts.email.reached',
