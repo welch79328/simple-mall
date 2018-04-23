@@ -67,9 +67,30 @@ class MailController extends Controller
         return true;
     }
 
-    public static function refund()
+    public static function refund($recipient)
     {
+        Mail::send(
+            'layouts.email.refund',
+            [],
+            function ($msg) use ($recipient) {
+                $msg->subject('捷 U 購『退貨處理中』通知');
+                $msg->to($recipient);
+            }
+        );
+        return true;
+    }
 
+    public static function exchange($recipient)
+    {
+        Mail::send(
+            'layouts.email.exchange',
+            [],
+            function ($msg) use ($recipient) {
+                $msg->subject('捷 U 購『退貨瑕疵處理中』通知');
+                $msg->to($recipient);
+            }
+        );
+        return true;
     }
 
 }

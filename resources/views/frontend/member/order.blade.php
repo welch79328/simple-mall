@@ -81,7 +81,9 @@
                                 aria-hidden="true">&times;</span></button>
                     <h4 id="returnTitle" class="modal-title">退貨</h4>
                 </div>
-                <form id="returnForm" action="{{url('')}}" method="post">
+                <form id="returnForm" action="{{url('member_order_return')}}" method="post">
+                    {{csrf_field()}}
+                    <input type="hidden" id="return_order_id" name="order_id">
                     <div class="modal-body">
                         <div class="form-inline">
                             <label>訂單編號：</label>
@@ -90,19 +92,26 @@
                         <br>
                         <div class="form-inline">
                             <label>退貨方式：</label>
-                            <label class="radio-inline"><input type="radio" name="return_status">換貨</label>
-                            <label class="radio-inline"><input type="radio" name="return_status">退款</label>
+                            <label class="radio-inline">
+                                <input type="radio" name="return_status" value="exchange" onchange="requireAccount()"
+                                       required>換貨
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="refund" name="return_status" value="refund"
+                                       onchange="requireAccount()" required>退款
+                            </label>
                         </div>
                         <br>
-                        <input type="email" class="form-control" id="email" placeholder="退款帳號" name="">
+                        <input type="text" class="form-control" placeholder="退款帳號" id="return_account"
+                               name="return_account">
                         <br>
-                        <textarea class="form-control" rows="3" placeholder="退換貨原因"></textarea>
+                        <textarea class="form-control" rows="3" placeholder="退換貨原因" name="return_reason"
+                                  required></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-                        <button id="returnButton" type="submit" class="btn btn-primary"
-                                onclick="returnOrder(this.value)">
-                            確定退貨
+                        <button id="returnButton" type="submit" class="btn btn-primary">
+                            確定
                         </button>
                     </div>
                 </form>
@@ -111,15 +120,28 @@
     </div><!-- /.modal -->
     <script>
 
+        $(document).ready(function () {
+            returnOrder();
+        });
+
         function showCancelOrderModal(order_id) {
             $("#cancelOrderButton").val(order_id);
             $("#cancelOrderModal").modal("show");
         }
 
         function showReturnModal(order_id, order_number) {
-            $("#returnButton").val(order_id);
+            $("#return_order_id").val(order_id);
             $("#orderNumber").html(order_number);
             $("#returnModal").modal("show");
+        }
+
+        function requireAccount() {
+            var checked = $("#refund").is(':checked');
+            if (checked) {
+                $("#return_account").prop("required", true);
+                return;
+            }
+            $("#return_account").prop("required", false);
         }
 
         function cancelOrder(order_id) {
@@ -140,6 +162,31 @@
                     }
                     window.location.href = "{{url('member_order')}}";
                 }
+            });
+        }
+
+        function returnOrder(order_id) {
+            $("#returnForm").submit(function (e) {
+                e.preventDefault();
+                showModal("waitModal", "提示", "請等候系統處理，關閉頁面可能會造成退貨失敗！");
+                $("#returnButton").prop('disabled', true);
+                $.ajax({
+                    url: "{{url('member_order_return')}}",
+                    type: "POST",
+                    data: $(this).serialize(), // serializes the form's elements.
+                    success: function (data) {
+                        $("#waitModal").modal("hide");
+                        $("#returnButton").prop('disabled', false);
+                        var callback = function () {
+                            window.location.href = "{{url('member_order')}}";
+                        }
+                        if (!data.result) {
+                            showModal("errorModal", "提示", data.msg, callback);
+                            return;
+                        }
+                        showModal("successModal", "提示", "已收到您退貨的相關訊息，請等候專員為您處理。", callback);
+                    }
+                });
             });
         }
 

@@ -182,10 +182,8 @@ class OrderController extends CommonController
         $input['creator'] = session('admin_member.member_name');
         $delivery_time = null;
         $order = Order::where('order_id', $order_id)->first();
-        if ($input['status'] == "complete" && empty($order->$delivery_time)) {
+        if ($input['status'] == "complete" && $order->order_status != "complete") {
             $delivery_time = Carbon::now()->format("Y:m:d H:i:s");
-        } elseif ($input['status'] == "complete" && !empty($order->$delivery_time)) {
-            $delivery_time = $order->$delivery_time;
         }
         if ($input['is_pay'] == "1" && $order->is_pay != "1") {
             MailController::paymentSuccess($order->order_mail, $order->order_number);

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Backstage\MailController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Exception;
-use Modules\Commodity\Entities\CommoditySpec;
-use Modules\Commodity\Entities\CommoditySpeco;
-use Modules\Commodity\Entities\Commodity;
+use App\Http\Model\ReturnModel;
 use Modules\Order\Entities\Orderlist;
 use Modules\Order\Entities\Order;
 use Illuminate\Http\Request;
@@ -20,6 +19,9 @@ class OrderController extends CommonController
     const ORDER_STATUS_REFUND = "refund"; // 退貨處理中
     const ORDER_STATUS_SHIPPING = "shipping"; // 出貨中
     const ORDER_STATUS_CANCEL = "cancel"; // 已取消
+
+    const RETURN_STATUS_EXCHANGE = "exchange";
+    const RETURN_STATUS_REFUND = "refund";
 
     public function order(Request $request)
     {
@@ -137,6 +139,36 @@ class OrderController extends CommonController
             return CommonController::failResponse($e->getMessage());
         }
         return CommonController::successResponse("取消訂單成功。");
+    }
+
+    public function return(Request $request)
+    {
+        $input = $request->except("_token");
+        $mail = $request->session()->get("member.member_mail");
+        $before = Carbon::now()->subDays(7)->format("Y:m:d H:i:s");//7天鑑賞期
+        $order = Order::where([["order_id", "=", $input["order_id"]], ["delivery_time", ">", $before]])->first();
+        if (empty($order)) {
+            return CommonController::failResponse("退貨失敗：已超過七天鑑賞期！");
+        }
+        $result = Order::where("order_id", $input["order_id"])->update(["order_status" => self::ORDER_STATUS_REFUND]);
+        if (!$result) {
+            return CommonController::failResponse("退貨失敗：請稍後再試！");
+        }
+        $result = Orderlist::where("order_id", $input["order_id"])->update(["status" => self::ORDER_STATUS_REFUND]);
+        if (!$result) {
+            return CommonController::failResponse("退貨失敗：請稍後再試！");
+        }
+        $result = ReturnModel::create($input);
+        if (!$result) {
+            return CommonController::failResponse("退貨失敗：請稍後再試！");
+        }
+        if ($input["return_status"] == self::RETURN_STATUS_REFUND) {
+            MailController::refund($mail);
+        } elseif ($input["return_status"] == self::RETURN_STATUS_EXCHANGE) {
+            MailController::exchange($mail);
+        }
+
+        return CommonController::successResponse("退貨成功。");
     }
 
 }

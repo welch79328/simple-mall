@@ -17,7 +17,7 @@
                         <input type="password" class="form-control" id="password" name="member_password"
                                placeholder="密碼(6至8位、第一位為英文、只接受英文或數字)"
                                pattern="[a-zA-Z][a-zA-Z0-9]{5,7}"
-                               title="密碼限制(6至8位、第一位必須為英文字母、只接受英文字母或數字)"
+                               title="密碼(6至8位、第一位為英文、只接受英文或數字)"
                                required>
                     </div>
                     <div class="form-group">

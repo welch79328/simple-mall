@@ -99,7 +99,6 @@
                         <button type="submit" class="btn btn-danger" id="orderSubmitButton">完成</button>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

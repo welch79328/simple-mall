@@ -62,6 +62,12 @@
                         <th>訂單狀態</th>
                         <td style="color:@if($order->order_status == "complete")#009966 @elseif($order->order_status == "cancel")#FF0033 @else #555 @endif">{{$order->_order_status}}</td>
                     </tr>
+                    @if($order->order_status == "complete")
+                        <tr>
+                            <th>送達時間</th>
+                            <td>{{$order->delivery_time}}</td>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
             </div>
