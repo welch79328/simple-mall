@@ -30,6 +30,7 @@ class CreateReturnsTable extends Migration
             $table->text('returns_comment')->nullable();
             $table->integer('member_id');
             $table->integer('order_id');
+            $table->string('editor')->nullable();
             $table->timestamps();
         });
     }

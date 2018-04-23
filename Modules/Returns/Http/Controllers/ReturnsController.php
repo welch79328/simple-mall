@@ -3,6 +3,7 @@
 namespace Modules\Returns\Http\Controllers;
 
 use Modules\Order\Entities\Order;
+use Modules\Order\Entities\Orderlist;
 use Modules\Returns\Entities\Returns;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,34 +19,31 @@ class ReturnsController extends Controller
     {
         $data = Returns::orderBy('created_at', 'desc')->paginate(20);
         foreach ($data as $v) {
-            switch ($v->return_status) {
-                case 'exchange':
-                    $v->_return_status = '換貨';
-                    break;
-                case 'refund':
-                    $v->_return_status = '退款';
+            switch ($v->returns_status) {
+                case 'pending':
+                    $v->_returns_status = '待處理';
                     break;
                 case 'complete':
-                    $v->_return_status = '已解決';
+                    $v->_returns_status = '已解決';
                     break;
             }
         }
         return view('backstage.returns.index', compact('data'));
     }
 
-    public function complete($return_id)
+    public function complete($returns_id)
     {
         $data = [
-            "return_status" => "complete",
-            "creator" => session('admin_member.member_name'),
+            "returns_status" => "complete",
+            "editor" => session('admin_member.member_name'),
         ];
-        $result = Returns::where("return_id", $return_id)->update($data);
+        $result = Returns::where("returns_id", $returns_id)->update($data);
         if (!$result) {
             return back()->with("errors", "修改退貨單失敗：請稍後再試！");
         }
-        $return = Returns::where("return_id", $return_id)->first();
-        $result = Order::where("order_id", $return->order_id)->update(["order_status" => "pending"]);
-        return redirect("admin/return");
+        //$returns = Returns::where("returns_id", $returns_id)->first();
+        //$result = Order::where("order_id", $returns->order_id)->update(["order_status" => "pending"]);
+        return redirect("admin/returns");
     }
 
     /**
@@ -79,9 +77,26 @@ class ReturnsController extends Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit()
+    public function edit($returns_id)
     {
-        return view('returns::edit');
+        $data = Returns::where("returns_id", $returns_id)->first();
+        switch ($data->returns_reason) {
+            case "1":
+                $data->_returns_reason = "不滿意款式";
+                break;
+            case "2":
+                $data->_returns_reason = "與網頁呈現有落差";
+                break;
+            case "3":
+                $data->_returns_reason = "改變心意";
+                break;
+            case "4":
+                $data->_returns_reason = "收到有瑕疵/損壞的商品(更換商品)";
+                break;
+        }
+        $order = Order::where("order_id", $data->order_id)->first();
+        $orderDetail = Orderlist::where("order_id", $data->order_id)->get();
+        return view('backstage.returns.edit', compact('data', 'order', 'orderDetail'));
     }
 
     /**
@@ -89,8 +104,9 @@ class ReturnsController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $returns_id)
     {
+        dd($returns_id);
     }
 
     /**

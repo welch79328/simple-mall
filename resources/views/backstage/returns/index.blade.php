@@ -36,8 +36,7 @@
                     <tr>
                         <th>訂單編號</th>
                         <th>退貨狀態</th>
-                        <th>退款帳號</th>
-                        <th>退換貨原因</th>
+                        <th>編輯者</th>
                         <th>發布時間</th>
                         <th>修改時間</th>
                         <th>操作</th>
@@ -45,15 +44,13 @@
                     @foreach($data as $v)
                         <tr>
                             <td><a href="{{url('admin/order/'.$v->order_id)}}">{{$v->order_number}}</a></td>
-                            <td style="color: @if($v->return_status == 'complete') #009966 @endif">{{$v->_return_status}}</td>
-                            <td>{{$v->return_account}}</td>
-                            <td>{{$v->return_reason}}</td>
+                            <td style="color: @if($v->return_status == 'complete') #009966 @endif">{{$v->_returns_status}}</td>
+                            <td>{{$v->editor}}</td>
                             <td>{{$v->created_at}}</td>
                             <td>{{$v->updated_at}}</td>
                             <td>
-                                @if($v->return_status != "complete")
-                                    <a href="{{url('admin/return_complete/'.$v->return_id)}}">已解決</a>
-                                @endif
+                                <a href="{{url('admin/returns_edit/'.$v->returns_id)}}">查看</a>
+                                <a href="{{url('admin/returns_complete/'.$v->returns_id)}}">已解決</a>
                             </td>
                         </tr>
                     @endforeach
