@@ -10,4 +10,5 @@ return [
     'min_count' => 25,
     'max_count' => 50,
     'baseline_count' => 100,
+    'limit_time' => 7,
 ];
