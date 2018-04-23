@@ -35,6 +35,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Frontend'], function () {
         Route::get('member_order_detail/{order_id}', 'OrderController@orderDetail');
         Route::post('member_order_cancel', 'OrderController@cancel');
         Route::post('member_order_return', 'OrderController@return');
+        Route::post('get_order', 'OrderController@get');
         //訂單--end
     });
     //會員--end

@@ -144,13 +144,18 @@ class OrderController extends CommonController
     public function return(Request $request)
     {
         $input = $request->except("_token");
-        $mail = $request->session()->get("member.member_mail");
         $before = Carbon::now()->subDays(7)->format("Y:m:d H:i:s");//7天鑑賞期
         $order = Order::where([["order_id", "=", $input["order_id"]], ["delivery_time", ">", $before]])->first();
         if (empty($order)) {
             return CommonController::failResponse("退貨失敗：已超過七天鑑賞期！");
         }
+        if (!empty($input["tel_code"]) && !empty($input["returns_tel"])) {
+            $input["returns_tel"] = $input["tel_code"] . "-" . $input["returns_tel"];
+        }
         $input["order_number"] = $order->order_number;
+        $input["member_id"] = session("member.member_id");
+        unset($input["tel_code"]);
+
         $result = Order::where("order_id", $input["order_id"])->update(["order_status" => self::ORDER_STATUS_REFUND]);
         if (!$result) {
             return CommonController::failResponse("退貨失敗：請稍後再試！");
@@ -159,17 +164,29 @@ class OrderController extends CommonController
         if (!$result) {
             return CommonController::failResponse("退貨失敗：請稍後再試！");
         }
+
         $result = Returns::create($input);
         if (!$result) {
             return CommonController::failResponse("退貨失敗：請稍後再試！");
         }
-        if ($input["return_status"] == self::RETURN_STATUS_REFUND) {
-            MailController::refund($mail);
-        } elseif ($input["return_status"] == self::RETURN_STATUS_EXCHANGE) {
-            MailController::exchange($mail);
+
+        if ($input["returns_reason"] != 4) {
+            MailController::refund($input["returns_mail"]);
         }
 
         return CommonController::successResponse("退貨成功。");
+    }
+
+    public function get(Request $request)
+    {
+        $order_id = $request->post("order_id");
+        $order = Order::where("order_id", $order_id)->first();
+        if (!empty($order->order_tel)) {
+            $temp = explode("-", $order->order_tel);
+            $order->tel_code = $temp[0];
+            $order->order_tel = $temp[1];
+        }
+        return $order;
     }
 
 }

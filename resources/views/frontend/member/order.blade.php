@@ -73,44 +73,79 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="returnModal">
+    <div class="modal" tabindex="-1" role="dialog" id="returnModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 id="returnTitle" class="modal-title">退貨</h4>
+                    <h4 id="returnTitle" class="modal-title">退貨單</h4>
                 </div>
-                <form id="returnForm" action="{{url('member_order_return')}}" method="post">
+                <form id="returnsForm" action="{{url('member_order_return')}}" method="post">
                     {{csrf_field()}}
-                    <input type="hidden" id="return_order_id" name="order_id">
+                    <input type="hidden" id="returns_order_id" name="order_id">
                     <div class="modal-body">
                         <div class="form-inline">
                             <label>訂單編號：</label>
                             <label id="orderNumber"></label>
                         </div>
                         <br>
-                        <div class="form-inline">
-                            <label>退貨方式：</label>
-                            <label class="radio-inline">
-                                <input type="radio" name="return_status" value="exchange" onchange="requireAccount()"
-                                       required>換貨
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" id="refund" name="return_status" value="refund"
-                                       onchange="requireAccount()" required>退款
-                            </label>
+                        <div class="form-group">
+                            <label for="returns_reason">退貨原因:</label>
+                            <select class="form-control" id="returns_reason" name="returns_reason"
+                                    onchange="toggleRefundDiv(this.value)">
+                                <option value="1">不滿意款式</option>
+                                <option value="2">與網頁呈現有落差</option>
+                                <option value="3">改變心意</option>
+                                <option value="4">收到有瑕疵/損壞的商品(更換商品)</option>
+                            </select>
                         </div>
-                        <br>
-                        <input type="text" class="form-control" placeholder="退款帳號" id="return_account"
-                               name="return_account">
-                        <br>
-                        <textarea class="form-control" rows="3" placeholder="退換貨原因" name="return_reason"
-                                  required></textarea>
+                        <div id="refundDiv">
+                            <label>退款資料：</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="銀行代碼" id="bank_code"
+                                       name="bank_code"
+                                       style="width: 50%; float: left" required>
+                                <input type="text" class="form-control" placeholder="帳戶名稱" id="returns_account_name"
+                                       name="returns_account_name"
+                                       style="width: 50%; float: left" required>
+                                <div class="clearfix"></div>
+                                <input type="text" class="form-control" placeholder="退款帳號" id="returns_account"
+                                       name="returns_account" required>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <label>退貨資料：</label>
+                            <label><input type="checkbox" id="getOderCheckbox" onchange="getOrder(this)">同訂單資料</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="收件人" id="returns_name"
+                                   name="returns_name" required>
+                            <input type="text" class="form-control" id="returns_phone" name="returns_phone"
+                                   placeholder="手機">
+                            <input type="text" class="form-control" id="tel_code" name="tel_code" placeholder="區碼"
+                                   style="width: 20%; float: left" onchange="requireTel()">
+                            <input type="text" class="form-control" id="returns_tel" name="returns_tel" placeholder="市話"
+                                   style="width: 80%; float: left" onchange="requireTel()">
+                            <div class="clearfix"></div>
+                            <input type="email" class="form-control" id="returns_mail" name="returns_mail"
+                                   placeholder="電子信箱" required>
+                            <input type="text" class="form-control" id="returns_zipcode" name="returns_zipcode"
+                                   style="width: 20%; float: left" placeholder="郵遞區號" required>
+                            <input type="text" class="form-control" id="returns_address" name="returns_address"
+                                   style="width: 80%; float: left" placeholder="地址" required>
+                            <div class="clearfix"></div>
+                            <textarea class="form-control" rows="5" id="returns_comment" name="returns_comment"
+                                      placeholder="備註事項"></textarea>
+                        </div>
+                        <div>
+                            <label>*備註：</label><br>
+                            請將退貨商品連同原包裝、發票包裝完整，我們將派物流至您提供的收貨地址取件
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-                        <button id="returnButton" type="submit" class="btn btn-primary">
+                        <button id="returnsButton" type="submit" class="btn btn-primary">
                             確定
                         </button>
                     </div>
@@ -124,24 +159,66 @@
             returnOrder();
         });
 
+        function getOrder(obj) {
+            if (!$(obj).is(":checked")) {
+                return;
+            }
+            var order_id = $("#returns_order_id").val();
+            $.ajax({
+                url: "{{url('get_order')}}",
+                type: "POST",
+                data: {_token: "{{csrf_token()}}", order_id: order_id},
+                success: function (data) {
+                    $("#returns_name").val(data.order_name);
+                    $("#returns_phone").val(data.order_phone);
+                    $("#tel_code").val(data.tel_code);
+                    $("#returns_tel").val(data.order_tel);
+                    $("#returns_mail").val(data.order_mail);
+                    $("#returns_zipcode").val(data.order_zipcode);
+                    $("#returns_address").val(data.order_address);
+                    $("#returns_comment").val(data.order_comment);
+                }
+            });
+        }
+
+        function requireTel() {
+            var tel = $("#returns_tel").val();
+            var tel_code = $("#tel_code").val();
+            if (tel || tel_code) {
+                $("#returns_tel").prop("required", true);
+                $("#tel_code").prop("required", true);
+            } else {
+                $("#returns_tel").removeAttr("required");
+                $("#tel_code").removeAttr("required");
+            }
+        }
+
+        function toggleRefundDiv(value) {
+            if (value == 4) {
+                $("#bank_code").prop("required", false);
+                $("#returns_account").prop("required", false);
+                $("#returns_account_name").prop("required", false);
+                $("#returns_mail").prop("required", false);
+                $("#refundDiv").hide();
+                return;
+            }
+            $("#bank_code").prop("required", true);
+            $("#returns_account").prop("required", true);
+            $("#returns_account_name").prop("required", true);
+            $("#returns_mail").prop("required", true);
+            $("#refundDiv").show();
+        }
+
         function showCancelOrderModal(order_id) {
             $("#cancelOrderButton").val(order_id);
             $("#cancelOrderModal").modal("show");
         }
 
         function showReturnModal(order_id, order_number) {
-            $("#return_order_id").val(order_id);
+            $("#returns_order_id").val(order_id);
             $("#orderNumber").html(order_number);
+            $("#getOderCheckbox").prop('checked', true).trigger('change');
             $("#returnModal").modal("show");
-        }
-
-        function requireAccount() {
-            var checked = $("#refund").is(':checked');
-            if (checked) {
-                $("#return_account").prop("required", true);
-                return;
-            }
-            $("#return_account").prop("required", false);
         }
 
         function cancelOrder(order_id) {
@@ -165,18 +242,25 @@
             });
         }
 
-        function returnOrder(order_id) {
-            $("#returnForm").submit(function (e) {
+        function returnOrder() {
+            $("#returnsForm").submit(function (e) {
                 e.preventDefault();
+                var phone = $('#returns_phone').val()
+                var tel = $("#returns_tel").val();
+                if (phone == "" && tel == "") {
+                    showModal("alertModal", "提示", "手機與市話請擇一填寫！");
+                    return;
+                }
                 showModal("waitModal", "提示", "請等候系統處理，關閉頁面可能會造成退貨失敗！");
-                $("#returnButton").prop('disabled', true);
+                $("#returnsButton").prop('disabled', true);
                 $.ajax({
                     url: "{{url('member_order_return')}}",
                     type: "POST",
                     data: $(this).serialize(), // serializes the form's elements.
                     success: function (data) {
                         $("#waitModal").modal("hide");
-                        $("#returnButton").prop('disabled', false);
+                        $("#returnsButton").prop('disabled', false);
+                        $("#returnModal").modal("hide");
                         var callback = function () {
                             window.location.href = "{{url('member_order')}}";
                         }
