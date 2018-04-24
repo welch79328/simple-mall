@@ -136,7 +136,11 @@
 @section('content')
     <div class="fixedDiv visible-xs">
         <button type="button" class="btn btn-danger addCartButton"
-                onclick="addToShoppingCart({{$commodity->commodity_id}});">
+                @if(count($specArray) != 0)
+                onclick="addToShoppingCartWithSpec({{$commodity->commodity_id}});"
+                @else
+                onclick="addToShoppingCart({{$commodity->commodity_id}});"
+                @endif>
             剩餘組數{{$commodity->commodity_stock}}/立即預購
         </button>
         <div class="clearfix"></div>
@@ -239,7 +243,11 @@
                     <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"
                          style="margin: 0; width: 100%">
                         <input type="button" value="立即預購" class="button"
-                               onclick="addToShoppingCart({{$commodity->commodity_id}});"/>
+                               @if(count($specArray) != 0)
+                               onclick="addToShoppingCartWithSpec({{$commodity->commodity_id}});"
+                               @else
+                               onclick="addToShoppingCart({{$commodity->commodity_id}});"
+                                @endif/>
                     </div>
                 </div>
 
@@ -527,7 +535,7 @@
             }
         });
 
-        function addToShoppingCart(commodity_id) {
+        function addToShoppingCartWithSpec(commodity_id) {
             var specId = $("#specId").val();
             var amount = $("#amount").val();
             if (specId === "default") {
@@ -538,10 +546,32 @@
                 showModal("alertModal", "提示", "請先選擇數量")
                 return;
             }
-            $.get("{{url('shopping')}}/" + commodity_id,
+            $.get("{{url('push_with_spec')}}/" + commodity_id,
                 {
                     amount: amount,
                     specId: specId
+                }, function (data) {
+                    if (!data.result) {
+                        showModal("errorModal", "提示", data.msg);
+                        return;
+                    }
+                    $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
+                    showModal("successModal", "提示", data.msg);
+                    setTimeout(function () {
+                        $("#successModal").modal("hide");
+                    }, 1000);
+                });
+        }
+
+        function addToShoppingCart(commodity_id) {
+            var amount = $("#amount").val();
+            if (amount === "default") {
+                showModal("alertModal", "提示", "請先選擇數量")
+                return;
+            }
+            $.get("{{url('shopping')}}/" + commodity_id,
+                {
+                    amount: amount,
                 }, function (data) {
                     if (!data.result) {
                         showModal("errorModal", "提示", data.msg);
