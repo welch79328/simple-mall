@@ -233,11 +233,16 @@
                 success: function (data) {
                     $("#cancelOrderButton").val("");
                     $("#cancelOrderModal").modal("hide");
-                    if (!data.result) {
-                        showModal("failModal", "提示", data.msg);
-                        return;
-                    }
-                    window.location.href = "{{url('member_order')}}";
+                    $("#cancelOrderModal").on('hidden.bs.modal', function (e) {
+                        var callback = function () {
+                            window.location.href = "{{url('member_order')}}";
+                        }
+                        if (!data.result) {
+                            showModal("failModal", "提示", data.msg);
+                            return;
+                        }
+                        showModal("successModal", "提示", "取消訂單成功，歡迎您繼續選購其他商品。", callback);
+                    });
                 }
             });
         }

@@ -111,6 +111,7 @@ class OrderController extends CommonController
             if ($order->order_status != self::ORDER_STATUS_PENDING) {
                 throw new Exception("取消訂單失敗：只有狀態為處理中的訂單才可取消！");
             }
+
             //復原商品庫存數量
             $details = DB::table("order_list")->where("order_id", $order_id)->get();
             foreach ($details as $detail) {
@@ -128,6 +129,11 @@ class OrderController extends CommonController
                         throw new Exception("取消訂單失敗：商品規格庫存數量更新失敗！");
                     }
                 }
+
+            }
+            $result = DB::table("order_list")->where("order_id", $order_id)->update(["status" => self::ORDER_STATUS_CANCEL, "updated_at" => $now]);
+            if (!$result) {
+                throw new Exception("取消訂單失敗：請稍後再試！");
             }
             $result = DB::table("order")->where("order_id", $order_id)->update(["order_status" => self::ORDER_STATUS_CANCEL, "updated_at" => $now]);
             if (!$result) {
