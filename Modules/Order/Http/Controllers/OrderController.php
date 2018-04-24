@@ -352,10 +352,13 @@ class OrderController extends CommonController
             ->join('commodity', 'order_list.commodity_id', '=', 'commodity.commodity_id')
             ->where($condition)
             ->get();
+        $order_ids = [];
         foreach ($datas as $data) {
             $recipient = $data->order_mail;
             MailController::reached($recipient, $data);
+            $order_ids[] = $data->order_id;
         }
+        Order::whereIn("order_id", $order_ids)->update(["is_mail" => 1]);
     }
 
     public function commodity_show()

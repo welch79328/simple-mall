@@ -121,7 +121,7 @@
                 </tr>
 
                 <tr>
-                    <th>訂單金額：</th>
+                    <th>訂單總金額：</th>
                     <td>
                         <p>{{$data->order_total}}</p>
                     </td>
