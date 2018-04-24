@@ -94,6 +94,14 @@ class ReturnsController extends Controller
                 $data->_returns_reason = "收到有瑕疵/損壞的商品(更換商品)";
                 break;
         }
+        switch ($data->returns_status) {
+            case 'pending':
+                $data->_returns_status = '待處理';
+                break;
+            case 'complete':
+                $data->_returns_status = '已解決';
+                break;
+        }
         $order = Order::where("order_id", $data->order_id)->first();
         $orderDetail = Orderlist::where("order_id", $data->order_id)->get();
         return view('backstage.returns.edit', compact('data', 'order', 'orderDetail'));

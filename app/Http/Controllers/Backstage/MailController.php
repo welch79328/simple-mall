@@ -42,13 +42,13 @@ class MailController extends Controller
     }
 
     //@todo
-    public static function reached()
+    public static function reached($recipient, $data)
     {
         Mail::send(
             'layouts.email.reached',
-            function ($msg) {
-                $msg->subject('捷 U 購『預購達成!匯款資訊』通知');
-                $msg->to('ren096358@gmail.com');
+            compact("data"),
+            function ($msg) use ($recipient) {
+                $msg->to($recipient)->subject('捷 U 購『預購組數達成!匯款資訊』通知');
             }
         );
         return true;

@@ -39,7 +39,7 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form action="{{url('admin/returns/update/'.$data->returns_id)}}" method="post">
+        {{--<form action="{{url('admin/returns/update/'.$data->returns_id)}}" method="post">--}}
             {{csrf_field()}}
             <table class="add_tab">
                 <tbody>
@@ -146,26 +146,27 @@
                 <tr>
                     <th>狀態：</th>
                     <td>
-                        <select name="returns_status">
-                            <option value="pending" @if($data->returns_status == 'pending') selected @endif>
-                                待處理
-                            </option>
-                            <option value="complete" @if($data->returns_status == 'complete') selected @endif>
-                                已解決
-                            </option>
-                        </select>
+                        <p>{{$data->_returns_status}}</p>
+                        {{--<select name="returns_status">--}}
+                            {{--<option value="pending" @if($data->returns_status == 'pending') selected @endif>--}}
+                                {{--待處理--}}
+                            {{--</option>--}}
+                            {{--<option value="complete" @if($data->returns_status == 'complete') selected @endif>--}}
+                                {{--已解決--}}
+                            {{--</option>--}}
+                        {{--</select>--}}
                     </td>
                 </tr>
                 <tr>
                     <th></th>
                     <td>
-                        <input type="submit" value="提交">
+                        {{--<input type="submit" value="提交">--}}
                         <input type="button" class="back" onclick="history.go(-1)" value="返回">
                     </td>
                 </tr>
                 </tbody>
             </table>
-        </form>
+        {{--</form>--}}
     </div>
 
     <script>

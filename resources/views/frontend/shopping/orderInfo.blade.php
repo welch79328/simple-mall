@@ -172,7 +172,7 @@
                         $("#waitModal").modal("hide");
                         $("#orderSubmitButton").prop('disabled', false);
                         var callback = function () {
-                            window.location.href = "{{url('/')}}";
+                            window.location.href = "{{url('member_order')}}";
                         }
                         if (!data.result) {
                             showModal("errorModal", "提示", data.msg);

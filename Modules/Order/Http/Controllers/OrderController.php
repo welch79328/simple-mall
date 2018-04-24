@@ -340,6 +340,24 @@ class OrderController extends CommonController
         }
     }
 
+    public function commodity_reached()
+    {
+        $condition = [
+            ['commodity_stock', 0],
+            ['is_pay', 0],
+            ['is_mail', 0],
+            ['order_status', '!=', 'cancel']
+        ];
+        $datas = Orderlist::join('order', 'order_list.order_id', '=', 'order.order_id')
+            ->join('commodity', 'order_list.commodity_id', '=', 'commodity.commodity_id')
+            ->where($condition)
+            ->get();
+        foreach ($datas as $data) {
+            $recipient = $data->order_mail;
+            MailController::reached($recipient, $data);
+        }
+    }
+
     public function commodity_show()
     {
         $data = Commodity::where('commodity_stock', 0)->orderBy('created_at', 'asc')->paginate(20);
