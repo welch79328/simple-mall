@@ -160,33 +160,6 @@
     <!-- //here ends scrolling icon -->
 
     <script>
-        function showChooseSpecDialog(commodity_id) {
-            $.get("{{url('show_choose_spec_dialog')}}/" + commodity_id, {},
-                function (data) {
-                    if (data === "") {
-                        addToShoppingCart(commodity_id);
-                        return;
-                    }
-                    $("#specModalPlace").html(data);
-                    $("#specModal").modal("show");
-                });
-        }
-
-        function addToShoppingCart(commodity_id, spec_id = null) {
-            $.get("{{url('shopping')}}/" + commodity_id, {specId: spec_id},
-                function (data) {
-                    if (!data.result) {
-                        showModal("errorModal", "提示", data.msg);
-                        return;
-                    }
-                    $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
-                    showModal("successModal", "提示", data.msg);
-                    setTimeout(function () {
-                        $("#successModal").modal("hide");
-                    }, 1000);
-                });
-        }
-
         function getLimitCommodities(obj) {
             var page = $(obj).val();
             if (page == 0) {

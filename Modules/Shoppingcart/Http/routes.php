@@ -7,6 +7,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Shoppingcart\Http\C
 
     //加入購物車
     Route::get('shopping/{commodity_id}', 'ShoppingcartController@push');
+    Route::get('push_with_spec/{commodity_id}', 'ShoppingcartController@pushWithSpec');
 //    //購物車路由
 //    Route::resource('shoppingcart', 'ShoppingcartController');
     //SESSION時間顯示

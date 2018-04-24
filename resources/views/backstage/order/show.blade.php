@@ -157,7 +157,7 @@
                 <tr>
                     <th></th>
                     <td>
-                        <input type="submit" value="提交">
+                        <input type="submit" onclick="wait()" value="提交">
                         <input type="button" class="back" onclick="history.go(-1)" value="返回">
                     </td>
                 </tr>
@@ -167,7 +167,9 @@
     </div>
 
     <script>
-
+        function wait() {
+            layer.alert('請等候系統處理！', {icon: 6});
+        }
     </script>
 
 @endsection

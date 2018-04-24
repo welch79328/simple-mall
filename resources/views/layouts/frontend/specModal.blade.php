@@ -5,7 +5,7 @@
     }
 </style>
 <!-- modal -->
-<div class="modal" tabindex="-1" role="dialog" id="specModal">
+<div class="modal fade" tabindex="-1" role="dialog" id="specModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -46,8 +46,21 @@
             return;
         }
         var spec_id = checked.val();
-        addToShoppingCart(commodity_id, spec_id);
-        $("#specModal").modal("hide");
+        $.get("{{url('push_with_spec')}}/" + commodity_id, {specId: spec_id},
+            function (data) {
+                $("#specModal").modal("hide");
+                $("#specModal").on('hidden.bs.modal', function (e) {
+                    if (!data.result) {
+                        showModal("errorModal", "提示", data.msg);
+                        return;
+                    }
+                    $("#shoppingCartCount").html("(" + data.cartCount + ")購物車");
+                    showModal("successModal", "提示", data.msg);
+                    setTimeout(function () {
+                        $("#successModal").modal("hide");
+                    }, 1000);
+                });
+            });
     }
 
 </script>

@@ -90,7 +90,6 @@ class ShoppingcartController extends Controller
         }
 
         $amount = $request->get("amount", 1);
-        $specId = $request->get("specId", null);
 
         $commodity = Commodity::find($commodity_id);
         if (empty($commodity)) {
@@ -100,18 +99,9 @@ class ShoppingcartController extends Controller
             ];
             return $response;
         }
-        $spec = CommoditySpec::find($specId);
-        $specCount = CommoditySpec::where("commodity_id", $commodity_id)->get()->count();
-        if (empty($specId) && $specCount != 0) {
-            $spec = CommoditySpec::where("commodity_id", $commodity_id)->first();
-        }
-        if (!empty($spec)) {
-            $response = $this->pushWithSpec($request, $commodity_id);
-            return $response;
-        }
+
         $carts = Cart::content();
         $quantity_in_cart = 0;
-
         foreach ($carts as $cart) {
             if ($cart->id == $commodity_id) {
                 $quantity_in_cart = $cart->qty;
@@ -125,6 +115,7 @@ class ShoppingcartController extends Controller
             ];
             return $response;
         }
+
         Cart::add($commodity->commodity_id, $commodity->commodity_title, $amount, $commodity->commodity_price);
         $cartCount = Cart::content()->count();
         $response = [
@@ -147,9 +138,10 @@ class ShoppingcartController extends Controller
         }
 
         $amount = $request->get("amount", 1);
-        $specId = $request->get("specId", null);
+        $specId = $request->get("specId");
 
         $commodity = Commodity::find($commodity_id);
+        $spec = CommoditySpec::find($specId);
         if (empty($commodity)) {
             $response = [
                 "result" => false,
@@ -157,18 +149,14 @@ class ShoppingcartController extends Controller
             ];
             return $response;
         }
-        $spec = CommoditySpec::find($specId);
-        $specCount = CommoditySpec::where("commodity_id", $commodity_id)->get()->count();
-        if (empty($specId) && $specCount != 0) {
-            $spec = CommoditySpec::where("commodity_id", $commodity_id)->first();
-        }
         if (empty($spec)) {
             $response = [
                 "result" => false,
-                "msg" => "加入購物車失敗：商品規格不能為空！"
+                "msg" => "加入購物車失敗：找不到此商品規格！"
             ];
             return $response;
         }
+
         $carts = Cart::content();
         $quantity_in_cart = 0;
         foreach ($carts as $cart) {
@@ -184,6 +172,7 @@ class ShoppingcartController extends Controller
             ];
             return $response;
         }
+
         Cart::add($commodity->commodity_id, $commodity->commodity_title, $amount, $commodity->commodity_price, ["specId" => $spec->id, "specName" => $spec->spec]);
         $cartCount = Cart::content()->count();
         $response = [

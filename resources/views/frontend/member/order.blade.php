@@ -72,8 +72,8 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="returnModal">
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="returnModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -251,24 +251,28 @@
                     showModal("alertModal", "提示", "手機與市話請擇一填寫！");
                     return;
                 }
-                showModal("waitModal", "提示", "請等候系統處理，關閉頁面可能會造成退貨失敗！");
-                $("#returnsButton").prop('disabled', true);
+                $("#returnModal").modal("hide");
+                $("#returnModal").on('hidden.bs.modal', function (e) {
+                    showModal("waitModal", "提示", "請等候系統處理，關閉頁面可能會造成退貨失敗！");
+                    $("#returnsButton").prop('disabled', true);
+                });
                 $.ajax({
                     url: "{{url('member_order_return')}}",
                     type: "POST",
                     data: $(this).serialize(), // serializes the form's elements.
                     success: function (data) {
                         $("#waitModal").modal("hide");
-                        $("#returnsButton").prop('disabled', false);
-                        $("#returnModal").modal("hide");
-                        var callback = function () {
-                            window.location.href = "{{url('member_order')}}";
-                        }
-                        if (!data.result) {
-                            showModal("errorModal", "提示", data.msg, callback);
-                            return;
-                        }
-                        showModal("successModal", "提示", "已收到您退貨的相關訊息，請等候專員為您處理。", callback);
+                        $("#waitModal").on('hidden.bs.modal', function (e) {
+                            $("#returnsButton").prop('disabled', false);
+                            var callback = function () {
+                                window.location.href = "{{url('member_order')}}";
+                            }
+                            if (!data.result) {
+                                showModal("errorModal", "提示", data.msg, callback);
+                                return;
+                            }
+                            showModal("successModal", "提示", "已收到您要退貨的相關資料，請等候專員為您處理，謝謝。", callback);
+                        });
                     }
                 });
             });
