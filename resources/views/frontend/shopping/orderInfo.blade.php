@@ -6,11 +6,11 @@
     <style>
         @media (max-width: 480px) {
             .order_info {
-                font-size: 4px;
+                font-size: 10px;
             }
 
             .agree_info {
-                font-size: 5px;
+                font-size: 10px;
             }
         }
     </style>
@@ -28,13 +28,15 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="phone" name="order_phone" placeholder="請輸入行動電話"
-                               value="{{$data->member_phone}}">
+                               value="{{$data->member_phone}}" maxlength="10" pattern="\d{10}" title="最大十位，只能輸入數字">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="tel_code" name="tel_code" placeholder="區碼"
-                               style="width: 20%; float: left" value="{{$data->tel_code}}" onchange="requireTel()">
+                               style="width: 20%; float: left" value="{{$data->tel_code}}" onchange="requireTel()"
+                               maxlength="4" pattern="\d{4}" title="最大四位，只能輸入數字">
                         <input type="text" class="form-control" id="tel" name="order_tel" placeholder="請輸入市話"
-                               style="width: 80%; float: left" value="{{$data->member_tel}}" onchange="requireTel()">
+                               style="width: 80%; float: left" value="{{$data->member_tel}}" onchange="requireTel()"
+                               maxlength="8" pattern="\d{8}" title="最大八位，只能輸入數字">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">

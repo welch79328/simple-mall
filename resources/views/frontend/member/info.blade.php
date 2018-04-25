@@ -50,16 +50,16 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="member_phone" name="member_phone"
-                               placeholder="請輸入手機"
-                               value="{{$member->member_phone}}">
+                               placeholder="請輸入手機" value="{{$member->member_phone}}" maxlength="10" pattern="\d{10}"
+                               title="最大十位，只能輸入數字">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="tel_code" name="tel_code"
-                               placeholder="區碼"
-                               value="{{$member->tel_code}}" style="width: 20%; float: left">
+                               placeholder="區碼" value="{{$member->tel_code}}" style="width: 20%; float: left"
+                               maxlength="4" pattern="\d{4}" title="最大四位，只能輸入數字">
                         <input type="text" class="form-control" id="member_tel" name="member_tel"
-                               placeholder="請輸入市內電話"
-                               value="{{$member->member_tel}}" style="width: 80%; float: left">
+                               placeholder="請輸入市內電話" value="{{$member->member_tel}}" style="width: 80%; float: left"
+                               maxlength="8" pattern="\d{8}" title="最大八位，只能輸入數字">
                     </div>
                     <div class=" clearfix"></div>
                     <div class="form-group">
