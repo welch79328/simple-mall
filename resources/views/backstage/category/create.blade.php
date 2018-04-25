@@ -32,7 +32,7 @@
         </div>
     </div>
     <!--结果集标题与导航组件 结束-->
-    
+
     <div class="result_wrap">
         <form action="{{url('admin/category')}}" method="post">
             {{csrf_field()}}
@@ -59,7 +59,7 @@
                     <tr>
                         <th><i class="require">*</i>排序：</th>
                         <td>
-                            <input type="number" class="sm" min="1" max="5" name="cate_order">
+                            <input type="number" class="sm" min="1" max="5" name="cate_order" value="1">
                         </td>
                     </tr>
                     <tr>

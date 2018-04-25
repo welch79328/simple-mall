@@ -8,25 +8,25 @@
     </div>
     <!--面包屑导航 结束-->
 
-	{{--<!--结果页快捷搜索框 开始-->--}}
-	{{--<div class="search_wrap">--}}
-        {{--<form action="" method="post">--}}
-            {{--<table class="search_tab">--}}
-                {{--<tr>--}}
-                    {{--<th width="120">选择分类:</th>--}}
-                    {{--<td>--}}
-                        {{--<select onchange="javascript:location.href=this.value;">--}}
-                            {{--<option value="">全部</option>--}}
-                            {{--<option value="http://www.baidu.com">百度</option>--}}
-                            {{--<option value="http://www.sina.com">新浪</option>--}}
-                        {{--</select>--}}
-                    {{--</td>--}}
-                    {{--<th width="70">关键字:</th>--}}
-                    {{--<td><input type="text" name="keywords" placeholder="关键字"></td>--}}
-                    {{--<td><input type="submit" name="sub" value="查询"></td>--}}
-                {{--</tr>--}}
-            {{--</table>--}}
-        {{--</form>--}}
+    {{--<!--结果页快捷搜索框 开始-->--}}
+    {{--<div class="search_wrap">--}}
+    {{--<form action="" method="post">--}}
+    {{--<table class="search_tab">--}}
+    {{--<tr>--}}
+    {{--<th width="120">选择分类:</th>--}}
+    {{--<td>--}}
+    {{--<select onchange="javascript:location.href=this.value;">--}}
+    {{--<option value="">全部</option>--}}
+    {{--<option value="http://www.baidu.com">百度</option>--}}
+    {{--<option value="http://www.sina.com">新浪</option>--}}
+    {{--</select>--}}
+    {{--</td>--}}
+    {{--<th width="70">关键字:</th>--}}
+    {{--<td><input type="text" name="keywords" placeholder="关键字"></td>--}}
+    {{--<td><input type="submit" name="sub" value="查询"></td>--}}
+    {{--</tr>--}}
+    {{--</table>--}}
+    {{--</form>--}}
     {{--</div>--}}
     {{--<!--结果页快捷搜索框 结束-->--}}
 
@@ -56,89 +56,96 @@
                     </tr>
 
                     @foreach($data as $v)
-                    <tr @if($v->cate_parent==0)
-                        style="background-color:#CCCCCC;"
-                        @endif
-                    >
-                        <td>
-                            <a href="#"
-                               @if($v->cate_parent!=0)
-                               style="color:#CC3333;"
-                                    @endif
-                            >{{$v->_cate_name}}</a>
-                        </td>
-                        <td>{{$v->cate_view}}</td>
-                        <td>
-                            <a href="{{url('admin/category/'.$v->cate_id.'/edit')}}">修改</a>
-                            <a href="javascript::" onclick="delCate({{$v->cate_id}})">删除</a>
-                        </td>
-                    </tr>
+                        <tr @if($v->cate_parent==0)
+                            style="background-color:#CCCCCC;"
+                                @endif
+                        >
+                            <td>
+                                <a href="#"
+                                   @if($v->cate_parent!=0)
+                                   style="color:#CC3333;"
+                                        @endif
+                                >{{$v->_cate_name}}</a>
+                            </td>
+                            <td>{{$v->cate_view}}</td>
+                            <td>
+                                <a href="{{url('admin/category/'.$v->cate_id.'/edit')}}">修改</a>
+                                <a href="javascript::" onclick="delCate({{$v->cate_id}})">删除</a>
+                            </td>
+                        </tr>
                     @endforeach
                 </table>
 
-{{--<div class="page_nav">--}}
-{{--<div>--}}
-{{--<a class="first" href="/wysls/index.php/Admin/Tag/index/p/1.html">第一页</a> --}}
-{{--<a class="prev" href="/wysls/index.php/Admin/Tag/index/p/7.html">上一页</a> --}}
-{{--<a class="num" href="/wysls/index.php/Admin/Tag/index/p/6.html">6</a>--}}
-{{--<a class="num" href="/wysls/index.php/Admin/Tag/index/p/7.html">7</a>--}}
-{{--<span class="current">8</span>--}}
-{{--<a class="num" href="/wysls/index.php/Admin/Tag/index/p/9.html">9</a>--}}
-{{--<a class="num" href="/wysls/index.php/Admin/Tag/index/p/10.html">10</a> --}}
-{{--<a class="next" href="/wysls/index.php/Admin/Tag/index/p/9.html">下一页</a> --}}
-{{--<a class="end" href="/wysls/index.php/Admin/Tag/index/p/11.html">最后一页</a> --}}
-{{--<span class="rows">11 条记录</span>--}}
-{{--</div>--}}
-{{--</div>--}}
+                {{--<div class="page_nav">--}}
+                {{--<div>--}}
+                {{--<a class="first" href="/wysls/index.php/Admin/Tag/index/p/1.html">第一页</a> --}}
+                {{--<a class="prev" href="/wysls/index.php/Admin/Tag/index/p/7.html">上一页</a> --}}
+                {{--<a class="num" href="/wysls/index.php/Admin/Tag/index/p/6.html">6</a>--}}
+                {{--<a class="num" href="/wysls/index.php/Admin/Tag/index/p/7.html">7</a>--}}
+                {{--<span class="current">8</span>--}}
+                {{--<a class="num" href="/wysls/index.php/Admin/Tag/index/p/9.html">9</a>--}}
+                {{--<a class="num" href="/wysls/index.php/Admin/Tag/index/p/10.html">10</a> --}}
+                {{--<a class="next" href="/wysls/index.php/Admin/Tag/index/p/9.html">下一页</a> --}}
+                {{--<a class="end" href="/wysls/index.php/Admin/Tag/index/p/11.html">最后一页</a> --}}
+                {{--<span class="rows">11 条记录</span>--}}
+                {{--</div>--}}
+                {{--</div>--}}
 
 
 
                 {{--<div class="page_list">--}}
-                    {{--<ul>--}}
-                        {{--<li class="disabled"><a href="#">&laquo;</a></li>--}}
-                        {{--<li class="active"><a href="#">1</a></li>--}}
-                        {{--<li><a href="#">2</a></li>--}}
-                        {{--<li><a href="#">3</a></li>--}}
-                        {{--<li><a href="#">4</a></li>--}}
-                        {{--<li><a href="#">5</a></li>--}}
-                        {{--<li><a href="#">&raquo;</a></li>--}}
-                    {{--</ul>--}}
+                {{--<ul>--}}
+                {{--<li class="disabled"><a href="#">&laquo;</a></li>--}}
+                {{--<li class="active"><a href="#">1</a></li>--}}
+                {{--<li><a href="#">2</a></li>--}}
+                {{--<li><a href="#">3</a></li>--}}
+                {{--<li><a href="#">4</a></li>--}}
+                {{--<li><a href="#">5</a></li>--}}
+                {{--<li><a href="#">&raquo;</a></li>--}}
+                {{--</ul>--}}
                 {{--</div>--}}
             </div>
         </div>
     </form>
     <!--搜索结果页面 列表 结束-->
 
-<script>
-    function changeOder(obj,cate_id){
-        var cate_order = $(obj).val();
-        $.post("{{url('admin/cate/changeOrder')}}",{'_token':'{{csrf_token()}}','cate_id':cate_id,'cate_order':cate_order},function (data) {
-            if(data.status == 0){
-                layer.msg(data.msg, {icon: 6});
-            }else{
-                layer.msg(data.msg, {icon: 5});
-            }
-        });
-    };
-
-    //刪除分類
-    function delCate(cate_id) {
-        layer.confirm('您確定要刪除此分類嗎？', {
-            btn: ['確定','取消'] //按钮
-        }, function(){
-            $.post("{{url('admin/category/')}}/"+cate_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
-                if(data.status == 0){
-                    location.href = location.href;
+    <script>
+        function changeOder(obj, cate_id) {
+            var cate_order = $(obj).val();
+            $.post("{{url('admin/cate/changeOrder')}}", {
+                '_token': '{{csrf_token()}}',
+                'cate_id': cate_id,
+                'cate_order': cate_order
+            }, function (data) {
+                if (data.status == 0) {
                     layer.msg(data.msg, {icon: 6});
-                }else{
+                } else {
                     layer.msg(data.msg, {icon: 5});
                 }
             });
-        }, function(){
+        };
 
-        });
-    }
+        //刪除分類
+        function delCate(cate_id) {
+            layer.confirm('您確定要刪除此分類嗎？', {
+                btn: ['確定', '取消'] //按钮
+            }, function () {
+                $.post("{{url('admin/category/')}}/" + cate_id, {
+                    '_method': 'delete',
+                    '_token': "{{csrf_token()}}"
+                }, function (data) {
+                    if (data.status == 0) {
+                        layer.msg(data.msg, {icon: 6});
+                        window.location.href = location.href;
+                    } else {
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            }, function () {
 
-</script>
+            });
+        }
+
+    </script>
 
 @endsection

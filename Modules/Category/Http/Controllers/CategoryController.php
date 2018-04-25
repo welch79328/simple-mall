@@ -68,7 +68,7 @@ class CategoryController extends Controller
         if($validator->passes()){
             $re = Category::create($input);
             if($re){
-                return redirect('category');
+                return redirect('admin/category');
             }else {
                 return back()->with('errors', '數據填充錯誤, 請稍後重試');
             }
@@ -106,7 +106,7 @@ class CategoryController extends Controller
         $input = Input::except('_token','_method');
         $re = Category::where('cate_id',$cate_id)->update($input);
         if($re){
-            return redirect('category');
+            return redirect('admin/category');
         }else{
             return back()->with('errors', '分類信息更新失敗, 請稍後重試');
         }
@@ -128,11 +128,11 @@ class CategoryController extends Controller
         }
         $re = Category::where('cate_id',$cate_id)->delete();
         if($re){
-            $level2 = Category::where('cate_pid',$level->cate_id)->get();
-            $re2 = Category::where('cate_pid',$level->cate_id)->delete();
+            $level2 = Category::where('cate_parent',$level->cate_id)->get();
+            $re2 = Category::where('cate_parent',$level->cate_id)->delete();
             if($re2){
                 foreach ($level2 as $v){
-                    $level3 = Category::where('cate_pid',$v->cate_id)->get();
+                    $level3 = Category::where('cate_parent',$v->cate_id)->get();
                     $comm2 =  Commodity::where('cate_id',$v->cate_id)->get();
                     Commodity::where('cate_id',$v->cate_id)->delete();
                     if($comm2){
@@ -140,10 +140,10 @@ class CategoryController extends Controller
                             CommodityImg::where('commodity_id',$e->commodity_id)->delete();
                         }
                     }
-                    $re3 = Category::where('cate_pid',$v->cate_id)->delete();
+                    $re3 = Category::where('cate_parent',$v->cate_id)->delete();
                     if($re3){
                         foreach ($level3 as $m){
-                            $level4 = Category::where('cate_pid',$m->cate_id)->get();
+                            $level4 = Category::where('cate_parent',$m->cate_id)->get();
                             $comm3 =  Commodity::where('cate_id',$m->cate_id)->get();
                             Commodity::where('cate_id',$m->cate_id)->delete();
                             if($comm3){
@@ -151,10 +151,10 @@ class CategoryController extends Controller
                                     CommodityImg::where('commodity_id',$f->commodity_id)->delete();
                                 }
                             }
-                            $re4 = Category::where('cate_pid',$m->cate_id)->delete();
+                            $re4 = Category::where('cate_parent',$m->cate_id)->delete();
                             if($re4){
                                 foreach ($level4 as $o){
-                                    $level5 = Category::where('cate_pid',$o->cate_id)->get();
+                                    $level5 = Category::where('cate_parent',$o->cate_id)->get();
                                     $comm4 =  Commodity::where('cate_id',$o->cate_id)->get();
                                     Commodity::where('cate_id',$o->cate_id)->delete();
                                     if($comm4){
@@ -162,7 +162,7 @@ class CategoryController extends Controller
                                             CommodityImg::where('commodity_id',$j->commodity_id)->delete();
                                         }
                                     }
-                                    $re5 = Category::where('cate_pid',$o->cate_id)->delete();
+                                    $re5 = Category::where('cate_parent',$o->cate_id)->delete();
                                     if($re5){
                                         foreach ($level5 as $x){
                                             $comm5 =  Commodity::where('cate_id',$x->cate_id)->get();
