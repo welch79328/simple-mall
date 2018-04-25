@@ -11,7 +11,7 @@
 
     .footer_title_mobile {
         padding-top: 20px;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         font-size: 18px;
     }
 
@@ -61,7 +61,7 @@
 <div class="adwifi_footer hidden-xs" style="height: 250px">
     <div class="col-sm-3 col-md-4 footer_div_2">
         <div class="col-sm-12 col-md-9 col-md-offset-3" style="border-right-style: solid; border-width: thin;">
-            <div style="padding: 10px">
+            <div>
                 <img src="{{url('images/frontend/J-UGO-footer.png')}}" width="120px">
             </div>
             <div class="center-block text-left footer_detail">
@@ -83,7 +83,7 @@
     <div class="col-sm-3 col-md-2 footer_div_1">
         <div class="col-sm-12 col-md-11 col-md-offset-1">
             <h3 class="footer_title">關係企業</h3>
-            <div class="center-block text-left footer_detail">
+            <div class="center-block text-left footer_detail" style="margin-bottom: 0">
                 <a href="http://www.adwifi.com.tw/">
                     <img src="{{url('images/frontend/free ad wifi-01.png')}}" width="60px">
                 </a>
@@ -106,6 +106,7 @@
         </div>
     </div>
 </div>
+<!-- mobile footer -->
 <div class="adwifi_footer visible-xs col-xs-12" style="background-color: #0c68ab;">
     <div class="col-xs-8 col-xs-offset-4 footer_div_mobile">
         <h3 class="footer_title_mobile">關於我們</h3>
@@ -113,7 +114,7 @@
             <div><a href="{{url('about')}}">關於J-UGo</a></div>
             <div><a href="{{url('privacy')}}">隱私權保護政策</a></div>
         </div>
-        <h3 class="footer_title_mobile" style="margin-top: 20px">關係企業</h3>
+        <h3 class="footer_title_mobile" style="margin-top: 20px; padding-bottom: 0">關係企業</h3>
         <div class="center-block text-left footer_detail">
             <a href="http://www.adwifi.com.tw/">
                 <img src="{{url('images/frontend/free ad wifi-01.png')}}" width="60px">
