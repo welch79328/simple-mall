@@ -7,7 +7,7 @@
                         <li><i class="fa fa-phone" aria-hidden="true"></i> 電話 : 01234567898</li>
                         <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>-->
             @if(!empty(session('member')))
-                <li>
+                <li class="hidden-xs">
                     @if(empty($member->member_name))
                         {{$member->member_account}} 您好
                     @else
