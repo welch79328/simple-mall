@@ -37,13 +37,12 @@
                     <h4>{{$activeCate->cate_name}}</h4>
                     <div class="list-group">
                         @foreach($cateTree as $cate)
-                            @if($cate->cate_id == $activeCate->cate_id)
-                                <a href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}"
-                                   class="list-group-item active">{{$cate->cate_name}}</a>
-                            @else
-                                <a href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}"
-                                   class="list-group-item">{{$cate->cate_name}}</a>
-                            @endif
+                            <a @if($topCate->cate_id == 0)
+                               href="{{url('category/' . $cate->cate_id . '?topCateId=' . $cate->cate_id)}}"
+                               @else
+                               href="{{url('category/' . $cate->cate_id . '?topCateId=' . $topCate->cate_id)}}"
+                               @endif
+                               class="list-group-item @if($cate->cate_id == $activeCate->cate_id)active  @endif">{{$cate->cate_name}}</a>
                         @endforeach
                     </div>
                 </div>

@@ -30,6 +30,16 @@ class CategoryController extends CommonController
             ["commodity_price", ">=", CommodityHelper::COMMODITY_PRICE_MIN],
             ["commodity_price", "<=", CommodityHelper::COMMODITY_PRICE_MAX],
         ];
+
+        //0 表示資料庫裡 "全部" 這個分類的 cate_id
+        if ($topCateId == 0) {
+            $cateTree = Category::where("cate_parent", 0)->orderBy('cate_order', 'asc')->get();
+            $conditions = [
+                ["commodity_price", ">=", CommodityHelper::COMMODITY_PRICE_MIN],
+                ["commodity_price", "<=", CommodityHelper::COMMODITY_PRICE_MAX],
+            ];
+        }
+
         $commodities = $commodityHelper->getCommoditiesByQuery(8, $conditions);
         foreach ($commodities as $commodity) {
             if ((int)$commodity->commodity_price >= 1000) {
@@ -65,6 +75,13 @@ class CategoryController extends CommonController
             ["commodity_price", ">=", $minPrice],
             ["commodity_price", "<=", $maxPrice],
         ];
+        ////0 表示資料庫裡 "全部" 這個分類的 cate_id
+        if ($cate_id == 0) {
+            $conditions = [
+                ["commodity_price", ">=", $minPrice],
+                ["commodity_price", "<=", $maxPrice],
+            ];
+        }
         $sort = [];
         if (!empty($field)) {
             foreach ($field as $value) {
