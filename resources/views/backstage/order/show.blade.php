@@ -51,9 +51,46 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>訂購人：</th>
+                    <th>訂購者：</th>
                     <td>
                         <p><a href="{{url('member/'.$member->member_id.'/edit')}}">{{$member->member_name}}</a></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>訂單總金額：</th>
+                    <td>
+                        <p>{{$data->order_total}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>訂單狀態：</th>
+                    <td>
+                        <select name="status">
+                            <option value="pending" @if($data->order_status == 'pending') selected @endif>待處理</option>
+                            <option value="shipping" @if($data->order_status == 'shipping') selected @endif>出貨中</option>
+                            <option value="complete" @if($data->order_status == 'complete') selected @endif>已送達</option>
+                            <option value="refund" @if($data->order_status == 'refund') selected @endif>退貨處理中</option>
+                            <option value="cancel" @if($data->order_status == 'cancel') selected @endif>取消</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>是否付款：</th>
+                    <td>
+                        <select name="is_pay">
+                            <option value="1" @if($data->is_pay == '1') selected @endif>已付款</option>
+                            <option value="0" @if($data->is_pay == '0') selected @endif>尚未付款</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>送達時間：</th>
+                    <td>
+                        {{$data->delivery_time}}
                     </td>
                 </tr>
 
@@ -100,6 +137,13 @@
                 </tr>
 
                 <tr>
+                    <th>備註：</th>
+                    <td>
+                        <p>{{$data->order_comment}}</p>
+                    </td>
+                </tr>
+
+                <tr>
                     <th>購買商品：</th>
                     <td>
                         @foreach($orderlist as $v)
@@ -121,39 +165,19 @@
                 </tr>
 
                 <tr>
-                    <th>訂單總金額：</th>
+                    <th>發布時間：</th>
                     <td>
-                        <p>{{$data->order_total}}</p>
+                        {{$data->created_at}}
                     </td>
                 </tr>
 
                 <tr>
-                    <th>訂單狀態：</th>
+                    <th>最後修改：</th>
                     <td>
-                        <select name="status">
-                            <option value="pending" @if($data->order_status == 'pending') selected @endif>待處理</option>
-                            <option value="shipping" @if($data->order_status == 'shipping') selected @endif>出貨中</option>
-                            <option value="complete" @if($data->order_status == 'complete') selected @endif>已送達</option>
-                            <option value="refund" @if($data->order_status == 'refund') selected @endif>退貨處理中</option>
-                            <option value="cancel" @if($data->order_status == 'cancel') selected @endif>取消</option>
-                        </select>
+                        {{$data->updated_at}}
                     </td>
                 </tr>
-                <tr>
-                    <th>是否付款：</th>
-                    <td>
-                        <select name="is_pay">
-                            <option value="1" @if($data->is_pay == '1') selected @endif>已付款</option>
-                            <option value="0" @if($data->is_pay == '0') selected @endif>尚未付款</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>送達時間：</th>
-                    <td>
-                        {{$data->delivery_time}}
-                    </td>
-                </tr>
+
                 <tr>
                     <th></th>
                     <td>
@@ -161,6 +185,7 @@
                         <input type="button" class="back" onclick="history.go(-1)" value="返回">
                     </td>
                 </tr>
+
                 </tbody>
             </table>
         </form>
