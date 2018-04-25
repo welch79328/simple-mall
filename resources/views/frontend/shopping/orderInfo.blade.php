@@ -28,15 +28,19 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="phone" name="order_phone" placeholder="請輸入行動電話"
-                               value="{{$data->member_phone}}" maxlength="10" pattern="\d{10}" title="最大十位，只能輸入數字">
+                               value="{{$data->member_phone}}" maxlength="10" pattern="\d{10}"
+                               oninvalid="this.setCustomValidity('最多十位，只能輸入數字')"
+                               oninput="this.setCustomValidity('')">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="tel_code" name="tel_code" placeholder="區碼"
                                style="width: 20%; float: left" value="{{$data->tel_code}}" onchange="requireTel()"
-                               maxlength="4" pattern="\d{4}" title="最大四位，只能輸入數字">
+                               maxlength="4" pattern="\d{1,4}" oninvalid="this.setCustomValidity('最多四位，只能輸入數字')"
+                               oninput="this.setCustomValidity('')">
                         <input type="text" class="form-control" id="tel" name="order_tel" placeholder="請輸入市話"
                                style="width: 80%; float: left" value="{{$data->member_tel}}" onchange="requireTel()"
-                               maxlength="8" pattern="\d{8}" title="最大八位，只能輸入數字">
+                               maxlength="8" pattern="\d{8}" oninvalid="this.setCustomValidity('最多八位，只能輸入數字')"
+                               oninput="this.setCustomValidity('')">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
@@ -120,6 +124,7 @@
     <!-- //modal -->
     <script>
         $(document).ready(function () {
+            //customValidityMsg();
             ajaxSubmitOrder();
         });
 
@@ -185,6 +190,12 @@
                     }
                 });
             });
+        }
+
+        function customValidityMsg() {
+            $('#phone').get(0).setCustomValidity('最大十位，只能輸入數字');
+            $('#tel_code').get(0).setCustomValidity('最大四位，只能輸入數字');
+            $('#tel').get(0).setCustomValidity('最大八位，只能輸入數字');
         }
     </script>
 @endsection

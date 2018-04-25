@@ -122,13 +122,18 @@
                             <input type="text" class="form-control" placeholder="收件人" id="returns_name"
                                    name="returns_name" required>
                             <input type="text" class="form-control" id="returns_phone" name="returns_phone"
-                                   placeholder="手機" maxlength="10" pattern="\d{10}" title="最大十位，只能輸入數字">
+                                   placeholder="手機" maxlength="10" pattern="\d{10}"
+                                   oninvalid="this.setCustomValidity('最多十位，只能輸入數字')"
+                                   oninput="this.setCustomValidity('')">>
                             <input type="text" class="form-control" id="tel_code" name="tel_code" placeholder="區碼"
-                                   style="width: 20%; float: left" onchange="requireTel()" maxlength="4" pattern="\d{4}"
-                                   title="最大四位，只能輸入數字">
+                                   style="width: 20%; float: left" onchange="requireTel()" maxlength="4"
+                                   pattern="\d{1,4}"
+                                   oninvalid="this.setCustomValidity('最多四位，只能輸入數字')"
+                                   oninput="this.setCustomValidity('')">>
                             <input type="text" class="form-control" id="returns_tel" name="returns_tel" placeholder="市話"
                                    style="width: 80%; float: left" onchange="requireTel()" maxlength="8" pattern="\d{8}"
-                                   title="最大八位，只能輸入數字">
+                                   oninvalid="this.setCustomValidity('最多八位，只能輸入數字')"
+                                   oninput="this.setCustomValidity('')">>
                             <div class="clearfix"></div>
                             <input type="email" class="form-control" id="returns_mail" name="returns_mail"
                                    placeholder="電子信箱" required>
