@@ -25,7 +25,7 @@
 			<li>
 				<h3><i class="fa fa-fw fa-clipboard"></i>管理</h3>
 				<ul class="sub_menu">
-					@if(session('member.member_level') == 'admin')
+					@if(session('admin_member.member_level') == 'admin')
 					<li><a href="{{url('admin/member')}}" target="main"><i class="fa fa-fw fa-square"></i>帳號管理</a></li>
 					@endif
 					<li><a href="{{url('member')}}" target="main"><i class="fa fa-fw fa-square"></i>會員管理</a></li>
@@ -67,7 +67,7 @@
 
 	<!--主体部分 开始-->
 	<div class="main_box">
-		<iframe src="{{url('admin/info')}}" frameborder="0" width="100%" height="100%" name="main"></iframe>
+		<iframe id="iframe" src="{{url('admin/info')}}" frameborder="0" width="100%" height="100%" name="main"></iframe>
 	</div>
 	<!--主体部分 结束-->
 

@@ -34,7 +34,7 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th>訂單編號</th>
+                        <th>退貨單編號</th>
                         <th>退貨狀態</th>
                         <th>編輯者</th>
                         <th>發布時間</th>
@@ -43,7 +43,7 @@
                     </tr>
                     @foreach($data as $v)
                         <tr>
-                            <td><a href="{{url('admin/order/'.$v->order_id)}}">{{$v->order_number}}</a></td>
+                            <td>{{$v->returns_number}}</td>
                             <td style="color: @if($v->returns_status == 'complete') #009966 @endif">{{$v->_returns_status}}</td>
                             <td>{{$v->editor}}</td>
                             <td>{{$v->created_at}}</td>

@@ -47,9 +47,20 @@ class OrderController extends CommonController
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Order::orderBy('created_at', 'desc')->paginate(20);
+        $order_number = $request->get("order_number", "");
+        $order_status = $request->get("order_status", "");
+        $is_pay = $request->get("is_pay", "");
+
+        $codition = [
+            ["order_number", "like", "%$order_number%"],
+            ["order_status", "like", "%$order_status%"],
+            ["is_pay", "like", "%$is_pay%"]
+        ];
+
+        $data = Order::where($codition)->orderBy('created_at', 'desc')->paginate(20);
+        //format 資料
         foreach ($data as $v) {
             switch ($v->order_status) {
                 case 'pending':
@@ -68,10 +79,23 @@ class OrderController extends CommonController
                     $v->_order_status = '已取消';
                     break;
             }
+            switch ($v->is_pay) {
+                case '1':
+                    $v->_is_pay = '已付款';
+                    break;
+                case '0':
+                    $v->_is_pay = '尚未付款';
+                    break;
+            }
             $member = Member::where('member_id', $v->member_id)->first();
             $v->member_name = $member['member_name'];
         }
-        return view('backstage.order.index', compact('data'));
+
+        $search = new \stdClass();
+        $search->order_number = $order_number;
+        $search->order_status = $order_status;
+        $search->is_pay = $is_pay;
+        return view('backstage.order.index', compact('data', 'search'));
     }
 
     /**
@@ -418,4 +442,5 @@ class OrderController extends CommonController
     {
         $report->generateReport($commodity_id);
     }
+
 }

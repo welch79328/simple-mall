@@ -15,7 +15,7 @@ class CreateReturnsTable extends Migration
     {
         Schema::create('returns', function (Blueprint $table) {
             $table->increments('returns_id');
-            $table->string('order_number');
+            $table->string('returns_number');
             $table->enum('returns_reason', ['1', '2', '3', '4'])->default('1');
             $table->enum('returns_status', ['complete', 'pending'])->default('pending');
             $table->string('bank_code')->nullable();

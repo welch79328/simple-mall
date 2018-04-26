@@ -264,10 +264,8 @@
                     return;
                 }
                 $("#returnModal").modal("hide");
-                $("#returnModal").on('hidden.bs.modal', function (e) {
-                    showModal("waitModal", "提示", "請等候系統處理，關閉頁面可能會造成退貨失敗！");
-                    $("#returnsButton").prop('disabled', true);
-                });
+                $("#returnsButton").prop('disabled', true);
+                showModal("waitModal", "提示", "請等候系統處理，關閉頁面可能會造成退貨失敗！");
                 $.ajax({
                     url: "{{url('member_order_return')}}",
                     type: "POST",
