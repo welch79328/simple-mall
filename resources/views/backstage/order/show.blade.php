@@ -67,7 +67,7 @@
                 <tr>
                     <th>訂單狀態：</th>
                     <td>
-                        <select name="status">
+                        <select name="order_status">
                             <option value="pending" @if($data->order_status == 'pending') selected @endif>待處理</option>
                             <option value="shipping" @if($data->order_status == 'shipping') selected @endif>出貨中</option>
                             <option value="complete" @if($data->order_status == 'complete') selected @endif>已送達</option>
@@ -97,49 +97,52 @@
                 <tr>
                     <th>聯絡姓名：</th>
                     <td>
-                        <p>{{$data->order_name}}</p>
+                        <p><input type="text" name="order_name" value="{{$data->order_name}}"></p>
                     </td>
                 </tr>
 
                 <tr>
                     <th>聯絡信箱：</th>
                     <td>
-                        <p>{{$data->order_mail}}</p>
+                        <p>
+                            <input type="email" name="order_mail" value="{{$data->order_mail}}"
+                                   style="padding: 6px 5px;">
+                        </p>
                     </td>
                 </tr>
 
                 <tr>
                     <th>聯絡手機：</th>
                     <td>
-                        <p>{{$data->order_phone}}</p>
+                        <p><input type="text" name="order_phone" value="{{$data->order_phone}}"></p>
                     </td>
                 </tr>
 
                 <tr>
                     <th>聯絡電話：</th>
                     <td>
-                        <p>{{$data->order_tel}}</p>
+                        <p><input type="text" name="order_tel" value="{{$data->order_tel}}"></p>
                     </td>
                 </tr>
 
                 <tr>
                     <th>郵遞區號：</th>
                     <td>
-                        <p>{{$data->order_zipcode}}</p>
+                        <p><input type="text" name="order_zipcode" value="{{$data->order_zipcode}}"></p>
                     </td>
                 </tr>
 
                 <tr>
                     <th>聯絡地址：</th>
                     <td>
-                        <p>{{$data->order_address}}</p>
+                        <p><input class="lg" type="text" name="order_address" value="{{$data->order_address}}"></p>
                     </td>
                 </tr>
 
                 <tr>
                     <th>備註：</th>
                     <td>
-                        <p>{{$data->order_comment}}</p>
+                        <textarea name="order_comment" row="3">{{$data->order_comment}}</textarea>
                     </td>
                 </tr>
 
@@ -175,6 +178,13 @@
                     <th>最後修改：</th>
                     <td>
                         {{$data->updated_at}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>編輯者：</th>
+                    <td>
+                        {{$data->editor}}
                     </td>
                 </tr>
 

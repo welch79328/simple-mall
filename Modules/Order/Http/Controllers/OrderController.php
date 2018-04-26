@@ -201,33 +201,32 @@ class OrderController extends CommonController
      * @param  Request $request
      * @return Response
      */
-    public function update($order_id)
+    public function update(Request $request, $order_id)
     {
-        $input = Input::all();
-        $input['creator'] = session('admin_member.member_name');
-        $delivery_time = null;
+        $input = $request->except("_token");
+        $input['editor'] = session('admin_member.member_name');
+        $input['delivery_time'] = null;
         $order = Order::where('order_id', $order_id)->first();
-        if ($input['status'] == "complete" && $order->order_status != "complete") {
-            $delivery_time = Carbon::now()->format("Y:m:d H:i:s");
+        if ($input['order_status'] == "complete" && $order->order_status != "complete") {
+            $input['delivery_time'] = Carbon::now()->format("Y:m:d H:i:s");
         }
         if ($input['is_pay'] == "1" && $order->is_pay != "1") {
             MailController::paymentSuccess($order->order_mail, $order->order_number);
         }
+
+        $result = Order::where('order_id', $order_id)->update($input);
+        if (!$result) {
+            return back()->with("errors", "修改訂單失敗：請稍後再試！");
+        }
+
         $result = Orderlist::where('order_id', $order_id)->update([
-            'status' => $input['status'],
-            'creator' => $input['creator'],
+            'status' => $input['order_status'],
+            'creator' => $input['editor'],
         ]);
         if (!$result) {
             return back()->with("errors", "修改訂單失敗：請稍後再試！");
         }
-        $result = Order::where('order_id', $order_id)->update([
-            'order_status' => $input['status'],
-            'is_pay' => $input['is_pay'],
-            'delivery_time' => $delivery_time
-        ]);
-        if (!$result) {
-            return back()->with("errors", "修改訂單失敗：請稍後再試！");
-        }
+
         return redirect('admin/order');
     }
 

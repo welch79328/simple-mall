@@ -29,6 +29,7 @@ class CreateOrderTable extends Migration
             $table->boolean('is_pay')->default(0);
             $table->integer('member_id');
             $table->timestamp('delivery_time')->nullable();
+            $table->string('editor')->nullable();
             $table->timestamps();
         });
     }
