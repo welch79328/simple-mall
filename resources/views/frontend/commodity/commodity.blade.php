@@ -351,10 +351,10 @@
                         <li>
                             <div id="fb-root"></div>
                             <div class="fb-share-button" data-href="{{url('commodity/'.$commodity->commodity_id)}}"
-                                 data-layout="button" data-size="small" data-mobile-iframe="false">
+                                 data-layout="button_count" data-size="small" data-mobile-iframe="false">
                                 <a target="_blank"
                                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                                   class="fb-xfbml-parse-ignore"></a>
+                                   class="fb-xfbml-parse-ignore">分享</a>
                             </div>
                         </li>
                         <li>
@@ -509,11 +509,9 @@
     </script>
     <!-- //here ends scrolling icon -->
     <!-- fb -->
-    <script>
-        (function (d, s, id) {
+    <script>(function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id))
-                return;
+            if (d.getElementById(id)) return;
             js = d.createElement(s);
             js.id = id;
             js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.12';

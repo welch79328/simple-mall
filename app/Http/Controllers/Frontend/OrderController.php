@@ -9,6 +9,7 @@ use Exception;
 use Modules\Returns\Entities\Returns;
 use Modules\Order\Entities\Orderlist;
 use Modules\Order\Entities\Order;
+use Modules\Commodity\Entities\Commodity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -90,7 +91,8 @@ class OrderController extends CommonController
                     $detail->_status = "已取消";
                     break;
             }
-
+            $commodity = Commodity::select("commodity_image")->where("commodity_id", $detail->commodity_id)->first();
+            $detail->img = $commodity->commodity_image;
         }
         return view("frontend.member.order_detail", compact("order", "order_details"));
     }

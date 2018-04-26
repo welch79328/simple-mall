@@ -121,6 +121,13 @@
             </tr>
 
             <tr>
+                <th>備註：</th>
+                <td>
+                    <p>{{$data->returns_comment}}</p>
+                </td>
+            </tr>
+
+            <tr>
                 <th>退貨商品：</th>
                 <td>
                     @foreach($orderDetail as $v)
@@ -157,6 +164,28 @@
                     {{--</select>--}}
                 </td>
             </tr>
+
+            <tr>
+                <th>發布時間：</th>
+                <td>
+                    {{$data->created_at}}
+                </td>
+            </tr>
+
+            <tr>
+                <th>最後修改：</th>
+                <td>
+                    {{$data->updated_at}}
+                </td>
+            </tr>
+
+            <tr>
+                <th>編輯者：</th>
+                <td>
+                    {{$data->editor}}
+                </td>
+            </tr>
+
             <tr>
                 <th></th>
                 <td>
