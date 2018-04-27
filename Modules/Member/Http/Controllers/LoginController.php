@@ -87,7 +87,7 @@ class LoginController extends Controller
             } else if ($member->member_account != $input['member_account'] || Crypt::decrypt($member->member_password) != $input['member_password']) {
                 return back()->with('errors.msg', '帳號或是密碼錯誤');
             }
-            if ($member->enable == 0) {
+            if ($member->member_enable == 0) {
                 MailController::verifyAccount($member->member_id);
                 return back()->with('errors.msg', "此帳號尚未驗證，已寄送驗證信，請立即驗證！");
             }
