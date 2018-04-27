@@ -5,7 +5,7 @@
 @section('content')
     <div class="new_arrivals_agile_w3ls_info" style="font-family: Microsoft JhengHei;">
         <div class="container">
-            <form class="form-horizontal" action="{{url('member_store')}}" method="post">
+            <form class="form-horizontal" action="{{url('member_store')}}" method="post" id="signUpForm">
                 {{csrf_field()}}
                 <div class="col-md-offset-2 col-md-8">
                     <h2 style="margin-bottom: 20px">註冊</h2>
@@ -41,11 +41,19 @@
                         </div>
                     @endif
                     <div style="text-align: right">
-                        <button type="submit" class="btn btn-primary">註冊</button>
+                        <button type="submit" class="btn btn-primary" id="signUpSubmitButton">註冊</button>
                     </div>
                 </div>
 
             </form>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#signUpForm").submit(function (e) {
+                $("#signUpSubmitButton").prop('disabled', true);
+                showModal("waitModal", "提示", "請等候系統處理！");
+            })
+        });
+    </script>
 @endsection

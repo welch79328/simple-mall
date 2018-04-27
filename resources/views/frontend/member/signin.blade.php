@@ -5,7 +5,7 @@
 @section('content')
     <div class="new_arrivals_agile_w3ls_info" style="font-family: Microsoft JhengHei;">
         <div class="container">
-            <form class="form-horizontal" action="{{url('member/login')}}" method="post">
+            <form class="form-horizontal" action="{{url('member/login')}}" method="post" id="signInForm">
                 {{csrf_field()}}
                 <input type="hidden" name="path" value="{{$redirectPath}}">
                 <div class="col-md-offset-2 col-md-8">
@@ -28,11 +28,19 @@
                     @endif
                     <div style="text-align: right">
                         <a class="agile-icon btn btn-default" href="{{url('member_signup')}}"></input>尚未擁有帳號，立即註冊</a>
-                        <button type="submit" class="btn btn-primary">登錄</button>
+                        <button type="submit" class="btn btn-primary" id="signInSubmitButton">登錄</button>
                     </div>
                 </div>
 
             </form>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#signInForm").submit(function (e) {
+                $("#signInSubmitButton").prop('disabled', true);
+                showModal("waitModal", "提示", "請等候系統處理！");
+            })
+        });
+    </script>
 @endsection
