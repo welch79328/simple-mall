@@ -24,11 +24,11 @@ class LoginJudgmentMiddleware
         if (empty($member)) {
             return redirect()->route('member_signin', ['path' => $redirectPath]);
         }
-
-        if (in_array($member->member_level, $roles)) {
-            return $next($request);
+        if (!in_array($member->member_level, $roles)) {
+            return redirect()->route('member_signin', ['path' => $redirectPath]);
         }
-        return redirect()->route('member_signin', ['path' => $redirectPath]);
+
+        return $next($request);
     }
 
     private function getRequiredRoleForRoute($route)

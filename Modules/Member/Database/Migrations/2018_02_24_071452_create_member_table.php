@@ -18,7 +18,7 @@ class CreateMemberTable extends Migration
             $table->string('member_account');
             $table->string('member_password');
             $table->string('member_name')->nullable();
-            $table->enum('member_sex', ['male','female'])->nullable();
+            $table->enum('member_sex', ['male', 'female'])->nullable();
             $table->string('member_year')->nullable();
             $table->string('member_month')->nullable();
             $table->string('member_mail');
@@ -30,6 +30,8 @@ class CreateMemberTable extends Migration
             $table->string('member_area')->nullable();
             $table->integer('member_zipcode')->nullable();
             $table->enum('member_level', ['member'])->default('member');
+            $table->string('member_code');
+            $table->boolean('member_enable')->default(0);
             $table->timestamps();
         });
     }

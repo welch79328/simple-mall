@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Modules\Member\Entities\MemberLog;
 use Modules\Member\Http\Controllers\LoginController;
+use App\Http\Controllers\Backstage\MailController;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Modules\Member\Entities\Member;
@@ -39,19 +40,17 @@ class MemberController extends CommonController
         if (Member::where("member_account", $member["member_account"])->count() > 0) {
             return back()->with('errors.msg', '此帳號已經被註冊！');
         }
+        //產生驗證碼亂數
+        $member["member_code"] = str_random(15);
+
         $result = Member::create($member);
         if (!$result) {
             return back()->with('errors.msg', '數據填充錯誤, 請稍後重試');
         }
-        $result->member_level = "member";
-        session(['member' => $result]);
-        $loginController = new LoginController();
-        $ip = $loginController->transform_ip($_SERVER['REMOTE_ADDR']);;
-        MemberLog::create([
-            'account' => $member['member_account'],
-            'ip' => $ip,
-        ]);
-        return redirect('shoppingcart/show')->with("sussess.msg", "註冊成功，已自動登入！");;
+
+        MailController::verifyAccount($result->member_id);
+
+        return redirect('member_signin')->with("sussess.msg", "註冊成功，已寄送驗證信，請立即驗證！");
     }
 
     public function info(TownshipHelper $townshipHelper)
@@ -149,5 +148,32 @@ class MemberController extends CommonController
         parent::__construct();
         return view("frontend.member.signup");
     }
+
+    public function verify(Request $request)
+    {
+        $account = $request->get("account");
+        $code = $request->get("code");
+        $account = Crypt::decrypt($account);
+        $member = Member::where(["member_account" => $account, "member_code" => $code])->first();
+        if (count($member) == 0) {
+            return redirect("/")->with("errors.msg", "驗證失敗：無符合條件的會員資料！");
+        }
+        if ($member->member_enable == 1) {
+            return redirect("/")->with("errors.msg", "此帳號已驗證通過！");
+        }
+        $result = Member::where("member_id", $member->member_id)->update(["member_enable" => 1]);
+        if (!$result) {
+            return redirect("/")->with("errors.msg", "驗證失敗：請稍後再試！");
+        }
+        session(['member' => $member]);
+        $loginController = new LoginController();
+        $ip = $loginController->transform_ip($_SERVER['REMOTE_ADDR']);;
+        MemberLog::create([
+            'account' => $member->member_account,
+            'ip' => $ip,
+        ]);
+        return redirect('shoppingcart/show')->with("sussess.msg", "驗證成功，已自動登入。");
+    }
+
 
 }

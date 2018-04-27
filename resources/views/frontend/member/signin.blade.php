@@ -23,8 +23,8 @@
                     </div>
                 </div>
                 <div class="col-md-offset-2 col-md-8">
-                    @if(session('msg'))
-                        <p style="color: red; text-align: center;">{{session('msg')}}</p>
+                    @if(session('errors'))
+                        <p style="color: red; text-align: center;">{{session('errors.msg')}}</p>
                     @endif
                     <div style="text-align: right">
                         <a class="agile-icon btn btn-default" href="{{url('member_signup')}}"></input>尚未擁有帳號，立即註冊</a>

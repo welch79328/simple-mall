@@ -2,11 +2,13 @@
 
 namespace Modules\Member\Http\Controllers;
 
+use App\Http\Controllers\Backstage\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Modules\Member\Entities\MemberLog;
 use Modules\Member\Entities\Member;
 
@@ -81,11 +83,14 @@ class LoginController extends Controller
             $redirectPath = $input["path"];
             $member = Member::where('member_account', $input['member_account'])->first();
             if (empty($member)) {
-                return back()->with('msg', '帳號或是密碼錯誤');
+                return back()->with('errors.msg', '帳號或是密碼錯誤');
             } else if ($member->member_account != $input['member_account'] || Crypt::decrypt($member->member_password) != $input['member_password']) {
-                return back()->with('msg', '帳號或是密碼錯誤');
+                return back()->with('errors.msg', '帳號或是密碼錯誤');
             }
-
+            if ($member->enable == 0) {
+                MailController::verifyAccount($member->member_id);
+                return back()->with('errors.msg', "此帳號尚未驗證，已寄送驗證信，請立即驗證！");
+            }
             session(['member' => $member]);
 
             $ip = $this->transform_ip($_SERVER['REMOTE_ADDR']);;

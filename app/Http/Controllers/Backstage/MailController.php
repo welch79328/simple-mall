@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backstage;
 
+use Illuminate\Support\Facades\Crypt;
 use Modules\Member\Entities\Member;
 use Exception;
 use Illuminate\Http\Request;
@@ -79,17 +80,35 @@ class MailController extends Controller
         return true;
     }
 
-    public static function exchange($recipient)
+    public static function verifyAccount($member_id)
     {
+        $member = Member::where("member_id", $member_id)->first();
+        $code = $member->member_code;
+        $account = Crypt::encrypt($member->member_account);
+        $recipient = $member->member_mail;
         Mail::send(
-            'layouts.email.exchange',
-            [],
+            'layouts.email.verifyAccount',
+            compact("code", "account"),
             function ($msg) use ($recipient) {
-                $msg->subject('捷 U 購『退貨瑕疵處理中』通知');
+                $msg->subject('捷 U 購『驗證電子郵件地址』通知');
                 $msg->to($recipient);
             }
         );
         return true;
     }
+
+//    public static function exchange($recipient)
+//    {
+//        Mail::send(
+//            'layouts.email.exchange',
+//            [],
+//            function ($msg) use ($recipient) {
+//                $msg->subject('捷 U 購『退貨瑕疵處理中』通知');
+//                $msg->to($recipient);
+//            }
+//        );
+//        return true;
+//    }
+
 
 }
