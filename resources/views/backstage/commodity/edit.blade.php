@@ -319,17 +319,19 @@
                             var route_prefix = "{{ url(config('lfm.url_prefix', config('lfm.prefix'))) }}";
                         </script>
                         {{--<textarea name="commodity_description"></textarea>--}}
-                        <textarea name="commodity_introduce">{{$commodity->commodity_introduce}}</textarea>
-                        <script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.11/ckeditor.js"></script>
-                        <script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.11/adapters/jquery.js"></script>
+                        <textarea id="commodity_introduce" name="commodity_introduce">{{$commodity->commodity_introduce}}</textarea>
+                        <script src="{{asset('org/ckeditor/ckeditor.js')}}"></script>
                         <script>
-                            $('textarea[name=commodity_introduce]').ckeditor({
-                                height: 300,
-                                filebrowserImageBrowseUrl: route_prefix + '?type=Images',
-                                filebrowserImageUploadUrl: route_prefix + '/upload?type=Images&_token={{csrf_token()}}',
-                                filebrowserBrowseUrl: route_prefix + '?type=Files',
-                                filebrowserUploadUrl: route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
-                            });
+                            // Replace the <textarea id="editor1"> with a CKEditor
+                            // instance, using default configuration.
+                            CKEDITOR.replace('commodity_introduce',
+                                {
+                                    height: 300,
+                                    filebrowserImageBrowseUrl: route_prefix + '?type=Images',
+                                    filebrowserImageUploadUrl: route_prefix + '/upload?type=Images&_token={{csrf_token()}}',
+                                    filebrowserBrowseUrl: route_prefix + '?type=Files',
+                                    filebrowserUploadUrl: route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
+                                });
                         </script>
                         <p><span style="color: red">提醒</span>：要讓圖片能自動適應視窗的大小，請將寬度設為 100%，高度不用設。</p>
                     </td>

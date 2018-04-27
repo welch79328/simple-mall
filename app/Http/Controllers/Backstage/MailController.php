@@ -41,7 +41,6 @@ class MailController extends Controller
         return true;
     }
 
-    //@todo
     public static function reached($recipient, $data)
     {
         Mail::send(

@@ -23,7 +23,9 @@
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password_check" name="member_password_check"
-                               placeholder="密碼確認" pattern="[a-zA-Z][a-zA-Z0-9]{5,7}" required>
+                               placeholder="密碼確認" pattern="[a-zA-Z][a-zA-Z0-9]{5,7}"
+                               oninvalid="this.setCustomValidity('密碼限制(6至8位、第一位為英文、只接受英文或數字)')"
+                               oninput="this.setCustomValidity('')" required>
                     </div>
                 </div>
                 <div class="col-md-offset-2 col-md-8">
