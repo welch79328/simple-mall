@@ -319,7 +319,8 @@
                             var route_prefix = "{{ url(config('lfm.url_prefix', config('lfm.prefix'))) }}";
                         </script>
                         {{--<textarea name="commodity_description"></textarea>--}}
-                        <textarea id="commodity_introduce" name="commodity_introduce">{{$commodity->commodity_introduce}}</textarea>
+                        <textarea id="commodity_introduce"
+                                  name="commodity_introduce">{{$commodity->commodity_introduce}}</textarea>
                         <script src="{{asset('org/ckeditor/ckeditor.js')}}"></script>
                         <script>
                             // Replace the <textarea id="editor1"> with a CKEditor
@@ -333,7 +334,11 @@
                                     filebrowserUploadUrl: route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
                                 });
                         </script>
-                        <p><span style="color: red">提醒</span>：要讓圖片能自動適應視窗的大小，請將寬度設為 100%，高度不用設。</p>
+                        <p>
+                            <span style="color: red">提醒</span>：<br>
+                            1.要讓圖片能自動適應視窗的大小，請將寬度設為 100%，高度不用設。<br>
+                            2.影片上傳限制 2 M。
+                        </p>
                     </td>
                 </tr>
 
