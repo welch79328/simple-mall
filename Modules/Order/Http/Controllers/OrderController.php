@@ -88,7 +88,8 @@ class OrderController extends CommonController
                     break;
             }
             $member = Member::where('member_id', $v->member_id)->first();
-            $v->member_name = $member['member_name'];
+            $v->member_account = $member->member_account;
+            $v->member_name = $member->member_name;
         }
 
         $search = new \stdClass();
@@ -160,7 +161,7 @@ class OrderController extends CommonController
                     break;
             }
         }
-        $member = Member::select("member_id", "member_name")->where("member_id", $data->member_id)->first();
+        $member = Member::select("member_id", "member_account", "member_name")->where("member_id", $data->member_id)->first();
         return view('backstage.order.show', compact('data', 'orderlist', 'member'));
     }
 

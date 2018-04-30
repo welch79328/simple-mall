@@ -142,6 +142,7 @@ class OrderController extends CommonController
                 throw new Exception("取消訂單失敗：請稍後再試！");
             }
             DB::commit();
+            MailController::cancel($order->order_mail);
         } catch (Exception $e) {
             DB::rollBack();
             return CommonController::failResponse($e->getMessage());

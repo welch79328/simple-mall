@@ -53,7 +53,15 @@
                 <tr>
                     <th>訂購者：</th>
                     <td>
-                        <p><a href="{{url('member/'.$member->member_id.'/edit')}}">{{$member->member_name}}</a></p>
+                        <p>
+                            <a href="{{url('member/'.$member->member_id.'/edit')}}">
+                                @if(!empty($member->member_name))
+                                    {{$member->member_name}}
+                                @else
+                                    {{$member->member_account}}
+                                @endif
+                            </a>
+                        </p>
                     </td>
                 </tr>
 

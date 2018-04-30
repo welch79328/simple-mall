@@ -56,28 +56,33 @@
 
                 <tr>
                     <th>
-                        <p>主標題：</p>
-                        <p>(30個字元)</p>
+                        <p><i class="require">*</i>主標題：</p>
                     </th>
                     <td>
-                        <input type="text" class="md" name="commodity_title">
+                        <input type="text" class="lg" name="commodity_title" required>
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            30個字元。
+                        </span>
                     </td>
                 </tr>
 
                 <tr>
                     <th>
                         <p>副標題：</p>
-                        <p>(18個字元)</p>
                     </th>
                     <td>
                         <input type="text" class="md" name="commodity_subtitle">
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            18個字元。
+                        </span>
                     </td>
                 </tr>
 
                 <tr>
                     <th>
                         <p>大圖：</p>
-                        <p>(尺寸：340*340)</p>
                     </th>
                     <td>
                         <img src="" alt="" id="comm_cover_img" style="max-height: 200px; max-width: 350px;">
@@ -121,13 +126,16 @@
                                 margin: 0;
                             }
                         </style>
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            尺寸：340*340。
+                        </span>
                     </td>
                 </tr>
 
                 <tr>
                     <th>
                         <p>其他圖片：</p>
-                        <p>(尺寸：340*340)</p>
                     </th>
                     <td>
                         <div id="thumb_image">
@@ -180,6 +188,10 @@
                                 margin: 0;
                             }
                         </style>
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            尺寸：340*340。
+                        </span>
                     </td>
                 </tr>
 
@@ -194,7 +206,7 @@
                         <link rel="stylesheet" type="text/css"
                               href="{{asset('org/daterangepicker/daterangepicker.css')}}"/>
                         {{--<input type="text" id="dom-id" size="20" name="advertisement_period">--}}
-                        <input type="text" name="commodity_period" value="">
+                        <input type="text" name="commodity_period" value="" class="md">
 
                         <script type="text/javascript">
                             $(function () {
@@ -224,22 +236,36 @@
                 <tr>
                     <th>網路價：</th>
                     <td>
-                        <input type="number" min="1" style="height: 28px;" name="commodity_originalprice">
+                        <input type="number" min="1" style="margin-right: 5px; height: 28px;"
+                               name="commodity_originalprice">
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            必須大於零。
+                        </span>
                     </td>
                 </tr>
 
                 <tr>
-                    <th>預購價：</th>
+                    <th><i class="require">*</i>預購價：</th>
                     <td>
-                        <input type="number" min="1" style="height: 28px;" name="commodity_price">
+                        <input type="number" min="1" style="margin-right: 5px; height: 28px;" name="commodity_price"
+                               required>
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            必須大於零。
+                        </span>
                     </td>
                 </tr>
 
                 <tr>
                     <th>總庫存：</th>
                     <td>
-                        <input type="number" id="commodity_stock" min="0" style="height: 28px;" name="commodity_stock"
-                               value="0">
+                        <input type="number" id="commodity_stock" min="0" style="margin-right: 5px;height: 28px;"
+                               name="commodity_stock" value="0">
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            若有規格，會自動等於規格的庫存量總和。
+                        </span>
                     </td>
                 </tr>
 
@@ -271,7 +297,12 @@
                 <tr>
                     <th>排序：</th>
                     <td>
-                        <input type="number" min="0" style="height: 28px;" name="commodity_ordering" value="1">
+                        <input type="number" min="0" style="margin-right: 5px; height: 28px;" name="commodity_ordering"
+                               value="1">
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            數字愈小，排序愈前。
+                        </span>
                     </td>
                 </tr>
 
@@ -315,7 +346,7 @@
                         {{--});--}}
                         {{--</script>--}}
                         <p>
-                            <span style="color: red">提醒</span>：<br>
+                            <i class="fa fa-exclamation-circle yellow"></i>提醒：<br>
                             1.要讓圖片能自動適應視窗的大小，請將寬度設為 100%，高度不用設。<br>
                             2.影片上傳限制 8 M。
                         </p>

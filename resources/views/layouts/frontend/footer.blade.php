@@ -82,7 +82,7 @@
     </div>
     <div class="col-sm-3 col-md-2 footer_div_1">
         <div class="col-sm-12 col-md-11 col-md-offset-1">
-            <h3 class="footer_title">關係企業</h3>
+            <h3 class="footer_title" style="padding-bottom: 0">關係企業</h3>
             <div class="center-block text-left footer_detail" style="margin-bottom: 0">
                 <a href="http://www.adwifi.com.tw/">
                     <img src="{{url('images/frontend/free ad wifi-01.png')}}" width="60px">

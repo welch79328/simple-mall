@@ -39,10 +39,12 @@
             <table class="add_tab">
                 <tbody>
                 <tr>
-                    <th><i class="require">*</i>帳號：</th>
+                    <th><i class="require">*</i>帳號(信箱)：</th>
                     <td>
-                        <input type="text" class="md" id="member_account" name="member_account" value="" readonly>
-                        <span><i class="fa fa-exclamation-circle yellow"></i>此欄位無法被輸入，請從信箱欄位輸入。</span>
+                        <input type="email" class="md" name="member_account"
+                               style="margin-right: 5px; padding: 6px 5px; line-height: 12px; font-size: 12px; width: 250px;"
+                               onkeyup="changeAccount(this)" required>
+                        <span><i class="fa fa-exclamation-circle yellow"></i>Ex：marketing@adwifi.com.tw。</span>
                     </td>
                 </tr>
 
@@ -112,10 +114,10 @@
                 <tr>
                     <th><i class="require">*</i>信箱：</th>
                     <td>
-                        <input type="email" class="md" name="member_mail"
+                        <input type="email" class="md" id="member_mail" name="member_mail"
                                style="margin-right: 5px; padding: 6px 5px; line-height: 12px; font-size: 12px; width: 250px;"
-                               onkeyup="changeAccount(this)">
-                        <span><i class="fa fa-exclamation-circle yellow"></i>Ex：marketing@adwifi.com.tw。</span>
+                               required readonly>
+                        <span><i class="fa fa-exclamation-circle yellow"></i>此欄位不能被輸入，請從帳號欄位輸入。</span>
                     </td>
                 </tr>
 
@@ -209,7 +211,7 @@
 
         function changeAccount(obj) {
             var member_account = $(obj).val();
-            $("#member_account").val(member_account);
+            $("#member_mail").val(member_account);
         }
 
 

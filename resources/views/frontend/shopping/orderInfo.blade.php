@@ -92,7 +92,7 @@
                     </div>
                     <div style="text-align: center; font-size: 3vh; font-weight:bold;">
                         <div>
-                            訂單金額 <span style="color: red;">${{$total}}</span>
+                            訂單總金額 <span style="color: red;">${{$total}}</span>
                         </div>
                         <div>
                             預購組數售完即通知
@@ -165,7 +165,7 @@
                 var phone = $('#phone').val()
                 var tel = $("#tel").val();
                 if (phone == "" && tel == "") {
-                    showModal("alertModal", "提示", "手機與市話請擇一填寫！");
+                    showModal("alertModal", "提示", "行動電話與市話請擇一填寫！");
                     return;
                 }
                 var url = "{{url('order_setup')}}"; // the script where you handle the form input.

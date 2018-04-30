@@ -67,6 +67,19 @@ class MailController extends Controller
         return true;
     }
 
+    public static function cancel($recipient)
+    {
+        Mail::send(
+            'layouts.email.cancel',
+            [],
+            function ($msg) use ($recipient) {
+                $msg->subject('捷 U 購『取消預購』通知');
+                $msg->to($recipient);
+            }
+        );
+        return true;
+    }
+
     public static function refund($recipient)
     {
         Mail::send(

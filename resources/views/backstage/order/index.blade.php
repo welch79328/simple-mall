@@ -64,7 +64,13 @@
                     @forelse($data as $v)
                         <tr>
                             <td>{{$v->order_number}}</td>
-                            <td>{{$v->member_name}}</td>
+                            <td>
+                                @if(!empty($v->member_name))
+                                    {{$v->member_name}}
+                                @else
+                                    {{$v->member_account}}
+                                @endif
+                            </td>
                             <td>{{$v->order_total}}</td>
                             <td style="color: @if($v->order_status == 'complete') #009966 @elseif($v->order_status == 'cancel') #FF0033 @endif">
                                 {{$v->_order_status}}

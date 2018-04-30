@@ -50,7 +50,7 @@
                         <td>{{$v->commodity_title}}</td>
                         <td>{{$v->commodity_start_time}}</td>
                         <td style="<?php $now = strtotime(date("Y/m/d h:i:s")); ?>@if(strtotime($v->commodity_end_time) < $now) color: #CC0033; @endif">{{$v->commodity_end_time}}</td>
-                        <td>{{$v->commodity_type}}</td>
+                        <td>{{$v->_commodity_type}}</td>
                         <td style="@if($v->commodity_status == 'on') color: #009966; @else color: #FF0033; @endif">{{$v->commodity_status}}</td>
                         <td>{{$v->updated_at}}</td>
                         <td>{{$v->commodity_creator}}</td>

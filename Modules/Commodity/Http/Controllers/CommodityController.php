@@ -44,6 +44,14 @@ class CommodityController extends Controller
                     }
                 }
             }
+            switch ($v->commodity_type) {
+                case "limited":
+                    $v->_commodity_type = "限時";
+                    break;
+                case "general":
+                    $v->_commodity_type = "一般";
+                    break;
+            }
         }
         return view('backstage.commodity.index', compact('data'));
     }
