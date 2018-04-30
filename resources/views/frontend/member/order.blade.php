@@ -229,6 +229,9 @@
         }
 
         function cancelOrder(order_id) {
+            $("#cancelOrderModal").modal("hide");
+            $("#cancelOrderButton").prop('disabled', true);
+            showModal("waitModal", "提示", "請等候系統處理，關閉頁面可能會造成取消預購單失敗！");
             $.ajax({
                 type: "POST",
                 url: "{{url('member_order_cancel/')}}",
@@ -238,9 +241,10 @@
                 },
                 dataType: "json",
                 success: function (data) {
+                    $("#cancelOrderButton").prop('disabled', false);
                     $("#cancelOrderButton").val("");
-                    $("#cancelOrderModal").modal("hide");
-                    $("#cancelOrderModal").on('hidden.bs.modal', function (e) {
+                    $("#waitModal").modal("hide");
+                    $("#waitModal").on('hidden.bs.modal', function (e) {
                         var callback = function () {
                             window.location.href = "{{url('member_order')}}";
                         }
