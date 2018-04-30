@@ -23,21 +23,29 @@ class IndexController extends CommonController
         $limitCommodities = $commodityHelper->getLimitCommodities(4, 8);
         $commodities = $commodityHelper->getCommodities(8);
         foreach ($limitCommodities as $limit) {
+            // 三位一撇
             if ((int)$limit->commodity_price >= 1000) {
                 $limit->commodity_price = number_format((int)$limit->commodity_price);
             }
+
+            //瀏覽人數的計算
             $data = $commodityHelper->getPageCount($limit->commodity_id);
             $limit->online = $data["count"];
             $limit->rand = $data["rand"];
         }
         foreach ($commodities as $commodity) {
+            // 三位一撇
             if ((int)$commodity->commodity_price >= 1000) {
                 $commodity->commodity_price = number_format((int)$commodity->commodity_price);
             }
+
+            //瀏覽人數的計算
             $data = $commodityHelper->getPageCount($commodity->commodity_id);
             $commodity->online = $data["count"];
             $commodity->rand = $data["rand"];
         }
+
+        //瀏覽過的商品
         $recentlyViewedCommodities = [];
         if ($request->session()->has("recently_viewed.commodities")) {
             $recentlyViewedCommodities = $request->session()->get("recently_viewed.commodities");

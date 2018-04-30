@@ -26,6 +26,7 @@ class CommodityHelper
     {
         PageCount::where('updated_at', '<', date("Y-m-d H:i:s", strtotime("-8 hours")))->delete();
     }
+
     /**
      * 取得限時商品清單(已上架、符合時間內)，HTTP request 需傳入 $page 參數
      * @param int $count 筆數
@@ -178,20 +179,20 @@ class CommodityHelper
         $count = count(PageCount::where([['page_name', $page], ['updated_at', '>', date("Y-m-d H:i:s", strtotime("-2 hours"))]])->get());
         if ($rand == 0) {
             if ($count < config('config.baseline_count')) {
-                if(empty(session('commodity-'.$page))){
+                if (empty(session('commodity-' . $page))) {
                     $rand = rand(config('config.min_count'), config('config.max_count'));
-                    session(['commodity-'.$page => $rand]);
-                }else{
-                    $rand = session('commodity-'.$page);
+                    session(['commodity-' . $page => $rand]);
+                } else {
+                    $rand = session('commodity-' . $page);
                 }
-                if(date("H") < config('config.limit_time')){
+                if (date("H") < config('config.limit_time')) {
                     $rand = 0;
                 }
                 $count = $count + $rand;
             }
         } elseif ($rand != 0) {
             if ($count + $rand < config('config.baseline_count')) {
-                if(date("H") < config('config.limit_time')){
+                if (date("H") < config('config.limit_time')) {
                     $rand = 0;
                 }
                 $count = $count + $rand;
