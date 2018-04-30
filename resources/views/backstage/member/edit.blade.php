@@ -8,8 +8,8 @@
     </div>
     <!--面包屑导航 结束-->
 
-	<!--结果集标题与导航组件 开始-->
-	<div class="result_wrap">
+    <!--结果集标题与导航组件 开始-->
+    <div class="result_wrap">
         <div class="result_title">
             <h3>編輯會員</h3>
             @if(count($errors)>0)
@@ -32,144 +32,167 @@
         </div>
     </div>
     <!--结果集标题与导航组件 结束-->
-    
+
     <div class="result_wrap">
         <form action="{{url('member/'.$data->member_id)}}" method="post">
             <input type="hidden" name="_method" value="put">
             {{csrf_field()}}
             <table class="add_tab">
                 <tbody>
-                    <tr>
-                        <th>帳號：</th>
-                        <td>
-                            <input type="text" class="md" name="member_account" value="{{$data->member_account}}">
-                        </td>
-                    </tr>
+                <tr>
+                    <th>帳號：</th>
+                    <td>
+                        <input type="text" class="md" id="member_account" name="member_account"
+                               value="{{$data->member_account}}" readonly>
+                        <span><i class="fa fa-exclamation-circle yellow"></i>此欄位無法被輸入，請從信箱欄位輸入</span>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>密碼：</th>
-                        <td>
-                            <input type="text" class="md" name="member_password" value="{{$data->member_password}}">
-                        </td>
-                    </tr>
+                <tr>
+                    <th>密碼：</th>
+                    <td>
+                        <input type="text" class="md" name="member_password" value="{{$data->member_password}}">
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>名字：</th>
-                        <td>
-                            <input type="text" class="md" name="member_name" value="{{$data->member_name}}">
-                        </td>
-                    </tr>
+                <tr>
+                    <th>名字：</th>
+                    <td>
+                        <input type="text" class="md" name="member_name" value="{{$data->member_name}}">
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>性別 : </th>
-                        <td>
-                            <input type="radio" name="member_sex" value="male" @if($data->member_sex == 'male') checked @endif>男
-                            <input type="radio" name="member_sex" value="female" @if($data->member_sex == 'female') checked @endif>女<p>
-                        </td>
-                    </tr>
+                <tr>
+                    <th>性別 :</th>
+                    <td>
+                        <input type="radio" name="member_sex" value="male"
+                               @if($data->member_sex == 'male') checked @endif>男
+                        <input type="radio" name="member_sex" value="female"
+                               @if($data->member_sex == 'female') checked @endif>女<p>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>生日：</th>
-                        <td>
-                            <select name="member_year">
-                                <?php
-                                for ($i=2018;$i>=1900;$i--){
-                                ?>
-                                <option value="{{$i}}" @if($data->member_year == $i) selected @endif>{{$i}}</option>
-                                <?php } ?>
-                            </select>
-                            <span>年</span>
-                            <select name="member_month">
-                                <?php
-                                for ($i=1;$i<=12;$i++){
-                                ?>
-                                <option value="{{$i}}" @if($data->member_month == $i) selected @endif>{{$i}}</option>
-                                <?php } ?>
-                            </select>
-                            <span>月</span>
-                        </td>
-                    </tr>
+                <tr>
+                    <th>生日：</th>
+                    <td>
+                        <select name="member_year">
+                            <?php
+                            for ($i = 2018;$i >= 1900;$i--){
+                            ?>
+                            <option value="{{$i}}" @if($data->member_year == $i) selected @endif>{{$i}}</option>
+                            <?php } ?>
+                        </select>
+                        <span>年</span>
+                        <select name="member_month">
+                            <?php
+                            for ($i = 1;$i <= 12;$i++){
+                            ?>
+                            <option value="{{$i}}" @if($data->member_month == $i) selected @endif>{{$i}}</option>
+                            <?php } ?>
+                        </select>
+                        <span>月</span>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>信箱：</th>
-                        <td>
-                            <input type="text" class="md" name="member_mail" value="{{$data->member_mail}}">
-                        </td>
-                    </tr>
+                <tr>
+                    <th>信箱：</th>
+                    <td>
+                        <input type="text" class="md" name="member_mail" value="{{$data->member_mail}}"
+                               onkeyup="changeAccount(this)">
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>手機：</th>
-                        <td>
-                            <input type="text" class="md" name="member_phone" value="{{$data->member_phone}}">
-                        </td>
-                    </tr>
+                <tr>
+                    <th>手機：</th>
+                    <td>
+                        <input type="text" class="md" name="member_phone" value="{{$data->member_phone}}">
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>市內電話：</th>
-                        <td>
-                            <input type="text" class="md" name="member_tel" value="{{$data->member_tel}}">
-                        </td>
-                    </tr>
+                <tr>
+                    <th>市內電話：</th>
+                    <td>
+                        <input type="text" class="md" name="member_tel" value="{{$data->member_tel}}">
+                    </td>
+                </tr>
 
-                    {{--<tr>--}}
-                        {{--<th>發票：</th>--}}
-                        {{--<td>--}}
-                            {{--<input type="text" class="md" name="member_invoice" value="{{$data->member_invoice}}">--}}
-                        {{--</td>--}}
-                    {{--</tr>--}}
+                {{--<tr>--}}
+                {{--<th>發票：</th>--}}
+                {{--<td>--}}
+                {{--<input type="text" class="md" name="member_invoice" value="{{$data->member_invoice}}">--}}
+                {{--</td>--}}
+                {{--</tr>--}}
 
-                    <tr>
-                        <th width="120">地址：</th>
-                        <td>
-                            <select name="member_city" onchange="changeCity(this)">
-                                @foreach($city as $v)
-                                    <option value="{{$v['city_id']}}" @if($data->member_city == $v['city_id']) selected @endif>{{$v['city']}}</option>
-                                @endforeach
-                            </select>
+                <tr>
+                    <th width="120">地址：</th>
+                    <td>
+                        <select name="member_city" onchange="changeCity(this)">
+                            @foreach($city as $v)
+                                <option value="{{$v['city_id']}}"
+                                        @if($data->member_city == $v['city_id']) selected @endif>{{$v['city']}}</option>
+                            @endforeach
+                        </select>
 
-                            <select name="member_area" id="area" onchange="changeArea(this)">
-                                @foreach($area as $v)
-                                    @if($v['city_id'] == $data->member_city)
-                                        <option value="{{$v['area_id']}}" @if($data->member_area == $v['area_id']) selected @endif>{{$v['area']}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            <input type="text" class="sm" id="zipcode" name="member_zipcode" value="{{$data->member_zipcode}}">
-                            <br>
-                            <input type="text" class="lg" name="member_location" value="{{$data->member_location}}">
-                        </td>
-                    </tr>
+                        <select name="member_area" id="area" onchange="changeArea(this)">
+                            @foreach($area as $v)
+                                @if($v['city_id'] == $data->member_city)
+                                    <option value="{{$v['area_id']}}"
+                                            @if($data->member_area == $v['area_id']) selected @endif>{{$v['area']}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        <input type="text" class="sm" id="zipcode" name="member_zipcode"
+                               value="{{$data->member_zipcode}}">
+                        <br>
+                        <input type="text" class="lg" name="member_location" value="{{$data->member_location}}">
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th></th>
-                        <td>
-                            <input type="submit" value="提交">
-                            <input type="button" class="back" onclick="history.go(-1)" value="返回">
-                        </td>
-                    </tr>
+                <tr>
+                    <th>信箱驗證</th>
+                    <td>
+                        <select name="member_enable">
+                            <option value="0" @if($data->member_enable) selected @endif>未驗證</option>
+                            <option value="1" @if($data->member_enable) selected @endif>已驗證</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" value="提交">
+                        <input type="button" class="back" onclick="history.go(-1)" value="返回">
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </form>
     </div>
 
     <script>
-        function changeCity(obj){
+        function changeCity(obj) {
             var city_order = $(obj).val();
-            $.post("{{url('city')}}",{'_token':'{{csrf_token()}}','city_id':city_order},function (data) {
+            $.post("{{url('city')}}", {'_token': '{{csrf_token()}}', 'city_id': city_order}, function (data) {
                 $('#area').empty();
                 for (var i = 0; i < data.length; i++) {
-                    $('#area').append('<option value="'+ data[i].areaid +'">' + data[i].area + '</option>')
+                    $('#area').append('<option value="' + data[i].areaid + '">' + data[i].area + '</option>')
                 }
-                $('#zipcode').attr('value',data[0].zipcode);
+                $('#zipcode').attr('value', data[0].zipcode);
             });
         }
 
-        function changeArea(obj){
+        function changeArea(obj) {
             var area_order = $(obj).val();
 
-            $.post("{{url('area')}}",{'_token':'{{csrf_token()}}','area_id':area_order},function (data) {
-                $('#zipcode').attr('value',data);
+            $.post("{{url('area')}}", {'_token': '{{csrf_token()}}', 'area_id': area_order}, function (data) {
+                $('#zipcode').attr('value', data);
             });
+        }
+
+        function changeAccount(obj) {
+            var member_account = $(obj).val();
+            $("#member_account").val(member_account);
         }
 
 

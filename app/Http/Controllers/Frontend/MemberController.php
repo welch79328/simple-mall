@@ -45,10 +45,13 @@ class MemberController extends CommonController
 
         $result = Member::create($member);
         if (!$result) {
-            return back()->with('errors.msg', '數據填充錯誤, 請稍後重試');
+            return back()->with('errors.msg', '數據填充錯誤，請稍後重試！');
         }
 
-        MailController::verifyAccount($result->member_id);
+        $result = MailController::verifyAccount($result->member_id);
+        if (!$result) {
+            return back()->with('errors.msg', '寄送驗證信失敗，請稍後重試！');
+        }
 
         return redirect('member_signin')->with("sussess.msg", "註冊成功，已寄送驗證信，請立即驗證！");
     }

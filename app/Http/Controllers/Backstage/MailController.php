@@ -94,6 +94,9 @@ class MailController extends Controller
                 $msg->to($recipient);
             }
         );
+        if (count(Mail::failures()) > 0) {
+            return false;
+        }
         return true;
     }
 

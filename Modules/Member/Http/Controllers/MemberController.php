@@ -21,6 +21,16 @@ class MemberController extends Controller
     public function index()
     {
         $data = Member::orderBy('member_id', 'desc')->paginate(20);
+        foreach ($data as $value) {
+            switch ($value->member_enable) {
+                case 0:
+                    $value->_member_enable = "未驗證";
+                    break;
+                case 1:
+                    $value->_member_enable = "已驗證";
+                    break;
+            }
+        }
         return view('backstage.member.index', compact('data'));
     }
 
@@ -72,7 +82,9 @@ class MemberController extends Controller
         $member = Input::except('_token', 'member_password_check');
         $member["member_account"] = $member["member_mail"];
         $member['member_password'] = Crypt::encrypt($member['member_password']);
-
+        if (Member::where("member_account", $member["member_account"])->count() > 0) {
+            return back()->with('errors', '此帳號已經被註冊！');
+        }
         if ($validator->passes()) {
             $re = Member::create($member);
             if ($re) {
