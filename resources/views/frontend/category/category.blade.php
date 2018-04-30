@@ -94,7 +94,7 @@
             <div class="col-sm-9 col-md-9 products-right">
                 <h3 class="wthree_text_info" style="padding-left: 15px;">{{$activeCate->cate_name}}</h3>
                 <div class="sorting">
-                    <select class="form-control" id="sortByPrice" onchange="searchCommodities()">
+                    <select class="form-control" id="sortByPrice" onchange="searchCommodities()" style="color: #555;">
                         <option value="default">預設排序</option>
                         <option value="commodity_price">價格低到高</option>
                         <option value="-commodity_price">價格高到低</option>
