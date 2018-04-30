@@ -40,18 +40,25 @@
             <table class="add_tab">
                 <tbody>
                 <tr>
-                    <th>帳號：</th>
+                    <th><i class="require">*</i>帳號：</th>
                     <td>
                         <input type="text" class="md" id="member_account" name="member_account"
                                value="{{$data->member_account}}" readonly>
-                        <span><i class="fa fa-exclamation-circle yellow"></i>此欄位無法被輸入，請從信箱欄位輸入</span>
+                        <span><i class="fa fa-exclamation-circle yellow"></i>此欄位無法被輸入，請從信箱欄位輸入。</span>
                     </td>
                 </tr>
 
                 <tr>
-                    <th>密碼：</th>
+                    <th><i class="require">*</i>密碼：</th>
                     <td>
-                        <input type="text" class="md" name="member_password" value="{{$data->member_password}}">
+                        <input type="text" class="md" name="member_password" value="{{$data->member_password}}"
+                               pattern="[a-zA-Z][a-zA-Z0-9]{5,7}"
+                               oninvalid="this.setCustomValidity('密碼限制(6至8位、第一位為英文、只接受英文或數字)')"
+                               oninput="this.setCustomValidity('')" required>
+                        <span>
+                            <i class="fa fa-exclamation-circle yellow"></i>
+                            6至8位，第一位為英文，只接受英文與數字，Ex：q123456。
+                        </span>
                     </td>
                 </tr>
 
@@ -95,10 +102,12 @@
                 </tr>
 
                 <tr>
-                    <th>信箱：</th>
+                    <th><i class="require">*</i>信箱：</th>
                     <td>
-                        <input type="text" class="md" name="member_mail" value="{{$data->member_mail}}"
+                        <input type="email" class="md" name="member_mail" value="{{$data->member_mail}}"
+                               style="margin-right: 5px; padding: 6px 5px; line-height: 12px; font-size: 12px; width: 250px;"
                                onkeyup="changeAccount(this)">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>Ex：marketing@adwifi.com.tw。</span>
                     </td>
                 </tr>
 
@@ -113,6 +122,7 @@
                     <th>市內電話：</th>
                     <td>
                         <input type="text" class="md" name="member_tel" value="{{$data->member_tel}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>Ex：02-77091239。</span>
                     </td>
                 </tr>
 
@@ -145,16 +155,18 @@
                                value="{{$data->member_zipcode}}">
                         <br>
                         <input type="text" class="lg" name="member_location" value="{{$data->member_location}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>Ex：北安路630巷15號B1。</span>
                     </td>
                 </tr>
 
                 <tr>
                     <th>信箱驗證</th>
                     <td>
-                        <select name="member_enable">
+                        <select name="member_enable" style="margin-right: 5px;">
                             <option value="0" @if($data->member_enable) selected @endif>未驗證</option>
                             <option value="1" @if($data->member_enable) selected @endif>已驗證</option>
                         </select>
+                        <span><i class="fa fa-exclamation-circle yellow"></i>通過信箱驗證的帳號，才能使用前台的會員功能。</span>
                     </td>
                 </tr>
 
