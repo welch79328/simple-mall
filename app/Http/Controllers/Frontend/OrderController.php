@@ -179,8 +179,15 @@ class OrderController extends CommonController
             return CommonController::failResponse("退貨失敗：請稍後再試！");
         }
 
-        if ($input["returns_reason"] != 4) {
-            MailController::refund($input["returns_mail"]);
+        switch ($input["returns_reason"]) {
+            case 1:
+            case 2:
+            case 3:
+                MailController::refund($input["returns_mail"]);
+                break;
+            case 4:
+                MailController::exchange($input["returns_mail"]);
+                break;
         }
 
         return CommonController::successResponse("退貨成功。");

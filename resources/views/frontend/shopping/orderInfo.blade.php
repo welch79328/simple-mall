@@ -185,8 +185,7 @@
                             showModal("errorModal", "提示", data.msg);
                             return;
                         }
-                        showModal("successModal", "提示", "預購商品成功，請等候頁面跳轉，或按下關閉即可。", callback);
-                        setTimeout(callback, 2000);
+                        showModal("successModal", "提示", "預購商品成功，請按下關閉按鈕即可跳轉到查詢訂單的畫面。", callback);
                     }
                 });
             });

@@ -214,6 +214,9 @@ class OrderController extends CommonController
         if ($input['is_pay'] == "1" && $order->is_pay != "1") {
             MailController::paymentSuccess($order->order_mail, $order->order_number);
         }
+        if ($input['order_status'] == "shipping" && $order->order_status != "shipping") {
+            MailController::shipping($order->order_mail, $order->order_number);
+        }
 
         $result = Order::where('order_id', $order_id)->update($input);
         if (!$result) {
