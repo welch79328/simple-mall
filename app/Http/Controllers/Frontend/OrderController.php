@@ -161,7 +161,7 @@ class OrderController extends CommonController
         if (!empty($input["tel_code"]) && !empty($input["returns_tel"])) {
             $input["returns_tel"] = $input["tel_code"] . "-" . $input["returns_tel"];
         }
-        $input["returns_number"] = "R" . substr((string)time(), -7);
+        $input["returns_number"] = "R" . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
         $input["member_id"] = session("member.member_id");
         unset($input["tel_code"]);
 

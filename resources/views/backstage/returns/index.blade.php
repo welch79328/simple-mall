@@ -35,7 +35,7 @@
                 <table class="list_tab">
                     <tr>
                         <th>退貨單編號</th>
-                        <th>退貨狀態</th>
+                        <th>退貨單狀態</th>
                         <th>編輯者</th>
                         <th>發布時間</th>
                         <th>修改時間</th>

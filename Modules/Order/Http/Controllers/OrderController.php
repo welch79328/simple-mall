@@ -305,7 +305,7 @@ class OrderController extends CommonController
         try {
             $i = 0;
             foreach ($carts as $v) {
-                $input["order_number"] = substr((string)time() . $i, -8);
+                $input["order_number"] = substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
                 $input["order_total"] = $v->qty * $v->price;
                 $result = Order::create($input);
                 if (!$result) {
