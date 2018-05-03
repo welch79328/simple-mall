@@ -28,7 +28,7 @@ class IndexController extends CommonController
                 $limit->commodity_price = number_format((int)$limit->commodity_price);
             }
 
-            //瀏覽人數的計算
+            //取得瀏覽人數
             $data = $commodityHelper->getPageCount($limit->commodity_id);
             $limit->online = $data["count"];
             $limit->rand = $data["rand"];
