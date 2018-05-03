@@ -295,6 +295,13 @@
                 </tr>
 
                 <tr>
+                    <th>限購數量：</th>
+                    <td>
+                        <input type="number" min="0" style="height: 28px;" name="limit_purchase">
+                    </td>
+                </tr>
+
+                <tr>
                     <th>排序：</th>
                     <td>
                         <input type="number" min="0" style="margin-right: 5px; height: 28px;" name="commodity_ordering"

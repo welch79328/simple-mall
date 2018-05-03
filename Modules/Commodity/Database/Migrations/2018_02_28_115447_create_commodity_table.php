@@ -28,7 +28,8 @@ class CreateCommodityTable extends Migration
             $table->string('commodity_end_time');
             $table->integer('commodity_ordering')->default(1);
             $table->enum('commodity_status', ['on', 'off'])->default('on');
-            $table->enum('commodity_type', ['general', 'limited '])->default('general');
+            $table->enum('commodity_type', ['general', 'limited'])->default('general');
+            $table->integer('limit_purchase')->nullable();
             $table->integer('commodity_view')->default(0);
             $table->integer('cate_id')->nullable();
             $table->integer('discount_id')->nullable();

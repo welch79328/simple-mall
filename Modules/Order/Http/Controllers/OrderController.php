@@ -242,7 +242,7 @@ class OrderController extends CommonController
     {
     }
 
-    public function orderInfo(TownshipHelper $townshipHelper)
+    public function orderInfo(TownshipHelper $townshipHelper, Request $request)
     {
         $carts = Cart::content();
         if (count($carts) == 0) {
@@ -250,8 +250,31 @@ class OrderController extends CommonController
         }
         foreach ($carts as $item) {
             $commodity = Commodity::find($item->id);
-            if ($item->qty > $commodity->commodity_stock) {
+            $stock = $commodity->commodity_stock;
+            if (count($item->options) > 0) {
+                $spec = CommoditySpec::find($item->options->specId);
+                $stock = $spec->stock;
+            }
+            if ($item->qty > $stock) {
                 return redirect("shoppingcart/show")->with("errors.msg", "預購失敗：$commodity->commodity_title 的庫存量不足，只剩 $commodity->commodity_stock 組！");
+            }
+            if (!empty($commodity->limit_purchase)) {
+                $member_id = $request->session()->get("member.member_id");
+                $match = [
+                    ["member_id", "=", $member_id],
+                    ["commodity_id", "=", $commodity->commodity_id],
+                    ["order_status", "!=", "cancel"]
+                ];
+                if (count($item->options) > 0) {
+                    $match[] = ["spec_id", "=", $item->options->specId];
+                }
+                $order_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
+                    ->where($match)
+                    ->sum("amount");
+                $sum = (int)$item->qty + (int)$order_amount;
+                if ($sum > (int)$commodity->limit_purchase) {
+                    return redirect("shoppingcart/show")->with("errors.msg", "預購失敗：$commodity->commodity_title 限購 $commodity->limit_purchase 組！");
+                }
             }
         }
         new CommonController;
@@ -302,6 +325,28 @@ class OrderController extends CommonController
                     "msg" => "預購失敗：$commodity->commodity_title 的庫存量不足，只剩 $stock 組！"
                 ];
                 return $response;
+            }
+            if (!empty($commodity->limit_purchase)) {
+                $member_id = $request->session()->get("member.member_id");
+                $match = [
+                    ["member_id", "=", $member_id],
+                    ["commodity_id", "=", $commodity->commodity_id],
+                    ["order_status", "!=", "cancel"]
+                ];
+                if (count($item->options) > 0) {
+                    $match[] = ["spec_id", "=", $item->options->specId];
+                }
+                $order_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
+                    ->where($match)
+                    ->sum("amount");
+                $sum = (int)$item->qty + (int)$order_amount;
+                if ($sum > (int)$commodity->limit_purchase) {
+                    $response = [
+                        "result" => false,
+                        "msg" => "預購失敗：$commodity->commodity_title 限購 $commodity->limit_purchase 組！"
+                    ];
+                    return $response;
+                }
             }
         }
 

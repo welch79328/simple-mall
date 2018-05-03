@@ -58,7 +58,7 @@
                         <p><i class="require">*</i>主標題：</p>
                     </th>
                     <td>
-                        <input type="text" class="md" name="commodity_title" value="{{$commodity->commodity_title}}">
+                        <input type="text" class="lg" name="commodity_title" value="{{$commodity->commodity_title}}">
                         <span>
                             <i class="fa fa-exclamation-circle yellow"></i>
                             30個字元。
@@ -238,6 +238,7 @@
                         <div id="specBlock">
                             @foreach($spec_array as $key => $spec)
                                 <div id="initSpecDiv{{$key}}">
+                                    <input type="hidden" name="specId[]" value="{{$spec->id}}">
                                     <input type="text" name="spec[]" value="{{$spec->spec}}" style="margin-right: 10px"
                                            required>
                                     庫存量：
@@ -319,6 +320,14 @@
                                @if($commodity->commodity_status == 'on') checked @endif>上架
                         <input type="radio" name="commodity_status" value="off"
                                @if($commodity->commodity_status == 'off') checked @endif>下架
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>限購數量：</th>
+                    <td>
+                        <input type="number" min="0" style="height: 28px;" name="limit_purchase"
+                               value="{{$commodity->limit_purchase}}">
                     </td>
                 </tr>
 

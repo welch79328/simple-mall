@@ -2,6 +2,7 @@
 
 namespace Modules\Shoppingcart\Http\Controllers;
 
+use Modules\Order\Entities\Order;
 use Modules\Commodity\Entities\CommoditySpec;
 use App\Helpers\Frontend\CommodityHelper;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -90,7 +91,6 @@ class ShoppingcartController extends Controller
         }
 
         $amount = $request->get("amount", 1);
-
         $commodity = Commodity::find($commodity_id);
         if (empty($commodity)) {
             $response = [
@@ -114,6 +114,21 @@ class ShoppingcartController extends Controller
                 "msg" => "加入購物車失敗：商品庫存量不足！"
             ];
             return $response;
+        }
+
+        if (!empty($commodity->limit_purchase)) {
+            $member_id = $request->session()->get("member.member_id");
+            $total_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
+                ->where(["member_id" => $member_id, "commodity_id" => $commodity->commodity_id, ["order_status", "!=", "cancel"]])
+                ->sum("amount");
+            $sum += (int)$total_amount;
+            if ($sum > (int)$commodity->limit_purchase) {
+                $response = [
+                    "result" => false,
+                    "msg" => "加入購物車失敗：此商品限購 $commodity->limit_purchase 組！"
+                ];
+                return $response;
+            }
         }
 
         Cart::add($commodity->commodity_id, $commodity->commodity_title, $amount, $commodity->commodity_price);
@@ -173,6 +188,21 @@ class ShoppingcartController extends Controller
             return $response;
         }
 
+        if (!empty($commodity->limit_purchase)) {
+            $member_id = $request->session()->get("member.member_id");
+            $total_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
+                ->where(["member_id" => $member_id, "spec_id" => $spec->id, ["order_status", "!=", "cancel"]])
+                ->sum("amount");
+            $sum += (int)$total_amount;
+            if ($sum > (int)$commodity->limit_purchase) {
+                $response = [
+                    "result" => false,
+                    "msg" => "加入購物車失敗：此商品限購 $commodity->limit_purchase 組！"
+                ];
+                return $response;
+            }
+        }
+
         Cart::add($commodity->commodity_id, $commodity->commodity_title, $amount, $commodity->commodity_price, ["specId" => $spec->id, "specName" => $spec->spec]);
         $cartCount = Cart::content()->count();
         $response = [
@@ -228,6 +258,29 @@ class ShoppingcartController extends Controller
                 "msg" => "修改數量失敗：商品庫存量不足，只剩 $stock 組！"
             ];
             return $response;
+        }
+
+        if (!empty($commodity->limit_purchase)) {
+            $member_id = $request->session()->get("member.member_id");
+            $match = [
+                ["member_id", "=", $member_id],
+                ["commodity_id", "=", $commodity->commodity_id],
+                ["order_status", "!=", "cancel"]
+            ];
+            if (count($cartItem->options) > 0) {
+                $match[] = ["spec_id", "=", $cartItem->options->specId];
+            }
+            $order_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
+                ->where($match)
+                ->sum("amount");
+            $sum = (int)$amount + (int)$order_amount;
+            if ($sum > (int)$commodity->limit_purchase) {
+                $response = [
+                    "result" => false,
+                    "msg" => "修改數量失敗：此商品限購 $commodity->limit_purchase 組！"
+                ];
+                return $response;
+            }
         }
 
         $cartItem->qty = $amount;
