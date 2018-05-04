@@ -103,7 +103,7 @@ class LoginController extends Controller
             return redirect("$redirectPath");
 
         } catch (\Exception $e) {
-            return view('backstage.member.login');
+            return redirect()->back();
         }
 
     }

@@ -30,7 +30,7 @@ class CreateMemberTable extends Migration
             $table->string('member_area')->nullable();
             $table->integer('member_zipcode')->nullable();
             $table->enum('member_level', ['member'])->default('member');
-            $table->string('member_code');
+            $table->string('member_code')->nullable();
             $table->boolean('member_enable')->default(0);
             $table->timestamps();
         });

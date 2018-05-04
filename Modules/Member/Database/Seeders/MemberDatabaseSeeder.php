@@ -23,12 +23,13 @@ class MemberDatabaseSeeder extends Seeder
         Model::unguard();
 
         $factory->define(Member::class, function (Faker $faker) {
-            $str = '1234';
+            $str = 'a123456';
             $password = Crypt::encrypt($str);
+            $mail = $faker->unique()->safeEmail;
             return [
                 'member_name' => $faker->name,
-                'member_mail' => $faker->unique()->safeEmail,
-                'member_account' => str_random(5),
+                'member_mail' => $mail,
+                'member_account' => $mail,
                 'member_password' => $password,
             ];
         });
