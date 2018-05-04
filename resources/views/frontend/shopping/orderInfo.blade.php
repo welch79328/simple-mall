@@ -21,7 +21,9 @@
             <form id="addOrderForm" class="form-horizontal" action="{{url('order_setup')}}" method="post">
                 {{csrf_field()}}
                 <div class="col-md-offset-2 col-md-8" style="padding: 30px;">
-                    <h2 style="margin-bottom: 20px">收件人資料<i class="glyphicon glyphicon-user"></i></h2>
+                    <h2 style="margin-bottom: 20px; margin-left: -15px">
+                        收件人資料<i class="glyphicon glyphicon-user"></i>
+                    </h2>
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" name="order_name" placeholder="請輸入中文姓名"
                                required value="{{$data->member_name}}">

@@ -191,9 +191,15 @@ class ShoppingcartController extends Controller
         if (!empty($commodity->limit_purchase)) {
             $member_id = $request->session()->get("member.member_id");
             $total_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
-                ->where(["member_id" => $member_id, "spec_id" => $spec->id, ["order_status", "!=", "cancel"]])
+                ->where(["member_id" => $member_id, "commodity_id" => $commodity->commodity_id, ["order_status", "!=", "cancel"]])
                 ->sum("amount");
-            $sum += (int)$total_amount;
+            $quantity_in_cart = 0;
+            foreach ($carts as $cart) {
+                if ($cart->id == $commodity_id) {
+                    $quantity_in_cart += $cart->qty;
+                }
+            }
+            $sum = (int)$quantity_in_cart + (int)$amount + (int)$total_amount;
             if ($sum > (int)$commodity->limit_purchase) {
                 $response = [
                     "result" => false,
@@ -267,13 +273,16 @@ class ShoppingcartController extends Controller
                 ["commodity_id", "=", $commodity->commodity_id],
                 ["order_status", "!=", "cancel"]
             ];
-            if (count($cartItem->options) > 0) {
-                $match[] = ["spec_id", "=", $cartItem->options->specId];
-            }
             $order_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
                 ->where($match)
                 ->sum("amount");
-            $sum = (int)$amount + (int)$order_amount;
+            $quantity_in_cart = 0;
+            foreach ($carts as $key => $cart) {
+                if ($cart->id == $commodity->commodity_id && $key != $rowId) {
+                    $quantity_in_cart += $cart->qty;
+                }
+            }
+            $sum = (int)$amount + (int)$quantity_in_cart + (int)$order_amount;
             if ($sum > (int)$commodity->limit_purchase) {
                 $response = [
                     "result" => false,
