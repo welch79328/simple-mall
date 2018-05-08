@@ -248,7 +248,7 @@ class OrderController extends CommonController
         if (count($carts) == 0) {
             return redirect("shoppingcart/show")->with("errors.msg", "預購失敗：購物車內沒有商品！");
         }
-        foreach ($carts as $item) {
+        foreach ($carts as $rowId => $item) {
             $commodity = Commodity::find($item->id);
             $stock = $commodity->commodity_stock;
             if (count($item->options) > 0) {
@@ -265,13 +265,16 @@ class OrderController extends CommonController
                     ["commodity_id", "=", $commodity->commodity_id],
                     ["order_status", "!=", "cancel"]
                 ];
-                if (count($item->options) > 0) {
-                    $match[] = ["spec_id", "=", $item->options->specId];
-                }
                 $order_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
                     ->where($match)
                     ->sum("amount");
-                $sum = (int)$item->qty + (int)$order_amount;
+                $quantity_in_cart = 0;
+                foreach ($carts as $key => $cart) {
+                    if ($cart->id == $commodity->commodity_id && $key != $rowId) {
+                        $quantity_in_cart += $cart->qty;
+                    }
+                }
+                $sum = (int)$item->qty + (int)$quantity_in_cart + (int)$order_amount;
                 if ($sum > (int)$commodity->limit_purchase) {
                     return redirect("shoppingcart/show")->with("errors.msg", "預購失敗：$commodity->commodity_title 限購 $commodity->limit_purchase 組！");
                 }
@@ -312,7 +315,7 @@ class OrderController extends CommonController
 
         //檢查商品庫存是否足夠
         $carts = Cart::content();
-        foreach ($carts as $item) {
+        foreach ($carts as $rowId => $item) {
             $commodity = Commodity::find($item->id);
             $stock = $commodity->commodity_stock;
             if (count($item->options) > 0) {
@@ -333,13 +336,16 @@ class OrderController extends CommonController
                     ["commodity_id", "=", $commodity->commodity_id],
                     ["order_status", "!=", "cancel"]
                 ];
-                if (count($item->options) > 0) {
-                    $match[] = ["spec_id", "=", $item->options->specId];
-                }
                 $order_amount = Order::join('order_list', 'order.order_id', '=', 'order_list.order_id')
                     ->where($match)
                     ->sum("amount");
-                $sum = (int)$item->qty + (int)$order_amount;
+                $quantity_in_cart = 0;
+                foreach ($carts as $key => $cart) {
+                    if ($cart->id == $commodity->commodity_id && $key != $rowId) {
+                        $quantity_in_cart += $cart->qty;
+                    }
+                }
+                $sum = (int)$item->qty + (int)$quantity_in_cart + (int)$order_amount;
                 if ($sum > (int)$commodity->limit_purchase) {
                     $response = [
                         "result" => false,
