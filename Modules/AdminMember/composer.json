@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/adminmember",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\AdminMember\\Providers\\AdminMemberServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\AdminMember\\": ""
+        }
+    }
+}

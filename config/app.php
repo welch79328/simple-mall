@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Taipei',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +150,10 @@ return [
         /*
          * Package Service Providers...
          */
+        Nwidart\Modules\LaravelModulesServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -208,7 +212,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Module' => Nwidart\Modules\Facades\Module::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

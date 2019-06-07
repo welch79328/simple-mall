@@ -58,5 +58,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'login.judgment' => \Modules\Member\Http\Middleware\LoginJudgmentMiddleware::class,
+        'admin.login.judgment' => \Modules\AdminMember\Http\Middleware\AdminLoginJudgmentMiddleware::class,
+        'check.commodity.deadline' => \App\Http\Middleware\Frontend\CheckCommodityDeadline::class
     ];
 }
