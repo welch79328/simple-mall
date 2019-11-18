@@ -1,4 +1,21 @@
-# adwifi_mall
+# welchMall
+
+## Getting Started
+```
+git clone https://github.com/welch79328/welchMall.git
+```
+
+```
+composer install
+```
+
+```
+cp .env.example .env
+```
+
+```
+php artisan key:generate
+```
 
 # demo
-http://www.j-ugomall.com.tw/
+http://52.198.23.208/
