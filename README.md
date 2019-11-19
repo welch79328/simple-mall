@@ -24,7 +24,7 @@ php artisan module:migrate
 前台：http://52.198.23.208/
 ```
 ```
-後台：http://52.198.23.208/
+後台：http://52.198.23.208/admin
 帳號：root
 密碼：1234
 ```
