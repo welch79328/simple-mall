@@ -16,16 +16,18 @@ php artisan key:generate
 ```
 
 ```
-php artisan module:migrate
+php artisan module:migrate --seed
 ```
 
 # demo
 ```
 前台：http://52.198.23.208/
+帳號：test@gmail.com
+密碼：a123456
 ```
 ```
 後台：http://52.198.23.208/admin
-帳號：root
+帳號：admin
 密碼：1234
 ```
 

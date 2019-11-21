@@ -34,8 +34,19 @@ class MemberDatabaseSeeder extends Seeder
             ];
         });
 
-        factory(Member::class, 20)->create();
+        $factory->defineAs(Member::class, 'test', function (Faker $faker) {
+            $str = 'a123456';
+            $password = Crypt::encrypt($str);
+            return [
+                'member_name' => $faker->name,
+                'member_mail' => 'test@gmail.com',
+                'member_account' => 'test@gmail.com',
+                'member_password' => $password,
+                'member_enable' => 1
+            ];
+        });
 
-        // $this->call("OthersTableSeeder");
+        factory(Member::class, 'test')->create();
+        factory(Member::class, 20)->create();
     }
 }

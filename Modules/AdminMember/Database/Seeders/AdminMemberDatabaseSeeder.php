@@ -31,8 +31,19 @@ class AdminMemberDatabaseSeeder extends Seeder
             ];
         });
 
-        factory(AdminMember::class, 20)->create();
+        $factory->defineAs(AdminMember::class, 'admin', function (Faker $faker) {
+            $str = '1234';
+            $password = Crypt::encrypt($str);
+            return [
+                'member_name' => 'admin',
+                'member_mail' => $faker->unique()->safeEmail,
+                'member_account' => 'admin',
+                'member_password' => $password,
+            ];
+        });
 
-        // $this->call("OthersTableSeeder");
+
+        factory(AdminMember::class, 'admin')->create();
+        factory(AdminMember::class, 20)->create();
     }
 }
